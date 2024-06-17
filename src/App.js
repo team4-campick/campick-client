@@ -1,19 +1,21 @@
-import './App.css';
+import "./App.css";
 
-import { Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-import MyPage from './pages/MyPage/MyPage';
-import BingoCoupon from './pages/MyPage/BingoCoupon';
-import Bingo from './pages/MyPage/Bingo';
-import Coupon from './pages/MyPage/Coupon';
-import TransactionHistory from './pages/MyPage/TransactionHistory';
-import Sale from './pages/MyPage/Sale';
-import Purchase from './pages/MyPage/Purchase';
-import MyPost from './pages/MyPage/MyPost';
-import EditInfo from './pages/MyPage/EditInfo';
-import CustomerService from './pages/MyPage/CustomerService';
+import MyPage from "./pages/MyPage/MyPage";
+import BingoCoupon from "./pages/MyPage/BingoCoupon";
+import Bingo from "./pages/MyPage/Bingo";
+import Coupon from "./pages/MyPage/Coupon";
+import TransactionHistory from "./pages/MyPage/TransactionHistory";
+import Sale from "./pages/MyPage/Sale";
+import Purchase from "./pages/MyPage/Purchase";
+import MyPost from "./pages/MyPage/MyPost";
+import EditInfo from "./pages/MyPage/EditInfo";
+import CustomerService from "./pages/MyPage/CustomerService";
+
+import Market from "./pages/Market/Market";
 
 function App() {
   return (
@@ -39,7 +41,8 @@ function App() {
           <Route path="customer-service" element={<CustomerService />} />
         </Route>
 
-        {/* ===================================================== */}
+        {/* =================== Market Area ===================  */}
+        <Route path="market" element={<Market />} />
 
         <Route path="*" element={<>잘못된 경로입니다</>} />
       </Routes>
