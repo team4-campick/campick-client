@@ -3,7 +3,17 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import MyPage from './pages/MyPage';
+
+import MyPage from './pages/MyPage/MyPage';
+import BingoCoupon from './pages/MyPage/BingoCoupon';
+import Bingo from './pages/MyPage/Bingo';
+import Coupon from './pages/MyPage/Coupon';
+import TransactionHistory from './pages/MyPage/TransactionHistory';
+import Sale from './pages/MyPage/Sale';
+import Purchase from './pages/MyPage/Purchase';
+import MyPost from './pages/MyPage/MyPost';
+import EditInfo from './pages/MyPage/EditInfo';
+import CustomerService from './pages/MyPage/CustomerService';
 
 function App() {
   return (
@@ -11,8 +21,26 @@ function App() {
       <Header />
       <Routes>
         {/* <Route path="/" element={<Main />} /> */}
-        <Route path="/" element={<Main />} />
-        <Route path="/mypage/:nickName" element={<MyPage />} />
+        {/* <Route path="/" element={<Main />} /> */}
+
+        {/* =================== My Page Area ===================  */}
+
+        <Route path="/my-page/:nickname" element={<MyPage />}>
+          <Route path="bingo-coupon" element={<BingoCoupon />}>
+            <Route path="bingo" element={<Bingo />} />
+            <Route path="coupon" element={<Coupon />} />
+          </Route>
+          <Route path="transaction-history" element={<TransactionHistory />}>
+            <Route path="sale" element={<Sale />} />
+            <Route path="purchase" element={<Purchase />} />
+          </Route>
+          <Route path="my-post" element={<MyPost />} />
+          <Route path="edit-info" element={<EditInfo />} />
+          <Route path="customer-service" element={<CustomerService />} />
+        </Route>
+
+        {/* ===================================================== */}
+
         <Route path="*" element={<>잘못된 경로입니다</>} />
       </Routes>
 
