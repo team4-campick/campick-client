@@ -1,0 +1,26 @@
+.MyPage {
+  display: flex;
+  flex-wrap: wrap;
+}
+.MyPage .Banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 30%;
+}
+.SideBar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.SideBar > a {
+  padding: 1rem 4rem;
+}
+.MyPage > .SideBar > a:hover {
+  font-weight: bold;
+  transition: 0.3s;
+}
+.MyPage > section {
+  flex: 1;
+}
