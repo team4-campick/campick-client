@@ -1,7 +1,16 @@
-import React from 'react';
+import React from "react";
 
 const Footer = () => {
-  return <footer>Footer</footer>;
+  return (
+    <footer>
+      <div className="copyrightWarp">
+        <p>
+          &copy; team_campick. All right reserved. The design refers to 'STAY
+          FOLIO'.
+        </p>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
