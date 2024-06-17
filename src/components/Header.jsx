@@ -5,10 +5,10 @@ const Header = () => {
     <header>
       <nav className="headerWrap">
         <h1>
-          <a href="#">
+          <link>
             <img src="#" alt="logo" />
             CAMPICK
-          </a>
+          </link>
         </h1>
         <div className="menuWarp">
           <ul>
