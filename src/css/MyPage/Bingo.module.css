@@ -1,0 +1,7 @@
+.Bingo {
+  display: flex;
+  flex-wrap: wrap;
+}
+.CountStatus {
+  width: 100%;
+}
