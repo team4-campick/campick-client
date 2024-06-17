@@ -27,7 +27,7 @@ function App() {
 
         {/* =================== My Page Area ===================  */}
 
-        <Route path="/my-page/:nickname" element={<MyPage />}>
+        <Route path="/my-page" element={<MyPage />}>
           <Route path="bingo-coupon" element={<BingoCoupon />}>
             <Route path="bingo" element={<Bingo />} />
             <Route path="coupon" element={<Coupon />} />
