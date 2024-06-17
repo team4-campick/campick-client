@@ -13,16 +13,16 @@ const Header = () => {
         <div className="menuWarp">
           <ul>
             <li>
-              <a href="#">CAMP SITE</a>
+              <link>CAMP SITE</link>
             </li>
             <li>
-              <a href="#">MARKET</a>
+              <link>MARKET</link>
             </li>
             <li>
-              <a href="#">CONTENTS</a>
+              <link>CONTENTS</link>
             </li>
             <li>
-              <a href="#">EVNET</a>
+              <link>EVNET</link>
             </li>
           </ul>
         </div>
@@ -30,17 +30,17 @@ const Header = () => {
           <ul>
             {/* 로그인 전 */}
             <li className="public">
-              <a href="#">SIGN IN</a>
+              <link>SIGN IN</link>
             </li>
             <li className="public">
-              <a href="#">SIGN UP</a>
+              <link>SIGN UP</link>
             </li>
             {/* 로그인 후 */}
             <li className="privacy">
-              <a href="#">SETTING</a>
+              <link>SETTING</link>
             </li>
             <li className="privacy">
-              <a href="#">LOGOUT</a>
+              <link>LOGOUT</link>
             </li>
           </ul>
         </div>
