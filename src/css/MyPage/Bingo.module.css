@@ -5,3 +5,25 @@
 .CountStatus {
   width: 100%;
 }
+.BingoArea {
+  display: grid;
+  flex: 1;
+  border: 1px solid red;
+  /* grid-template-columns: 20% 20% 20%; */
+  grid-template-columns: repeat(3, 1fr);
+  padding: 2rem;
+  gap: 1rem;
+}
+.BingoArea > div {
+  border: 1px solid greenyellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  /* filter: drop-shadow(0 0 0.75rem black); */
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.MissionList {
+  padding: 0 100px 0 1rem;
+}

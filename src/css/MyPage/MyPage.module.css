@@ -8,17 +8,34 @@
   align-items: center;
   width: 100%;
   padding-top: 30%;
+  position: relative;
+  background-image: url('https://img.freepik.com/free-vector/camping-adventure-twitch-banner_23-2150460139.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.MyPageIntro {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 55px;
+}
+.DetailHeader {
+  width: 100%;
+  text-align: center;
 }
 .SideBar {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(217, 217, 217, 0.2);
 }
 .SideBar > a {
   padding: 1rem 4rem;
 }
 .MyPage > .SideBar > a:hover {
-  font-weight: bold;
+  color: black;
   transition: 0.3s;
 }
 .MyPage > section {
