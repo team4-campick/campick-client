@@ -13,6 +13,7 @@ const styles = {
     marginTop: "20px",
   },
   copyrightmemo: {
+    color: "#B7B6B6",
     margin: "20px 0",
     fontSize: " 12px",
   },
