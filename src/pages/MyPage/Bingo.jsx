@@ -7,14 +7,13 @@ const Bingo = () => {
   return (
     <section className={style.Bingo}>
       <h3 hidden>Bingo</h3>
-      빙고 영역
       <p className={style.CountStatus}>
         지금까지 채운 빙고의 갯수는 <span>N</span>개 입니다.
       </p>
       <div className={style.BingoArea}>
-        {bingoArea.map((e, i) => {
-          return BingoCard(i + 1);
-        })}
+        {bingoArea.map((e, i) => (
+          <BingoCard key={i + 1} e={e} />
+        ))}
       </div>
       <ul className={style.MissionList}>
         <li>1. 리뷰 3회</li>
