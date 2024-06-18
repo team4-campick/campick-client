@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import style from '../../css/MyPage/MyPage.module.css';
-
+import '../../css/MyPage/MyPageCommon.css';
 const MyPage = () => {
   const [nickname, setNickname] = useState('홍길동');
 
@@ -11,7 +11,6 @@ const MyPage = () => {
       <div className={style.Banner}>
         <p className={style.MyPageIntro}>{`안녕하세요, ${nickname} 님!`}</p>
       </div>
-      <div className={style.DetailHeader}>세부 헤더? 들어가는 영역</div>
       <aside className={style.SideBar}>
         <Link to="/my-page/bingo-coupon/bingo">빙고 &#47; 쿠폰함</Link>
         <Link to="/my-page/transaction-history/sale">거래 내역</Link>
