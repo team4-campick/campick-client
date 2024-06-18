@@ -1,49 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  // 로그인 상태를 관리하는 변수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // 로그인 함수
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  // 로그아웃 함수
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
-    <header>
-      <nav className="headerWrap">
-        <h1>
-          <a href="#">
-            <img src="#" alt="logo" />
-            CAMPICK
-          </a>
-        </h1>
-        <div className="menuWarp">
-          <ul>
-            <li>
-              <a href="#">CAMP SITE</a>
-            </li>
-            <li>
-              <a href="#">MARKET</a>
-            </li>
-            <li>
-              <a href="#">CONTENTS</a>
-            </li>
-            <li>
-              <a href="#">EVNET</a>
-            </li>
-          </ul>
-        </div>
-        <div className="privacyWarp">
-          <ul>
-            {/* 로그인 전 */}
-            <li className="public">
-              <a href="#">SIGN IN</a>
-            </li>
-            <li className="public">
-              <a href="#">SIGN UP</a>
-            </li>
-            {/* 로그인 후 */}
-            <li className="privacy">
-              <a href="#">SETTING</a>
-            </li>
-            <li className="privacy">
-              <a href="#">LOGOUT</a>
-            </li>
-          </ul>
-        </div>
+    <header className="headerWrap">
+      <h1>
+        <Link to="/main">
+          <img src="#" alt="CAMPICK logo" />
+          CAMPICK
+        </Link>
+      </h1>
+
+      <nav className="menuWrap">
+        <ul>
+          <li>
+            <Link to="/campsite">CAMP SITE</Link>
+          </li>
+          <li>
+            <Link to="/market">MARKET</Link>
+          </li>
+          <li>
+            <Link to="/contents">CONTENTS</Link>
+          </li>
+          <li>
+            <Link to="/event">EVENT</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <nav className="privacyWrap">
+        <ul>
+          {isLoggedIn ? (
+            <>
+              {/* 로그인 후 */}
+              <li className="privacy">
+                <Link to="/setting">SETTING</Link>
+              </li>
+              <li className="privacy">
+                <Link to="/signout" onClick={handleLogout}>
+                  SIGN OUT
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              {/* 로그인 전 */}
+              <li className="public">
+                <Link to="/signin" onClick={handleLogin}>
+                  SIGN IN
+                </Link>
+              </li>
+              <li className="public">
+                <Link to="/register">REGISTER</Link>
+              </li>
+            </>
+          )}
+        </ul>
       </nav>
     </header>
   );
