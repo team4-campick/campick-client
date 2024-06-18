@@ -27,6 +27,15 @@
 .EditInfo .InputContent {
   width: 100%;
 }
+.EditInfo .Divider {
+  width: 35%;
+  height: 2px;
+  background-color: rgba(31, 59, 52, 0.05);
+  margin: 4rem 0;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .Submit {
   margin-top: 4rem;
   width: 35%;

@@ -1,0 +1,9 @@
+.MyPage_SubHeader {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+  border-bottom: 2px solid rgba(31, 59, 52, 0.2);
+  padding-left: 2rem;
+  font-size: 2rem;
+  font-weight: 400;
+}

@@ -1,6 +1,7 @@
 .CustomerService .InputArea {
   display: flex;
   flex-direction: column;
+  padding: 2rem 6rem;
 }
 .Policy {
   border: 2px solid black;
@@ -8,4 +9,7 @@
   margin: 1rem 6rem;
   border-radius: 0.5rem;
   opacity: 50%;
+}
+.PolicyCheck {
+  /* width: ; */
 }

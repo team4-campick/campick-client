@@ -1,6 +1,7 @@
 .MyPage {
   display: flex;
   flex-wrap: wrap;
+  height: 100%;
 }
 .MyPage .Banner {
   display: flex;
@@ -9,7 +10,7 @@
   width: 100%;
   padding-top: 30%;
   position: relative;
-  background-image: url('https://img.freepik.com/free-vector/camping-adventure-twitch-banner_23-2150460139.jpg');
+  background-image: url();
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -27,9 +28,9 @@
 .SideBar {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   color: rgba(0, 0, 0, 0.4);
   background-color: rgba(217, 217, 217, 0.2);
+  padding: 6rem 0;
 }
 .SideBar > a {
   padding: 1rem 4rem;
@@ -40,4 +41,5 @@
 }
 .MyPage > section {
   flex: 1;
+  border: 2px solid blue;
 }

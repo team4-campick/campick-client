@@ -1,0 +1,39 @@
+.BingoCard {
+  border: 1px solid greenyellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  position: relative;
+}
+.Front,
+.Back {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: 1s;
+}
+.Front {
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 4rem;
+  transform: rotate(0deg);
+}
+.Back {
+  border-radius: 50%;
+  background-image: url('https://cdnweb01.wikitree.co.kr/webdata/editor/202405/08/img_20240508134045_5a98bd30.webp');
+  background-size: cover;
+  transform: rotate(0deg);
+}
+.BingoCard:hover .Front {
+  transform: rotate(-360deg);
+}
+.BingoCard:hover .Back {
+  transform: rotate(-360deg);
+}
