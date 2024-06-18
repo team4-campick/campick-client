@@ -1,9 +1,9 @@
-.MyPage {
+.myPage {
   display: flex;
   flex-wrap: wrap;
   height: 100%;
 }
-.MyPage .Banner {
+.myPage .banner {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,31 +15,31 @@
   background-size: cover;
   background-position: center;
 }
-.MyPageIntro {
+.myPageIntro {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   font-size: 55px;
 }
-.DetailHeader {
+.detailHeader {
   width: 100%;
   text-align: center;
 }
-.SideBar {
+.sideBar {
   display: flex;
   flex-direction: column;
   color: rgba(0, 0, 0, 0.4);
   background-color: rgba(217, 217, 217, 0.2);
   padding: 6rem 0;
 }
-.SideBar > a {
+.sideBar > a {
   padding: 1rem 4rem;
 }
-.MyPage > .SideBar > a:hover {
+.myPage > .sideBar > a:hover {
   color: black;
   transition: 0.3s;
 }
-.MyPage > section {
+.myPage > section {
   flex: 1;
   border: 2px solid blue;
 }

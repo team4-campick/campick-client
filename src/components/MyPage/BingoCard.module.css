@@ -1,4 +1,4 @@
-.BingoCard {
+.bingoCard {
   border: 1px solid greenyellow;
   display: flex;
   justify-content: center;
@@ -8,15 +8,15 @@
   overflow: hidden;
   position: relative;
 }
-.Front,
-.Back {
+.front,
+.back {
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   transition: 1s;
 }
-.Front {
+.front {
   z-index: 5;
   display: flex;
   justify-content: center;
@@ -25,15 +25,15 @@
   font-size: 4rem;
   transform: rotate(0deg);
 }
-.Back {
+.back {
   border-radius: 50%;
   background-image: url('https://cdnweb01.wikitree.co.kr/webdata/editor/202405/08/img_20240508134045_5a98bd30.webp');
   background-size: cover;
   transform: rotate(0deg);
 }
-.BingoCard:hover .Front {
+.bingoCard:hover .front {
   transform: rotate(-360deg);
 }
-.BingoCard:hover .Back {
+.bingoCard:hover .back {
   transform: rotate(-360deg);
 }

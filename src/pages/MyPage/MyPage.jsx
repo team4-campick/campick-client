@@ -6,12 +6,12 @@ const MyPage = () => {
   const [nickname, setNickname] = useState('홍길동');
 
   return (
-    <section className={style.MyPage}>
+    <section className={style.myPage}>
       <h2 hidden>MyPage</h2>
-      <div className={style.Banner}>
-        <p className={style.MyPageIntro}>{`안녕하세요, ${nickname} 님!`}</p>
+      <div className={style.banner}>
+        <p className={style.myPageIntro}>{`안녕하세요, ${nickname} 님!`}</p>
       </div>
-      <aside className={style.SideBar}>
+      <aside className={style.sideBar}>
         <Link to="/my-page/bingo-coupon/bingo">빙고 &#47; 쿠폰함</Link>
         <Link to="/my-page/transaction-history/sale">거래 내역</Link>
         <Link to="/my-page/my-post">내가 쓴 게시글</Link>

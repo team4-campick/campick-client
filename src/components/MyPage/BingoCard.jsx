@@ -3,9 +3,9 @@ import style from './BingoCard.module.css';
 
 const BingoCard = ({ e }) => {
   return (
-    <div className={style.BingoCard}>
-      <div className={style.Front}>{e}</div>
-      <div className={style.Back}></div>
+    <div className={style.bingoCard}>
+      <div className={style.front}>{e}</div>
+      <div className={style.back}></div>
     </div>
   );
 };

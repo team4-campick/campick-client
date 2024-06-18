@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import style from '../../css/MyPage/CustomerService.module.css';
 
 const CustomerService = () => {
-  const [policyCheck, setPolicyCheck] = useState(false);
+  const [policyCheckStatus, setPolicyCheckStatus] = useState(false);
 
-  const checkBoxStatus = () => setPolicyCheck(!policyCheck);
+  const checkBoxStatus = () => setPolicyCheckStatus(!policyCheckStatus);
   const deleteUser = async (e) => {
     e.preventDefault();
   };
   return (
-    <section className={style.CustomerService}>
+    <section className={style.customerService}>
       <h3 hidden>CustomerService</h3>
-      <nav className="MyPage_SubHeader">고객 지원</nav>
+      <nav className="subHeader">고객 지원</nav>
       <form>
-        <label className={style.InputArea}>
+        <label className={style.inputArea}>
           <span>문의사항</span>
           <input type="text" placeholder="제목" />
           <input
@@ -26,9 +26,9 @@ const CustomerService = () => {
         </label>
       </form>
       <form>
-        <label className={style.InputArea}>
+        <label className={style.inputArea}>
           <span>회원 탈퇴</span>
-          <p className={style.Policy}>
+          <p className={style.policy}>
             회원 탈퇴일로부터 계정과 닉네임을 포함한 계정 정보는
             <br />
             <u>개인정보처리방침</u>에 따라 60일간 보관&#40;잠김&#41;되며, 60일
@@ -40,11 +40,11 @@ const CustomerService = () => {
           </p>
           <input
             type="checkbox"
-            className="PolicyCheck"
+            className={style.policyCheck}
             onChange={() => checkBoxStatus()}
           />
           <span>회원 탈퇴에 관한 정책을 읽고 이에 동의합니다.</span>
-          <button disabled={!policyCheck} onClick={(e) => deleteUser(e)}>
+          <button disabled={!policyCheckStatus} onClick={(e) => deleteUser(e)}>
             탈퇴하기
           </button>
         </label>

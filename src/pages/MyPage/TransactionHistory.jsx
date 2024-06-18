@@ -5,7 +5,7 @@ const TransactionHistory = () => {
   return (
     <section>
       <h3 hidden>TransactionHistory</h3>
-      <nav className="MyPage_SubHeader">
+      <nav className="myPage_SubHeader">
         <Link to={'sale'}>판매</Link>
         <span>&nbsp;&#47;&nbsp;</span>
         <Link to={'purchase'}>구매</Link>
