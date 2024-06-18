@@ -11,12 +11,12 @@ const Bingo = () => {
       <p className={style.CountStatus}>
         지금까지 채운 빙고의 갯수는 <span>N</span>개 입니다.
       </p>
-      <div>
-        {bingoArea.map((card) => {
-          return BingoCard(card);
+      <div className={style.BingoArea}>
+        {bingoArea.map((e, i) => {
+          return BingoCard(i + 1);
         })}
       </div>
-      <ul>
+      <ul className={style.MissionList}>
         <li>1. 리뷰 3회</li>
         <li>2. 게시글 2회 작성</li>
         <li>3. 캠핑장 1회 방문</li>
