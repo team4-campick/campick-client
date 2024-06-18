@@ -16,6 +16,7 @@ import EditInfo from "./pages/MyPage/EditInfo";
 import CustomerService from "./pages/MyPage/CustomerService";
 
 import Market from "./pages/Market/Market";
+import SalePostWrite from "./pages/Market/SalePostWrite";
 
 function App() {
   return (
@@ -42,7 +43,8 @@ function App() {
         </Route>
 
         {/* =================== Market Area ===================  */}
-        <Route path="market" element={<Market />} />
+        <Route path="/market" element={<Market />} />
+        <Route path="/sale-post-write" element={<SalePostWrite />} />
 
         <Route path="*" element={<>잘못된 경로입니다</>} />
       </Routes>
