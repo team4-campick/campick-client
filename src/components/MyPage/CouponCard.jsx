@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Coupon = () => {
+const CouponCard = () => {
   return (
     <div>
       <p>coupon type</p>
@@ -8,4 +8,4 @@ const Coupon = () => {
   );
 };
 
-export default Coupon;
+export default CouponCard;
