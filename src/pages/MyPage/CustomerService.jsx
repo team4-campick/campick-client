@@ -11,6 +11,7 @@ const CustomerService = () => {
   return (
     <section className={style.CustomerService}>
       <h3 hidden>CustomerService</h3>
+      <nav className="MyPage_SubHeader">고객 지원</nav>
       <form>
         <label className={style.InputArea}>
           <span>문의사항</span>

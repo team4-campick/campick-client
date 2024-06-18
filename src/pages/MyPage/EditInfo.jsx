@@ -5,6 +5,7 @@ const EditInfo = () => {
   return (
     <section className={style.EditInfo}>
       <h3 hidden>EditInfo</h3>
+      <nav className="MyPage_SubHeader">회원정보 수정</nav>
       <form>
         <label className={style.InputArea}>
           <span className={style.InputContent}>닉네임</span>
@@ -17,6 +18,7 @@ const EditInfo = () => {
           <input type="password" placeholder="현재 비밀번호를 입력해주세요" />
           <span className={style.ErrMsg}>errorMsg</span>
         </label>
+        <span className={style.Divider}></span>
         <label className={style.InputArea}>
           <span className={style.InputContent}>변경 비밀번호</span>
           <input type="password" placeholder="변경할 비밀번호를 입력해주세요" />
