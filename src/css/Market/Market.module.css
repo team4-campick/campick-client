@@ -1,0 +1,25 @@
+.marketCon {
+  width: calc(100% - 180px);
+  margin: auto;
+}
+.searchBar {
+  display: flex;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.cateGories {
+  border: 1px solid green;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.writeBtn {
+  border: 1px solid blue;
+  float: right;
+}
+.postCardList {
+  display: flex;
+  justify-content: space-around;
+}
