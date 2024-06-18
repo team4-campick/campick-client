@@ -9,9 +9,9 @@ const MyPage = () => {
     <section className={style.MyPage}>
       <h2 hidden>MyPage</h2>
       <div className={style.Banner}>
-        <p>{`안녕하세요, ${nickname} 님!`}</p>
-        <img src="/" alt="마이페이지 배너영역" />
+        <p className={style.MyPageIntro}>{`안녕하세요, ${nickname} 님!`}</p>
       </div>
+      <div className={style.DetailHeader}>세부 헤더? 들어가는 영역</div>
       <aside className={style.SideBar}>
         <Link to="/my-page/bingo-coupon/bingo">빙고 &#47; 쿠폰함</Link>
         <Link to="/my-page/transaction-history/sale">거래 내역</Link>
