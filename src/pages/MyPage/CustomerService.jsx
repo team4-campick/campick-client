@@ -1,33 +1,75 @@
 import React, { useState } from 'react';
 import style from '../../css/MyPage/CustomerService.module.css';
 
+const url = 'http://localhost:8000'; // 테스트용 store에 ref 로 올려야할 부분
 const CustomerService = () => {
   const [policyCheckStatus, setPolicyCheckStatus] = useState(false);
+  const [title, setTitle] = useState('');
+  const [email, setEmail] = useState('');
+  const [content, setContent] = useState('');
 
   const checkBoxStatus = () => setPolicyCheckStatus(!policyCheckStatus);
+  // ===========================백엔드 API 연결 진행하다가 잠=======================
+  const inquiry = async (e) => {
+    const response = await fetch(`${url}/inquiry`, {
+      method: 'POST',
+      body: JSON.stringify({
+        title,
+        email,
+        content,
+      }),
+      headers: { 'Content-type': 'application/json' },
+      credentials: 'include',
+    });
+    console.log(response);
+  };
+  // ======================================================================
+
   const deleteUser = async (e) => {
     e.preventDefault();
   };
   return (
     <section className={style.customerService}>
       <h3 hidden>CustomerService</h3>
-      <nav className="subHeader">고객 지원</nav>
-      <form>
-        <label className={style.inputArea}>
+      <nav className="myPage_SubHeader">고객 지원</nav>
+      <form onSubmit={inquiry}>
+        <div className={style.testArea}>
           <span>문의사항</span>
-          <input type="text" placeholder="제목" />
+          <span className={style.divider}></span>
+        </div>
+        <label className={style.inputArea}>
           <input
-            type="email"
-            pattern=".+@example\.com"
-            placeholder="답변 받으실 이메일"
+            type="text"
+            placeholder="제목"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
-          <textarea name="" id="" placeholder="문의사항"></textarea>
-          <button>문의하기</button>
+          <input
+            type="text"
+            // pattern=".+@example\.com"git
+            placeholder="답변 받으실 이메일"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <textarea
+            name="inquiryContent"
+            id="inquiryContent"
+            placeholder="문의사항"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          >
+            {content}
+          </textarea>
+
+          <button type="submit">문의하기</button>
         </label>
       </form>
       <form>
-        <label className={style.inputArea}>
+        <div className={style.testArea}>
           <span>회원 탈퇴</span>
+          <span className={style.divider}></span>
+        </div>
+        <label className={style.inputArea}>
           <p className={style.policy}>
             회원 탈퇴일로부터 계정과 닉네임을 포함한 계정 정보는
             <br />
@@ -38,13 +80,16 @@ const CustomerService = () => {
             작성된 게시물은 삭제되지 않으며, 익명처리 후 Campick으로 소유권이
             귀속됩니다.
           </p>
-          <input
-            type="checkbox"
-            className={style.policyCheck}
-            onChange={() => checkBoxStatus()}
-          />
-          <span>회원 탈퇴에 관한 정책을 읽고 이에 동의합니다.</span>
-          <button disabled={!policyCheckStatus} onClick={(e) => deleteUser(e)}>
+          <p>
+            <span>회원 탈퇴에 관한 정책을 읽고 이에 동의합니다.</span>
+            <input
+              type="checkbox"
+              className={style.policyCheck}
+              onChange={() => checkBoxStatus()}
+            />
+          </p>
+
+          <button disabled={policyCheckStatus} onClick={(e) => deleteUser(e)}>
             탈퇴하기
           </button>
         </label>
