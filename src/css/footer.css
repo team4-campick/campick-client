@@ -1,0 +1,16 @@
+footer {
+  width: 100%;
+  bottom: 0;
+}
+
+.copyrightWrap {
+  border-top: 1px solid #b7b6b6;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.copyrightmemo {
+  color: #b7b6b6;
+  margin: 20px 0;
+  font-size: 12px;
+}
