@@ -34,10 +34,29 @@
 }
 .sideBar > a {
   padding: 1rem 4rem;
+  position: relative;
+  transition: 0.3s;
+}
+.sideBar > a::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 20%;
+  transform: translateY(-50%);
+  transform-origin: center;
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: black;
+  transition: 0.3s;
+  opacity: 0;
 }
 .myPage > .sideBar > a:hover {
   color: black;
-  transition: 0.3s;
+}
+.sideBar > a:hover::after {
+  opacity: 1;
 }
 .myPage > section {
   flex: 1;
