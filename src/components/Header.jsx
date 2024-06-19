@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <header className="headerWrap">
       <h1>
-        <Link to="/main">
+        <Link to="/src/pages/Mainpage/Mainpage.jsx">
           <img src="#" alt="CAMPICK LOGO IMG" />
         </Link>
       </h1>
@@ -47,7 +47,7 @@ const Header = () => {
             <>
               {/* 로그인 후 */}
               <li className="privacy">
-                <Link to="/setting">SETTING</Link>
+                <Link to="/my-page/bingo-coupon/bingo">MY PAGE</Link>
               </li>
               <li className="privacy">
                 <Link to="/signout" onClick={handleLogout}>

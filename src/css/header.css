@@ -1,10 +1,12 @@
 /* header.css */
 .headerWrap {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgba(31, 59, 52, 0.2);
   padding: 10px 20px;
+  z-index: 1000;
 }
 
 .headerWrap h1 {
