@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-
+import "./useDropdown.css";
 // 드롭다운 컴포넌트와 드롭다운으로 선택된 값을 반환하는 커스텀 훅
 // @param options 드롭다운 옵션
 
-const useDropdown = ({ options }) => {
+const useDropdown = ({ options, type }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(null);
   const [selectedLabel, setSelectedLabel] = useState(null);
@@ -27,7 +27,7 @@ const useDropdown = ({ options }) => {
       <div className="container" tabIndex={0}>
         <label onClick={handleClickContainer}>
           <button type="button">
-            {selectedLabel || "선택"} {isDropdownOpen ? "⌃" : "⌄"}
+            {selectedLabel || type} {isDropdownOpen ? "⌃" : "⌄"}
           </button>
         </label>
         {isDropdownOpen && (
