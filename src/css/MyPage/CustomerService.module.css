@@ -1,11 +1,15 @@
-.CustomerService .InputArea {
+.customerService .inputArea {
   display: flex;
   flex-direction: column;
+  padding: 2rem 6rem;
 }
-.Policy {
+.policy {
   border: 2px solid black;
   padding: 1rem;
   margin: 1rem 6rem;
   border-radius: 0.5rem;
   opacity: 50%;
+}
+.policyCheck {
+  /* width: ; */
 }

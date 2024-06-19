@@ -5,18 +5,17 @@ import BingoCard from '../../components/MyPage/BingoCard';
 const Bingo = () => {
   const bingoArea = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
-    <section className={style.Bingo}>
+    <section className={style.bingo}>
       <h3 hidden>Bingo</h3>
-      빙고 영역
-      <p className={style.CountStatus}>
+      <p className={style.countStatus}>
         지금까지 채운 빙고의 갯수는 <span>N</span>개 입니다.
       </p>
-      <div className={style.BingoArea}>
-        {bingoArea.map((e, i) => {
-          return BingoCard(i + 1);
-        })}
+      <div className={style.bingoArea}>
+        {bingoArea.map((e, i) => (
+          <BingoCard key={i + 1} e={e} />
+        ))}
       </div>
-      <ul className={style.MissionList}>
+      <ul className={style.missionList}>
         <li>1. 리뷰 3회</li>
         <li>2. 게시글 2회 작성</li>
         <li>3. 캠핑장 1회 방문</li>

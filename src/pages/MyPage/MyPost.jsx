@@ -4,7 +4,7 @@ const MyPost = () => {
   return (
     <section>
       <h3 hidden>MyPost</h3>
-      내가 쓴 게시글 영역
+      <nav className="myPage_SubHeader">내가 쓴 게시글</nav>
     </section>
   );
 };
