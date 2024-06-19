@@ -1,0 +1,13 @@
+.writeCon span {
+  padding-right: 3rem;
+}
+.uploaBtn {
+  width: 150px;
+  height: 150px;
+}
+#file {
+  display: none;
+}
+.writeCon li {
+  border-bottom: 1px solid gray;
+}
