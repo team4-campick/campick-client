@@ -24,9 +24,14 @@ const CustomerService = () => {
     console.log(response);
   };
   // ======================================================================
-
   const deleteUser = async (e) => {
     e.preventDefault();
+    console.log('deleteBtn clicked');
+    const response = await fetch(`${url}/deleteUser/:nickname`, {
+      method: 'DELETE',
+      headers: { 'Content-type': 'application/json' },
+      credentials: 'include',
+    });
   };
   return (
     <section className={style.customerService}>
@@ -61,7 +66,9 @@ const CustomerService = () => {
             {content}
           </textarea>
 
-          <button type="submit">문의하기</button>
+          <button className={style.inquiryBtn} type="submit">
+            문의하기
+          </button>
         </label>
       </form>
       <form>
@@ -80,16 +87,22 @@ const CustomerService = () => {
             작성된 게시물은 삭제되지 않으며, 익명처리 후 Campick으로 소유권이
             귀속됩니다.
           </p>
-          <p>
-            <span>회원 탈퇴에 관한 정책을 읽고 이에 동의합니다.</span>
+          <p className={style.policyAllowArea}>
             <input
               type="checkbox"
               className={style.policyCheck}
               onChange={() => checkBoxStatus()}
             />
+            <span className={style.policyAllow}>
+              회원 탈퇴에 관한 정책을 읽고 이에 동의합니다.
+            </span>
           </p>
 
-          <button disabled={policyCheckStatus} onClick={(e) => deleteUser(e)}>
+          <button
+            className={style.deleteBtn}
+            disabled={!policyCheckStatus}
+            onClick={(e) => deleteUser(e)}
+          >
             탈퇴하기
           </button>
         </label>
