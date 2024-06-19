@@ -23,7 +23,7 @@ const Market = () => {
       <h2 hidden>Market</h2>
       <div className={style.searchBar}>
         <input type="text" placeholder="검색어를 입력하세요." />
-        <button class="searchBtn">검색</button>
+        <button className="searchBtn">검색</button>
       </div>
       <div className={style.cateGories}>
         <button onClick={() => {}}>텐트</button>

@@ -1,31 +1,46 @@
 import style from "../../css/Market/SalePostWrite.module.css";
 import useDropdown from "../../hooks/useDropdown";
 import { PRODUCT_CATEGORY, REGION } from "../../constants/market";
-
-const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-
-  reader.onloadend = () => {
-    // 파일 내용은 reader.result에 저장됩니다.
-    console.log(reader.result);
-  };
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-};
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const SalePostWrite = () => {
+  const navigate = useNavigate();
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const MAX_IMAGES = 5;
+
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files);
+    const newFiles = files.slice(0, MAX_IMAGES - imagePreviews.length);
+
+    const filePreviews = files.map((file) => {
+      const reader = new FileReader();
+      return new Promise((resolve) => {
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+      });
+    });
+
+    Promise.all(filePreviews).then((previews) =>
+      setImagePreviews((prev) => [...prev, ...previews])
+    );
+  };
+  const handleImageDelete = (index) => {
+    setImagePreviews((prev) => prev.filter((_, i) => i !== index));
+  };
+
   // useDropdown 훅을 통해 드롭다운 컴포넌트 및 선택값을 필요한 값(카테고리, 지역 등)에 따라 분리하여 관리
   const { selectedValue: category, Dropdown: CategoryDropdown } = useDropdown({
     options: PRODUCT_CATEGORY,
+    type: "종류",
   });
   const { selectedValue: region, Dropdown: RegionDropdown } = useDropdown({
     options: REGION,
+    type: "도",
   });
   const { selectedValue: cities, Dropdown: CityDropdown } = useDropdown({
     options: REGION.find((option) => option.value === region)?.cities || [],
+    type: "시",
   });
 
   return (
@@ -42,25 +57,36 @@ const SalePostWrite = () => {
               multiple
               accept="image/*"
               onChange={handleFileChange}
+              disabled={imagePreviews.length >= MAX_IMAGES}
             />
             <label className={style.uploadBtn} htmlFor="file">
-              <div>+</div>
+              <div>
+                <i className="fa-solid fa-camera"></i>
+              </div>
             </label>
+            <div className={style.imgPreview}>
+              {imagePreviews.map((preview, index) => (
+                <img
+                  key={index}
+                  src={preview}
+                  alt={`미리보기 ${index + 1}`}
+                  onClick={() => handleImageDelete(index)}
+                />
+              ))}
+            </div>
+          </li>
+          <li>
+            <span>상품종류</span>
+            <CategoryDropdown />
           </li>
           <li>
             <span>상품명</span>
             <input type="text" placeholder="상품명을 입력해주세요." />
           </li>
           <li>
-            <span>카테고리</span>
-            <CategoryDropdown />
-          </li>
-          <li>
             <span>지역</span>
             <div className={style.selectRegion}>
-              <span>도</span>
               <RegionDropdown />
-              <span>시</span>
               <CityDropdown />
             </div>
           </li>
@@ -106,7 +132,13 @@ const SalePostWrite = () => {
             <textarea name="" id=""></textarea>
           </li>
         </ul>
-        <button>등록하기</button>
+        <button
+          onClick={() => {
+            navigate("/market");
+          }}
+        >
+          등록하기
+        </button>
       </div>
     </section>
   );

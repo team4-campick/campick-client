@@ -1,7 +1,13 @@
-.writeCon li {
+.writeCon {
+  width: calc(100% - 180px);
+  margin: auto;
+}
+
+.writeCon > div > ul > li {
   display: flex;
   padding: 1rem;
   border-bottom: 1px solid gray;
+  padding: 2rem 0;
 }
 .writeCon li > span {
   padding-right: 3rem;
@@ -9,13 +15,28 @@
 .imgInput {
   display: none;
 }
-.uploadBtn {
-  display: flex;
+.uploadBtn,
+.imgPreview img {
+  border: 1px solid lightgrey;
   width: 150px;
   height: 150px;
-  border: 1px solid gray;
+}
+.uploadBtn {
+  display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 10px;
+}
+.imgPreview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.imgPreview img {
+  object-fit: fill;
+}
+.uploadBtn i {
+  color: #d2d8d6;
 }
 .selectRegion {
   display: flex;
