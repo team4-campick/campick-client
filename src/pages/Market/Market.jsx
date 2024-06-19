@@ -1,8 +1,23 @@
+import { useEffect } from "react";
 import SalePostCard from "../../components/Market/SalePostCard";
 import style from "../../css/Market/Market.module.css";
 import { Link } from "react-router-dom";
 
 const Market = () => {
+  const getSalePostList = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/sale-posts");
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getSalePostList();
+  }, []);
+
   return (
     <section className={style.marketCon}>
       <h2 hidden>Market</h2>
