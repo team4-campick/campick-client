@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import inquiry from './inquiryStore';
 // import user from './userStore'
 
 export const store = configureStore({
   reducer: {
-    // user: user.reducer,
+    inquiry: inquiry.reducer,
   },
 });
