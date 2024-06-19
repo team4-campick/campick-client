@@ -1,0 +1,7 @@
+.container button {
+  all: unset;
+  border: 1px solid black;
+  width: 140px;
+  padding: 0.7rem 1rem;
+  margin-right: 1rem;
+}
