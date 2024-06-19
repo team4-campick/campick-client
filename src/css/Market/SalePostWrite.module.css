@@ -1,13 +1,22 @@
-.writeCon span {
+.writeCon li {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid gray;
+}
+.writeCon li > span {
   padding-right: 3rem;
 }
-.uploaBtn {
-  width: 150px;
-  height: 150px;
-}
-#file {
+.imgInput {
   display: none;
 }
-.writeCon li {
-  border-bottom: 1px solid gray;
+.uploadBtn {
+  display: flex;
+  width: 150px;
+  height: 150px;
+  border: 1px solid gray;
+  justify-content: center;
+  align-items: center;
+}
+.selectRegion {
+  display: flex;
 }
