@@ -4,7 +4,7 @@ import style from "../../css/Market/Market.module.css";
 import { Link } from "react-router-dom";
 
 const Market = () => {
-  const [marketPosts, setMarketPosts] = useState([]);
+  const [salePosts, setSalePosts] = useState([]);
 
   const getSalePostList = async () => {
     try {
@@ -14,7 +14,7 @@ const Market = () => {
         return alert(data.message);
       }
 
-      setMarketPosts(data.marketPosts);
+      setSalePosts(data.salePosts);
     } catch (error) {
       console.error(error);
     }
@@ -24,7 +24,7 @@ const Market = () => {
     getSalePostList();
   }, []);
 
-  console.log(marketPosts);
+  console.log(salePosts);
 
   return (
     <section className={style.marketCon}>
