@@ -81,7 +81,7 @@ const SalePostWrite = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/api/market-posts", {
+      const response = await fetch("http://localhost:8000/api/sale-posts", {
         method: "POST",
         body: JSON.stringify(newPost),
         headers: {
