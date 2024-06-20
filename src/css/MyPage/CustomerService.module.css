@@ -3,21 +3,7 @@
   flex-direction: column;
   padding: 4rem 12rem;
 }
-.testArea {
-  display: flex;
-  align-items: center;
-  padding: 2rem 3rem;
-  gap: 2rem;
-}
-.testArea span {
-  font-size: 24px;
-}
-.divider {
-  display: block;
-  flex: 1;
-  height: 2px;
-  background-color: rgba(0, 59, 89, 0.02);
-}
+
 .customerService .inputArea input,
 .customerService .inputArea textarea {
   border: 1px solid rgba(217, 217, 217, 0.5);

@@ -7,3 +7,26 @@
   font-size: 2rem;
   font-weight: 400;
 }
+.myPage_SubHeader > a,
+.myPage_SubHeader > span {
+  color: gray;
+}
+.myPage_SubHeader > a:focus {
+  color: black;
+}
+
+.testArea {
+  display: flex;
+  align-items: center;
+  padding: 2rem 3rem;
+  gap: 2rem;
+}
+.testArea span {
+  font-size: 24px;
+}
+.divider {
+  display: block;
+  flex: 1;
+  height: 2px;
+  background-color: rgba(0, 59, 89, 0.02);
+}

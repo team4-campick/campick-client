@@ -38,9 +38,9 @@ const CustomerService = () => {
       <h3 hidden>CustomerService</h3>
       <nav className="myPage_SubHeader">고객 지원</nav>
       <form onSubmit={inquiry}>
-        <div className={style.testArea}>
+        <div className="testArea">
           <span>문의사항</span>
-          <span className={style.divider}></span>
+          <span className="divider"></span>
         </div>
         <label className={style.inputArea}>
           <input
@@ -72,9 +72,9 @@ const CustomerService = () => {
         </label>
       </form>
       <form>
-        <div className={style.testArea}>
+        <div className="testArea">
           <span>회원 탈퇴</span>
-          <span className={style.divider}></span>
+          <span className="divider"></span>
         </div>
         <label className={style.inputArea}>
           <p className={style.policy}>
