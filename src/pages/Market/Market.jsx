@@ -8,7 +8,7 @@ const Market = () => {
 
   const getSalePostList = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/market-posts");
+      const response = await fetch("http://localhost:8000/api/sale-posts");
       const data = await response.json();
       if (!data.result) {
         return alert(data.message);
