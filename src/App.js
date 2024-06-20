@@ -1,5 +1,4 @@
 import "./App.css";
-
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -20,17 +19,18 @@ import CustomerService from "./pages/MyPage/CustomerService";
 import Market from "./pages/Market/Market";
 import SalePostWrite from "./pages/Market/SalePostWrite";
 
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/mainpage" element={<Mainpage />} />
         {/* <Route path="/" element={<Main />} /> */}
         {/* <Route path="/" element={<Main />} /> */}
 
         {/* =================== My Page Area ===================  */}
-
         <Route path="/my-page" element={<MyPage />}>
           <Route path="bingo-coupon" element={<BingoCoupon />}>
             <Route path="bingo" element={<Bingo />} />
@@ -49,9 +49,12 @@ function App() {
         <Route path="/market" element={<Market />} />
         <Route path="/sale-post-write" element={<SalePostWrite />} />
 
+        {/* =================== Login Page ===================  */}
+        <Route path="/signin" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
         <Route path="*" element={<>잘못된 경로입니다</>} />
       </Routes>
-
       <Footer />
     </div>
   );
