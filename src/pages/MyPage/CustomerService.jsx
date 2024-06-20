@@ -7,10 +7,33 @@ const CustomerService = () => {
   const [title, setTitle] = useState('');
   const [email, setEmail] = useState('');
   const [content, setContent] = useState('');
+  const [titleErrMsg, setTitleErrMsg] = useState('');
+  const [emailErrMsg, setEmailErrMsg] = useState('');
+  const [contentErrMsg, setContentErrMsg] = useState('');
 
   const checkBoxStatus = () => setPolicyCheckStatus(!policyCheckStatus);
   // ===========================백엔드 API 연결 진행하다가 잠=======================
   const inquiry = async (e) => {
+    e.preventDefault();
+    if (title === '') {
+      setTitleErrMsg('제목을 입력해주세요');
+      return;
+    } else {
+      setTitleErrMsg('');
+    }
+    if (email === '') {
+      setEmailErrMsg('이메일을 입력해주세요');
+      return;
+    } else {
+      setEmailErrMsg('');
+    }
+
+    if (content === '') {
+      setContentErrMsg('내용을 입력해주세요');
+      return;
+    } else {
+      setContentErrMsg('');
+    }
     const response = await fetch(`${url}/inquiry`, {
       method: 'POST',
       body: JSON.stringify({
@@ -49,6 +72,7 @@ const CustomerService = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          <span className={style.errMsg}>&nbsp;{titleErrMsg}</span>
           <input
             type="text"
             // pattern=".+@example\.com"git
@@ -56,6 +80,7 @@ const CustomerService = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <span className={style.errMsg}>&nbsp;{emailErrMsg}</span>
           <textarea
             name="inquiryContent"
             id="inquiryContent"
@@ -65,7 +90,7 @@ const CustomerService = () => {
           >
             {content}
           </textarea>
-
+          <span className={style.errMsg}>&nbsp;{contentErrMsg}</span>
           <button className={style.inquiryBtn} type="submit">
             문의하기
           </button>
