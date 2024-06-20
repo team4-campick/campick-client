@@ -1,5 +1,18 @@
 .salePostCard {
   margin-top: 2rem;
   width: calc(50% - 2rem);
-  border: 2px solid aqua;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  display: flex;
+}
+.salePostCard img {
+  margin-right: 1rem;
+}
+.productInfo span:first-child {
+  font-size: 0.7rem;
+  color: gray;
+}
+.productInfo p {
+  font-size: 1.2rem;
+  font-weight: bold;
 }

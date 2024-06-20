@@ -19,6 +19,7 @@ import CustomerService from "./pages/MyPage/CustomerService";
 
 import Market from "./pages/Market/Market";
 import SalePostWrite from "./pages/Market/SalePostWrite";
+import SaleDetail from "./pages/Market/SaleDetail";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         {/* =================== Market Area ===================  */}
         <Route path="/market" element={<Market />} />
         <Route path="/sale-post-write" element={<SalePostWrite />} />
+        <Route path="/sale-detail" element={<SaleDetail />} />
 
         <Route path="*" element={<>잘못된 경로입니다</>} />
       </Routes>
