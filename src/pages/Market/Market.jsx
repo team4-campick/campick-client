@@ -4,17 +4,17 @@ import style from "../../css/Market/Market.module.css";
 import { Link } from "react-router-dom";
 
 const Market = () => {
-  const [salePosts, setSalePosts] = useState([]);
+  const [marketPosts, setMarketPosts] = useState([]);
 
   const getSalePostList = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/sale-posts");
+      const response = await fetch("http://localhost:8000/api/market-posts");
       const data = await response.json();
       if (!data.result) {
         return alert(data.message);
       }
 
-      setSalePosts(data.salePosts);
+      setMarketPosts(data.marketPosts);
     } catch (error) {
       console.error(error);
     }
@@ -24,7 +24,7 @@ const Market = () => {
     getSalePostList();
   }, []);
 
-  console.log(salePosts);
+  console.log(marketPosts);
 
   return (
     <section className={style.marketCon}>
