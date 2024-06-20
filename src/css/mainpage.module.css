@@ -3,28 +3,107 @@
   height: 900px;
   border: 1px solid red;
   display: block;
-  position: absolute;
+  position: relative;
   background-color: rgb(238, 253, 255);
   top: 0;
-  z-index: -1;
+}
+/* 배경 돌아가는애 */
+.mainVisual > div:nth-child(1) > div {
+  height: 900px;
+}
+/* 배경 돌아가는 애들 세개 전체 */
+.mainVisual > div:nth-child(1) > div:nth-child(1) > div {
+  font-size: 100px;
+}
+/* 네비게이션 돌아가는애 */
+.mainVisual > div:nth-child(2) > div {
+  height: 300px;
+  position: relative;
+}
+/* 네비게이션 돌아가는애 화살표 없애기 */
+.mainVisual > div:nth-child(2) > div > div:nth-child(2),
+.mainVisual > div:nth-child(2) > div > div:nth-child(3) {
+  display: none;
+}
+/* 네비게이션 버튼 */
+.mainVisual > div:nth-child(2) > div > div:nth-child(4) {
+  position: absolute;
+  top: 0px;
+  z-index: 10;
+}
+.mainVisual > div:nth-child(2) > div > div:nth-child(4) > span {
+  width: 90px;
+  height: 10px;
+  border-radius: 3px 3px 0 0;
 }
 
 .blogTapWarp {
   width: 300px;
   height: 300px;
-  border: 1px solid orange;
+  /* border: 1px solid orange; */
   display: block;
   position: absolute;
   right: calc(0px + 6%);
   bottom: calc(0px + 10%);
 }
 
+/* 블로그 슬라이드 컨테이너 */
+
+.firstBlog,
+.secondBlog,
+.thirdBlog {
+  width: 300px;
+  height: 300px;
+  background-color: rgb(197, 197, 197);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 20px auto;
+}
+
+.firstBlog p,
+.secondBlog p,
+.thirdBlog p {
+  color: #555;
+}
+
+.firstBlog strong,
+.secondBlog strong,
+.thirdBlog strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #333;
+}
+
+.firstBlog :link,
+.secondBlog :link,
+.thirdBlog :link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  color: #007bff;
+  text-decoration: none;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+}
+
+/* 이후로는 비디오와 이벤트 */
+/* 비디오와 이벤트 제목 */
+.mainVideoWarp h3,
+.mainEventsWarp h3 {
+  border: 1px solid red;
+  color: #1f3b34;
+  font-size: 38px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
 .mainVideoWarp {
   width: 100%;
-  height: 600px;
-  /* border: 1px solid blue; */
+  height: 700px;
+  border: 1px solid blue;
   position: relative;
-  margin-top: 870px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,15 +113,14 @@
 .mainVideo {
   width: 980px;
   height: 540px;
-  border: 1px solid skyblue;
+  /* border: 1px solid skyblue; */
 }
 
 .mainEventsWarp {
   width: 100%;
-  height: 500px;
-  /* border: 1px solid green; */
+  height: 600px;
+  border: 1px solid green;
   position: relative;
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,12 +132,11 @@
   height: 360px;
   border: 1px solid greenyellow;
 }
-
-.mainVideoWarp h3,
-.mainEventsWarp h3 {
-  color: #1f3b34;
-  font-size: 38px;
-  font-weight: bold;
-  padding-top: 20px;
-  margin-bottom: 20px;
+.mainEvents > div {
+  height: 360px;
+  border: 1px solid red;
+}
+.mainEvents > div > div:nth-child(1) > div {
+  height: 360px;
+  background-color: teal;
 }
