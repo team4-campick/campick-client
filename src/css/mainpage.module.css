@@ -1,0 +1,65 @@
+.mainVisual {
+  width: 100%;
+  height: 900px;
+  border: 1px solid red;
+  display: block;
+  position: absolute;
+  background-color: rgb(238, 253, 255);
+  top: 0;
+  z-index: -1;
+}
+
+.blogTapWarp {
+  width: 300px;
+  height: 300px;
+  border: 1px solid orange;
+  display: block;
+  position: absolute;
+  right: calc(0px + 6%);
+  bottom: calc(0px + 10%);
+}
+
+.mainVideoWarp {
+  width: 100%;
+  height: 600px;
+  /* border: 1px solid blue; */
+  position: relative;
+  margin-top: 870px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainVideo {
+  width: 980px;
+  height: 540px;
+  border: 1px solid skyblue;
+}
+
+.mainEventsWarp {
+  width: 100%;
+  height: 500px;
+  /* border: 1px solid green; */
+  position: relative;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainEvents {
+  width: 980px;
+  height: 360px;
+  border: 1px solid greenyellow;
+}
+
+.mainVideoWarp h3,
+.mainEventsWarp h3 {
+  color: #1f3b34;
+  font-size: 38px;
+  font-weight: bold;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
