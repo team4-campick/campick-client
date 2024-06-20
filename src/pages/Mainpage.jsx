@@ -1,18 +1,26 @@
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import styles from "../css/mainpage.module.css"; // CSS 모듈로 임포트
 import YouTube from "react-youtube";
-import { Autoplay, FreeMode, Pagination, Navigation } from "swiper/modules";
+import {
+  Autoplay,
+  FreeMode,
+  Pagination,
+  Navigation,
+  Controller,
+} from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 const Mainpage = () => {
+  const mainSwiperRef = useRef(null);
+  const blogSwiperRef = useRef(null);
   return (
     <>
-      {" "}
       {/* 메인화면 비주얼 영역 */}
       <section className={styles.mainVisual}>
         {/* 슬라이드 제어 불가 영역- 배경이미지 */}
@@ -21,11 +29,18 @@ const Mainpage = () => {
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
-            delay: 3500,
+            delay: 5000,
             disableOnInteraction: false,
           }}
-          modules={[Autoplay]}
-          className="mySwiper"
+          modules={[Autoplay, Controller]}
+          className={"mySwiper"}
+          onSwiper={(swiper) => {
+            mainSwiperRef.current = swiper;
+            if (blogSwiperRef.current) {
+              swiper.controller.control = blogSwiperRef.current;
+              blogSwiperRef.current.controller.control = swiper;
+            }
+          }}
         >
           <SwiperSlide>Slide 1</SwiperSlide>
           <SwiperSlide>Slide 2</SwiperSlide>
@@ -34,44 +49,48 @@ const Mainpage = () => {
         <div className={styles.blogTapWarp}>
           {/* 슬라이드 제어 가능 영역- 설명페이지 */}
           <Swiper
-            spaceBetween={30}
+            spaceBetween={4}
             centeredSlides={true}
             autoplay={{
-              delay: 3500,
+              delay: 5000,
               disableOnInteraction: false,
             }}
             pagination={{
               clickable: true,
             }}
             navigation={true}
-            modules={[Autoplay, Pagination, Navigation]}
-            className="mySwiper"
+            modules={[Autoplay, Pagination, Navigation, Controller]}
+            className={"mySwiper"}
+            onSwiper={(swiper) => {
+              blogSwiperRef.current = swiper;
+              if (mainSwiperRef.current) {
+                swiper.controller.control = mainSwiperRef.current;
+                mainSwiperRef.current.controller.control = swiper;
+              }
+            }}
           >
             <SwiperSlide>
-              Slide 1
               <div className={styles.firstBlog}>
-                <p>위치정보</p>
-                <strong>정보</strong>
-                <p>내용</p>
-                <Link to="/blog/1">Read More</Link>
+                <p>위치정보1</p>
+                <strong>정보1</strong>
+                <p>내용1</p>
+                <Link to="/blog/1">Read More1</Link>
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              Slide 2
               <div className={styles.secondBlog}>
-                <p>위치정보</p>
-                <strong>정보</strong>
-                <p>내용</p>
-                <Link to="/blog/2">Read More</Link>
+                <p>위치정보2</p>
+                <strong>정보2</strong>
+                <p>내용2</p>
+                <Link to="/blog/2">Read More2</Link>
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              Slide 3
               <div className={styles.thirdBlog}>
-                <p>위치정보</p>
-                <strong>정보</strong>
-                <p>내용</p>
-                <Link to="/blog/3">Read More</Link>
+                <p>위치정보3</p>
+                <strong>정보3</strong>
+                <p>내용3</p>
+                <Link to="/blog/3">Read More3</Link>
               </div>
             </SwiperSlide>
           </Swiper>
@@ -107,8 +126,8 @@ const Mainpage = () => {
         <h3>Today's event</h3>
         <div className={styles.mainEvents}>
           <Swiper
-            slidesPerView={3}
-            spaceBetween={30}
+            slidesPerView={3.5}
+            spaceBetween={15}
             freeMode={true}
             pagination={{
               clickable: true,
