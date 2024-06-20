@@ -3,10 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import 
-
-
-from "./pages/Mainpage";
+import MainPage from "./pages/Mainpage";
 
 import MyPage from "./pages/MyPage/MyPage";
 import BingoCoupon from "./pages/MyPage/BingoCoupon";
