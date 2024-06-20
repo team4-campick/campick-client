@@ -7,3 +7,11 @@
   padding: 3rem;
   gap: 2rem;
 }
+.notAvailableCouponCon > div {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+}
+.notAvailableCouponCon > div > p {
+  color: gray;
+  text-decoration: line-through;
+}

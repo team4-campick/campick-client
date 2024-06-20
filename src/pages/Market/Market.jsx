@@ -31,7 +31,7 @@ const Market = () => {
       <h2 hidden>Market</h2>
       <div className={style.searchBar}>
         <input type="text" placeholder="검색어를 입력하세요." />
-        <button className="searchBtn">검색</button>
+        <i className="fa-solid fa-magnifying-glass"></i>
       </div>
       <div className={style.cateGories}>
         <button onClick={() => {}}>텐트</button>
@@ -41,13 +41,17 @@ const Market = () => {
         <button onClick={() => {}}>조리도구</button>
         <button onClick={() => {}}>기타장비</button>
       </div>
-      <Link to="/sale-post-write" className={style.writeBtn}>
-        판매하기
-      </Link>
+      <div>
+        <Link to="/sale-post-write" className={style.writeBtn}>
+          판매하기
+          <i class="fa-regular fa-pen-to-square"></i>
+        </Link>
+      </div>
 
       <div className={style.postCardList}>
-        <SalePostCard />
-        <SalePostCard />
+        {salePosts.map((post) => (
+          <SalePostCard key={post._id} post={post} />
+        ))}
       </div>
     </section>
   );

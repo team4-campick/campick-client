@@ -3,7 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import Mainpage from "./pages/Mainpage";
+import 
+
+
+from "./pages/Mainpage";
 
 import MyPage from "./pages/MyPage/MyPage";
 import BingoCoupon from "./pages/MyPage/BingoCoupon";
@@ -18,6 +21,7 @@ import CustomerService from "./pages/MyPage/CustomerService";
 
 import Market from "./pages/Market/Market";
 import SalePostWrite from "./pages/Market/SalePostWrite";
+import SaleDetail from "./pages/Market/SaleDetail";
 
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -27,6 +31,7 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
+        <Route path="/" element={<Mainpage />} />
         {/* <Route path="/" element={<Main />} /> */}
         {/* <Route path="/" element={<Main />} /> */}
 
@@ -48,6 +53,7 @@ function App() {
         {/* =================== Market Area ===================  */}
         <Route path="/market" element={<Market />} />
         <Route path="/sale-post-write" element={<SalePostWrite />} />
+        <Route path="/sale-detail" element={<SaleDetail />} />
 
         {/* =================== Login Page ===================  */}
         <Route path="/signin" element={<LoginPage />} />

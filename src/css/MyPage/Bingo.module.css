@@ -11,7 +11,7 @@
 }
 .bingoArea {
   display: grid;
-  flex: 1;
+  /* flex: 1; */
   border: 1px solid red;
   grid-template-columns: repeat(3, 300px);
   padding: 2rem;

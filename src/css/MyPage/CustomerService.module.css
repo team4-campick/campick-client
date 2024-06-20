@@ -10,7 +10,6 @@
   border-radius: 0.2rem;
   padding: 1rem 0.5rem;
   outline: none;
-  margin-bottom: 1rem;
   font-size: 12px;
 }
 .customerService textarea {
@@ -75,4 +74,9 @@
 }
 .customerService .deleteBtn:after {
   background-color: red;
+}
+.errMsg {
+  color: red;
+  margin: 0.5rem 0;
+  font-size: 12px;
 }
