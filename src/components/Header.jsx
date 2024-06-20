@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <header className="headerWrap">
       <h1>
-        <Link to="/src/pages/Mainpage/Mainpage.jsx">
+        <Link to="/mainpage">
           <img src="#" alt="CAMPICK LOGO IMG" />
         </Link>
       </h1>
