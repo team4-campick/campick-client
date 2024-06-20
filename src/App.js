@@ -1,10 +1,12 @@
 import "./App.css";
-
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import Mainpage from "./pages/Mainpage";
+import 
+
+
+from "./pages/Mainpage";
 
 import MyPage from "./pages/MyPage/MyPage";
 import BingoCoupon from "./pages/MyPage/BingoCoupon";
@@ -21,6 +23,9 @@ import Market from "./pages/Market/Market";
 import SalePostWrite from "./pages/Market/SalePostWrite";
 import SaleDetail from "./pages/Market/SaleDetail";
 
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+
 function App() {
   return (
     <div className="App">
@@ -31,7 +36,6 @@ function App() {
         {/* <Route path="/" element={<Main />} /> */}
 
         {/* =================== My Page Area ===================  */}
-
         <Route path="/my-page" element={<MyPage />}>
           <Route path="bingo-coupon" element={<BingoCoupon />}>
             <Route path="bingo" element={<Bingo />} />
@@ -51,9 +55,12 @@ function App() {
         <Route path="/sale-post-write" element={<SalePostWrite />} />
         <Route path="/sale-detail" element={<SaleDetail />} />
 
+        {/* =================== Login Page ===================  */}
+        <Route path="/signin" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+
         <Route path="*" element={<>잘못된 경로입니다</>} />
       </Routes>
-
       <Footer />
     </div>
   );
