@@ -249,17 +249,11 @@ const REGION = [
   },
 ];
 
-// const REGION = [
-//   { label: "서울", value: "Seoul" },
-//   { label: "부산", value: "Busan" },
-//   { label: "인천", value: "Incheon" },
-//   { label: "대구", value: "Daegu" },
-//   { label: "대전", value: "Daejeon" },
-//   {
-//     label: "경상남도",
-//     value: "Gyeongsangnam-do",
-//     cities: [{ label: "마산", value: "masan" }],
-//   },
-// ];
+const PRODUCT_CONDITION_OPTIONS = [
+  { value: "new", label: "새상품(미개봉)" },
+  { value: "noUse", label: "사용감 없음" },
+  { value: "littleUse", label: "사용감 적음" },
+  { value: "muchUse", label: "사용감 많음" },
+];
 
-export { PRODUCT_CATEGORY, REGION };
+export { PRODUCT_CATEGORY, REGION, PRODUCT_CONDITION_OPTIONS };
