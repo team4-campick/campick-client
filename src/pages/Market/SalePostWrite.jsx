@@ -160,15 +160,17 @@ const SalePostWrite = () => {
               const { value, label } = option;
               return (
                 <React.Fragment key={value}>
-                  <input
-                    type="radio"
-                    id={value}
-                    name="condition"
-                    value={value}
-                    onChange={handleCondition}
-                    checked={condition === value}
-                  />
-                  <label htmlFor={value}>{label}</label>
+                  <label>
+                    <input
+                      type="radio"
+                      id={value}
+                      name="condition"
+                      value={value}
+                      onChange={handleCondition}
+                      checked={condition === value}
+                    />
+                    {label}
+                  </label>
                 </React.Fragment>
               );
             })}
@@ -182,6 +184,16 @@ const SalePostWrite = () => {
               onChange={handlePrice}
             />
             원
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  id="negotiablePrice"
+                  name="negotiablePrice"
+                />
+                가격협의가능
+              </label>
+            </div>
           </li>
           <li>
             설명
