@@ -1,0 +1,18 @@
+.postCon {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.postContent {
+  display: flex;
+  flex-direction: column;
+}
+.imgCon {
+  padding-top: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.postCon img {
+  position: absolute;
+  top: 0;
+  object-fit: cover;
+}
