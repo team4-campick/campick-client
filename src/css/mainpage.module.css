@@ -3,7 +3,7 @@
   height: 900px;
   border: 1px solid red;
   display: block;
-  position: relative;
+  position: absolute;
   background-color: rgb(238, 253, 255);
   top: 0;
 }
@@ -108,6 +108,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 830px;
 }
 
 .mainVideo {
