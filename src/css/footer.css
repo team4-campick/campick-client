@@ -5,7 +5,7 @@ footer {
 }
 
 .copyrightWrap {
-  border-top: 1px solid #b7b6b6;
+  border-top: rgb(31, 59, 52, 0.2) solid 1px;
   text-align: center;
   padding: 10px 0;
 }
