@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import style from '../../css/MyPage/EditInfo.module.css';
 
-const url = 'http://localhost:8000';
+const url = process.env.REACT_APP_SERVER_URL;
+console.log('url 테스트', url);
 const EditInfo = () => {
   const [nickname, setNickname] = useState('');
   const [currentPW, setCurrentPW] = useState('');

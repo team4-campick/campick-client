@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import style from '../../css/MyPage/CustomerService.module.css';
-
-const url = 'http://localhost:8000'; // 테스트용 store에 ref 로 올려야할 부분
+import { useParams } from 'react-router-dom';
+// import { url } from '../../store/ref';
+const url = process.env.REACT_APP_SERVER_URL;
 const CustomerService = () => {
   const [policyCheckStatus, setPolicyCheckStatus] = useState(false);
   const [title, setTitle] = useState('');
@@ -11,8 +12,9 @@ const CustomerService = () => {
   const [emailErrMsg, setEmailErrMsg] = useState('');
   const [contentErrMsg, setContentErrMsg] = useState('');
 
+  const { userId } = useParams();
+
   const checkBoxStatus = () => setPolicyCheckStatus(!policyCheckStatus);
-  // ===========================백엔드 API 연결 진행하다가 잠=======================
   const inquiry = async (e) => {
     e.preventDefault();
     if (title === '') {
@@ -45,16 +47,26 @@ const CustomerService = () => {
       credentials: 'include',
     });
     console.log(response);
+    setTitle('');
+    setEmail('');
+    setContent('');
   };
-  // ======================================================================
   const deleteUser = async (e) => {
     e.preventDefault();
     console.log('deleteBtn clicked');
-    const response = await fetch(`${url}/deleteUser/:nickname`, {
+    console.log(userId);
+    console.log(url);
+    const response = await fetch(`${url}/delete-user/deleteMe`, {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json' },
       credentials: 'include',
     });
+    if (response.status === 200) {
+      console.log('deleted');
+      window.location = '/';
+    } else {
+      console.log('오류가 있다.', response.status);
+    }
   };
   return (
     <section className={style.customerService}>
