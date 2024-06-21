@@ -105,7 +105,7 @@ const Mainpage = () => {
               height: "540px",
               playerVars: {
                 autoplay: 1,
-                controls: 0,
+                controls: 1,
                 rel: 0,
                 modestbranding: 1,
                 loop: 1,
@@ -114,7 +114,7 @@ const Mainpage = () => {
               },
             }}
             onReady={(e) => {
-              e.target.unMute();
+              e.target.mute();
             }}
           />
         </div>
