@@ -50,7 +50,7 @@ const Header = () => {
                 <Link to="/my-page/bingo-coupon/bingo">MY PAGE</Link>
               </li>
               <li className="privacy">
-                <Link to="/signout" onClick={handleLogout}>
+                <Link to="/" onClick={handleLogout}>
                   SIGN OUT
                 </Link>
               </li>
