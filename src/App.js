@@ -20,6 +20,7 @@ import Market from "./pages/Market/Market";
 import SalePostWrite from "./pages/Market/SalePostWrite";
 import SaleDetail from "./pages/Market/SaleDetail";
 
+import Contents from "./pages/contents";
 import Event from "./pages/Event";
 
 import LoginPage from "./pages/LoginPage";
@@ -54,6 +55,7 @@ function App() {
         <Route path="/sale-post-write" element={<SalePostWrite />} />
         <Route path="/sale-detail" element={<SaleDetail />} />
         {/* =================== contents page =================== */}
+        <Route path="/contents" element={<Contents />} />
         {/* =================== event page =================== */}
         <Route path="/event" element={<Event />} />
 
