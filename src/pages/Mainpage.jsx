@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import styles from "../css/mainpage.module.css"; // CSS 모듈로 임포트
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import YouTube from "react-youtube";
 import {
   Autoplay,
@@ -12,28 +13,23 @@ import {
   Controller,
 } from "swiper/modules";
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import styles from "../css/mainpage.module.css"; // CSS 모듈로 임포트
 
 const Mainpage = () => {
   const mainSwiperRef = useRef(null);
   const blogSwiperRef = useRef(null);
+
   return (
     <>
       {/* 메인화면 비주얼 영역 */}
       <section className={styles.mainVisual}>
         {/* 슬라이드 제어 불가 영역- 배경이미지 */}
-
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          modules={[Autoplay, Controller]}
-          className={"mySwiper"}
+          allowTouchMove={false} // 마우스로 슬라이드 불가능
+          modules={[Controller]}
+          className={styles.mySwiper}
           onSwiper={(swiper) => {
             mainSwiperRef.current = swiper;
             if (blogSwiperRef.current) {
@@ -46,6 +42,7 @@ const Mainpage = () => {
           <SwiperSlide>Slide 2</SwiperSlide>
           <SwiperSlide>Slide 3</SwiperSlide>
         </Swiper>
+
         <div className={styles.blogTapWarp}>
           {/* 슬라이드 제어 가능 영역- 설명페이지 */}
           <Swiper
@@ -60,7 +57,7 @@ const Mainpage = () => {
             }}
             navigation={true}
             modules={[Autoplay, Pagination, Navigation, Controller]}
-            className={"mySwiper"}
+            className={styles.mySwiper}
             onSwiper={(swiper) => {
               blogSwiperRef.current = swiper;
               if (mainSwiperRef.current) {
@@ -96,6 +93,7 @@ const Mainpage = () => {
           </Swiper>
         </div>
       </section>
+
       <section className={styles.mainVideoWarp}>
         {/* 유튜브 영상 섹션 전체 처리완료 */}
         <h3>Today's video</h3>
@@ -121,6 +119,7 @@ const Mainpage = () => {
           />
         </div>
       </section>
+
       <section className={styles.mainEventsWarp}>
         {/* 이벤트 슬라이드 진행필요 */}
         <h3>Today's event</h3>
@@ -133,7 +132,7 @@ const Mainpage = () => {
               clickable: true,
             }}
             modules={[FreeMode, Pagination]}
-            className="mySwiper"
+            className={styles.mySwiper}
           >
             <SwiperSlide>Slide 1</SwiperSlide>
             <SwiperSlide>Slide 2</SwiperSlide>
