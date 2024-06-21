@@ -132,7 +132,7 @@ const Mainpage = () => {
               clickable: true,
             }}
             modules={[FreeMode, Pagination]}
-            className={styles.mainVideoSwiper}
+            className={styles.mainEventsSwiper}
           >
             <SwiperSlide>Slide 1</SwiperSlide>
             <SwiperSlide>Slide 2</SwiperSlide>
