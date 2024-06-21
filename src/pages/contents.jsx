@@ -3,10 +3,9 @@ import Styles from "../css/contents.module.css";
 
 const Contents = () => {
   return (
-    <div className={Styles.container}>
-      <h1>Contents Component</h1>
-      {/* 추가적인 컴포넌트나 JSX 코드 작성 */}
-    </div>
+    <section className={Styles.container}>
+      <p>Contents Component</p>
+    </section>
   );
 };
 
