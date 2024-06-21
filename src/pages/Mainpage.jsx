@@ -29,7 +29,7 @@ const Mainpage = () => {
           centeredSlides={true}
           allowTouchMove={false} // 마우스로 슬라이드 불가능
           modules={[Controller]}
-          className={styles.mySwiper}
+          className={styles.mainBackgroundSwiper}
           onSwiper={(swiper) => {
             mainSwiperRef.current = swiper;
             if (blogSwiperRef.current) {
@@ -57,7 +57,7 @@ const Mainpage = () => {
             }}
             navigation={true}
             modules={[Autoplay, Pagination, Navigation, Controller]}
-            className={styles.mySwiper}
+            className={styles.mainExplainSwiper}
             onSwiper={(swiper) => {
               blogSwiperRef.current = swiper;
               if (mainSwiperRef.current) {
@@ -132,7 +132,7 @@ const Mainpage = () => {
               clickable: true,
             }}
             modules={[FreeMode, Pagination]}
-            className={styles.mySwiper}
+            className={styles.mainVideoSwiper}
           >
             <SwiperSlide>Slide 1</SwiperSlide>
             <SwiperSlide>Slide 2</SwiperSlide>
