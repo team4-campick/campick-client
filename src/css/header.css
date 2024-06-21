@@ -6,7 +6,11 @@
   justify-content: space-between;
   background-color: rgba(31, 59, 52, 0.2);
   padding: 10px 20px;
-  z-index: 1000;
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  float: left; */
+  z-index: 999;
 }
 
 .headerWrap h1 {
@@ -62,11 +66,11 @@
 .menuWrap a::after {
   content: "";
   position: absolute;
-  right: -10px;
+  right: -15px;
   top: 50%;
   transform: translateY(-50%);
-  width: 5px;
-  height: 5px;
+  width: 7px;
+  height: 7px;
   background-color: #ffce31;
   opacity: 0;
   transition: opacity 0.3s;
