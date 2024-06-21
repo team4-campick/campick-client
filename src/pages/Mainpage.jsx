@@ -125,7 +125,7 @@ const Mainpage = () => {
         <h3>Today's event</h3>
         <div className={styles.mainEvents}>
           <Swiper
-            slidesPerView={3.5}
+            slidesPerView={4}
             spaceBetween={15}
             freeMode={true}
             pagination={{
