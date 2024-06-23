@@ -12,10 +12,13 @@ const SalePostWrite = () => {
   const navigate = useNavigate();
   const [imagePreviews, setImagePreviews] = useState([]);
   const MAX_IMAGES = 5;
+  const [imageFiles, setImageFiles] = useState([]);
 
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
     const newFiles = files.slice(0, MAX_IMAGES - imagePreviews.length);
+
+    setImageFiles((prev) => [...prev, ...newFiles]);
 
     const filePreviews = newFiles.map((file) => {
       const reader = new FileReader();
@@ -34,16 +37,16 @@ const SalePostWrite = () => {
   };
 
   // useDropdown 훅을 통해 드롭다운 컴포넌트 및 선택값을 필요한 값(카테고리, 지역 등)에 따라 분리하여 관리
-  const { selectedValue: category, Dropdown: CategoryDropdown } = useDropdown({
+  const { selectedLabel: category, Dropdown: CategoryDropdown } = useDropdown({
     options: PRODUCT_CATEGORY,
     type: "종류",
   });
-  const { selectedValue: region, Dropdown: RegionDropdown } = useDropdown({
+  const { selectedLabel: region, Dropdown: RegionDropdown } = useDropdown({
     options: REGION,
     type: "도",
   });
-  const { selectedValue: city, Dropdown: CityDropdown } = useDropdown({
-    options: REGION.find((option) => option.value === region)?.cities || [],
+  const { selectedLabel: city, Dropdown: CityDropdown } = useDropdown({
+    options: REGION.find((option) => option.label === region)?.cities || [],
     type: "시",
   });
 
@@ -53,10 +56,15 @@ const SalePostWrite = () => {
   };
 
   const [condition, setCondition] = useState(
-    PRODUCT_CONDITION_OPTIONS[0].value
+    PRODUCT_CONDITION_OPTIONS[0].label
   );
   const handleCondition = (event) => {
     setCondition(event.target.value);
+  };
+
+  const [isNegotiable, setIsNegotiable] = useState(false);
+  const handleIsNegotiable = (event) => {
+    setIsNegotiable(event.target.checked);
   };
 
   const [price, setPrice] = useState("");
@@ -64,7 +72,7 @@ const SalePostWrite = () => {
     setPrice(event.target.value);
   };
 
-  const [desc, setDesc] = useState("");
+  const [desc, setDesc] = useState("여기서부터 추가로 입력하세요");
   const hadleDesc = (event) => {
     setDesc(event.target.value);
   };
@@ -78,11 +86,19 @@ const SalePostWrite = () => {
       price,
       desc,
       condition,
+      isNegotiable,
     };
+
+    // const formData = new FormData();
+    // formData.append("newPost", JSON.stringify(newPost));
+    // imageFiles.forEach((file) => {
+    //   formData.append("images", file);
+    // });
 
     try {
       const response = await fetch("http://localhost:8000/api/sale-posts", {
         method: "POST",
+        // body: formData,
         body: JSON.stringify(newPost),
         headers: {
           "Content-Type": "application/json",
@@ -100,6 +116,7 @@ const SalePostWrite = () => {
       console.log(error);
     }
   };
+  console.log(condition);
 
   return (
     <section className={style.writeCon}>
@@ -163,11 +180,11 @@ const SalePostWrite = () => {
                   <label>
                     <input
                       type="radio"
-                      id={value}
+                      id={label}
                       name="condition"
-                      value={value}
+                      value={label}
                       onChange={handleCondition}
-                      checked={condition === value}
+                      checked={condition === label}
                     />
                     {label}
                   </label>
@@ -190,6 +207,8 @@ const SalePostWrite = () => {
                   type="checkbox"
                   id="negotiablePrice"
                   name="negotiablePrice"
+                  onChange={handleIsNegotiable}
+                  checked={isNegotiable}
                 />
                 가격협의가능
               </label>
