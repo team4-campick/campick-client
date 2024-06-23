@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 const SalePostCard = ({ post }) => {
   const navigate = useNavigate();
   const { productName, region, city, price } = post;
+
   return (
     <div
       className={style.salePostCard}
       onClick={() => {
-        navigate(`/sale-detail`);
-        // navigate(`/sale-detail/${post._id}`);
+        navigate(`/sale-detail/${post._id}`);
       }}
     >
       <img src="" alt="물품이미지" />
