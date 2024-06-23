@@ -2,29 +2,43 @@ import { useState, useEffect } from "react";
 import SalePostCard from "../../components/Market/SalePostCard";
 import style from "../../css/Market/Market.module.css";
 import { Link } from "react-router-dom";
+import { PRODUCT_CATEGORY } from "../../constants/market";
 
 const Market = () => {
   const [salePosts, setSalePosts] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
-  const getSalePostList = async () => {
+  const API_BASE_URL = "http://localhost:8000/api";
+  const salePostsEndpoint = `${API_BASE_URL}/sale-posts`;
+
+  const fetchSalePosts = async (category = "") => {
     try {
-      const response = await fetch("http://localhost:8000/api/sale-posts");
+      const url = category
+        ? `${salePostsEndpoint}?category=${category}`
+        : salePostsEndpoint;
+      const response = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       if (!data.result) {
         return alert(data.message);
       }
-
       setSalePosts(data.salePosts);
+      setSelectedCategory(category);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    getSalePostList();
+    fetchSalePosts();
   }, []);
 
-  console.log(salePosts);
+  const handleCategoryClick = (category) => {
+    fetchSalePosts(category);
+  };
 
   return (
     <section className={style.marketCon}>
@@ -34,17 +48,20 @@ const Market = () => {
         <i className="fa-solid fa-magnifying-glass"></i>
       </div>
       <div className={style.cateGories}>
-        <button onClick={() => {}}>텐트</button>
-        <button onClick={() => {}}>침낭/매트/해먹</button>
-        <button onClick={() => {}}>스토브/화로대</button>
-        <button onClick={() => {}}>랜턴</button>
-        <button onClick={() => {}}>조리도구</button>
-        <button onClick={() => {}}>기타장비</button>
+        <button onClick={() => handleCategoryClick("")}>전체보기</button>
+        {PRODUCT_CATEGORY.map((cate) => (
+          <button
+            key={cate.value}
+            onClick={() => handleCategoryClick(cate.value)}
+          >
+            {cate.label}
+          </button>
+        ))}
       </div>
       <div>
         <Link to="/sale-post-write" className={style.writeBtn}>
           판매하기
-          <i class="fa-regular fa-pen-to-square"></i>
+          <i className="fa-regular fa-pen-to-square"></i>
         </Link>
       </div>
 
