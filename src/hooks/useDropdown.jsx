@@ -47,7 +47,7 @@ const useDropdown = ({ options, type }) => {
   };
 
   // 선택된 값과 드롭다운 컴포넌트를 반환
-  return { selectedValue, Dropdown };
+  return { selectedLabel, Dropdown };
 };
 
 export default useDropdown;
