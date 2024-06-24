@@ -18,7 +18,7 @@ const SalePostWrite = () => {
     const files = Array.from(event.target.files);
     const newFiles = files.slice(0, MAX_IMAGES - imagePreviews.length);
 
-    setImageFiles((prev) => [...prev, ...newFiles]);
+    setImageFiles(newFiles);
 
     const filePreviews = newFiles.map((file) => {
       const reader = new FileReader();
@@ -73,7 +73,7 @@ const SalePostWrite = () => {
   };
 
   const [desc, setDesc] = useState('여기서부터 추가로 입력하세요');
-  const hadleDesc = (event) => {
+  const handleDesc = (event) => {
     setDesc(event.target.value);
   };
 
@@ -112,7 +112,6 @@ const SalePostWrite = () => {
       console.log(error);
     }
   };
-  console.log(condition);
 
   return (
     <section className={style.writeCon}>
@@ -216,7 +215,7 @@ const SalePostWrite = () => {
               name=""
               id=""
               value={desc}
-              onChange={hadleDesc}
+              onChange={handleDesc}
             ></textarea>
           </li>
         </ul>
