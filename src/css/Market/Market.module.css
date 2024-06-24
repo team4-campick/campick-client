@@ -41,11 +41,12 @@
   color: black;
   cursor: pointer;
 }
-
+.writeBtnCon {
+  display: block;
+  width: 100%;
+  text-align: right;
+}
 .writeBtn {
-  display: flex;
-  justify-content: flex-end;
-  padding-bottom: 1rem;
   color: #1f3b34;
 }
 .writeBtn span {
@@ -58,7 +59,7 @@
   width: 100%;
   height: 2px;
   background-color: rgba(31, 59, 52, 0.1);
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem 0;
 }
 
 .postCardList {

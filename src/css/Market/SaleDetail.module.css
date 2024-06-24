@@ -13,6 +13,10 @@
   height: 500px;
   margin-bottom: 1rem;
 }
+.detailSlide img {
+  width: 100%;
+  object-fit: cover;
+}
 .writer {
   margin-top: 1rem;
 }
