@@ -1,12 +1,12 @@
-import style from "../../css/Market/SalePostWrite.module.css";
-import useDropdown from "../../hooks/useDropdown";
+import style from '../../css/Market/SalePostWrite.module.css';
+import useDropdown from '../../hooks/useDropdown';
 import {
   PRODUCT_CATEGORY,
   REGION,
   PRODUCT_CONDITION_OPTIONS,
-} from "../../constants/market";
-import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+} from '../../constants/market';
+import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const SalePostWrite = () => {
   const navigate = useNavigate();
@@ -39,18 +39,18 @@ const SalePostWrite = () => {
   // useDropdown 훅을 통해 드롭다운 컴포넌트 및 선택값을 필요한 값(카테고리, 지역 등)에 따라 분리하여 관리
   const { selectedLabel: category, Dropdown: CategoryDropdown } = useDropdown({
     options: PRODUCT_CATEGORY,
-    type: "종류",
+    type: '종류',
   });
   const { selectedLabel: region, Dropdown: RegionDropdown } = useDropdown({
     options: REGION,
-    type: "도",
+    type: '도',
   });
   const { selectedLabel: city, Dropdown: CityDropdown } = useDropdown({
     options: REGION.find((option) => option.label === region)?.cities || [],
-    type: "시",
+    type: '시',
   });
 
-  const [productName, setProductName] = useState("");
+  const [productName, setProductName] = useState('');
   const handleProductName = (event) => {
     setProductName(event.target.value);
   };
@@ -67,12 +67,12 @@ const SalePostWrite = () => {
     setIsNegotiable(event.target.checked);
   };
 
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState('');
   const handlePrice = (event) => {
     setPrice(event.target.value);
   };
 
-  const [desc, setDesc] = useState("여기서부터 추가로 입력하세요");
+  const [desc, setDesc] = useState('여기서부터 추가로 입력하세요');
   const hadleDesc = (event) => {
     setDesc(event.target.value);
   };
@@ -89,20 +89,16 @@ const SalePostWrite = () => {
       isNegotiable,
     };
 
-    // const formData = new FormData();
-    // formData.append("newPost", JSON.stringify(newPost));
-    // imageFiles.forEach((file) => {
-    //   formData.append("images", file);
-    // });
+    const formData = new FormData();
+    formData.append('newPost', JSON.stringify(newPost));
+    imageFiles.forEach((file) => {
+      formData.append('images', file);
+    });
 
     try {
-      const response = await fetch("http://localhost:8000/api/sale-posts", {
-        method: "POST",
-        // body: formData,
-        body: JSON.stringify(newPost),
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await fetch('http://localhost:8000/api/sale-posts', {
+        method: 'POST',
+        body: formData,
       });
 
       const res = await response.json();
@@ -110,8 +106,8 @@ const SalePostWrite = () => {
         return alert(res.message);
       }
 
-      alert("게시물 생성에 성공했습니다.");
-      navigate("/market");
+      alert('게시물 생성에 성공했습니다.');
+      navigate('/market');
     } catch (error) {
       console.log(error);
     }
