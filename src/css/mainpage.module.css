@@ -3,7 +3,7 @@
   height: 900px;
   border: 1px solid red;
   display: block;
-  background-color: rgb(238, 253, 255);
+  background-color: rgb(13, 74, 82);
   top: 0;
 }
 /* 배경 돌아가는애 */
@@ -39,17 +39,17 @@
   height: 30px;
   border-radius: 3px 3px 0 0;
   margin: 0;
-  background-color: rgb(197, 197, 197);
+  background-color: white;
 }
 
 .blogTapWarp {
   width: 300px;
   height: 300px;
-  /* border: 1px solid orange; */
+  border: 1px solid orange;
   display: block;
   position: absolute;
   right: calc(0px + 6%);
-  bottom: calc(0px + 30%);
+  bottom: calc(0px + 40%);
 }
 
 /* 블로그 슬라이드 컨테이너 */
@@ -59,33 +59,43 @@
 .thirdBlog {
   width: 300px;
   height: 300px;
-  background-color: rgb(197, 197, 197);
+  background-color: white;
   border-radius: 0 0 10px 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
   margin: 20px auto;
-}
-
-.firstBlog p,
-.secondBlog p,
-.thirdBlog p {
-  color: #555;
+  border: 1px solid red;
 }
 
 .firstBlog strong,
 .secondBlog strong,
 .thirdBlog strong {
+  color: #555;
+  margin-top: 80px;
+  border: 1px solid rgb(55, 151, 63);
+}
+
+.firstBlog h3,
+.secondBlog h3,
+.thirdBlog h3 {
   display: block;
   margin-bottom: 10px;
   font-size: 24px;
   color: #333;
+  border: 1px solid rgb(188, 57, 206);
+}
+.firstBlog p,
+.secondBlog p,
+.thirdBlog p {
+  color: #555;
+  border: 1px solid rgb(184, 104, 104);
 }
 
 .firstBlog :link,
 .secondBlog :link,
 .thirdBlog :link {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 50px;
   padding: 8px 16px;
   color: #007bff;
   text-decoration: none;
@@ -95,8 +105,8 @@
 
 /* 이후로는 비디오와 이벤트 */
 /* 비디오와 이벤트 제목 */
-.mainVideoWarp h3,
-.mainEventsWarp h3 {
+.mainVideoWarp h2,
+.mainEventsWarp h2 {
   border: 1px solid red;
   color: #1f3b34;
   font-size: 38px;
@@ -134,14 +144,14 @@
 
 .mainEvents {
   width: 980px;
-  height: 360px;
+  height: 400px;
   border: 1px solid greenyellow;
 }
-.mainEvents > div {
+.mainEventsSwiper {
   height: 360px;
   border: 1px solid red;
 }
-.mainEvents > div > div:nth-child(1) > div {
+.mainEventsSwiper > div:nth-child(1) > div {
   height: 360px;
   background-color: teal;
 }
