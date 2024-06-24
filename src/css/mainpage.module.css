@@ -45,13 +45,20 @@
 .blogTapWarp {
   width: 300px;
   height: 300px;
+  border: 1px solid rgb(224, 0, 168);
+  position: absolute;
+  right: calc(0px + 5%);
+  bottom: calc(0px + 30%);
+}
+.mainExplainSwiper {
+  width: 300px;
+  height: 300px;
   border: 1px solid orange;
   display: block;
   position: absolute;
-  right: calc(0px + 6%);
-  bottom: calc(0px + 40%);
+  right: 0;
+  bottom: 0;
 }
-
 /* 블로그 슬라이드 컨테이너 */
 
 .firstBlog,
@@ -70,6 +77,8 @@
 .firstBlog strong,
 .secondBlog strong,
 .thirdBlog strong {
+  position: relative;
+  z-index: 10;
   color: #555;
   margin-top: 80px;
   border: 1px solid rgb(55, 151, 63);
