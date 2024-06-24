@@ -1,6 +1,13 @@
-import React, { useEffect, useState } from "react";
-import style from "../../css/Market/SaleDetail.module.css";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import style from '../../css/Market/SaleDetail.module.css';
+import { useParams } from 'react-router-dom';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+import { Pagination, Navigation } from 'swiper/modules';
 
 const SaleDetail = () => {
   const { id } = useParams();
@@ -17,14 +24,14 @@ const SaleDetail = () => {
     isNegotiable,
   } = salePostDetail;
 
-  const API_BASE_URL = "http://localhost:8000/api";
+  const API_BASE_URL = 'http://localhost:8000/api';
   const salePostsEndpoint = `${API_BASE_URL}/sale-posts/${id}`;
 
   const fetchSalePostDetail = async () => {
     try {
       const response = await fetch(salePostsEndpoint, {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       const data = await response.json();
@@ -46,7 +53,28 @@ const SaleDetail = () => {
       <h2 hidden>SaleDetail</h2>
 
       <div className={style.productImg}>
-        <div className={style.productImgSlide}>이미지 슬라이드 들어가는 곳</div>
+        <div className={style.productImgSlide}>
+          <Swiper
+            pagination={{
+              type: 'fraction',
+            }}
+            navigation={true}
+            loop={true}
+            modules={[Pagination, Navigation]}
+            className={style.detailSlide}
+          >
+            <SwiperSlide>Slide 1</SwiperSlide>
+            <SwiperSlide>Slide 2</SwiperSlide>
+            <SwiperSlide>Slide 3</SwiperSlide>
+            <SwiperSlide>Slide 4</SwiperSlide>
+            <SwiperSlide>Slide 5</SwiperSlide>
+            <SwiperSlide>Slide 6</SwiperSlide>
+            <SwiperSlide>Slide 7</SwiperSlide>
+            <SwiperSlide>Slide 8</SwiperSlide>
+            <SwiperSlide>Slide 9</SwiperSlide>
+            <SwiperSlide>Slide 10</SwiperSlide>
+          </Swiper>
+        </div>
         <span className={style.writer}>작성자</span>
       </div>
       <div className={style.productInfo}>
@@ -58,9 +86,9 @@ const SaleDetail = () => {
           </span>
         </div>
         <div className={style.priceCon}>
-          <span>{isNegotiable ? "가격협의가능" : "가격협의불가"}</span>
+          <span>{isNegotiable ? '가격협의가능' : '가격협의불가'}</span>
           <p className={style.productPrice}>판매 희망가 : {price}원</p>
-        </div>{" "}
+        </div>{' '}
       </div>
       <div>상품 상태 :{condition}</div>
       <div>{desc}</div>
