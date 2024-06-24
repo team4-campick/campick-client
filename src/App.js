@@ -46,7 +46,7 @@ function App() {
             <Route path="purchase" element={<Purchase />} />
           </Route>
           <Route path="my-post" element={<MyPost />} />
-          <Route path="edit-info" element={<EditInfo />} />
+          <Route path="edit-info/:userId" element={<EditInfo />} />
           <Route
             path="customer-service/:userId"
             element={<CustomerService />}
