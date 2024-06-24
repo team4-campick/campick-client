@@ -5,9 +5,8 @@ import {
   REGION,
   PRODUCT_CONDITION_OPTIONS,
 } from '../../constants/market';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 
 const SalePostEdit = () => {
   const { id } = useParams();
@@ -21,7 +20,6 @@ const SalePostEdit = () => {
   //   const [imagePreviews, setImagePreviews] = useState([]);
   //   const MAX_IMAGES = 5;
   const [imageFiles, setImageFiles] = useState([]);
-  console.log(imageFiles);
   //   const handleFileChange = (event) => {
   // const files = Array.from(event.target.files);
   // const newFiles = files.slice(0, MAX_IMAGES - imagePreviews.length);
