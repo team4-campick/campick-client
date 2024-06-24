@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/header.css";
+import logo from "../components/logo.svg";
 
 const Header = () => {
   // 로그인 상태를 관리하는 변수
@@ -20,7 +21,7 @@ const Header = () => {
     <header className="headerWrap">
       <h1>
         <Link to="/">
-          <img src="#" alt="CAMPICK LOGO IMG" />
+          <img src={logo} alt="CAMPICK LOGO IMG" />
         </Link>
       </h1>
 
