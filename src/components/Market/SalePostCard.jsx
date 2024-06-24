@@ -16,7 +16,7 @@ const SalePostCard = ({ post }) => {
         navigate(`/sale-detail/${post._id}`);
       }}
     >
-      <img src={thumbnail} alt="물품이미지" />
+      <img src={thumbnail} alt="상품이미지" />
       <div className={style.productInfo}>
         <span>{`${region} ${city} `}</span>
         <p>{`${productName}`} 판매합니다.</p>
