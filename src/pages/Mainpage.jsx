@@ -48,10 +48,10 @@ const Mainpage = () => {
           <Swiper
             spaceBetween={4}
             centeredSlides={true}
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false,
-            }}
+            // autoplay={{
+            //   delay: 5000,
+            //   disableOnInteraction: false,
+            // }}
             pagination={{
               clickable: true,
             }}
@@ -68,24 +68,24 @@ const Mainpage = () => {
           >
             <SwiperSlide>
               <div className={styles.firstBlog}>
-                <p>위치정보1</p>
-                <strong>정보1</strong>
+                <strong>위치정보1</strong>
+                <h3>정보1</h3>
                 <p>내용1</p>
                 <Link to="/blog/1">Read More1</Link>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className={styles.secondBlog}>
-                <p>위치정보2</p>
-                <strong>정보2</strong>
+                <strong>위치정보2</strong>
+                <h3>정보2</h3>
                 <p>내용2</p>
                 <Link to="/blog/2">Read More2</Link>
               </div>
             </SwiperSlide>
             <SwiperSlide>
               <div className={styles.thirdBlog}>
-                <p>위치정보3</p>
-                <strong>정보3</strong>
+                <strong>위치정보3</strong>
+                <h3>정보3</h3>
                 <p>내용3</p>
                 <Link to="/blog/3">Read More3</Link>
               </div>
@@ -96,7 +96,7 @@ const Mainpage = () => {
 
       <section className={styles.mainVideoWarp}>
         {/* 유튜브 영상 섹션 전체 처리완료 */}
-        <h3>Today's video</h3>
+        <h2>Today's video</h2>
         <div className={styles.mainVideo}>
           <YouTube
             videoId="X5Y-zlsKL2M"
@@ -122,7 +122,7 @@ const Mainpage = () => {
 
       <section className={styles.mainEventsWarp}>
         {/* 이벤트 슬라이드 진행필요 */}
-        <h3>Today's event</h3>
+        <h2>Today's event</h2>
         <div className={styles.mainEvents}>
           <Swiper
             slidesPerView={4}
