@@ -1,3 +1,41 @@
+.detailCon {
+  width: calc(100% - 180px);
+  margin: auto;
+}
 .detailCon > * {
   border: 1px solid red;
+}
+.productImg {
+  margin-bottom: 1rem;
+}
+.detailSlide {
+  border: 1px solid black;
+  height: 500px;
+  margin-bottom: 1rem;
+}
+.writer {
+  margin-top: 1rem;
+}
+.productInfo {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1rem;
+}
+.productCategory {
+  color: gray;
+}
+.productName {
+  font-size: 2rem;
+}
+.productPrice {
+  font-size: 1.2rem;
+}
+.inquiryBtn {
+  width: 716px;
+  height: 73px;
+  border: none;
+  border-radius: 3px;
+  background-color: #1f3b34;
+  color: white;
+  font-size: 1.5rem;
 }

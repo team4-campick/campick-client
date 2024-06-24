@@ -2,8 +2,8 @@
   width: calc(100% - 180px);
   margin: auto;
 }
-.marketCon div {
-  margin: 2rem 0;
+.marketCon > div {
+  margin-top: 2rem;
 }
 .searchBar {
   position: relative;
@@ -43,8 +43,12 @@
 .writeBtn {
   display: flex;
   justify-content: flex-end;
+  padding-right: 2rem;
   color: #1f3b34;
 }
 .postCardList {
-  width: 100%;
+  margin: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

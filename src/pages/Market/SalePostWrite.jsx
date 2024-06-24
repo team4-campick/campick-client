@@ -1,21 +1,24 @@
-import style from "../../css/Market/SalePostWrite.module.css";
-import useDropdown from "../../hooks/useDropdown";
+import style from '../../css/Market/SalePostWrite.module.css';
+import useDropdown from '../../hooks/useDropdown';
 import {
   PRODUCT_CATEGORY,
   REGION,
   PRODUCT_CONDITION_OPTIONS,
-} from "../../constants/market";
-import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+} from '../../constants/market';
+import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const SalePostWrite = () => {
   const navigate = useNavigate();
   const [imagePreviews, setImagePreviews] = useState([]);
   const MAX_IMAGES = 5;
+  const [imageFiles, setImageFiles] = useState([]);
 
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
     const newFiles = files.slice(0, MAX_IMAGES - imagePreviews.length);
+
+    setImageFiles((prev) => [...prev, ...newFiles]);
 
     const filePreviews = newFiles.map((file) => {
       const reader = new FileReader();
@@ -34,37 +37,42 @@ const SalePostWrite = () => {
   };
 
   // useDropdown 훅을 통해 드롭다운 컴포넌트 및 선택값을 필요한 값(카테고리, 지역 등)에 따라 분리하여 관리
-  const { selectedValue: category, Dropdown: CategoryDropdown } = useDropdown({
+  const { selectedLabel: category, Dropdown: CategoryDropdown } = useDropdown({
     options: PRODUCT_CATEGORY,
-    type: "종류",
+    type: '종류',
   });
-  const { selectedValue: region, Dropdown: RegionDropdown } = useDropdown({
+  const { selectedLabel: region, Dropdown: RegionDropdown } = useDropdown({
     options: REGION,
-    type: "도",
+    type: '도',
   });
-  const { selectedValue: city, Dropdown: CityDropdown } = useDropdown({
-    options: REGION.find((option) => option.value === region)?.cities || [],
-    type: "시",
+  const { selectedLabel: city, Dropdown: CityDropdown } = useDropdown({
+    options: REGION.find((option) => option.label === region)?.cities || [],
+    type: '시',
   });
 
-  const [productName, setProductName] = useState("");
+  const [productName, setProductName] = useState('');
   const handleProductName = (event) => {
     setProductName(event.target.value);
   };
 
   const [condition, setCondition] = useState(
-    PRODUCT_CONDITION_OPTIONS[0].value
+    PRODUCT_CONDITION_OPTIONS[0].label
   );
   const handleCondition = (event) => {
     setCondition(event.target.value);
   };
 
-  const [price, setPrice] = useState("");
+  const [isNegotiable, setIsNegotiable] = useState(false);
+  const handleIsNegotiable = (event) => {
+    setIsNegotiable(event.target.checked);
+  };
+
+  const [price, setPrice] = useState('');
   const handlePrice = (event) => {
     setPrice(event.target.value);
   };
 
-  const [desc, setDesc] = useState("");
+  const [desc, setDesc] = useState('여기서부터 추가로 입력하세요');
   const hadleDesc = (event) => {
     setDesc(event.target.value);
   };
@@ -78,15 +86,19 @@ const SalePostWrite = () => {
       price,
       desc,
       condition,
+      isNegotiable,
     };
 
+    const formData = new FormData();
+    formData.append('newPost', JSON.stringify(newPost));
+    imageFiles.forEach((file) => {
+      formData.append('images', file);
+    });
+
     try {
-      const response = await fetch("http://localhost:8000/api/sale-posts", {
-        method: "POST",
-        body: JSON.stringify(newPost),
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await fetch('http://localhost:8000/api/sale-posts', {
+        method: 'POST',
+        body: formData,
       });
 
       const res = await response.json();
@@ -94,12 +106,13 @@ const SalePostWrite = () => {
         return alert(res.message);
       }
 
-      alert("게시물 생성에 성공했습니다.");
-      navigate("/market");
+      alert('게시물 생성에 성공했습니다.');
+      navigate('/market');
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(condition);
 
   return (
     <section className={style.writeCon}>
@@ -163,11 +176,11 @@ const SalePostWrite = () => {
                   <label>
                     <input
                       type="radio"
-                      id={value}
+                      id={label}
                       name="condition"
-                      value={value}
+                      value={label}
                       onChange={handleCondition}
-                      checked={condition === value}
+                      checked={condition === label}
                     />
                     {label}
                   </label>
@@ -190,6 +203,8 @@ const SalePostWrite = () => {
                   type="checkbox"
                   id="negotiablePrice"
                   name="negotiablePrice"
+                  onChange={handleIsNegotiable}
+                  checked={isNegotiable}
                 />
                 가격협의가능
               </label>

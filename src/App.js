@@ -56,7 +56,7 @@ function App() {
         {/* =================== Market Area ===================  */}
         <Route path="/market" element={<Market />} />
         <Route path="/sale-post-write" element={<SalePostWrite />} />
-        <Route path="/sale-detail" element={<SaleDetail />} />
+        <Route path="/sale-detail/:id" element={<SaleDetail />} />
         {/* =================== contents page =================== */}
         <Route path="/contents" element={<Contents />} />
         {/* =================== event page =================== */}
