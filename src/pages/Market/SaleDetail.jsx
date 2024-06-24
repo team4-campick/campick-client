@@ -22,6 +22,7 @@ const SaleDetail = () => {
     price,
     desc,
     isNegotiable,
+    imageUrls = [],
   } = salePostDetail;
 
   const API_BASE_URL = 'http://localhost:8000/api';
@@ -87,11 +88,15 @@ const SaleDetail = () => {
             modules={[Pagination, Navigation]}
             className={style.detailSlide}
           >
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-            <SwiperSlide>Slide 5</SwiperSlide>
+            {imageUrls.map((image, index) => (
+              <SwiperSlide>
+                <img
+                  key={image._id}
+                  src={image.url}
+                  alt={`상품이미지 ${index + 1}`}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
         <span className={style.writer}>작성자</span>
