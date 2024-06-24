@@ -35,9 +35,9 @@
   background-size: cover;
   transform: rotateY(180deg);
 }
-.bingoCard:hover .front {
+.bingoCard.on .front {
   transform: rotateY(180deg);
 }
-.bingoCard:hover .back {
+.bingoCard.on .back {
   transform: rotateY(360deg);
 }
