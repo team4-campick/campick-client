@@ -2,6 +2,7 @@ footer {
   width: 100%;
   z-index: 999;
   position: relative;
+  background-color: white;
 }
 
 .copyrightWrap {
@@ -11,7 +12,7 @@ footer {
 }
 
 .copyrightmemo {
-  color: #b7b6b6;
+  color: rgb(31, 59, 52, 0.2);
   margin: 20px 0;
   font-size: 12px;
 }
