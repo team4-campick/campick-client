@@ -24,19 +24,17 @@
 .mainVisual > div:nth-child(2) > div > div:nth-child(3) {
   display: none;
 }
-/* 네비게이션 버튼 */
+/* 네비게이션 3개 클릭가능한 버튼 */
 .mainVisual > div:nth-child(2) > div > div:nth-child(4) {
-  /* position: absolute; */
   top: 0px;
-  /* left: 50px; */
-  z-index: 10;
+  z-index: 1;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
 }
 .mainVisual > div:nth-child(2) > div > div:nth-child(4) > span {
   width: 90px;
-  height: 30px;
+  height: 20px;
   border-radius: 3px 3px 0 0;
   margin: 0;
   background-color: white;
@@ -45,15 +43,21 @@
 .blogTapWarp {
   width: 300px;
   height: 300px;
+  border: 1px solid rgb(224, 0, 168);
+  position: absolute;
+  right: calc(0px + 5%);
+  bottom: calc(0px + 30%);
+}
+.mainExplainSwiper {
+  width: 300px;
+  height: 300px;
   border: 1px solid orange;
   display: block;
   position: absolute;
-  right: calc(0px + 6%);
-  bottom: calc(0px + 40%);
+  right: 0;
+  bottom: 0;
 }
-
 /* 블로그 슬라이드 컨테이너 */
-
 .firstBlog,
 .secondBlog,
 .thirdBlog {
@@ -91,6 +95,7 @@
   border: 1px solid rgb(184, 104, 104);
 }
 
+/* 메인스와이퍼 네비게이션 read more 버튼 */
 .firstBlog :link,
 .secondBlog :link,
 .thirdBlog :link {
@@ -102,8 +107,8 @@
   border: 1px solid #007bff;
   border-radius: 4px;
 }
-
 /* 이후로는 비디오와 이벤트 */
+
 /* 비디오와 이벤트 제목 */
 .mainVideoWarp h2,
 .mainEventsWarp h2 {
