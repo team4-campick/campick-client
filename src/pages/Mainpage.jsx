@@ -5,13 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import YouTube from "react-youtube";
-import {
-  Autoplay,
-  FreeMode,
-  Pagination,
-  Navigation,
-  Controller,
-} from "swiper/modules";
+import { Autoplay, Pagination, Navigation, Controller } from "swiper/modules";
 
 import styles from "../css/mainpage.module.css"; // CSS 모듈로 임포트
 
@@ -127,11 +121,11 @@ const Mainpage = () => {
           <Swiper
             slidesPerView={4}
             spaceBetween={15}
-            freeMode={true}
+            navigation={true}
             pagination={{
               clickable: true,
             }}
-            modules={[FreeMode, Pagination]}
+            modules={[Navigation, Pagination]}
             className={styles.mainEventsSwiper}
           >
             <SwiperSlide>Slide 1</SwiperSlide>
