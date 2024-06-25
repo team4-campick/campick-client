@@ -1,6 +1,7 @@
 import style from "../css/RegisterPage.module.css";
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+const url = process.env.REACT_APP_SERVER_URL;
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -28,24 +29,34 @@ const LoginPage = () => {
 
     const loginDate = new Date().toISOString();
 
-    const response = await fetch("http://localhost:8000/login", {
-      method: "POST",
-      body: JSON.stringify({ username, password, loginDate }),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
+    try {
+      const response = await fetch(`${url}/login`, {
+        method: "POST",
+        body: JSON.stringify({ username, password }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
 
-    const data = await response.json();
-    console.log(data);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-    if (data.id) {
-      setRedirect(true);
-    }
-    if (data.message === "nouser") {
-      setMessage1("사용자가 없습니다.");
-    }
-    if (data.message === "failed") {
-      setMessage2("비밀번호가 맞지 않습니다.");
+      const data = await response.json();
+      console.log(data);
+
+      if (data.id) {
+        setRedirect(true);
+      } else {
+        if (data.message === "nouser") {
+          setMessage1("사용자가 없습니다.");
+        }
+        if (data.message === "failed") {
+          setMessage2("비밀번호가 맞지 않습니다.");
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setMessage1("서버 오류가 발생했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -79,7 +90,7 @@ const LoginPage = () => {
         <button type="submit">로그인</button>
       </form>
       <p>
-        계정이 없나요? <Link to="/register">회원가입</Link>
+        계정이 없으신가요? <Link to="/register">회원가입</Link>
       </p>
     </main>
   );
