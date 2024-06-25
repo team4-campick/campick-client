@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import style from '../../css/Market/SaleDetail.module.css';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -22,6 +22,7 @@ const SaleDetail = () => {
     price,
     desc,
     isNegotiable,
+    imageUrls = [],
   } = salePostDetail;
 
   const API_BASE_URL = 'http://localhost:8000/api';
@@ -48,10 +49,34 @@ const SaleDetail = () => {
     fetchSalePostDetail();
   }, []);
 
+  const navigate = useNavigate();
+  const deleteSalePost = async () => {
+    try {
+      const response = await fetch(salePostsEndpoint, {
+        method: 'DELETE',
+      });
+      const res = await response.json();
+      if (!res.result) {
+        return alert(res.message);
+      }
+      alert('삭제가 완료되었습니다.');
+      navigate('/market');
+    } catch (error) {
+      console.log(error);
+      alert('삭제 중 오류가 발생했습니다.');
+    }
+  };
+  const editPost = () => {
+    navigate(`/sale-post-edit/${id}`);
+  };
+
   return (
     <section className={style.detailCon}>
       <h2 hidden>SaleDetail</h2>
-
+      <div>
+        <button onClick={editPost}>수정</button>
+        <button onClick={deleteSalePost}>삭제</button>
+      </div>
       <div className={style.productImg}>
         <div className={style.productImgSlide}>
           <Swiper
@@ -63,16 +88,15 @@ const SaleDetail = () => {
             modules={[Pagination, Navigation]}
             className={style.detailSlide}
           >
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-            <SwiperSlide>Slide 5</SwiperSlide>
-            <SwiperSlide>Slide 6</SwiperSlide>
-            <SwiperSlide>Slide 7</SwiperSlide>
-            <SwiperSlide>Slide 8</SwiperSlide>
-            <SwiperSlide>Slide 9</SwiperSlide>
-            <SwiperSlide>Slide 10</SwiperSlide>
+            {imageUrls.map((image, index) => (
+              <SwiperSlide>
+                <img
+                  key={image._id}
+                  src={image.url}
+                  alt={`상품이미지 ${index + 1}`}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
         <span className={style.writer}>작성자</span>
@@ -90,10 +114,14 @@ const SaleDetail = () => {
           <p className={style.productPrice}>판매 희망가 : {price}원</p>
         </div>{' '}
       </div>
-      <div>상품 상태 :{condition}</div>
-      <div>{desc}</div>
-
-      <button className={style.inquiryBtn}>문의하기</button>
+      <div>상품 상태 : {condition}</div>
+      <div>상품 설명 : {desc}</div>
+      <div className={style.btnWrap}>
+        <Link to="/market">
+          <i className="fa-solid fa-chevron-left"></i>
+        </Link>
+        <button className={style.inquiryBtn}>문의하기</button>
+      </div>
     </section>
   );
 };

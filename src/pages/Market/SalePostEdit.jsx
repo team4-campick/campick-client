@@ -5,47 +5,65 @@ import {
   REGION,
   PRODUCT_CONDITION_OPTIONS,
 } from '../../constants/market';
-import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
-const SalePostWrite = () => {
+const SalePostEdit = () => {
+  const { id } = useParams();
+  //   const [salePostEdit, setSalePostEdit] = useState({});
+  //   console.log(salePostEdit);
+
+  const API_BASE_URL = 'http://localhost:8000/api';
+  const salePostsEndpoint = `${API_BASE_URL}/sale-posts/${id}`;
+
   const navigate = useNavigate();
-  const [imagePreviews, setImagePreviews] = useState([]);
-  const MAX_IMAGES = 5;
+  //   const [imagePreviews, setImagePreviews] = useState([]);
+  //   const MAX_IMAGES = 5;
   const [imageFiles, setImageFiles] = useState([]);
+  //   const handleFileChange = (event) => {
+  // const files = Array.from(event.target.files);
+  // const newFiles = files.slice(0, MAX_IMAGES - imagePreviews.length);
 
-  const handleFileChange = (event) => {
-    const files = Array.from(event.target.files);
-    const newFiles = files.slice(0, MAX_IMAGES - imagePreviews.length);
+  // setImageFiles((prev) => [...prev, ...newFiles]);
 
-    setImageFiles(newFiles);
+  // const filePreviews = newFiles.map((file) => {
+  //   const reader = new FileReader();
+  //   return new Promise((resolve) => {
+  //     reader.onloadend = () => resolve(reader.result);
+  //     reader.readAsDataURL(file);
+  //   });
+  // });
 
-    const filePreviews = newFiles.map((file) => {
-      const reader = new FileReader();
-      return new Promise((resolve) => {
-        reader.onloadend = () => resolve(reader.result);
-        reader.readAsDataURL(file);
-      });
-    });
-
-    Promise.all(filePreviews).then((previews) =>
-      setImagePreviews((prev) => [...prev, ...previews])
-    );
-  };
-  const handleImageDelete = (index) => {
-    setImagePreviews((prev) => prev.filter((_, i) => i !== index));
-  };
+  //     Promise.all(filePreviews).then((previews) =>
+  //       setImagePreviews((prev) => [...prev, ...previews])
+  //     );
+  //   };
+  //   const handleImageDelete = (index) => {
+  //     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
+  //   };
 
   // useDropdown 훅을 통해 드롭다운 컴포넌트 및 선택값을 필요한 값(카테고리, 지역 등)에 따라 분리하여 관리
-  const { selectedLabel: category, Dropdown: CategoryDropdown } = useDropdown({
+  const {
+    selectedLabel: category,
+    setSelectedLabel: setCategory,
+    Dropdown: CategoryDropdown,
+  } = useDropdown({
     options: PRODUCT_CATEGORY,
     type: '종류',
   });
-  const { selectedLabel: region, Dropdown: RegionDropdown } = useDropdown({
+  const {
+    selectedLabel: region,
+    setSelectedLabel: setRegion,
+    Dropdown: RegionDropdown,
+  } = useDropdown({
     options: REGION,
     type: '도',
   });
-  const { selectedLabel: city, Dropdown: CityDropdown } = useDropdown({
+  const {
+    selectedLabel: city,
+    setSelectedLabel: setCity,
+    Dropdown: CityDropdown,
+  } = useDropdown({
     options: REGION.find((option) => option.label === region)?.cities || [],
     type: '시',
   });
@@ -77,8 +95,38 @@ const SalePostWrite = () => {
     setDesc(event.target.value);
   };
 
+  const fetchSalePostEdit = async () => {
+    try {
+      const response = await fetch(salePostsEndpoint, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      if (!data.result) {
+        return alert(data.message);
+      }
+      //   setSalePostEdit(data.salePost);
+      setProductName(data.salePost.productName);
+      setPrice(data.salePost.price);
+      setDesc(data.salePost.desc);
+      setCondition(data.salePost.condition);
+      setIsNegotiable(data.salePost.isNegotiable);
+      setCategory(data.salePost.category);
+      setRegion(data.salePost.region);
+      setCity(data.salePost.city);
+      setImageFiles(data.salePost.imageUrls);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSalePostEdit();
+  }, []);
+
   const handleSubmitPost = async () => {
-    const newPost = {
+    const editedPost = {
       category,
       productName,
       region,
@@ -89,16 +137,19 @@ const SalePostWrite = () => {
       isNegotiable,
     };
 
-    const formData = new FormData();
-    formData.append('newPost', JSON.stringify(newPost));
-    imageFiles.forEach((file) => {
-      formData.append('images', file);
-    });
+    // const formData = new FormData();
+    // formData.append('newPost', JSON.stringify(newPost));
+    // imageFiles.forEach((file) => {
+    //   formData.append('images', file);
+    // });
 
     try {
-      const response = await fetch('http://localhost:8000/api/sale-posts', {
-        method: 'POST',
-        body: formData,
+      const response = await fetch(salePostsEndpoint, {
+        method: 'PUT',
+        body: JSON.stringify(editedPost),
+        headers: {
+          'Content-type': 'application/json',
+        },
       });
 
       const res = await response.json();
@@ -107,7 +158,7 @@ const SalePostWrite = () => {
       }
 
       alert('게시물 생성에 성공했습니다.');
-      navigate('/market');
+      navigate(`/sale-detail/${id}`);
     } catch (error) {
       console.log(error);
     }
@@ -120,7 +171,7 @@ const SalePostWrite = () => {
         <ul>
           <li>
             <span>상품이미지</span>
-            <input
+            {/* <input
               type="file"
               id="file"
               className={style.imgInput}
@@ -128,21 +179,31 @@ const SalePostWrite = () => {
               accept="image/*"
               onChange={handleFileChange}
               disabled={imagePreviews.length >= MAX_IMAGES}
-            />
-            <label className={style.uploadBtn} htmlFor="file">
+            /> */}
+            {/* <label className={style.uploadBtn} htmlFor="file">
               <div>
                 <i className="fa-solid fa-camera"></i>
-              </div>
-            </label>
+              </div> */}
+            {/* </label> */}
             <div className={style.imgPreview}>
-              {imagePreviews.map((preview, index) => (
+              {/* {imagePreviews.map((preview, index) => (
                 <img
                   key={index}
                   src={preview}
                   alt={`미리보기 ${index + 1}`}
-                  onClick={() => handleImageDelete(index)}
+                  //   onClick={() => handleImageDelete(index)}
                 />
-              ))}
+              ))} */}
+
+              {imageFiles.map((image, index) => {
+                return (
+                  <img
+                    key={image._id}
+                    src={image.url}
+                    alt={`상품이미지 ${index + 1}`}
+                  />
+                );
+              })}
             </div>
           </li>
           <li>
@@ -150,7 +211,7 @@ const SalePostWrite = () => {
             <CategoryDropdown />
           </li>
           <li>
-            <span>상품명</span>
+            <span>상품이름</span>
             <input
               type="text"
               placeholder="상품명을 입력해주세요."
@@ -210,7 +271,7 @@ const SalePostWrite = () => {
             </div>
           </li>
           <li>
-            설명
+            상품설명
             <textarea
               name=""
               id=""
@@ -219,10 +280,9 @@ const SalePostWrite = () => {
             ></textarea>
           </li>
         </ul>
-        <button onClick={handleSubmitPost}>등록하기</button>
+        <button onClick={handleSubmitPost}>수정하기</button>
       </div>
     </section>
   );
 };
-
-export default SalePostWrite;
+export default SalePostEdit;

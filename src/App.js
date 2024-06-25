@@ -19,6 +19,7 @@ import CustomerService from './pages/MyPage/CustomerService';
 import Market from './pages/Market/Market';
 import SalePostWrite from './pages/Market/SalePostWrite';
 import SaleDetail from './pages/Market/SaleDetail';
+import SalePostEdit from './pages/Market/SalePostEdit';
 
 import Contents from './pages/contents';
 import Event from './pages/Event';
@@ -57,6 +58,7 @@ function App() {
         <Route path="/market" element={<Market />} />
         <Route path="/sale-post-write" element={<SalePostWrite />} />
         <Route path="/sale-detail/:id" element={<SaleDetail />} />
+        <Route path="/sale-post-edit/:id" element={<SalePostEdit />} />
         {/* =================== contents page =================== */}
         <Route path="/contents" element={<Contents />} />
         {/* =================== event page =================== */}
