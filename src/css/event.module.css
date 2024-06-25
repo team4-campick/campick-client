@@ -1,14 +1,24 @@
-.gallery {
+.eventCategory {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  padding: 10px;
+  border: 1px solid red;
 }
 
-.placeholder {
-  width: 200px;
-  height: 300px;
-  margin: 10px;
+.buttonWarp {
+  margin: 20px auto;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열로 설정 */
+  gap: 10px;
+  padding: 10px;
+  justify-items: center;
+}
+
+.eventVisual {
+  width: 440px;
+  height: 621px;
   background-color: #ddd;
   display: flex;
   align-items: center;
@@ -16,7 +26,7 @@
   cursor: pointer;
 }
 
-#popup {
+.popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -28,27 +38,28 @@
   align-items: center;
 }
 
-#popup-content {
+.popupContent {
   position: relative;
-  background: white;
+  background: transparent;
   padding: 20px;
   border-radius: 5px;
+  z-index: 1000;
 }
 
-#popup-content .placeholder {
-  width: 300px;
-  height: 450px;
-  background-color: #ddd;
+.popupContent .eventVisual {
+  width: 700px;
+  height: 987px;
+  background-color: #a70c0c;
 }
 
-#close-btn {
+.closeBtn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
+  right: 35px;
+  font-size: 60px;
   cursor: pointer;
+  color: #ffce31;
 }
 
-.popup-hidden {
+.popupHidden {
   display: none;
 }
