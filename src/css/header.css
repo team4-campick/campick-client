@@ -8,8 +8,6 @@
   background-color: white;
   padding: 10px 20px;
   border-bottom: rgb(31, 59, 52, 0.2) solid 1px;
-  z-index: 999;
-  position: relative;
 }
 
 .headerWrap h1 {
