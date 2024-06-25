@@ -120,7 +120,9 @@ const SaleDetail = () => {
         <Link to="/market">
           <i className="fa-solid fa-chevron-left"></i>
         </Link>
-        <button className={style.inquiryBtn}>문의하기</button>
+        <Link to="/sale-chat/:id">
+          <button className={style.inquiryBtn}>문의하기</button>
+        </Link>
       </div>
     </section>
   );
