@@ -9,11 +9,13 @@
 }
 
 .gallery {
+  width: 930px;
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2열로 설정 */
   gap: 10px;
   padding: 10px;
   justify-items: center;
+  margin: 0 auto;
 }
 
 .eventVisual {
