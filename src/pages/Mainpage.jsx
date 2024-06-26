@@ -5,13 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import YouTube from "react-youtube";
-import {
-  Autoplay,
-  FreeMode,
-  Pagination,
-  Navigation,
-  Controller,
-} from "swiper/modules";
+import { Autoplay, Pagination, Navigation, Controller } from "swiper/modules";
 
 import styles from "../css/mainpage.module.css"; // CSS 모듈로 임포트
 
@@ -124,26 +118,28 @@ const Mainpage = () => {
         {/* 이벤트 슬라이드 진행필요 */}
         <h2>Today's event</h2>
         <div className={styles.mainEvents}>
-          <Swiper
-            slidesPerView={4}
-            spaceBetween={15}
-            freeMode={true}
-            pagination={{
-              clickable: true,
-            }}
-            modules={[FreeMode, Pagination]}
-            className={styles.mainEventsSwiper}
-          >
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-            <SwiperSlide>Slide 5</SwiperSlide>
-            <SwiperSlide>Slide 6</SwiperSlide>
-            <SwiperSlide>Slide 7</SwiperSlide>
-            <SwiperSlide>Slide 8</SwiperSlide>
-            <SwiperSlide>Slide 9</SwiperSlide>
-          </Swiper>
+          <Link to="/event">
+            <Swiper
+              slidesPerView={4}
+              spaceBetween={15}
+              navigation={true}
+              pagination={{
+                clickable: true,
+              }}
+              modules={[Navigation, Pagination]}
+              className={styles.mainEventsSwiper}
+            >
+              <SwiperSlide>Slide 1</SwiperSlide>
+              <SwiperSlide>Slide 2</SwiperSlide>
+              <SwiperSlide>Slide 3</SwiperSlide>
+              <SwiperSlide>Slide 4</SwiperSlide>
+              <SwiperSlide>Slide 5</SwiperSlide>
+              <SwiperSlide>Slide 6</SwiperSlide>
+              <SwiperSlide>Slide 7</SwiperSlide>
+              <SwiperSlide>Slide 8</SwiperSlide>
+              <SwiperSlide>Slide 9</SwiperSlide>
+            </Swiper>
+          </Link>
         </div>
       </section>
     </>

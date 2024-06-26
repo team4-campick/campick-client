@@ -1,62 +1,86 @@
 import React, { useState, useEffect } from "react";
 import Styles from "../css/event.module.css";
-import throttle from "lodash/throttle";
 
 const Event = () => {
-  const [placeholders, setPlaceholders] = useState([]);
+  const [eventVisuals, setEventVisuals] = useState([]);
   const [popupVisible, setPopupVisible] = useState(false);
+  const [selectedLabel, setSelectedLabel] = useState("PROCEEDING");
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
-    const loadPlaceholders = () => {
-      const newPlaceholders = Array.from({ length: 6 });
-      setPlaceholders((prevPlaceholders) => [
-        ...prevPlaceholders,
-        ...newPlaceholders,
-      ]);
+    const loadEventVisuals = () => {
+      const generateEventVisual = (index) => {
+        const today = new Date();
+        const eventDate = new Date();
+        eventDate.setDate(today.getDate() - index);
+        const status = eventDate < today ? "FINISHED" : "PROCEEDING";
+        return {
+          id: index,
+          visual: `Visual ${index + 1}`,
+          labels: [status],
+        };
+      };
+
+      const newEventVisuals = Array.from({ length: 6 }, (_, index) =>
+        generateEventVisual(index)
+      );
+      setEventVisuals(newEventVisuals);
     };
 
-    const handleScroll = throttle(() => {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 500
-      ) {
-        loadPlaceholders();
-      }
-    }, 300);
-
-    loadPlaceholders();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    loadEventVisuals();
   }, []);
 
-  const openPopup = () => {
+  const openPopup = (event) => {
+    setSelectedEvent(event);
     setPopupVisible(true);
   };
 
   const closePopup = () => {
     setPopupVisible(false);
+    setSelectedEvent(null);
   };
+
+  const handleLabelChange = (label) => {
+    setSelectedLabel(label);
+  };
+
+  const filteredEventVisuals = eventVisuals.filter((event) =>
+    event.labels.includes(selectedLabel)
+  );
 
   return (
     <>
-      <div className={Styles.eventCategory}>
-        <p>PROCEEDING</p>
-        <p>FINISHED</p>
-      </div>
+      <section className={Styles.eventCategory}>
+        <div className={Styles.buttonWrap}>
+          <button onClick={() => handleLabelChange("PROCEEDING")}>
+            PROCEEDING
+          </button>
+          <button onClick={() => handleLabelChange("FINISHED")}>
+            FINISHED
+          </button>
+        </div>
+      </section>
       <section className={Styles.gallery}>
-        {placeholders.map((_, index) => (
-          <div key={index} className={Styles.placeholder} onClick={openPopup}>
-            <p>Placeholder {index + 1}</p>
+        {filteredEventVisuals.map((event) => (
+          <div
+            key={event.id}
+            className={Styles.eventVisual}
+            onClick={() => openPopup(event)}
+          >
+            <p>{event.visual}</p>
           </div>
         ))}
-        {popupVisible && (
-          <div id="popup">
-            <div id="popup-content">
-              <span id="close-btn" onClick={closePopup}>
+        {popupVisible && selectedEvent && (
+          <div className={Styles.popup} onClick={closePopup}>
+            <div
+              className={Styles.popupContent}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className={Styles.closeBtn} onClick={closePopup}>
                 &times;
               </span>
-              <div className={Styles.placeholder}>
-                <p>Popup Placeholder</p>
+              <div className={Styles.eventVisual}>
+                <p>{selectedEvent.visual}</p> {/* 선택된 이벤트 시각 표시 */}
               </div>
             </div>
           </div>

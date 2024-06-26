@@ -4,10 +4,10 @@ import { Link, Navigate } from "react-router-dom";
 const url = process.env.REACT_APP_SERVER_URL;
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [message1, setMessage1] = useState("");
-  const [message2, setMessage2] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message1, setMessage1] = useState('');
+  const [message2, setMessage2] = useState('');
   const [redirect, setRedirect] = useState(false);
 
   const login = async (e) => {
@@ -15,27 +15,26 @@ const LoginPage = () => {
     console.log(username, password);
 
     if (!/^[a-zA-Z][a-zA-Z0-9]{3,}$/.test(username)) {
-      setMessage1("아이디는 4자 이상이어야 하며 영어로 시작해야 합니다.");
+      setMessage1('아이디는 4자 이상이어야 하며 영어로 시작해야 합니다.');
       return;
     } else {
-      setMessage1("");
+      setMessage1('');
     }
     if (password.length < 8) {
-      setMessage2("8자 이상이어야 합니다.");
+      setMessage2('8자 이상이어야 합니다.');
       return;
     } else {
-      setMessage2("");
+      setMessage2('');
     }
 
     const loginDate = new Date().toISOString();
-
-    try {
-      const response = await fetch(`${url}/login`, {
-        method: "POST",
-        body: JSON.stringify({ username, password }),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
+    console.log(loginDate);
+    const response = await fetch(`${url}/login`, {
+      method: 'POST',
+      body: JSON.stringify({ username, password, loginDate }),
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+    });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

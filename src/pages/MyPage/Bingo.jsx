@@ -1,73 +1,93 @@
 import React, { useEffect, useState } from 'react';
 import style from '../../css/MyPage/Bingo.module.css';
 import BingoCard from '../../components/MyPage/BingoCard';
-import useBingoCounter from '../../hooks/useBingoCounter';
 
 const Bingo = () => {
   const url = process.env.REACT_APP_SERVER_URL;
-  const [bingoStatus, setBingoStatus] = useState('');
-  const [continuousConnection, setContinuousConnection] = useState(2);
+  const [bingoArea, setBingoArea] = useState([]);
+  // const [bingoStatus, setBingoStatus] = useState('');
+
   const [reviewCount, setReviewCount] = useState(6);
-  const [numberCampsiteVisits, setNumberCampsiteVisits] = useState(0);
-  const [postCount, setPostCount] = useState(6);
+  const [postCount, setPostCount] = useState(1);
+  const [missionClear, setMissionClear] = useState(2);
   const [bingoCount, setBingoCount] = useState(0);
-  const [missionClear, setMissionClear] = useState(0);
-  const shuffle = (arr) => {
-    arr.sort(() => Math.random() - 0.5);
-  };
-  // ================= 서버로 옮기는게 좋을거 같은 부분 ===========================
-  const bingoArea = [
-    { mission: 1, state: reviewCount >= 3 ? 1 : 0 },
-    { mission: 2, state: postCount >= 2 ? 1 : 0 },
-    { mission: 3, state: missionClear >= 3 ? 1 : 0 },
-    { mission: 4, state: bingoCount >= 2 ? 1 : 0 },
-    { mission: 5, state: reviewCount >= 5 ? 1 : 0 },
-    { mission: 6, state: postCount >= 4 ? 1 : 0 },
-    { mission: 7, state: continuousConnection >= 3 ? 1 : 0 },
-    { mission: 8, state: missionClear >= 6 ? 1 : 0 },
-    { mission: 9, state: continuousConnection >= 7 ? 1 : 0 },
-  ];
-  shuffle(bingoArea);
-  console.log(bingoArea);
-  // =======================================================================
-  const getBingoStatus = async () => {
+  const [continuousConnection, setContinuousConnection] = useState(0);
+  const [bingoPattern, setBingoPattern] = useState([]);
+
+  const updateMission = async () => {
     try {
-      const response = await fetch(`${url}/bingo-status`);
+      const response = await fetch(`${url}/update-mission/안녕`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          reviewCount,
+          postCount,
+          missionClear,
+          bingoCount,
+        }),
+        credentials: 'include',
+      });
       const data = await response.json();
-      if (!data) {
-        alert('뭔가 잘못됨');
-      }
-      setBingoStatus(data);
+      if (!data) return;
+
+      const mission = await data.mission.mission;
+      const bingo = await data.bingo.bingo;
+
+      setReviewCount(mission.reviewCount);
+      setPostCount(mission.postCount);
+      setContinuousConnection(mission.continuousConnection);
+      setMissionClear(mission.missionClear);
+      setBingoCount(mission.bingoCount);
+      setBingoArea(bingo);
     } catch (error) {
       console.error(error);
     }
   };
-
-  const count = useBingoCounter(bingoArea);
+  const getBingoPattern = async () => {
+    try {
+      const response = await fetch(`${url}/bingo-pattern/안녕`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      console.log('빙고 패턴 체크 부분', data);
+      setBingoPattern(data.bingoPattern.bingoPattern);
+      console.log('bingoPattern', bingoPattern);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const getBingoCount = async () => {
+    try {
+      const response = await fetch(`${url}/bingo-count/안녕`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      console.log(data);
+      setBingoCount(data.bingoCount);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    setBingoCount(count);
-  }, [count]);
-  useEffect(() => {
-    bingoArea.map((e) => {
-      // console.log(e.mission, e.state);
-
-      if (e.state === 1) setMissionClear(missionClear + 1);
-    });
-    // bingoArea.forEach((e) => {
-    //   if (e.state === 1) setMissionClear(missionClear + 1);
-    // });
+    updateMission();
+    getBingoCount();
+    getBingoPattern();
   }, []);
+
   return (
     <section className={style.bingo}>
       <h3 hidden>Bingo</h3>
       <p className={style.countStatus}>
-        지금까지 채운 빙고의 갯수는 <span>{count}</span>개 입니다.
+        지금까지 채운 빙고의 갯수는 <span>{bingoCount}</span>개 입니다.
       </p>
       <div className={style.bingoArea}>
-        {
-          (console.log('bingoArea in Html', bingoArea),
-          bingoArea.map((e, i) => <BingoCard key={i + 1} e={e} />))
-        }
+        {bingoArea.map((e, i) => (
+          <BingoCard key={i + 1} e={e} />
+        ))}
       </div>
       <ul className={style.missionList}>
         <li>
