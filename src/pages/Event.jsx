@@ -5,6 +5,7 @@ const Event = () => {
   const [eventVisuals, setEventVisuals] = useState([]);
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState("PROCEEDING");
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     const loadEventVisuals = () => {
@@ -13,7 +14,11 @@ const Event = () => {
         const eventDate = new Date();
         eventDate.setDate(today.getDate() - index);
         const status = eventDate < today ? "FINISHED" : "PROCEEDING";
-        return { id: index, visual: `Visual ${index + 1}`, labels: [status] };
+        return {
+          id: index,
+          visual: `Visual ${index + 1}`,
+          labels: [status],
+        };
       };
 
       const newEventVisuals = Array.from({ length: 6 }, (_, index) =>
@@ -25,12 +30,14 @@ const Event = () => {
     loadEventVisuals();
   }, []);
 
-  const openPopup = () => {
+  const openPopup = (event) => {
+    setSelectedEvent(event);
     setPopupVisible(true);
   };
 
   const closePopup = () => {
     setPopupVisible(false);
+    setSelectedEvent(null);
   };
 
   const handleLabelChange = (label) => {
@@ -44,7 +51,7 @@ const Event = () => {
   return (
     <>
       <section className={Styles.eventCategory}>
-        <div className={Styles.buttonWarp}>
+        <div className={Styles.buttonWrap}>
           <button onClick={() => handleLabelChange("PROCEEDING")}>
             PROCEEDING
           </button>
@@ -58,12 +65,12 @@ const Event = () => {
           <div
             key={event.id}
             className={Styles.eventVisual}
-            onClick={openPopup}
+            onClick={() => openPopup(event)}
           >
             <p>{event.visual}</p>
           </div>
         ))}
-        {popupVisible && (
+        {popupVisible && selectedEvent && (
           <div className={Styles.popup} onClick={closePopup}>
             <div
               className={Styles.popupContent}
@@ -73,7 +80,7 @@ const Event = () => {
                 &times;
               </span>
               <div className={Styles.eventVisual}>
-                <p>Popup Event Visual</p>
+                <p>{selectedEvent.visual}</p> {/* 선택된 이벤트 시각 표시 */}
               </div>
             </div>
           </div>
