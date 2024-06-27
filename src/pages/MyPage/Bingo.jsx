@@ -11,12 +11,12 @@ const Bingo = () => {
   const [postCount, setPostCount] = useState(1);
   const [missionClear, setMissionClear] = useState(2);
   const [bingoCount, setBingoCount] = useState(0);
-  const [continuousConnection, setContinuousConnection] = useState(0);
+  const [continuousConnection, setContinuousConnection] = useState(1);
   const [bingoPattern, setBingoPattern] = useState([]);
 
   const updateMission = async () => {
     try {
-      const response = await fetch(`${url}/update-mission/안녕`, {
+      const response = await fetch(`${url}/update-mission/bbbbbbbb`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -28,39 +28,60 @@ const Bingo = () => {
         credentials: 'include',
       });
       const data = await response.json();
+      console.log('데이터를 확인해봅시다.', data);
       if (!data) return;
 
-      const mission = await data.mission.mission;
+      const mission = await data.mission;
       const bingo = await data.bingo.bingo;
 
-      setReviewCount(mission.reviewCount);
       setPostCount(mission.postCount);
+      setReviewCount(mission.reviewCount);
       setContinuousConnection(mission.continuousConnection);
       setMissionClear(mission.missionClear);
       setBingoCount(mission.bingoCount);
-      setBingoArea(bingo);
+      console.log('포카', postCount);
+      if (JSON.stringify(bingoArea) !== JSON.stringify(bingo)) {
+        getBingoArea();
+      }
+      console.log('빙고영역', bingoArea);
     } catch (error) {
       console.error(error);
     }
   };
   const getBingoPattern = async () => {
     try {
-      const response = await fetch(`${url}/bingo-pattern/안녕`, {
+      const response = await fetch(`${url}/bingo-pattern/bbbbbbbb`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       });
       const data = await response.json();
       console.log('빙고 패턴 체크 부분', data);
-      setBingoPattern(data.bingoPattern.bingoPattern);
-      console.log('bingoPattern', bingoPattern);
+      console.log(data.bingoPattern);
+      setBingoPattern(data.bingoPattern);
+      // }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const getBingoArea = async () => {
+    try {
+      const response = await fetch(`${url}/bingo-area/bbbbbbbb`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      console.log('빙고 영역 체크 부분', data.bingo.bingo);
+      setBingoArea(data.bingo.bingo);
+      console.log('빙고카운트 확인하는 곳', bingoCount);
     } catch (error) {
       console.error(error);
     }
   };
   const getBingoCount = async () => {
     try {
-      const response = await fetch(`${url}/bingo-count/안녕`, {
+      const response = await fetch(`${url}/bingo-count/bbbbbbbb`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -72,10 +93,29 @@ const Bingo = () => {
       console.log(error);
     }
   };
+  const updateStatus = async () => {
+    await updateMission();
+    await getBingoCount();
+    await getBingoPattern();
+    console.log('빙고패턴을 확인하려고 합니다', bingoPattern);
+  };
+  const resetBingo = async () => {
+    try {
+      const response = await fetch(`${url}/reset-bingo/bbbbbbbb`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    updateMission();
-    getBingoCount();
-    getBingoPattern();
+    getBingoArea();
   }, []);
 
   return (
@@ -84,10 +124,21 @@ const Bingo = () => {
       <p className={style.countStatus}>
         지금까지 채운 빙고의 갯수는 <span>{bingoCount}</span>개 입니다.
       </p>
+      <button onClick={updateStatus}>refresh</button>
       <div className={style.bingoArea}>
+        {bingoCount === 8 ? <button onClick={resetBingo}>reset</button> : null}
         {bingoArea.map((e, i) => (
           <BingoCard key={i + 1} e={e} />
         ))}
+        {bingoPattern.map((e, i) => {
+          if (e === 1) {
+            return (
+              <div className={style.bingoPattern} key={i + 1}>
+                {i + 1}번째 패턴
+              </div>
+            );
+          }
+        })}
       </div>
       <ul className={style.missionList}>
         <li>
