@@ -51,13 +51,11 @@ const Event = () => {
   return (
     <>
       <section className={Styles.eventCategory}>
-        <div className={Styles.buttonWrap}>
-          <button onClick={() => handleLabelChange("PROCEEDING")}>
+        <div className={Styles.categoryWrap}>
+          <span onClick={() => handleLabelChange("PROCEEDING")}>
             PROCEEDING
-          </button>
-          <button onClick={() => handleLabelChange("FINISHED")}>
-            FINISHED
-          </button>
+          </span>
+          <span onClick={() => handleLabelChange("FINISHED")}>FINISHED</span>
         </div>
       </section>
       <section className={Styles.gallery}>
