@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Styles from "../css/event.module.css";
+import style from "../css/event.module.css";
 
 const Event = () => {
   const [eventVisuals, setEventVisuals] = useState([]);
@@ -50,36 +50,34 @@ const Event = () => {
 
   return (
     <>
-      <section className={Styles.eventCategory}>
-        <div className={Styles.buttonWrap}>
-          <button onClick={() => handleLabelChange("PROCEEDING")}>
+      <section className={style.eventCategory}>
+        <div className={style.categoryWrap}>
+          <span onClick={() => handleLabelChange("PROCEEDING")}>
             PROCEEDING
-          </button>
-          <button onClick={() => handleLabelChange("FINISHED")}>
-            FINISHED
-          </button>
+          </span>
+          <span onClick={() => handleLabelChange("FINISHED")}>FINISHED</span>
         </div>
       </section>
-      <section className={Styles.gallery}>
+      <section className={style.gallery}>
         {filteredEventVisuals.map((event) => (
           <div
             key={event.id}
-            className={Styles.eventVisual}
+            className={style.eventVisual}
             onClick={() => openPopup(event)}
           >
             <p>{event.visual}</p>
           </div>
         ))}
         {popupVisible && selectedEvent && (
-          <div className={Styles.popup} onClick={closePopup}>
+          <div className={style.popup} onClick={closePopup}>
             <div
-              className={Styles.popupContent}
+              className={style.popupContent}
               onClick={(e) => e.stopPropagation()}
             >
-              <span className={Styles.closeBtn} onClick={closePopup}>
+              <span className={style.closeBtn} onClick={closePopup}>
                 &times;
               </span>
-              <div className={Styles.eventVisual}>
+              <div className={style.eventVisual}>
                 <p>{selectedEvent.visual}</p> {/* 선택된 이벤트 시각 표시 */}
               </div>
             </div>
