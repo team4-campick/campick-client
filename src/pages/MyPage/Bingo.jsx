@@ -16,7 +16,7 @@ const Bingo = () => {
 
   const updateMission = async () => {
     try {
-      const response = await fetch(`${url}/update-mission/안녕`, {
+      const response = await fetch(`${url}/update-mission/bbbbbbbb`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -31,10 +31,9 @@ const Bingo = () => {
       console.log('데이터를 확인해봅시다.', data);
       if (!data) return;
 
-      const mission = await data.mission.mission;
+      const mission = await data.mission;
       const bingo = await data.bingo.bingo;
-      console.log('mission test', mission);
-      console.log('bingo test', bingo);
+
       setPostCount(mission.postCount);
       setReviewCount(mission.reviewCount);
       setContinuousConnection(mission.continuousConnection);
@@ -51,7 +50,7 @@ const Bingo = () => {
   };
   const getBingoPattern = async () => {
     try {
-      const response = await fetch(`${url}/bingo-pattern/안녕`, {
+      const response = await fetch(`${url}/bingo-pattern/bbbbbbbb`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -67,7 +66,7 @@ const Bingo = () => {
   };
   const getBingoArea = async () => {
     try {
-      const response = await fetch(`${url}/bingo-area/안녕`, {
+      const response = await fetch(`${url}/bingo-area/bbbbbbbb`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -82,7 +81,7 @@ const Bingo = () => {
   };
   const getBingoCount = async () => {
     try {
-      const response = await fetch(`${url}/bingo-count/안녕`, {
+      const response = await fetch(`${url}/bingo-count/bbbbbbbb`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -102,7 +101,7 @@ const Bingo = () => {
   };
   const resetBingo = async () => {
     try {
-      const response = await fetch(`${url}/reset-bingo/안녕`, {
+      const response = await fetch(`${url}/reset-bingo/bbbbbbbb`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
