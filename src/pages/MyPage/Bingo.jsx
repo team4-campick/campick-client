@@ -7,11 +7,11 @@ const Bingo = () => {
   const [bingoArea, setBingoArea] = useState([]);
   // const [bingoStatus, setBingoStatus] = useState('');
 
-  const [reviewCount, setReviewCount] = useState(6);
-  const [postCount, setPostCount] = useState(1);
-  const [missionClear, setMissionClear] = useState(2);
+  const [reviewCount, setReviewCount] = useState(0);
+  const [postCount, setPostCount] = useState(0);
+  const [missionClear, setMissionClear] = useState(0);
   const [bingoCount, setBingoCount] = useState(0);
-  const [continuousConnection, setContinuousConnection] = useState(1);
+  const [continuousConnection, setContinuousConnection] = useState(0);
   const [bingoPattern, setBingoPattern] = useState([]);
 
   const updateMission = async () => {
@@ -116,6 +116,7 @@ const Bingo = () => {
 
   useEffect(() => {
     getBingoArea();
+    updateMission();
   }, []);
 
   return (
