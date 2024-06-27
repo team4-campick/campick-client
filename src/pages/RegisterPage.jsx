@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import style from '../css/RegisterPage.module.css'; // 경로 확인
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import style from "../css/RegisterPage.module.css"; // 경로 확인
 
 const RegisterPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [nickname, setNickname] = useState(''); // nickname 상태 추가
-  const [message, setMessage] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [nickname, setNickname] = useState(""); // nickname 상태 추가
+  const [message, setMessage] = useState("");
   const [redirect, setRedirect] = useState(false);
 
   const url = process.env.REACT_APP_SERVER_URL;
@@ -15,25 +15,25 @@ const RegisterPage = () => {
   const register = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      setMessage('패스워드가 일치하지 않습니다.');
+      setMessage("패스워드가 일치하지 않습니다.");
       return;
     }
 
     //백엔드로 post 요청 및 응답
     try {
       const response = await fetch(`${url}/register`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify({
           username,
           password,
           nickname,
         }), // nickname 추가
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
       });
-      console.log('test1', response.message);
+      console.log("test1", response.message);
       const data = await response.json();
-      console.log('test2', data.user.username);
+      console.log("test2", data.user.username);
 
       if (data.user.username) {
         setRedirect(true);
@@ -56,7 +56,7 @@ const RegisterPage = () => {
       <form onSubmit={register}>
         <input
           type="text"
-          placeholder="사용자이름"
+          placeholder="사용자ID"
           value={username}
           onChange={(e) => {
             setUsername(e.target.value);
