@@ -4,9 +4,17 @@
   border: 1px solid red;
 }
 
-.buttonWarp {
+.categoryWrap {
   margin: 20px auto;
 }
+.categoryWrap > span {
+  cursor: pointer;
+  margin: 0 5px;
+  color: rgba(0, 0, 0, 0.3);
+}
+/* .categoryWrap > span:focus {
+  color: #055a5b;
+} */
 
 .gallery {
   width: 930px;
