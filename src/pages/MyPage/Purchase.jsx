@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import style from '../../css/Market/Market.module.css';
-import SalePostCard from '../../components/Market/SalePostCard';
+import React, { useEffect, useState } from "react";
+import style from "../../css/Market/Market.module.css";
+import SalePostCard from "../../components/Market/SalePostCard";
 
 const Purchase = () => {
   const url = process.env.REACT_APP_SERVER_URL;

@@ -1,5 +1,5 @@
-import React from 'react';
-import style from './PostCard.module.css';
+import React from "react";
+import style from "./PostCard.module.css";
 const PostCard = () => {
   return (
     <div className={style.postCard}>
@@ -18,8 +18,8 @@ const PostCard = () => {
         </figcaption>
         <div className={style.imgCon}>
           <img
-            src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/advices/163525384007726630.jpg?gif=1&w=480"
-            alt="감성캠핑"
+            src='https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/advices/163525384007726630.jpg?gif=1&w=480'
+            alt='감성캠핑'
           />
         </div>
       </figure>

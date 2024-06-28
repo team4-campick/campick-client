@@ -1,5 +1,5 @@
-import React from 'react';
-import style from './CouponCard.module.css';
+import React from "react";
+import style from "./CouponCard.module.css";
 
 const CouponCard = ({ coupon }) => {
   return (

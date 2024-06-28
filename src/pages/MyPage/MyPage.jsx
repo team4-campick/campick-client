@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import style from '../../css/MyPage/MyPage.module.css';
-import '../../css/MyPage/MyPageCommon.css';
+import React, { useEffect, useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import style from "../../css/MyPage/MyPage.module.css";
+import "../../css/MyPage/MyPageCommon.css";
 const MyPage = () => {
-  const test = 'abcd';
-  const [nickname, setNickname] = useState('홍길동');
+  const test = "abcd";
+  const [nickname, setNickname] = useState("홍길동");
   // const {userId} = useParams();
-  const userId = 'deleteMe';
+  const userId = "deleteMe";
   // const getUser = async () => {
   //   const response = await fetch('http://localhost:8000/get-user', {
   //     method: 'GET',
@@ -38,11 +38,11 @@ const MyPage = () => {
         <p className={style.myPageIntro}>{`안녕하세요, ${nickname} 님!`}</p>
       </div>
       <aside className={style.sideBar}>
-        <Link to="/my-page/bingo-coupon/bingo">빙고 &#47; 쿠폰함</Link>
-        <Link to="/my-page/transaction-history/sale">거래 내역</Link>
-        <Link to="/my-page/my-post">내가 쓴 게시글</Link>
-        <Link to="/my-page/edit-info">회원정보 수정</Link>
-        <Link to="/my-page/customer-service">고객 지원</Link>
+        <Link to='/my-page/bingo-coupon/bingo'>빙고 &#47; 쿠폰함</Link>
+        <Link to='/my-page/transaction-history/sale'>거래 내역</Link>
+        <Link to='/my-page/my-post'>내가 쓴 게시글</Link>
+        <Link to='/my-page/edit-info'>회원정보 수정</Link>
+        <Link to='/my-page/customer-service'>고객 지원</Link>
         <Link to={`/my-page/customer-service/${userId}`}>고객지원2</Link>
       </aside>
       <Outlet></Outlet>

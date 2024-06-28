@@ -1,117 +1,117 @@
-import React, { useState } from 'react';
-import style from '../../css/MyPage/CustomerService.module.css';
-import { useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import style from "../../css/MyPage/CustomerService.module.css";
+import { useParams } from "react-router-dom";
 // import { url } from '../../store/ref';
 const url = process.env.REACT_APP_SERVER_URL;
 const CustomerService = () => {
   const [policyCheckStatus, setPolicyCheckStatus] = useState(false);
-  const [title, setTitle] = useState('');
-  const [email, setEmail] = useState('');
-  const [content, setContent] = useState('');
-  const [titleErrMsg, setTitleErrMsg] = useState('');
-  const [emailErrMsg, setEmailErrMsg] = useState('');
-  const [contentErrMsg, setContentErrMsg] = useState('');
+  const [title, setTitle] = useState("");
+  const [email, setEmail] = useState("");
+  const [content, setContent] = useState("");
+  const [titleErrMsg, setTitleErrMsg] = useState("");
+  const [emailErrMsg, setEmailErrMsg] = useState("");
+  const [contentErrMsg, setContentErrMsg] = useState("");
 
   const { userId } = useParams();
 
   const checkBoxStatus = () => setPolicyCheckStatus(!policyCheckStatus);
   const inquiry = async (e) => {
     e.preventDefault();
-    if (title === '') {
-      setTitleErrMsg('제목을 입력해주세요');
+    if (title === "") {
+      setTitleErrMsg("제목을 입력해주세요");
       return;
     } else {
-      setTitleErrMsg('');
+      setTitleErrMsg("");
     }
-    if (email === '') {
-      setEmailErrMsg('이메일을 입력해주세요');
+    if (email === "") {
+      setEmailErrMsg("이메일을 입력해주세요");
       return;
     } else {
-      setEmailErrMsg('');
+      setEmailErrMsg("");
     }
 
-    if (content === '') {
-      setContentErrMsg('내용을 입력해주세요');
+    if (content === "") {
+      setContentErrMsg("내용을 입력해주세요");
       return;
     } else {
-      setContentErrMsg('');
+      setContentErrMsg("");
     }
     const response = await fetch(`${url}/inquiry`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({
         title,
         email,
         content,
       }),
-      headers: { 'Content-type': 'application/json' },
-      credentials: 'include',
+      headers: { "Content-type": "application/json" },
+      credentials: "include",
     });
     console.log(response);
-    setTitle('');
-    setEmail('');
-    setContent('');
+    setTitle("");
+    setEmail("");
+    setContent("");
   };
   const deleteUser = async (e) => {
     e.preventDefault();
-    console.log('deleteBtn clicked');
+    console.log("deleteBtn clicked");
     console.log(userId);
     console.log(url);
     const response = await fetch(`${url}/delete-user/추가 업데이트`, {
-      method: 'DELETE',
-      headers: { 'Content-type': 'application/json' },
-      credentials: 'include',
+      method: "DELETE",
+      headers: { "Content-type": "application/json" },
+      credentials: "include",
     });
     if (response.status === 200) {
-      console.log('deleted');
-      window.location = '/';
+      console.log("deleted");
+      window.location = "/";
     } else {
-      console.log('오류가 있다.', response.status);
+      console.log("오류가 있다.", response.status);
     }
   };
   return (
     <section className={style.customerService}>
       <h3 hidden>CustomerService</h3>
-      <nav className="myPage_SubHeader">고객 지원</nav>
+      <nav className='myPage_SubHeader'>고객 지원</nav>
       <form onSubmit={inquiry}>
-        <div className="testArea">
+        <div className='testArea'>
           <span>문의사항</span>
-          <span className="divider"></span>
+          <span className='divider'></span>
         </div>
         <label className={style.inputArea}>
           <input
-            type="text"
-            placeholder="제목"
+            type='text'
+            placeholder='제목'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <span className={style.errMsg}>&nbsp;{titleErrMsg}</span>
           <input
-            type="text"
+            type='text'
             // pattern=".+@example\.com"git
-            placeholder="답변 받으실 이메일"
+            placeholder='답변 받으실 이메일'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <span className={style.errMsg}>&nbsp;{emailErrMsg}</span>
           <textarea
-            name="inquiryContent"
-            id="inquiryContent"
-            placeholder="문의사항"
+            name='inquiryContent'
+            id='inquiryContent'
+            placeholder='문의사항'
             value={content}
             onChange={(e) => setContent(e.target.value)}
           >
             {content}
           </textarea>
           <span className={style.errMsg}>&nbsp;{contentErrMsg}</span>
-          <button className={style.inquiryBtn} type="submit">
+          <button className={style.inquiryBtn} type='submit'>
             문의하기
           </button>
         </label>
       </form>
       <form>
-        <div className="testArea">
+        <div className='testArea'>
           <span>회원 탈퇴</span>
-          <span className="divider"></span>
+          <span className='divider'></span>
         </div>
         <label className={style.inputArea}>
           <p className={style.policy}>
@@ -126,7 +126,7 @@ const CustomerService = () => {
           </p>
           <p className={style.policyAllowArea}>
             <input
-              type="checkbox"
+              type='checkbox'
               className={style.policyCheck}
               onChange={() => checkBoxStatus()}
             />

@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import style from '../../css/MyPage/EditInfo.module.css';
-import { useParams } from 'react-router-dom';
-import { AUTH_ERROR } from '../../constants/errMsg';
+import React, { useState } from "react";
+import style from "../../css/MyPage/EditInfo.module.css";
+import { useParams } from "react-router-dom";
+import { AUTH_ERROR } from "../../constants/errMsg";
 
 // fetch 경로에서 원래는 ${username} 을 써야하는데 현재 로그인 기능 미완으로 하드코딩 하였음.
 
 const url = process.env.REACT_APP_SERVER_URL;
-console.log('url 테스트', url);
+console.log("url 테스트", url);
 const EditInfo = () => {
-  const [nickname, setNickname] = useState('');
-  const [currentPW, setCurrentPW] = useState('');
-  const [newPW, setNewPW] = useState('');
-  const [checkPW, setCheckPW] = useState('');
-  const [errorMsg1, setErrorMsg1] = useState('');
-  const [errorMsg2, setErrorMsg2] = useState('');
-  const [errorMsg3, setErrorMsg3] = useState('');
-  const [errorMsg4, setErrorMsg4] = useState('');
+  const [nickname, setNickname] = useState("");
+  const [currentPW, setCurrentPW] = useState("");
+  const [newPW, setNewPW] = useState("");
+  const [checkPW, setCheckPW] = useState("");
+  const [errorMsg1, setErrorMsg1] = useState("");
+  const [errorMsg2, setErrorMsg2] = useState("");
+  const [errorMsg3, setErrorMsg3] = useState("");
+  const [errorMsg4, setErrorMsg4] = useState("");
 
   const { username } = useParams();
 
@@ -26,32 +26,32 @@ const EditInfo = () => {
       return;
     }
     const response = await fetch(`${url}/duplicateCheck`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ nickname }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      credentials: 'include',
+      credentials: "include",
     });
     if (response.status === 200) {
       // 여기서 중복확인 되면 통과한것 관련 효과 추가하자.
-      console.log('중복확인 성공');
-      setErrorMsg1('');
+      console.log("중복확인 성공");
+      setErrorMsg1("");
     } else if (response.status === 409) {
       setErrorMsg1(AUTH_ERROR.DUPLICATE);
     }
   };
   const passwordCheck = async (password) => {
     const response = await fetch(`${url}/passwordCheck/test`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ password }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     if (response.status === 200) {
-      console.log('passwordCheck 성공');
-      setErrorMsg2('');
+      console.log("passwordCheck 성공");
+      setErrorMsg2("");
     } else if (response.status === 409) {
       setErrorMsg2(AUTH_ERROR.PASSWORD_CHECK);
       return;
@@ -66,7 +66,7 @@ const EditInfo = () => {
     if (!nickname) {
       setErrorMsg1(AUTH_ERROR.BLANK.NICKNAME);
       return;
-    } else if (currentPW === '') {
+    } else if (currentPW === "") {
       setErrorMsg2(AUTH_ERROR.BLANK.CURRENT_PW);
       return;
     } else if (!newPW) {
@@ -76,17 +76,17 @@ const EditInfo = () => {
       setErrorMsg4(AUTH_ERROR.NOT_MATCHING.NEW_PW);
       return;
     } else {
-      setErrorMsg1('');
-      setErrorMsg2('');
-      setErrorMsg3('');
-      setErrorMsg4('');
+      setErrorMsg1("");
+      setErrorMsg2("");
+      setErrorMsg3("");
+      setErrorMsg4("");
     }
 
     const response = await fetch(`${url}/editInfo/test`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ nickname, password: newPW }),
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
     });
     console.log(response.success);
   };
@@ -94,13 +94,13 @@ const EditInfo = () => {
   return (
     <section className={style.editInfo}>
       <h3 hidden>EditInfo</h3>
-      <nav className="myPage_SubHeader">회원정보 수정</nav>
+      <nav className='myPage_SubHeader'>회원정보 수정</nav>
       <form onSubmit={handleSubmit}>
         <label className={style.inputArea}>
           <span className={style.inputContent}>닉네임</span>
           <input
-            type="text"
-            placeholder="닉네임을 입력해주세요"
+            type='text'
+            placeholder='닉네임을 입력해주세요'
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
             required
@@ -117,8 +117,8 @@ const EditInfo = () => {
         <label className={style.inputArea}>
           <span className={style.inputContent}>현재 비밀번호</span>
           <input
-            type="password"
-            placeholder="현재 비밀번호를 입력해주세요"
+            type='password'
+            placeholder='현재 비밀번호를 입력해주세요'
             value={currentPW}
             onChange={(e) => setCurrentPW(e.target.value)}
           />
@@ -128,8 +128,8 @@ const EditInfo = () => {
         <label className={style.inputArea}>
           <span className={style.inputContent}>변경 비밀번호</span>
           <input
-            type="password"
-            placeholder="변경할 비밀번호를 입력해주세요"
+            type='password'
+            placeholder='변경할 비밀번호를 입력해주세요'
             value={newPW}
             onChange={(e) => setNewPW(e.target.value)}
           />
@@ -138,14 +138,14 @@ const EditInfo = () => {
         <label className={style.inputArea}>
           <span className={style.inputContent}>변경 비밀번호 확인</span>
           <input
-            type="password"
-            placeholder="변경한 비밀번호를 한번 더 입력해주세요"
+            type='password'
+            placeholder='변경한 비밀번호를 한번 더 입력해주세요'
             value={checkPW}
             onChange={(e) => setCheckPW(e.target.value)}
           />
           <span className={style.errMsg}>{errorMsg4}</span>
         </label>
-        <button type="submit" className={style.submitBtn}>
+        <button type='submit' className={style.submitBtn}>
           저장하기
         </button>
       </form>
