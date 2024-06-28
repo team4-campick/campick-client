@@ -94,13 +94,13 @@ const EditInfo = () => {
   return (
     <section className={style.editInfo}>
       <h3 hidden>EditInfo</h3>
-      <nav className='myPage_SubHeader'>회원정보 수정</nav>
+      <nav className="myPage_SubHeader">회원정보 수정</nav>
       <form onSubmit={handleSubmit}>
         <label className={style.inputArea}>
           <span className={style.inputContent}>닉네임</span>
           <input
-            type='text'
-            placeholder='닉네임을 입력해주세요'
+            type="text"
+            placeholder="닉네임을 입력해주세요"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
             required
@@ -117,8 +117,8 @@ const EditInfo = () => {
         <label className={style.inputArea}>
           <span className={style.inputContent}>현재 비밀번호</span>
           <input
-            type='password'
-            placeholder='현재 비밀번호를 입력해주세요'
+            type="password"
+            placeholder="현재 비밀번호를 입력해주세요"
             value={currentPW}
             onChange={(e) => setCurrentPW(e.target.value)}
           />
@@ -128,8 +128,8 @@ const EditInfo = () => {
         <label className={style.inputArea}>
           <span className={style.inputContent}>변경 비밀번호</span>
           <input
-            type='password'
-            placeholder='변경할 비밀번호를 입력해주세요'
+            type="password"
+            placeholder="변경할 비밀번호를 입력해주세요"
             value={newPW}
             onChange={(e) => setNewPW(e.target.value)}
           />
@@ -138,14 +138,14 @@ const EditInfo = () => {
         <label className={style.inputArea}>
           <span className={style.inputContent}>변경 비밀번호 확인</span>
           <input
-            type='password'
-            placeholder='변경한 비밀번호를 한번 더 입력해주세요'
+            type="password"
+            placeholder="변경한 비밀번호를 한번 더 입력해주세요"
             value={checkPW}
             onChange={(e) => setCheckPW(e.target.value)}
           />
           <span className={style.errMsg}>{errorMsg4}</span>
         </label>
-        <button type='submit' className={style.submitBtn}>
+        <button type="submit" className={style.submitBtn}>
           저장하기
         </button>
       </form>

@@ -23,7 +23,7 @@ const MyPost = () => {
   return (
     <section>
       <h3 hidden>MyPost</h3>
-      <nav className='myPage_SubHeader'>내가 쓴 게시글</nav>
+      <nav className="myPage_SubHeader">내가 쓴 게시글</nav>
       <div className={style.postCon}>
         {myPostList.map((post, i) => (
           <PostCard key={i} post={post} />

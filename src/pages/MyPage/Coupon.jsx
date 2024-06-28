@@ -13,9 +13,9 @@ const Coupon = () => {
           <CouponCard key={i} coupon={coupon} />
         ))}
       </div>
-      <div className='testArea'>
+      <div className="testArea">
         <span>사용한 쿠폰</span>
-        <span className='divider'></span>
+        <span className="divider"></span>
       </div>
       <div className={style.notAvailableCouponCon}>
         {notAvailableList.map((coupon, i) => (

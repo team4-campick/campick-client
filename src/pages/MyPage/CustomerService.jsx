@@ -71,47 +71,47 @@ const CustomerService = () => {
   return (
     <section className={style.customerService}>
       <h3 hidden>CustomerService</h3>
-      <nav className='myPage_SubHeader'>고객 지원</nav>
+      <nav className="myPage_SubHeader">고객 지원</nav>
       <form onSubmit={inquiry}>
-        <div className='testArea'>
+        <div className="testArea">
           <span>문의사항</span>
-          <span className='divider'></span>
+          <span className="divider"></span>
         </div>
         <label className={style.inputArea}>
           <input
-            type='text'
-            placeholder='제목'
+            type="text"
+            placeholder="제목"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <span className={style.errMsg}>&nbsp;{titleErrMsg}</span>
           <input
-            type='text'
+            type="text"
             // pattern=".+@example\.com"git
-            placeholder='답변 받으실 이메일'
+            placeholder="답변 받으실 이메일"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <span className={style.errMsg}>&nbsp;{emailErrMsg}</span>
           <textarea
-            name='inquiryContent'
-            id='inquiryContent'
-            placeholder='문의사항'
+            name="inquiryContent"
+            id="inquiryContent"
+            placeholder="문의사항"
             value={content}
             onChange={(e) => setContent(e.target.value)}
           >
             {content}
           </textarea>
           <span className={style.errMsg}>&nbsp;{contentErrMsg}</span>
-          <button className={style.inquiryBtn} type='submit'>
+          <button className={style.inquiryBtn} type="submit">
             문의하기
           </button>
         </label>
       </form>
       <form>
-        <div className='testArea'>
+        <div className="testArea">
           <span>회원 탈퇴</span>
-          <span className='divider'></span>
+          <span className="divider"></span>
         </div>
         <label className={style.inputArea}>
           <p className={style.policy}>
@@ -126,7 +126,7 @@ const CustomerService = () => {
           </p>
           <p className={style.policyAllowArea}>
             <input
-              type='checkbox'
+              type="checkbox"
               className={style.policyCheck}
               onChange={() => checkBoxStatus()}
             />

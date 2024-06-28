@@ -1,22 +1,67 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useMemo } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { setUserAllInfo } from "../store/userStore";
+
 import "../css/header.css";
 import logo from "../components/logo.svg";
+import { useDispatch, useSelector } from "react-redux";
+
+const url = process.env.REACT_APP_SERVER_URL;
 
 const Header = () => {
   // 로그인 상태를 관리하는 변수
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch();
 
   // 로그인 함수
   const handleLogin = () => {
-    setIsLoggedIn(true);
+    // setIsLoggedIn(true);
   };
 
   // 로그아웃 함수
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
+  // const handleLogout = async () => {
+  //   try {
+  //     const response = await fetch(`${url}/logout`, {
+  //       method: "POST",
+  //       credentials: "include",
+  //     });
 
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+  //     console.log(response);
+  //     // setIsLoggedIn(false);
+  //     <Navigate to="/" />;
+  //   } catch (error) {
+  //     console.error("Error logging out:", error);
+  //   }
+  // };
+  const user = useSelector((state) => state.user.user);
+  console.log("userInfo Get func =====", user);
+  const isLoggedIn = useMemo(() => (user ? user.username : null), [user]);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const response = await fetch(`${url}/profile`, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const userInfo = await response.json();
+        dispatch(setUserAllInfo(userInfo));
+      }
+    };
+    fetchProfile();
+  }, [dispatch]);
+
+  console.log("isLoggedIn ", isLoggedIn);
+  const handleLogout = (e) => {
+    e.preventDefault();
+    fetch(`${url}/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+    dispatch(setUserAllInfo(null));
+  };
   return (
     <header className="headerWrap">
       <h1>
