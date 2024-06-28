@@ -1,0 +1,66 @@
+.ContentsVideo {
+  display: grid;
+  grid-template-columns: repeat(3, 310px);
+  gap: 10px;
+  border: 1px solid red;
+  justify-content: center;
+}
+
+.videoBox {
+  width: 310px;
+  height: 540px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid blue;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid skyblue;
+}
+
+.infoBox {
+  position: absolute;
+  bottom: 0;
+  width: 310px;
+  height: 130px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid green;
+}
+
+.videoTitle {
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid green;
+}
+
+.videoDescription {
+  font-size: 14px;
+  margin: 5px 0;
+  border: 1px solid tan;
+}
+
+.userBox {
+  display: flex;
+  align-items: center;
+  border: 1px solid tan;
+}
+
+.userImage {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 5px;
+  border: 1px solid tan;
+}
+
+.videoUser {
+  font-size: 14px;
+  border: 1px solid tan;
+}
