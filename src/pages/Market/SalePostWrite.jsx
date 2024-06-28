@@ -1,12 +1,12 @@
-import style from '../../css/Market/SalePostWrite.module.css';
-import useDropdown from '../../hooks/useDropdown';
+import style from "../../css/Market/SalePostWrite.module.css";
+import useDropdown from "../../hooks/useDropdown";
 import {
   PRODUCT_CATEGORY,
   REGION,
   PRODUCT_CONDITION_OPTIONS,
-} from '../../constants/market';
-import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+} from "../../constants/market";
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
 const SalePostWrite = () => {
   const navigate = useNavigate();
@@ -39,18 +39,18 @@ const SalePostWrite = () => {
   // useDropdown 훅을 통해 드롭다운 컴포넌트 및 선택값을 필요한 값(카테고리, 지역 등)에 따라 분리하여 관리
   const { selectedLabel: category, Dropdown: CategoryDropdown } = useDropdown({
     options: PRODUCT_CATEGORY,
-    type: '종류',
+    type: "종류",
   });
   const { selectedLabel: region, Dropdown: RegionDropdown } = useDropdown({
     options: REGION,
-    type: '도',
+    type: "도",
   });
   const { selectedLabel: city, Dropdown: CityDropdown } = useDropdown({
     options: REGION.find((option) => option.label === region)?.cities || [],
-    type: '시',
+    type: "시",
   });
 
-  const [productName, setProductName] = useState('');
+  const [productName, setProductName] = useState("");
   const handleProductName = (event) => {
     setProductName(event.target.value);
   };
@@ -67,12 +67,12 @@ const SalePostWrite = () => {
     setIsNegotiable(event.target.checked);
   };
 
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState("");
   const handlePrice = (event) => {
     setPrice(event.target.value);
   };
 
-  const [desc, setDesc] = useState('여기서부터 추가로 입력하세요');
+  const [desc, setDesc] = useState("여기서부터 추가로 입력하세요");
   const handleDesc = (event) => {
     setDesc(event.target.value);
   };
@@ -90,14 +90,14 @@ const SalePostWrite = () => {
     };
 
     const formData = new FormData();
-    formData.append('newPost', JSON.stringify(newPost));
+    formData.append("newPost", JSON.stringify(newPost));
     imageFiles.forEach((file) => {
-      formData.append('images', file);
+      formData.append("images", file);
     });
 
     try {
-      const response = await fetch('http://localhost:8000/api/sale-posts', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8000/api/sale-posts", {
+        method: "POST",
         body: formData,
       });
 
@@ -106,8 +106,8 @@ const SalePostWrite = () => {
         return alert(res.message);
       }
 
-      alert('게시물 생성에 성공했습니다.');
-      navigate('/market');
+      alert("게시물 생성에 성공했습니다.");
+      navigate("/market");
     } catch (error) {
       console.log(error);
     }
@@ -121,17 +121,17 @@ const SalePostWrite = () => {
           <li>
             <span>상품이미지</span>
             <input
-              type="file"
-              id="file"
+              type='file'
+              id='file'
               className={style.imgInput}
               multiple
-              accept="image/*"
+              accept='image/*'
               onChange={handleFileChange}
               disabled={imagePreviews.length >= MAX_IMAGES}
             />
-            <label className={style.uploadBtn} htmlFor="file">
+            <label className={style.uploadBtn} htmlFor='file'>
               <div>
-                <i className="fa-solid fa-camera"></i>
+                <i className='fa-solid fa-camera'></i>
               </div>
             </label>
             <div className={style.imgPreview}>
@@ -152,8 +152,8 @@ const SalePostWrite = () => {
           <li>
             <span>상품명</span>
             <input
-              type="text"
-              placeholder="상품명을 입력해주세요."
+              type='text'
+              placeholder='상품명을 입력해주세요.'
               value={productName}
               onChange={handleProductName}
             />
@@ -174,9 +174,9 @@ const SalePostWrite = () => {
                 <React.Fragment key={value}>
                   <label>
                     <input
-                      type="radio"
+                      type='radio'
                       id={label}
-                      name="condition"
+                      name='condition'
                       value={label}
                       onChange={handleCondition}
                       checked={condition === label}
@@ -190,8 +190,8 @@ const SalePostWrite = () => {
           <li>
             <span>가격</span>
             <input
-              type="text"
-              placeholder="가격을 입력해 주세요."
+              type='text'
+              placeholder='가격을 입력해 주세요.'
               value={price}
               onChange={handlePrice}
             />
@@ -199,9 +199,9 @@ const SalePostWrite = () => {
             <div>
               <label>
                 <input
-                  type="checkbox"
-                  id="negotiablePrice"
-                  name="negotiablePrice"
+                  type='checkbox'
+                  id='negotiablePrice'
+                  name='negotiablePrice'
                   onChange={handleIsNegotiable}
                   checked={isNegotiable}
                 />
@@ -212,8 +212,8 @@ const SalePostWrite = () => {
           <li>
             설명
             <textarea
-              name=""
-              id=""
+              name=''
+              id=''
               value={desc}
               onChange={handleDesc}
             ></textarea>

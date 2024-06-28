@@ -36,8 +36,6 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Mainpage />} />
-        {/* <Route path="/" element={<Main />} /> */}
-        {/* <Route path="/" element={<Main />} /> */}
 
         {/* =================== My Page Area ===================  */}
         <Route path="/my-page" element={<MyPage />}>

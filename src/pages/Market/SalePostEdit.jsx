@@ -1,19 +1,19 @@
-import style from '../../css/Market/SalePostWrite.module.css';
-import useDropdown from '../../hooks/useDropdown';
+import style from "../../css/Market/SalePostWrite.module.css";
+import useDropdown from "../../hooks/useDropdown";
 import {
   PRODUCT_CATEGORY,
   REGION,
   PRODUCT_CONDITION_OPTIONS,
-} from '../../constants/market';
-import { useNavigate, useParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+} from "../../constants/market";
+import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 const SalePostEdit = () => {
   const { id } = useParams();
   //   const [salePostEdit, setSalePostEdit] = useState({});
   //   console.log(salePostEdit);
 
-  const API_BASE_URL = 'http://localhost:8000/api';
+  const API_BASE_URL = "http://localhost:8000/api";
   const salePostsEndpoint = `${API_BASE_URL}/sale-posts/${id}`;
 
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const SalePostEdit = () => {
     Dropdown: CategoryDropdown,
   } = useDropdown({
     options: PRODUCT_CATEGORY,
-    type: '종류',
+    type: "종류",
   });
   const {
     selectedLabel: region,
@@ -57,7 +57,7 @@ const SalePostEdit = () => {
     Dropdown: RegionDropdown,
   } = useDropdown({
     options: REGION,
-    type: '도',
+    type: "도",
   });
   const {
     selectedLabel: city,
@@ -65,10 +65,10 @@ const SalePostEdit = () => {
     Dropdown: CityDropdown,
   } = useDropdown({
     options: REGION.find((option) => option.label === region)?.cities || [],
-    type: '시',
+    type: "시",
   });
 
-  const [productName, setProductName] = useState('');
+  const [productName, setProductName] = useState("");
   const handleProductName = (event) => {
     setProductName(event.target.value);
   };
@@ -85,12 +85,12 @@ const SalePostEdit = () => {
     setIsNegotiable(event.target.checked);
   };
 
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState("");
   const handlePrice = (event) => {
     setPrice(event.target.value);
   };
 
-  const [desc, setDesc] = useState('여기서부터 추가로 입력하세요');
+  const [desc, setDesc] = useState("여기서부터 추가로 입력하세요");
   const handleDesc = (event) => {
     setDesc(event.target.value);
   };
@@ -99,7 +99,7 @@ const SalePostEdit = () => {
     try {
       const response = await fetch(salePostsEndpoint, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       const data = await response.json();
@@ -145,10 +145,10 @@ const SalePostEdit = () => {
 
     try {
       const response = await fetch(salePostsEndpoint, {
-        method: 'PUT',
+        method: "PUT",
         body: JSON.stringify(editedPost),
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
         },
       });
 
@@ -157,7 +157,7 @@ const SalePostEdit = () => {
         return alert(res.message);
       }
 
-      alert('게시물 생성에 성공했습니다.');
+      alert("게시물 생성에 성공했습니다.");
       navigate(`/sale-detail/${id}`);
     } catch (error) {
       console.log(error);
@@ -213,8 +213,8 @@ const SalePostEdit = () => {
           <li>
             <span>상품이름</span>
             <input
-              type="text"
-              placeholder="상품명을 입력해주세요."
+              type='text'
+              placeholder='상품명을 입력해주세요.'
               value={productName}
               onChange={handleProductName}
             />
@@ -235,9 +235,9 @@ const SalePostEdit = () => {
                 <React.Fragment key={value}>
                   <label>
                     <input
-                      type="radio"
+                      type='radio'
                       id={label}
-                      name="condition"
+                      name='condition'
                       value={label}
                       onChange={handleCondition}
                       checked={condition === label}
@@ -251,8 +251,8 @@ const SalePostEdit = () => {
           <li>
             <span>가격</span>
             <input
-              type="text"
-              placeholder="가격을 입력해 주세요."
+              type='text'
+              placeholder='가격을 입력해 주세요.'
               value={price}
               onChange={handlePrice}
             />
@@ -260,9 +260,9 @@ const SalePostEdit = () => {
             <div>
               <label>
                 <input
-                  type="checkbox"
-                  id="negotiablePrice"
-                  name="negotiablePrice"
+                  type='checkbox'
+                  id='negotiablePrice'
+                  name='negotiablePrice'
                   onChange={handleIsNegotiable}
                   checked={isNegotiable}
                 />
@@ -273,8 +273,8 @@ const SalePostEdit = () => {
           <li>
             상품설명
             <textarea
-              name=""
-              id=""
+              name=''
+              id=''
               value={desc}
               onChange={handleDesc}
             ></textarea>

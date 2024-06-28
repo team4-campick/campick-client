@@ -82,7 +82,7 @@ const LoginPage = () => {
   };
 
   if (redirect) {
-    return <Navigate to="/" />;
+    return <Navigate to='/' />;
   }
 
   return (
@@ -94,8 +94,8 @@ const LoginPage = () => {
       ) : (
         <form onSubmit={login}>
           <input
-            type="text"
-            placeholder="사용자이름(ID)"
+            type='text'
+            placeholder='사용자이름(ID)'
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
@@ -103,19 +103,19 @@ const LoginPage = () => {
           />
           <span>{message1}</span>
           <input
-            type="password"
-            placeholder="패스워드"
+            type='password'
+            placeholder='패스워드'
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           />
           <span>{message2}</span>
-          <button type="submit">로그인</button>
+          <button type='submit'>로그인</button>
         </form>
       )}
       <p>
-        계정이 없으신가요? <Link to="/register">회원가입</Link>
+        계정이 없으신가요? <Link to='/register'>회원가입</Link>
       </p>
     </main>
   );
