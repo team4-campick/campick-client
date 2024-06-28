@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './useDropdown.css';
+import React, { useState } from "react";
+import "./useDropdown.css";
 // 드롭다운 컴포넌트와 드롭다운으로 선택된 값을 반환하는 커스텀 훅
 // @param options 드롭다운 옵션
 
@@ -24,14 +24,14 @@ const useDropdown = ({ options, type }) => {
   // 드롭다운 컴포넌트
   const Dropdown = () => {
     return (
-      <div className="container" tabIndex={0}>
+      <div className='container' tabIndex={0}>
         <label onClick={handleClickContainer}>
-          <button type="button">
-            {selectedLabel || type} {isDropdownOpen ? '⌃' : '⌄'}
+          <button type='button'>
+            {selectedLabel || type} {isDropdownOpen ? "⌃" : "⌄"}
           </button>
         </label>
         {isDropdownOpen && (
-          <ul style={{ maxHeight: '100px', overflowY: 'scroll' }}>
+          <ul style={{ maxHeight: "100px", overflowY: "scroll" }}>
             {options.map((option) => {
               const { label, value } = option;
               return (

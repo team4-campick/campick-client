@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import style from '../../css/Market/SaleDetail.module.css';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import style from "../../css/Market/SaleDetail.module.css";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import 'swiper/css';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/pagination";
 
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation } from "swiper/modules";
 
 const SaleDetail = () => {
   const { id } = useParams();
@@ -25,14 +25,14 @@ const SaleDetail = () => {
     imageUrls = [],
   } = salePostDetail;
 
-  const API_BASE_URL = 'http://localhost:8000/api';
+  const API_BASE_URL = "http://localhost:8000/api";
   const salePostsEndpoint = `${API_BASE_URL}/sale-posts/${id}`;
 
   const fetchSalePostDetail = async () => {
     try {
       const response = await fetch(salePostsEndpoint, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       const data = await response.json();
@@ -53,17 +53,17 @@ const SaleDetail = () => {
   const deleteSalePost = async () => {
     try {
       const response = await fetch(salePostsEndpoint, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       const res = await response.json();
       if (!res.result) {
         return alert(res.message);
       }
-      alert('삭제가 완료되었습니다.');
-      navigate('/market');
+      alert("삭제가 완료되었습니다.");
+      navigate("/market");
     } catch (error) {
       console.log(error);
-      alert('삭제 중 오류가 발생했습니다.');
+      alert("삭제 중 오류가 발생했습니다.");
     }
   };
   const editPost = () => {
@@ -81,7 +81,7 @@ const SaleDetail = () => {
         <div className={style.productImgSlide}>
           <Swiper
             pagination={{
-              type: 'fraction',
+              type: "fraction",
             }}
             navigation={true}
             loop={true}
@@ -110,17 +110,17 @@ const SaleDetail = () => {
           </span>
         </div>
         <div className={style.priceCon}>
-          <span>{isNegotiable ? '가격협의가능' : '가격협의불가'}</span>
+          <span>{isNegotiable ? "가격협의가능" : "가격협의불가"}</span>
           <p className={style.productPrice}>판매 희망가 : {price}원</p>
-        </div>{' '}
+        </div>{" "}
       </div>
       <div>상품 상태 : {condition}</div>
       <div>상품 설명 : {desc}</div>
       <div className={style.btnWrap}>
-        <Link to="/market">
-          <i className="fa-solid fa-chevron-left"></i>
+        <Link to='/market'>
+          <i className='fa-solid fa-chevron-left'></i>
         </Link>
-        <Link to="/sale-chat/:id">
+        <Link to='/sale-chat/:id'>
           <button className={style.inquiryBtn}>문의하기</button>
         </Link>
       </div>
