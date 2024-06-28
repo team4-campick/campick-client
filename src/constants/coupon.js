@@ -4,9 +4,9 @@ const COUPON = Object.freeze({
     TWENTY: 20,
   },
   PRODUCT_OFFER: {
-    CHARCOAL: '숯',
-    RAMEN: '라면',
-    CAMPING_TICKET: '캠핑장 이용권',
+    CHARCOAL: "숯",
+    RAMEN: "라면",
+    CAMPING_TICKET: "캠핑장 이용권",
   },
   EXPIRE_DATE: {
     THIRTY: 30,
