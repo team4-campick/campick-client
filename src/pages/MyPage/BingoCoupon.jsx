@@ -5,11 +5,10 @@ const BingoCoupon = () => {
   return (
     <section>
       <h3 hidden>BingoCoupon</h3>
-
       <nav className="myPage_SubHeader">
-        <Link to={"bingo"}>빙고</Link>
+        <Link to="bingo">빙고</Link>
         <span>&nbsp;&#47;&nbsp;</span>
-        <Link to={"coupon"}>쿠폰함</Link>
+        <Link to="coupon">쿠폰함</Link>
       </nav>
       <Outlet></Outlet>
     </section>

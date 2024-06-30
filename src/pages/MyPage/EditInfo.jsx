@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import style from "../../css/MyPage/EditInfo.module.css";
 import { useParams } from "react-router-dom";
 import { AUTH_ERROR } from "../../constants/errMsg";
+import { useSelector } from "react-redux";
 
 // fetch 경로에서 원래는 ${username} 을 써야하는데 현재 로그인 기능 미완으로 하드코딩 하였음.
 
@@ -17,7 +18,8 @@ const EditInfo = () => {
   const [errorMsg3, setErrorMsg3] = useState("");
   const [errorMsg4, setErrorMsg4] = useState("");
 
-  const { username } = useParams();
+  const user = useSelector((state) => state.user.user);
+  const userName = user?.username;
 
   const duplicateCheck = async (e) => {
     e.preventDefault();
@@ -42,7 +44,7 @@ const EditInfo = () => {
     }
   };
   const passwordCheck = async (password) => {
-    const response = await fetch(`${url}/passwordCheck/test`, {
+    const response = await fetch(`${url}/passwordCheck/${userName}`, {
       method: "POST",
       body: JSON.stringify({ password }),
       headers: {
@@ -51,7 +53,7 @@ const EditInfo = () => {
     });
     if (response.status === 200) {
       console.log("passwordCheck 성공");
-      setErrorMsg2("");
+      setErrorMsg2("passwordCheck 성공");
     } else if (response.status === 409) {
       setErrorMsg2(AUTH_ERROR.PASSWORD_CHECK);
       return;
@@ -82,13 +84,17 @@ const EditInfo = () => {
       setErrorMsg4("");
     }
 
-    const response = await fetch(`${url}/editInfo/test`, {
+    const response = await fetch(`${url}/editInfo/${userName}`, {
       method: "POST",
-      body: JSON.stringify({ nickname, password: newPW }),
+      body: JSON.stringify({ username: userName, nickname, password: newPW }),
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
-    console.log(response.success);
+    if (response) {
+      console.log("변경완료");
+    } else {
+      console.log("변경실패");
+    }
   };
 
   return (
