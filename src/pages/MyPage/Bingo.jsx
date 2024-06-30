@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import style from "../../css/MyPage/Bingo.module.css";
 import BingoCard from "../../components/MyPage/BingoCard";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const Bingo = () => {
   const url = process.env.REACT_APP_SERVER_URL;
+  const user = useSelector((state) => state.user.user);
+  const userName = user?.username;
+
   const [bingoArea, setBingoArea] = useState([]);
   // const [bingoStatus, setBingoStatus] = useState('');
 
@@ -16,7 +21,7 @@ const Bingo = () => {
 
   const updateMission = async () => {
     try {
-      const response = await fetch(`${url}/update-mission/bbbbbbbb`, {
+      const response = await fetch(`${url}/update-mission/${userName}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -50,7 +55,7 @@ const Bingo = () => {
   };
   const getBingoPattern = async () => {
     try {
-      const response = await fetch(`${url}/bingo-pattern/bbbbbbbb`, {
+      const response = await fetch(`${url}/bingo-pattern/${userName}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -66,7 +71,7 @@ const Bingo = () => {
   };
   const getBingoArea = async () => {
     try {
-      const response = await fetch(`${url}/bingo-area/bbbbbbbb`, {
+      const response = await fetch(`${url}/bingo-area/${userName}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -81,7 +86,7 @@ const Bingo = () => {
   };
   const getBingoCount = async () => {
     try {
-      const response = await fetch(`${url}/bingo-count/bbbbbbbb`, {
+      const response = await fetch(`${url}/bingo-count/${userName}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -101,7 +106,7 @@ const Bingo = () => {
   };
   const resetBingo = async () => {
     try {
-      const response = await fetch(`${url}/reset-bingo/bbbbbbbb`, {
+      const response = await fetch(`${url}/reset-bingo/${userName}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

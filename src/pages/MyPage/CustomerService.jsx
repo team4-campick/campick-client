@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import style from "../../css/MyPage/CustomerService.module.css";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 // import { url } from '../../store/ref';
 const url = process.env.REACT_APP_SERVER_URL;
 const CustomerService = () => {
@@ -12,7 +13,8 @@ const CustomerService = () => {
   const [emailErrMsg, setEmailErrMsg] = useState("");
   const [contentErrMsg, setContentErrMsg] = useState("");
 
-  const { userId } = useParams();
+  const user = useSelector((state) => state.user.user);
+  const userName = user?.username;
 
   const checkBoxStatus = () => setPolicyCheckStatus(!policyCheckStatus);
   const inquiry = async (e) => {
@@ -36,7 +38,7 @@ const CustomerService = () => {
     } else {
       setContentErrMsg("");
     }
-    const response = await fetch(`${url}/inquiry`, {
+    const response = await fetch(`${url}/inquiry/${userName}`, {
       method: "POST",
       body: JSON.stringify({
         title,
@@ -54,9 +56,9 @@ const CustomerService = () => {
   const deleteUser = async (e) => {
     e.preventDefault();
     console.log("deleteBtn clicked");
-    console.log(userId);
+    console.log(userName);
     console.log(url);
-    const response = await fetch(`${url}/delete-user/추가 업데이트`, {
+    const response = await fetch(`${url}/delete-user/${userName}`, {
       method: "DELETE",
       headers: { "Content-type": "application/json" },
       credentials: "include",
