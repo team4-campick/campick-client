@@ -36,7 +36,6 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Mainpage />} />
-
         {/* =================== My Page Area ===================  */}
         <Route path="/my-page" element={<MyPage />}>
           <Route path="bingo-coupon" element={<BingoCoupon />}>
@@ -48,11 +47,8 @@ function App() {
             <Route path="purchase" element={<Purchase />} />
           </Route>
           <Route path="my-post" element={<MyPost />} />
-          <Route path="edit-info/:userId" element={<EditInfo />} />
-          <Route
-            path="customer-service/:userId"
-            element={<CustomerService />}
-          />
+          <Route path="edit-info" element={<EditInfo />} />
+          <Route path="customer-service" element={<CustomerService />} />
         </Route>
 
         {/* =================== Market Area ===================  */}
