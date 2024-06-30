@@ -5,3 +5,8 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
+.mw {
+  max-width: 1440px;
+  width: calc(100% - 200px);
+  margin: auto;
+}
