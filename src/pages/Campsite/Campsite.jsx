@@ -19,13 +19,12 @@ const Campsite = () => {
   };
   const handleSearch = (e) => {
     e.preventDefault();
-    // setSearchParams({ keyword: searchKeyword });
-    // searchParams.delete("category");
   };
   useEffect(() => {
     const basedList = async () => {
       try {
-        const baseUrl = `https://apis.data.go.kr/B551011/GoCamping/basedList?MobileOS=ETC&MobileApp=campick&numOfRows=12&serviceKey=CigWDfrtb8KsC1aESUqp9aphPSv1K5o2HU0pHEh4sSWPlZJSa3Lk73vRKi2Xy9uMg%2B6Ae%2FrbnS0iq7T2f9YASA%3D%3D&_type=json`;
+        const baseUrl = `${apiUrl}basedList?MobileOS=${apiOS}&MobileApp=${apiName}&numOfRows=12&serviceKey=${apiKey}&_type=${apiType}`;
+        console.log("baseUrl : ", baseUrl);
         const response = await fetch(baseUrl, {
           method: "GET",
           headers: {
@@ -33,8 +32,11 @@ const Campsite = () => {
           },
         });
         console.log("response", response);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
         const data = await response.json();
-
+        console.log(data);
         setSiteLists(data.response.body.items.item);
       } catch (error) {
         console.error(error);
