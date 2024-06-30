@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { setUserAllInfo } from "../store/userStore";
 
 import "../css/header.css";
@@ -12,7 +12,8 @@ const Header = () => {
   // 로그인 상태를 관리하는 변수
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  const navigate = useNavigate();
   // 로그인 함수
   const handleLogin = () => {
     // setIsLoggedIn(true);
@@ -51,7 +52,7 @@ const Header = () => {
       }
     };
     fetchProfile();
-  }, [dispatch]);
+  }, [dispatch, location.pathname]);
 
   console.log("isLoggedIn ", isLoggedIn);
   const handleLogout = (e) => {
