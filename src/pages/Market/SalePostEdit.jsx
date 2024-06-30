@@ -13,8 +13,7 @@ const SalePostEdit = () => {
   //   const [salePostEdit, setSalePostEdit] = useState({});
   //   console.log(salePostEdit);
 
-  const API_BASE_URL = "http://localhost:8000/api";
-  const salePostsEndpoint = `${API_BASE_URL}/sale-posts/${id}`;
+  const salePostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/sale-posts/${id}`;
 
   const navigate = useNavigate();
   //   const [imagePreviews, setImagePreviews] = useState([]);
@@ -165,7 +164,7 @@ const SalePostEdit = () => {
   };
 
   return (
-    <section className={style.writeCon}>
+    <section className={`mw ${style.writeCon}`}>
       <h2 hidden>SalePostWrite</h2>
       <div>
         <ul>
@@ -213,8 +212,8 @@ const SalePostEdit = () => {
           <li>
             <span>상품이름</span>
             <input
-              type='text'
-              placeholder='상품명을 입력해주세요.'
+              type="text"
+              placeholder="상품명을 입력해주세요."
               value={productName}
               onChange={handleProductName}
             />
@@ -235,9 +234,9 @@ const SalePostEdit = () => {
                 <React.Fragment key={value}>
                   <label>
                     <input
-                      type='radio'
+                      type="radio"
                       id={label}
-                      name='condition'
+                      name="condition"
                       value={label}
                       onChange={handleCondition}
                       checked={condition === label}
@@ -251,8 +250,8 @@ const SalePostEdit = () => {
           <li>
             <span>가격</span>
             <input
-              type='text'
-              placeholder='가격을 입력해 주세요.'
+              type="text"
+              placeholder="가격을 입력해 주세요."
               value={price}
               onChange={handlePrice}
             />
@@ -260,9 +259,9 @@ const SalePostEdit = () => {
             <div>
               <label>
                 <input
-                  type='checkbox'
-                  id='negotiablePrice'
-                  name='negotiablePrice'
+                  type="checkbox"
+                  id="negotiablePrice"
+                  name="negotiablePrice"
                   onChange={handleIsNegotiable}
                   checked={isNegotiable}
                 />
@@ -273,8 +272,8 @@ const SalePostEdit = () => {
           <li>
             상품설명
             <textarea
-              name=''
-              id=''
+              name=""
+              id=""
               value={desc}
               onChange={handleDesc}
             ></textarea>

@@ -10,8 +10,7 @@ const Market = () => {
   const [salePosts, setSalePosts] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  const API_BASE_URL = "http://localhost:8000/api";
-  const salePostsEndpoint = `${API_BASE_URL}/sale-posts`;
+  const salePostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/sale-posts`;
 
   const keyword = searchParams.get("keyword");
   const category = searchParams.get("category");
@@ -65,18 +64,18 @@ const Market = () => {
   }, [keyword, salePostsEndpoint, category]);
 
   return (
-    <section className={style.marketCon}>
+    <section className={`mw ${style.marketCon}`}>
       <h2 hidden>Market</h2>
       <form className={style.searchBar}>
         <input
-          type='text'
-          placeholder='어떤 상품을 찾고있나요?'
+          type="text"
+          placeholder="어떤 상품을 찾고있나요?"
           value={searchKeyword}
           onChange={handleSearchChange}
         />
 
-        <button type='submit' onClick={handleSearch}>
-          <i className='fa-solid fa-magnifying-glass'></i>
+        <button type="submit" onClick={handleSearch}>
+          <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </form>
       <div className={style.cateGories}>
@@ -92,9 +91,9 @@ const Market = () => {
       </div>
 
       <div className={style.writeBtnCon}>
-        <Link to='/sale-post-write' className={style.writeBtn}>
+        <Link to="/sale-post-write" className={style.writeBtn}>
           <span>판매하기</span>
-          <i className='fa-regular fa-pen-to-square'></i>
+          <i className="fa-regular fa-pen-to-square"></i>
         </Link>
       </div>
 
