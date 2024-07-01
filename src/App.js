@@ -23,10 +23,13 @@ import SalePostEdit from "./pages/Market/SalePostEdit";
 import Chat from "./pages/Market/Chat";
 
 import Contents from "./pages/Contents/Contents";
-import Event from "./pages/Event";
 import ContentsBlog from "./pages/Contents/ContentsBlog";
 import ContentsVideo from "./pages/Contents/ContentsVideo";
 import BlogPostWrite from "./pages/Contents/BlogPostWrite";
+
+import Event from "./pages/Event/Event";
+import EventFinished from "./pages/Event/EventFinished";
+import EventProceeding from "./pages/Event/EventProceeding";
 
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -69,13 +72,16 @@ function App() {
         {/* =================== contents page =================== */}
         <Route path="/contents" element={<Contents />}>
           <Route index element={<Navigate to="contentsBlog" replace />} />
-
           <Route path="contentsBlog" element={<ContentsBlog />} />
           <Route path="contentsVideo" element={<ContentsVideo />} />
         </Route>
         <Route path="/blog-post-write" element={<BlogPostWrite />} />
         {/* =================== event page =================== */}
-        <Route path="/event" element={<Event />} />
+        <Route path="/event" element={<Event />}>
+          <Route index element={<Navigate to="eventProceeding" replace />} />
+          <Route path="eventFinished" element={<EventFinished />} />
+          <Route path="eventProceeding" element={<EventProceeding />} />
+        </Route>
 
         {/* =================== Login Page ===================  */}
         <Route path="/signin" element={<LoginPage />} />

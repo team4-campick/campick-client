@@ -1,4 +1,3 @@
-/* contents.module.css */
 .pageWarp {
   text-align: center;
   padding: 20px;
@@ -37,8 +36,4 @@
 .pageSubHeader a.active::before {
   visibility: visible;
   transform: scaleX(1);
-}
-
-.active {
-  color: #008080; /* 활성화된 링크의 색상 */
 }
