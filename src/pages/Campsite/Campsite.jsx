@@ -23,7 +23,9 @@ const Campsite = () => {
   useEffect(() => {
     const basedList = async () => {
       try {
-        const baseUrl = `${apiUrl}basedList?MobileOS=${apiOS}&MobileApp=${apiName}&numOfRows=12&serviceKey=${apiKey}&_type=${apiType}`;
+        const baseUrl = new URL(
+          `${apiUrl}basedList?MobileOS=${apiOS}&MobileApp=${apiName}&numOfRows=12&serviceKey=${apiKey}&_type=${apiType}`
+        );
         console.log("baseUrl : ", baseUrl);
         const response = await fetch(baseUrl, {
           method: "GET",
