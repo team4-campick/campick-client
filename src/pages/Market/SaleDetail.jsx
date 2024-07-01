@@ -115,12 +115,12 @@ const SaleDetail = () => {
       </div>
       <div>상품 상태 : {condition}</div>
       <div>상품 설명 : {desc}</div>
-      <div className={style.btnWrap}>
+      <div className="submitButtonWrap">
         <Link to="/market">
           <i className="fa-solid fa-chevron-left"></i>
         </Link>
         <Link to="/sale-chat/:id">
-          <button className={style.inquiryBtn}>문의하기</button>
+          <button className="submitButton">문의하기</button>
         </Link>
       </div>
     </section>
