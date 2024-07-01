@@ -31,6 +31,9 @@ import BlogPostWrite from "./pages/Contents/BlogPostWrite";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
+import Campsite from "./pages/Campsite/Campsite";
+import SiteDetail from "./pages/Campsite/SiteDetail";
+
 function App() {
   return (
     <div className="App">
@@ -51,6 +54,10 @@ function App() {
           <Route path="edit-info" element={<EditInfo />} />
           <Route path="customer-service" element={<CustomerService />} />
         </Route>
+        {/* =================== Campsite Area ===================  */}
+        <Route path="/campsite" element={<Campsite />} />
+        <Route path="/site-detail/:id" element={<SiteDetail />} />
+        {/* <Route path="/site-review-write" element={<SiteReviewWrite />} /> */}
 
         {/* =================== Market Area ===================  */}
         <Route path="/market" element={<Market />} />

@@ -1,0 +1,67 @@
+.siteDetail {
+  width: calc(100% - 600px);
+  margin: auto;
+  padding-top: 4rem;
+  border: 1px solid black;
+}
+.siteDetailBanner {
+  padding-top: 40%;
+  position: relative;
+  border: 4px solid yellowgreen;
+}
+.siteDetailBanner > div {
+  position: absolute;
+  object-fit: cover;
+  height: 100%;
+  top: 0;
+}
+
+.siteDetailBanner > div > div > img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.siteDetailSubBanner {
+  height: 100px;
+  width: 100%;
+  margin: 1rem 0;
+  border: 1px solid green;
+}
+.siteDetailSubBanner > div {
+  display: flex;
+  width: 100%;
+
+  gap: 0.5rem;
+  justify-content: end;
+}
+.siteDetailSubBanner > div > div {
+  padding-top: 5%;
+  width: 120px !important;
+  overflow: hidden;
+  position: relative;
+  border: 4px solid transparent;
+}
+.siteDetailSubBanner > div > div:hover {
+  border: 4px solid #333;
+}
+.siteDetailSubBanner > div > div > img {
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.siteInfo {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid blue;
+}
+.optionCon {
+  border: 1px solid red;
+}
+.siteMap {
+  width: 100%;
+  height: 400px;
+}
