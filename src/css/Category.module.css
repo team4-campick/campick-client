@@ -37,3 +37,6 @@
   visibility: visible;
   transform: scaleX(1);
 }
+.active {
+  color: #008080;
+}
