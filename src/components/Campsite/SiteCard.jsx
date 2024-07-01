@@ -9,14 +9,14 @@ const SiteCard = ({ site }) => {
     <div
       className={style.siteCard}
       onClick={() => {
-        navigate(`/site-detail/${contentId}`);
+        navigate(`/site-detail/${contentId}`, { state: site });
       }}
     >
       <figure>
         <figcaption>
           <p className={style.info}>
-            <span>{facltNm}</span>
             <span>{`${doNm} ${sigunguNm}`}</span>
+            <span>{facltNm}</span>
           </p>
           <span className={style.score}>점수</span>
         </figcaption>
