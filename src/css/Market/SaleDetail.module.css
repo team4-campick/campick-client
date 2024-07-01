@@ -31,12 +31,12 @@
 .productPrice {
   font-size: 1.2rem;
 }
-.btnWrap {
+/* .btnWrap {
   display: flex;
   justify-content: center;
   gap: 12px;
-}
-.btnWrap i {
+} */
+/* .btnWrap i {
   width: 80px;
   height: 73px;
   border: 3px solid rgba(31, 59, 52, 0.5);
@@ -55,4 +55,4 @@
   background-color: #1f3b34;
   color: white;
   font-size: 1.5rem;
-}
+} */

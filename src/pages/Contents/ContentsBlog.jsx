@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import style from "../../css/Contents/contentsBlog.module.css";
 
+import { useNavigate } from "react-router-dom";
+
 const ContentsBlog = () => {
+  const navigate = useNavigate();
   return (
     <section class="mw">
       <h2 hidden>ContentsBlog</h2>
@@ -12,7 +15,12 @@ const ContentsBlog = () => {
         </Link>
       </div>
       <div className={style.blogPostList}>
-        <div className={style.blogPostCard}>
+        <div
+          className={style.blogPostCard}
+          onClick={() => {
+            navigate(`/blog-post-detail`);
+          }}
+        >
           <div className={style.blogImg}>
             <img src="" alt="이미지" />
           </div>

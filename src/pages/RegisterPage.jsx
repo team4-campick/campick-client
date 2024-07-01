@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import style from "../css/RegisterPage.module.css"; // 경로 확인
+import style from "../css/RegisterPage.module.css";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [nickname, setNickname] = useState(""); // nickname 상태 추가
+  const [nickname, setNickname] = useState("");
   const [message, setMessage] = useState("");
   const [redirect, setRedirect] = useState(false);
 
@@ -27,7 +27,7 @@ const RegisterPage = () => {
           username,
           password,
           nickname,
-        }), // nickname 추가
+        }),
         headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
@@ -49,6 +49,10 @@ const RegisterPage = () => {
     }
   };
 
+  if (redirect) {
+    return <Navigate to="/signin" />; // 회원가입 성공 시 로그인 페이지로 이동
+  }
+
   return (
     <main className={`mw ${style.register}`}>
       <h2>회원가입</h2>
@@ -65,7 +69,7 @@ const RegisterPage = () => {
         <input
           type="text"
           placeholder="닉네임"
-          value={nickname} // nickname input 필드 추가
+          value={nickname}
           onChange={(e) => {
             setNickname(e.target.value);
           }}
