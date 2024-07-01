@@ -1,13 +1,12 @@
 .pageWarp {
   text-align: center;
-  padding: 20px;
 }
 
 .pageSubHeader {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
   position: relative;
+  margin: 60px auto;
 }
 
 .pageSubHeader a {

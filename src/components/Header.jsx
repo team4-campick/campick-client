@@ -62,6 +62,7 @@ const Header = () => {
       credentials: "include",
     });
     dispatch(setUserAllInfo(null));
+    navigate("/");
   };
   return (
     <header className="headerWrap">

@@ -1,0 +1,21 @@
+.topBackgroundImg {
+  border: 1px solid red;
+  background-color: antiquewhite;
+  height: 440px;
+  position: relative;
+}
+.blogPostInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+
+.blogPostInfo h3 {
+  font-size: 2rem;
+  font-weight: bold;
+}

@@ -10,3 +10,31 @@ body {
   width: calc(100% - 200px);
   margin: auto;
 }
+
+/* 포스트 작성 완료 버튼 */
+.submitButtonWrap {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.submitButtonWrap i {
+  width: 60px;
+  height: 50px;
+  border: 3px solid rgba(31, 59, 52, 0.5);
+  border-radius: 3px;
+  color: rgba(31, 59, 52, 0.5);
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.submitButton {
+  width: 600px;
+  height: 50px;
+  border: none;
+  border-radius: 3px;
+  background-color: #1f3b34;
+  color: white;
+  font-size: 1.5rem;
+}

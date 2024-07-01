@@ -41,7 +41,7 @@ const REGION = [
     value: "Sejong",
   },
   {
-    label: "경기도",
+    label: "경기",
     value: "Gyeonggi-do",
     cities: [
       { label: "수원", value: "Suwon" },
@@ -77,7 +77,7 @@ const REGION = [
     ],
   },
   {
-    label: "강원도",
+    label: "강원",
     value: "Gangwon-do",
     cities: [
       { label: "춘천", value: "Chuncheon" },
@@ -101,7 +101,7 @@ const REGION = [
     ],
   },
   {
-    label: "충청북도",
+    label: "충북",
     value: "Chungcheongbuk-do",
     cities: [
       { label: "청주", value: "Cheongju" },
@@ -118,7 +118,7 @@ const REGION = [
     ],
   },
   {
-    label: "충청남도",
+    label: "충남",
     value: "Chungcheongnam-do",
     cities: [
       { label: "천안", value: "Cheonan" },
@@ -139,7 +139,7 @@ const REGION = [
     ],
   },
   {
-    label: "전라북도",
+    label: "전북",
     value: "Jeollabuk-do",
     cities: [
       { label: "전주", value: "Jeonju" },
@@ -159,7 +159,7 @@ const REGION = [
     ],
   },
   {
-    label: "전라남도",
+    label: "전남",
     value: "Jeollanam-do",
     cities: [
       { label: "목포", value: "Mokpo" },
@@ -187,7 +187,7 @@ const REGION = [
     ],
   },
   {
-    label: "경상북도",
+    label: "경북",
     value: "Gyeongsangbuk-do",
     cities: [
       { label: "포항", value: "Pohang" },
@@ -216,7 +216,7 @@ const REGION = [
     ],
   },
   {
-    label: "경상남도",
+    label: "경남",
     value: "Gyeongsangnam-do",
     cities: [
       { label: "창원", value: "Changwon" },
@@ -240,7 +240,7 @@ const REGION = [
     ],
   },
   {
-    label: "제주도",
+    label: "제주",
     value: "Jeju-do",
     cities: [
       { label: "제주시", value: "Jeju-si" },
