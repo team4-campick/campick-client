@@ -1,11 +1,11 @@
 import React from "react";
 
-import "../css/footer.css";
+import style from "../css/footer.module.css";
 const Footer = () => {
   return (
     <footer>
-      <div className={"copyrightWrap"}>
-        <p className={"copyrightmemo"}>
+      <div className={style.copyrightWrap}>
+        <p className={style.copyrightmemo}>
           &copy; team_campick. All rights reserved. The design refers to 'STAY
           FOLIO'.
         </p>
