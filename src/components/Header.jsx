@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUserAllInfo } from "../store/userStore";
 
-import "../css/header.css";
+import style from "./header.module.css";
 import logo from "../components/logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -65,14 +65,14 @@ const Header = () => {
     navigate("/");
   };
   return (
-    <header className="headerWrap">
+    <header className={style.headerWrap}>
       <h1>
         <Link to="/">
           <img src={logo} alt="CAMPICK LOGO IMG" />
         </Link>
       </h1>
 
-      <nav className="menuWrap">
+      <nav className={style.menuWrap}>
         <ul>
           <li>
             <Link to="/campsite">CAMP SITE</Link>
@@ -89,15 +89,15 @@ const Header = () => {
         </ul>
       </nav>
 
-      <nav className="privacyWrap">
+      <nav className={style.privacyWrap}>
         <ul>
           {isLoggedIn ? (
             <>
               {/* 로그인 후 */}
-              <li className="privacy">
+              <li className={style.privacy}>
                 <Link to="/my-page/bingo-coupon/bingo">MY PAGE</Link>
               </li>
-              <li className="privacy">
+              <li className={style.privacy}>
                 <Link to="/" onClick={handleLogout}>
                   SIGN OUT
                 </Link>
@@ -106,12 +106,12 @@ const Header = () => {
           ) : (
             <>
               {/* 로그인 전 */}
-              <li className="public">
+              <li className={style.public}>
                 <Link to="/signin" onClick={handleLogin}>
                   SIGN IN
                 </Link>
               </li>
-              <li className="public">
+              <li className={style.public}>
                 <Link to="/register">REGISTER</Link>
               </li>
             </>
