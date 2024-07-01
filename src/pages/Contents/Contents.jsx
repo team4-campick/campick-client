@@ -6,9 +6,9 @@ const Contents = () => {
   const location = useLocation();
 
   return (
-    <section className={style.contentsWarp}>
+    <section className={style.pageWarp}>
       <h3 hidden>contents</h3>
-      <nav className={style.contentSubHeader}>
+      <nav className={style.pageSubHeader}>
         <Link
           to={"contentsBlog"}
           className={location.pathname === "/contentsBlog" ? style.active : ""}
