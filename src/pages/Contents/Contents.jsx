@@ -1,18 +1,18 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import cateogryStyle from "../../css/Category.module.css";
+import categoryStyle from "../../css/Category.module.css";
 
 const Contents = () => {
   const location = useLocation();
 
   return (
-    <section className={cateogryStyle.pageWarp}>
+    <section className={categoryStyle.pageWarp}>
       <h3 hidden>contents</h3>
-      <nav className={cateogryStyle.pageSubHeader}>
+      <nav className={categoryStyle.pageSubHeader}>
         <Link
           to={"contentsBlog"}
           className={
-            location.pathname === "/contentsBlog" ? cateogryStyle.active : ""
+            location.pathname === "/contentsBlog" ? categoryStyle.active : ""
           }
         >
           BLOG
@@ -20,7 +20,7 @@ const Contents = () => {
         <Link
           to={"contentsVideo"}
           className={
-            location.pathname === "/contentsVideo" ? cateogryStyle.active : ""
+            location.pathname === "/contentsVideo" ? categoryStyle.active : ""
           }
         >
           VIDEO
