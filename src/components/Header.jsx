@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUserAllInfo } from "../store/userStore";
 
 import style from "../css/header.module.css";
@@ -13,6 +13,7 @@ const Header = () => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   // 로그인 함수
   const handleLogin = () => {
     // setIsLoggedIn(true);
