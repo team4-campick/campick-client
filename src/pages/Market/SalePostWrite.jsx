@@ -114,24 +114,24 @@ const SalePostWrite = () => {
   };
 
   return (
-    <section className={style.writeCon}>
+    <section className={`mw ${style.writeCon}`}>
       <h2 hidden>SalePostWrite</h2>
       <div>
         <ul>
           <li>
             <span>상품이미지</span>
             <input
-              type='file'
-              id='file'
+              type="file"
+              id="file"
               className={style.imgInput}
               multiple
-              accept='image/*'
+              accept="image/*"
               onChange={handleFileChange}
               disabled={imagePreviews.length >= MAX_IMAGES}
             />
-            <label className={style.uploadBtn} htmlFor='file'>
+            <label className={style.uploadBtn} htmlFor="file">
               <div>
-                <i className='fa-solid fa-camera'></i>
+                <i className="fa-solid fa-camera"></i>
               </div>
             </label>
             <div className={style.imgPreview}>
@@ -146,27 +146,27 @@ const SalePostWrite = () => {
             </div>
           </li>
           <li>
-            <span>상품종류</span>
+            <span>상품 종류</span>
             <CategoryDropdown />
           </li>
           <li>
-            <span>상품명</span>
+            <span>상품 이름</span>
             <input
-              type='text'
-              placeholder='상품명을 입력해주세요.'
+              type="text"
+              placeholder="상품 이름을 입력해주세요."
               value={productName}
               onChange={handleProductName}
             />
           </li>
           <li>
-            <span>지역</span>
+            <span>거래 지역</span>
             <div className={style.selectRegion}>
               <RegionDropdown />
               <CityDropdown />
             </div>
           </li>
           <li>
-            <span>상품상태</span>
+            <span>상품 상태</span>
 
             {PRODUCT_CONDITION_OPTIONS.map((option, idx) => {
               const { value, label } = option;
@@ -174,9 +174,9 @@ const SalePostWrite = () => {
                 <React.Fragment key={value}>
                   <label>
                     <input
-                      type='radio'
+                      type="radio"
                       id={label}
-                      name='condition'
+                      name="condition"
                       value={label}
                       onChange={handleCondition}
                       checked={condition === label}
@@ -188,10 +188,10 @@ const SalePostWrite = () => {
             })}
           </li>
           <li>
-            <span>가격</span>
+            <span>판매 가격</span>
             <input
-              type='text'
-              placeholder='가격을 입력해 주세요.'
+              type="text"
+              placeholder="가격을 입력해 주세요."
               value={price}
               onChange={handlePrice}
             />
@@ -199,9 +199,9 @@ const SalePostWrite = () => {
             <div>
               <label>
                 <input
-                  type='checkbox'
-                  id='negotiablePrice'
-                  name='negotiablePrice'
+                  type="checkbox"
+                  id="negotiablePrice"
+                  name="negotiablePrice"
                   onChange={handleIsNegotiable}
                   checked={isNegotiable}
                 />
@@ -210,10 +210,10 @@ const SalePostWrite = () => {
             </div>
           </li>
           <li>
-            설명
+            <span>상품설명</span>
             <textarea
-              name=''
-              id=''
+              name=""
+              id=""
               value={desc}
               onChange={handleDesc}
             ></textarea>

@@ -1,0 +1,14 @@
+.postWriteCon {
+  border: 1px solid red;
+  padding: 100px 0;
+}
+.inputWrap {
+  display: flex;
+  padding: 1rem 0;
+  gap: 1rem;
+}
+.inputWrap input {
+  border-bottom: 1px solid gray;
+  width: 40%;
+  padding: 0.5rem;
+}

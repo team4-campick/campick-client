@@ -26,6 +26,7 @@ import Contents from "./pages/Contents/Contents";
 import Event from "./pages/Event";
 import ContentsBlog from "./pages/Contents/ContentsBlog";
 import ContentsVideo from "./pages/Contents/ContentsVideo";
+import BlogPostWrite from "./pages/Contents/BlogPostWrite";
 
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -65,6 +66,7 @@ function App() {
           <Route path="contentsBlog" element={<ContentsBlog />} />
           <Route path="contentsVideo" element={<ContentsVideo />} />
         </Route>
+        <Route path="/blog-post-write" element={<BlogPostWrite />} />
         {/* =================== event page =================== */}
         <Route path="/event" element={<Event />} />
 

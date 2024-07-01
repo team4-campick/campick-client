@@ -25,8 +25,7 @@ const SaleDetail = () => {
     imageUrls = [],
   } = salePostDetail;
 
-  const API_BASE_URL = "http://localhost:8000/api";
-  const salePostsEndpoint = `${API_BASE_URL}/sale-posts/${id}`;
+  const salePostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/sale-posts/${id}`;
 
   const fetchSalePostDetail = async () => {
     try {
@@ -71,7 +70,7 @@ const SaleDetail = () => {
   };
 
   return (
-    <section className={style.detailCon}>
+    <section className={`mw ${style.detailCon}`}>
       <h2 hidden>SaleDetail</h2>
       <div>
         <button onClick={editPost}>수정</button>
@@ -117,10 +116,10 @@ const SaleDetail = () => {
       <div>상품 상태 : {condition}</div>
       <div>상품 설명 : {desc}</div>
       <div className={style.btnWrap}>
-        <Link to='/market'>
-          <i className='fa-solid fa-chevron-left'></i>
+        <Link to="/market">
+          <i className="fa-solid fa-chevron-left"></i>
         </Link>
-        <Link to='/sale-chat/:id'>
+        <Link to="/sale-chat/:id">
           <button className={style.inquiryBtn}>문의하기</button>
         </Link>
       </div>

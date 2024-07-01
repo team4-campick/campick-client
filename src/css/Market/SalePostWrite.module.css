@@ -1,6 +1,5 @@
 .writeCon {
-  width: calc(100% - 600px);
-  margin: auto;
+  padding: 0 200px;
 }
 
 .writeCon > div > ul > li {
@@ -10,6 +9,9 @@
   padding: 2rem 0;
 }
 .writeCon li > span {
+  display: block;
+  width: 150px;
+  min-width: 150px;
   padding-right: 3rem;
 }
 .imgInput {
