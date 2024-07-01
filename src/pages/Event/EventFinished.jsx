@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "../../css/Event/event.module.css";
+import { loadEventVisuals, toggleBodyOverflow } from "../Event/EventUtils";
 
 const EventFinished = () => {
   const [eventVisuals, setEventVisuals] = useState([]);
@@ -7,38 +8,11 @@ const EventFinished = () => {
   const [popupContent, setPopupContent] = useState(null);
 
   useEffect(() => {
-    const loadEventVisuals = () => {
-      const generateEventVisual = (index) => {
-        const today = new Date();
-        const eventDate = new Date();
-        eventDate.setDate(today.getDate() - index);
-        const status = eventDate < today ? "FINISHED" : "PROCEEDING";
-        return {
-          id: index,
-          visual: `Visual ${index + 1}`,
-          labels: [status],
-        };
-      };
-
-      const newEventVisuals = Array.from({ length: 6 }, (_, index) =>
-        generateEventVisual(index)
-      );
-      setEventVisuals(newEventVisuals);
-    };
-
-    loadEventVisuals();
+    setEventVisuals(loadEventVisuals(6));
   }, []);
 
   useEffect(() => {
-    if (isPopupOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
+    toggleBodyOverflow(isPopupOpen);
   }, [isPopupOpen]);
 
   const filteredEventVisuals = eventVisuals.filter((event) =>
