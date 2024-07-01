@@ -5,7 +5,7 @@ import {
   REGION,
   PRODUCT_CONDITION_OPTIONS,
 } from "../../constants/market";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 const SalePostEdit = () => {
@@ -156,7 +156,7 @@ const SalePostEdit = () => {
         return alert(res.message);
       }
 
-      alert("게시물 생성에 성공했습니다.");
+      alert("게시물 수정에 성공했습니다.");
       navigate(`/sale-detail/${id}`);
     } catch (error) {
       console.log(error);
@@ -279,7 +279,15 @@ const SalePostEdit = () => {
             ></textarea>
           </li>
         </ul>
-        <button onClick={handleSubmitPost}>수정하기</button>
+        <div className="submitButtonWrap">
+          <Link to="/market">
+            <i className="fa-solid fa-chevron-left"></i>
+          </Link>
+
+          <button className="submitButton" onClick={handleSubmitPost}>
+            수정하기
+          </button>
+        </div>
       </div>
     </section>
   );

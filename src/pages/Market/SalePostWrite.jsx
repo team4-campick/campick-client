@@ -5,7 +5,7 @@ import {
   REGION,
   PRODUCT_CONDITION_OPTIONS,
 } from "../../constants/market";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import React, { useState } from "react";
 
 const SalePostWrite = () => {
@@ -219,7 +219,16 @@ const SalePostWrite = () => {
             ></textarea>
           </li>
         </ul>
-        <button onClick={handleSubmitPost}>등록하기</button>
+
+        <div className="submitButtonWrap">
+          <Link to="/market">
+            <i className="fa-solid fa-chevron-left"></i>
+          </Link>
+
+          <button className="submitButton" onClick={handleSubmitPost}>
+            등록하기
+          </button>
+        </div>
       </div>
     </section>
   );
