@@ -1,34 +1,33 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import QuillEditor from "../../components/BlogPost/QuillEditor";
 import style from "../../css/Contents/blogPostWrite.module.css";
 import useDropdown from "../../hooks/useDropdown";
 import { REGION } from "../../constants/market";
 
 const BlogPostWrite = () => {
-  const [imagePreviews, setImagePreviews] = useState([]);
-  const MAX_IMAGES = 5;
-  const [imageFiles, setImageFiles] = useState([]);
+  // 이미지 미리보기 URL을 저장할 상태와 파일을 저장할 상태 선언
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
 
+  // 파일이 변경될 때 호출되는 핸들러
   const handleFileChange = (event) => {
-    const files = Array.from(event.target.files);
-    const newFiles = files.slice(0, MAX_IMAGES - imagePreviews.length);
+    const file = event.target.files[0]; // 첫 번째 파일만 선택
+    if (file) {
+      setImageFile(file); // 선택된 파일을 상태에 저장
 
-    setImageFiles(newFiles);
-
-    const filePreviews = newFiles.map((file) => {
-      const reader = new FileReader();
-      return new Promise((resolve) => {
-        reader.onloadend = () => resolve(reader.result);
-        reader.readAsDataURL(file);
-      });
-    });
-
-    Promise.all(filePreviews).then((previews) =>
-      setImagePreviews((prev) => [...prev, ...previews])
-    );
+      const reader = new FileReader(); // FileReader 객체 생성
+      reader.onloadend = () => {
+        setImagePreview(reader.result); // 파일을 읽은 후 미리보기 URL을 상태에 저장
+      };
+      reader.readAsDataURL(file); // 파일을 데이터 URL로 읽기 시작
+    }
   };
-  const handleImageDelete = (index) => {
-    setImagePreviews((prev) => prev.filter((_, i) => i !== index));
+
+  // 이미지 삭제 핸들러
+  const handleImageDelete = () => {
+    setImagePreview(null); // 미리보기 URL 초기화
+    setImageFile(null); // 파일 상태 초기화
   };
 
   const { selectedLabel: region, Dropdown: RegionDropdown } = useDropdown({
@@ -43,40 +42,46 @@ const BlogPostWrite = () => {
   return (
     <section className={`mw ${style.postWriteCon}`}>
       <h2 hidden>BlogPostWrite</h2>
-      <div>
-        썸네일 이미지
-        <input
-          type="file"
-          id="file"
-          className={style.imgInput}
-          multiple
-          accept="image/*"
-          onChange={handleFileChange}
-          disabled={imagePreviews.length >= MAX_IMAGES}
-        />
-        <label className={style.uploadBtn} htmlFor="file">
-          <div>
-            <i className="fa-solid fa-camera"></i>
-          </div>
-        </label>
+
+      <div className={style.bgImgWrap}>
+        <div>
+          <input
+            type="file"
+            id="file"
+            className={style.imgInput}
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+        </div>
+
         <div className={style.imgPreview}>
-          {imagePreviews.map((preview, index) => (
-            <img
-              key={index}
-              src={preview}
-              alt={`미리보기 ${index + 1}`}
-              onClick={() => handleImageDelete(index)}
-            />
-          ))}
+          <img
+            src={imagePreview}
+            alt="배경이미지"
+            onClick={handleImageDelete}
+          />
+        </div>
+
+        <div className={style.inputWrap}>
+          <input type="text" placeholder="글의 제목을 입력해주세요." />
+
+          <input type="text" placeholder="장소를 입력해주세요." />
+          <div className={style.selectedRegion}>
+            <RegionDropdown />
+            <CityDropdown />
+          </div>
         </div>
       </div>
-      <div className={style.inputWrap}>
-        <input type="text" placeholder="제목" />
-
-        <RegionDropdown />
-        <CityDropdown />
-      </div>
       <QuillEditor />
+
+      <div className="submitButtonWrap">
+        <Link to="/contents">
+          <i className="fa-solid fa-chevron-left"></i>
+        </Link>
+        <Link to="/blog-post/:id">
+          <button className="submitButton">작성하기</button>
+        </Link>
+      </div>
     </section>
   );
 };
