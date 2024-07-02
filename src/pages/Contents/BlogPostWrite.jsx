@@ -140,10 +140,10 @@ const BlogPostWrite = () => {
         </div>
       </div>
 
-      <QuillEditor setValue={setQuillInputValue} />
+      <QuillEditor setValue={setQuillInputValue} value={quillInputValue} />
 
       <div className="submitButtonWrap">
-        <Link to="/contents">
+        <Link to="/contents/contentsBlog">
           <i className="fa-solid fa-chevron-left"></i>
         </Link>
 
