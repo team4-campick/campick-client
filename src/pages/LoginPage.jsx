@@ -87,7 +87,7 @@ const LoginPage = () => {
 
   return (
     <main className={`mw ${style.register}`}>
-      <h2>로그인</h2>
+      <h2>SIGN IN</h2>
 
       {isLoggedIn ? (
         <button onClick={logout}>로그아웃</button>
@@ -111,11 +111,11 @@ const LoginPage = () => {
             }}
           />
           <span>{message2}</span>
-          <button type="submit">로그인</button>
+          <button type="submit">SIGN IN</button>
         </form>
       )}
       <p>
-        계정이 없으신가요? <Link to="/register">회원가입</Link>
+        계정이 없으신가요? <Link to="/register">REGISTER</Link>
       </p>
     </main>
   );
