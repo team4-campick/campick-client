@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import style from "../../css/Event/event.module.css";
-import { loadEventVisuals, toggleBodyOverflow } from "../Event/EventUtils";
+import {
+  loadEventVisuals,
+  toggleBodyOverflow,
+} from "../../components/ContentsEvent/EventUtils";
 
 const EventProceeding = () => {
   const [eventVisuals, setEventVisuals] = useState([]);
@@ -31,6 +34,8 @@ const EventProceeding = () => {
 
   return (
     <section className={style.gallery}>
+      <h2 hidden>PROCEEDING</h2>
+      {/* 이벤트 목록 */}
       {filteredEventVisuals.map((event) => (
         <div
           key={event.id}
@@ -40,6 +45,7 @@ const EventProceeding = () => {
           <p>{event.visual}</p>
         </div>
       ))}
+
       {isPopupOpen && (
         <div className={style.popup}>
           <div className={style.popupContent}>

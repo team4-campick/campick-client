@@ -1,19 +1,21 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import cateogryStyle from "../../css/Category.module.css";
-import style from "../../css/Event/event.module.css";
+import categoryStyle from "../../css/Category.module.css";
+// import style from "../../css/Event/event.module.css";
 
 const Event = () => {
   const location = useLocation();
 
   return (
-    <section className={cateogryStyle.pageWarp}>
-      <h3 hidden>Event</h3>
-      <nav className={cateogryStyle.pageSubHeader}>
+    <section className={categoryStyle.pageWarp}>
+      <h2 hidden>Event</h2>
+      <nav className={categoryStyle.pageSubHeader}>
         <Link
           to="eventProceeding"
           className={
-            location.pathname === "/event/eventProceeding" ? style.active : ""
+            location.pathname === "/event/eventProceeding"
+              ? categoryStyle.active
+              : ""
           }
         >
           PROCEEDING
@@ -21,7 +23,9 @@ const Event = () => {
         <Link
           to="eventFinished"
           className={
-            location.pathname === "/event/eventFinished" ? style.active : ""
+            location.pathname === "/event/eventFinished"
+              ? categoryStyle.active
+              : ""
           }
         >
           FINISHED
