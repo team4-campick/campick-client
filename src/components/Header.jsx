@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUserAllInfo } from "../store/userStore";
 
-import style from "./header.module.css";
+import style from "../css/header.module.css";
 import logo from "../components/logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 

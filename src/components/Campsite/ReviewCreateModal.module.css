@@ -1,0 +1,16 @@
+.reviewCreateModal {
+}
+.tools {
+  display: flex;
+}
+.tools > button {
+  border: 1px solid #055a5b;
+}
+.tools .submitBtn {
+  background-color: #055a5b;
+  color: white;
+}
+.tools .cancelBtn {
+  background-color: white;
+  color: #055a5b;
+}
