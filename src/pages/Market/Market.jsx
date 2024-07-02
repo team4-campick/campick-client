@@ -98,6 +98,7 @@ const Market = () => {
       </div>
 
       <div className={style.postCardList}>
+        {!salePosts.length && <p>게시물이 존재하지 않습니다.</p>}
         {salePosts.map((post) => (
           <SalePostCard key={post._id} post={post} />
         ))}

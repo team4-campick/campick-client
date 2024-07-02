@@ -19,9 +19,7 @@ const ContentsBlog = () => {
         );
 
         const data = await response.json();
-        if (!data.result) {
-          return alert(data.message);
-        }
+
         setBlogPosts(data.blogPosts);
       } catch (error) {
         console.error(error);
@@ -41,6 +39,7 @@ const ContentsBlog = () => {
         </Link>
       </div>
       <div className={style.blogPostList}>
+        {!blogPosts.length && <p>게시물이 존재하지 않습니다.</p>}
         {blogPosts.map((post) => {
           const {
             author,
@@ -68,7 +67,7 @@ const ContentsBlog = () => {
                 </div>
                 <h3 className={style.postTitle}>{`${blogPostTitle}`}</h3>
                 <div>{`${blogPostDesc}`}</div>
-                <div className={style.author}>{`${author}`}</div>
+                <div className={style.author}>by.{`${author}`}</div>
               </div>
             </div>
           );
