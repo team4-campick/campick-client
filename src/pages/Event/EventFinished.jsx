@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import style from "../../css/Event/event.module.css";
-import { loadEventVisuals, toggleBodyOverflow } from "../Event/EventUtils";
+import {
+  loadEventVisuals,
+  toggleBodyOverflow,
+} from "../../components/ContentsEvent/EventUtils";
 
 const EventFinished = () => {
   const [eventVisuals, setEventVisuals] = useState([]);
@@ -31,6 +34,8 @@ const EventFinished = () => {
 
   return (
     <section className={style.gallery}>
+      <h2 hidden>FINISHED</h2>
+
       {filteredEventVisuals.map((event) => (
         <div
           key={event.id}
