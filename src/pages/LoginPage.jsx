@@ -1,4 +1,4 @@
-import style from "../css/RegisterPage.module.css";
+import style from "../css/LoginPage.module.css";
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 const url = process.env.REACT_APP_SERVER_URL;
@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [message1, setMessage1] = useState("");
   const [message2, setMessage2] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // isLoggedIn 상태 정의
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
@@ -86,36 +86,33 @@ const LoginPage = () => {
   }
 
   return (
-    <main className={`mw ${style.register}`}>
-      <h2>로그인</h2>
-
-      {isLoggedIn ? (
-        <button onClick={logout}>로그아웃</button>
-      ) : (
-        <form onSubmit={login}>
-          <input
-            type="text"
-            placeholder="사용자이름(ID)"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-          <span>{message1}</span>
-          <input
-            type="password"
-            placeholder="패스워드"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <span>{message2}</span>
-          <button type="submit">로그인</button>
-        </form>
-      )}
-      <p>
-        계정이 없으신가요? <Link to="/register">회원가입</Link>
+    <main className={style.mw}>
+      <div className={style.header}>
+        <h2 className={style["header-h2"]}>SIGN IN</h2>
+      </div>
+      <form className={style["signin-form-container"]} onSubmit={login}>
+        <input
+          type="text"
+          className={style["signin-input"]}
+          placeholder="사용자이름(ID)"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <span className={style["signin-message"]}>{message1}</span>
+        <input
+          type="password"
+          className={style["signin-input"]}
+          placeholder="패스워드"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <span className={style["signin-message"]}>{message2}</span>
+        <button className={style["signin-button"]} type="submit">
+          SIGN IN
+        </button>
+      </form>
+      <p className={style["signin-link"]}>
+        계정이 없으신가요? <Link to="/register">REGISTER</Link>
       </p>
     </main>
   );

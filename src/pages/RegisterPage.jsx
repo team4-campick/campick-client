@@ -50,51 +50,48 @@ const RegisterPage = () => {
   };
 
   if (redirect) {
-    return <Navigate to="/signin" />; // 회원가입 성공 시 로그인 페이지로 이동
+    return <Navigate to="/signin" />;
   }
 
   return (
     <main className={`mw ${style.register}`}>
-      <h2>회원가입</h2>
-
-      <form onSubmit={register}>
+      <h2 className={style["register-h2"]}>REGISTER</h2>
+      <form className={style["register-form"]} onSubmit={register}>
         <input
           type="text"
+          className={style["register-input"]}
           placeholder="사용자ID"
           value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="text"
+          className={style["register-input"]}
           placeholder="닉네임"
           value={nickname}
-          onChange={(e) => {
-            setNickname(e.target.value);
-          }}
+          onChange={(e) => setNickname(e.target.value)}
         />
         <input
           type="password"
+          className={style["register-input"]}
           placeholder="패스워드"
           value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="password"
+          className={style["register-input"]}
           placeholder="패스워드 확인"
           value={password2}
-          onChange={(e) => {
-            setPassword2(e.target.value);
-          }}
+          onChange={(e) => setPassword2(e.target.value)}
         />
-        <span>{message}</span>
-        <button type="submit">회원가입</button>
+        <span className={style["register-span"]}>{message}</span>
+        <button type="submit" className={style["register-button"]}>
+          REGISTER
+        </button>
       </form>
-      <p>
-        계정이 있나요? <Link to="/login">로그인</Link>
+      <p className={style["register-link"]}>
+        계정이 있나요? <Link to="/login">SIGN IN</Link>
       </p>
     </main>
   );

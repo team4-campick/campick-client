@@ -1,10 +1,11 @@
-.register {
+.signin {
   text-align: center;
   margin: auto;
 }
 
-.register h2 {
-  margin-top: 10%;
+.header h2 {
+  text-align: center;
+  margin-top: 7%;
   margin-bottom: 50px;
   font-size: 22px;
   color: #7a8a87;
@@ -13,35 +14,37 @@
   text-transform: uppercase;
 }
 
-.register-form {
+.signin-form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 18px; /* RegisterPage와 동일하게 설정 */
 }
 
-.register-input {
-  width: 60%;
+.signin-input {
+  width: 50%; /* RegisterPage와 동일하게 설정 */
   padding: 10px;
+  margin-top: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   display: block;
 }
 
-.register-input::placeholder {
+.signin-input::placeholder {
   color: #999;
 }
 
-.register-span {
+.signin-message {
   color: red;
   font-size: 12px;
   margin-bottom: 10px;
 }
 
-.register-button {
-  width: 60%;
+.signin-button {
+  width: 50%;
   padding: 10px;
+  margin-top: 20px;
   background-color: #055a5b;
   border: none;
   border-radius: 5px;
@@ -51,23 +54,24 @@
   display: block;
 }
 
-.register-button:disabled {
+.signin-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-.register-link {
+.signin-link {
+  text-align: center;
   margin-top: 10rem;
   margin-bottom: 8rem;
   font-size: 14px;
 }
 
-.register-link a {
+.signin-link a {
   color: #007bff;
   text-decoration: none;
 }
 
-.register-link a:hover {
+.signin-link a:hover {
   text-decoration: underline;
 }
 
@@ -77,12 +81,12 @@
     padding: 10px;
   }
 
-  .register-input,
-  .register-button {
+  .signin-input,
+  .signin-button {
     width: 100%;
   }
 
-  .register-form {
+  .signin-form-container {
     width: 100%;
     padding: 10px;
     gap: 12px;
