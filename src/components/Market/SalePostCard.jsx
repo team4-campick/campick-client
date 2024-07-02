@@ -13,10 +13,10 @@ const SalePostCard = ({ post }) => {
     <div
       className={style.salePostCard}
       onClick={() => {
-        navigate(`/sale-detail/${post._id}`);
+        navigate(`/sale-post-detail/${post._id}`);
       }}
     >
-      <img src={thumbnail} alt='상품이미지' />
+      <img src={thumbnail} alt="상품이미지" />
       <div className={style.productInfo}>
         <span>{`${region} ${city} `}</span>
         <p>{`${productName}`} 판매합니다.</p>
