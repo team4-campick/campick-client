@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import QuillEditor from "../../components/BlogPost/QuillEditor";
 import style from "../../css/Contents/blogPostWrite.module.css";
 import useDropdown from "../../hooks/useDropdown";
@@ -7,6 +7,7 @@ import { REGION } from "../../constants/market";
 
 const BlogPostWrite = () => {
   // 이미지 미리보기 URL을 저장할 상태와 파일을 저장할 상태 선언
+  const navigate = useNavigate();
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
@@ -39,6 +40,56 @@ const BlogPostWrite = () => {
     type: "시",
   });
 
+  const [blogPostTitle, setBlogPostTitle] = useState("");
+  const handleblogPostTitle = (event) => {
+    setBlogPostTitle(event.target.value);
+  };
+  const [campSiteName, setCampSiteName] = useState("");
+  const handlecampSiteName = (event) => {
+    setCampSiteName(event.target.value);
+  };
+  const [blogPostDesc, setBlogPostDesc] = useState("");
+  const handleblogPostDesc = (event) => {
+    setBlogPostDesc(event.target.value);
+  };
+  const [quillInputValue, setQuillInputValue] = useState("");
+  console.log(quillInputValue);
+
+  const handleSubmitPost = async () => {
+    const newPost = {
+      content: quillInputValue,
+      region,
+      city,
+      blogPostTitle,
+      campSiteName,
+      blogPostDesc,
+    };
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/blog-posts`,
+        {
+          method: "POST",
+          body: JSON.stringify(newPost),
+          headers: {
+            "Content-type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+
+      const res = await response.json();
+      if (!res.result) {
+        return alert(res.message);
+      }
+
+      alert("게시물 생성에 성공했습니다.");
+      navigate(`/blog-post-detail/${res.blogPost._id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className={`mw ${style.postWriteCon}`}>
       <h2 hidden>BlogPostWrite</h2>
@@ -63,24 +114,46 @@ const BlogPostWrite = () => {
         </div>
 
         <div className={style.inputWrap}>
-          <input type="text" placeholder="글의 제목을 입력해주세요." />
+          <input
+            type="text"
+            placeholder="글의 제목을 입력해주세요."
+            value={blogPostTitle}
+            onChange={handleblogPostTitle}
+          />
 
-          <input type="text" placeholder="장소를 입력해주세요." />
+          <input
+            type="text"
+            placeholder="장소를 입력해주세요."
+            value={campSiteName}
+            onChange={handlecampSiteName}
+          />
           <div className={style.selectedRegion}>
             <RegionDropdown />
             <CityDropdown />
           </div>
+          <input
+            type="text"
+            placeholder="소개글을 작성해주세요."
+            value={blogPostDesc}
+            onChange={handleblogPostDesc}
+          />
         </div>
       </div>
-      <QuillEditor />
+
+      <QuillEditor setValue={setQuillInputValue} />
 
       <div className="submitButtonWrap">
         <Link to="/contents">
           <i className="fa-solid fa-chevron-left"></i>
         </Link>
-        <Link to="/blog-post/:id">
-          <button className="submitButton">작성하기</button>
-        </Link>
+
+        <button
+          className="submitButton"
+          type="button"
+          onClick={handleSubmitPost}
+        >
+          작성완료
+        </button>
       </div>
     </section>
   );
