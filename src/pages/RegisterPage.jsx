@@ -55,7 +55,7 @@ const RegisterPage = () => {
 
   return (
     <main className={`mw ${style.register}`}>
-      <h2>회원가입</h2>
+      <h2>REGISTER</h2>
 
       <form onSubmit={register}>
         <input
@@ -91,10 +91,10 @@ const RegisterPage = () => {
           }}
         />
         <span>{message}</span>
-        <button type="submit">회원가입</button>
+        <button type="submit">REGISTER</button>
       </form>
       <p>
-        계정이 있나요? <Link to="/login">로그인</Link>
+        계정이 있나요? <Link to="/login">SIGN IN</Link>
       </p>
     </main>
   );
