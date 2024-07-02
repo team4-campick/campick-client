@@ -27,7 +27,6 @@ import ContentsBlog from "./pages/Contents/ContentsBlog";
 import ContentsVideo from "./pages/Contents/ContentsVideo";
 import BlogPostWrite from "./pages/Contents/BlogPostWrite";
 import BlogPostDetail from "./pages/Contents/BlogPostDetail";
-import BlogPostEdit from "./pages/Contents/BlogPostEdit";
 
 import Event from "./pages/Event/Event";
 import EventFinished from "./pages/Event/EventFinished";
@@ -79,8 +78,6 @@ function App() {
         </Route>
         <Route path="/blog-post-write" element={<BlogPostWrite />} />
         <Route path="/blog-post-detail/:id" element={<BlogPostDetail />} />
-        <Route path="/blog-post-edit/:id" element={<BlogPostEdit />} />
-
         {/* =================== event page =================== */}
         <Route path="/event" element={<Event />}>
           <Route index element={<Navigate to="eventProceeding" replace />} />
