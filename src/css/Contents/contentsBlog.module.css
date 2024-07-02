@@ -22,9 +22,14 @@
   background-color: rgba(31, 59, 52, 0.1);
   margin: 1rem 0 2rem 0;
 }
+.blogPostList {
+  display: flex;
+  flex-wrap: wrap;
+}
 .blogPostCard {
-  border: 1px solid red;
-  width: calc((100% - 2rem) / 3);
+  border: 1px solid #888;
+  width: calc((100% - 4rem) / 3);
+  text-align: left;
 }
 .blogImg {
   border: 1px solid green;
@@ -41,14 +46,17 @@
   object-fit: cover;
 }
 .campSiteInfo {
-  color: gray;
   font-size: 0.85rem;
-  margin: 1rem 0;
+  margin-top: 1rem;
 }
 .postTitle {
   font-size: 2rem;
   font-weight: bold;
+  margin: 1rem 0;
 }
 .postDesc {
   margin: 1rem;
+}
+.author {
+  color: #888;
 }
