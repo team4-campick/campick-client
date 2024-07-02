@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import style from "../../css/Market/SaleDetail.module.css";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
@@ -14,6 +15,8 @@ const SaleDetail = () => {
   const [salePostDetail, setSalePostDetail] = useState({});
 
   const {
+    // author,
+    authorId,
     category,
     productName,
     region,
@@ -26,6 +29,11 @@ const SaleDetail = () => {
   } = salePostDetail;
 
   const salePostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/sale-posts/${id}`;
+
+  const user = useSelector((state) => state.user.user);
+  const userId = user?.id;
+
+  console.log("author===", authorId);
 
   const fetchSalePostDetail = async () => {
     try {
@@ -72,10 +80,12 @@ const SaleDetail = () => {
   return (
     <section className={`mw ${style.detailCon}`}>
       <h2 hidden>SaleDetail</h2>
-      <div>
-        <button onClick={editPost}>수정</button>
-        <button onClick={deleteSalePost}>삭제</button>
-      </div>
+      {userId === authorId && (
+        <div>
+          <button onClick={editPost}>수정</button>
+          <button onClick={deleteSalePost}>삭제</button>
+        </div>
+      )}
       <div className={style.productImg}>
         <div className={style.productImgSlide}>
           <Swiper

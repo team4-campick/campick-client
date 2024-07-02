@@ -23,7 +23,7 @@ const formats = [
   "code-block",
 ];
 
-const QuillEditor = ({ setValue }) => {
+const QuillEditor = ({ value, setValue }) => {
   // const [values, setValues] = useState();
 
   const modules = useMemo(() => {
@@ -48,16 +48,14 @@ const QuillEditor = ({ setValue }) => {
   }, []);
 
   return (
-    <>
-      {/* <CustomToolbar /> */}
-      <ReactQuill
-        theme="snow"
-        modules={modules}
-        formats={formats}
-        onChange={setValue}
-        placeholder="내용을 입력해주세요."
-      />
-    </>
+    <ReactQuill
+      theme="snow"
+      modules={modules}
+      formats={formats}
+      value={value}
+      onChange={setValue}
+      placeholder="내용을 입력해주세요."
+    />
   );
 };
 
