@@ -1,38 +1,100 @@
-.register {
-  padding: 100px 0;
-}
-.register h2 {
-  text-align: center;
-}
-.register form {
-  max-width: 400px;
-  width: calc(100% - 2rem);
+.mw {
+  max-width: calc(100% - 600px);
   margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.register {
   text-align: center;
+  margin: auto;
 }
 
-.register input {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 1rem;
-  margin-top: 1rem;
+h2 {
+  margin-top: 10%;
+  margin-bottom: 3%;
+  font-size: 22px;
+  color: #7a8a87;
+  font-family: "Malgun Gothic", sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.register button {
-  padding: 1rem;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.register > p {
-  text-align: center;
-  padding: 1rem 0;
+input {
+  width: 60%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
 }
-.register > p a {
-  color: tomato;
+
+input::placeholder {
+  color: #999;
 }
-.register form > span {
-  display: block;
-  font-size: 0.7rem;
-  color: tomato;
-  text-align: left;
-  padding-top: 0.25rem;
+
+span {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
+
+button {
+  width: 60%;
+  padding: 10px;
+  font-family: "Malgun Gothic", sans-serif;
+  background-color: #055a5b;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+p {
+  margin-top: 10rem;
+  margin-bottom: 8rem;
+  font-size: 14px;
+}
+
+p a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .mw {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  input,
+  button {
+    width: 100%;
+  }
+
+  form {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* design : RegisterPage.module.css 디자인 추가
