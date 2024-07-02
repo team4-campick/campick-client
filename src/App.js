@@ -66,7 +66,7 @@ function App() {
         {/* =================== Market Area ===================  */}
         <Route path="/market" element={<Market />} />
         <Route path="/sale-post-write" element={<SalePostWrite />} />
-        <Route path="/sale-detail/:id" element={<SaleDetail />} />
+        <Route path="/sale-post-detail/:id" element={<SaleDetail />} />
         <Route path="/sale-post-edit/:id" element={<SalePostEdit />} />
         <Route path="/sale-chat/:id" element={<Chat />} />
 
@@ -77,7 +77,7 @@ function App() {
           <Route path="contentsVideo" element={<ContentsVideo />} />
         </Route>
         <Route path="/blog-post-write" element={<BlogPostWrite />} />
-        <Route path="/blog-post-detail" element={<BlogPostDetail />} />
+        <Route path="/blog-post-detail/:id" element={<BlogPostDetail />} />
         {/* =================== event page =================== */}
         <Route path="/event" element={<Event />}>
           <Route index element={<Navigate to="eventProceeding" replace />} />
