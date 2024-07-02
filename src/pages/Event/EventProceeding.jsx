@@ -1,56 +1,65 @@
 import React, { useState, useEffect } from "react";
 import style from "../../css/Event/event.module.css";
 import {
-  loadEventVisuals,
+  filterImagesByDate,
+  updateImageStatuses,
   toggleBodyOverflow,
-} from "../../components/ContentsEvent/EventUtils";
+} from "../../utils/EventUtils";
+import { allImages } from "../../utils/imageData";
 
 const EventProceeding = () => {
-  const [eventVisuals, setEventVisuals] = useState([]);
+  const [images, setImages] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupContent, setPopupContent] = useState(null);
 
   useEffect(() => {
-    setEventVisuals(loadEventVisuals(6));
+    const fetchImages = async () => {
+      const updatedImages = updateImageStatuses(allImages);
+      const today = new Date();
+      const proceedingImages = filterImagesByDate(updatedImages, today, false);
+      setImages(proceedingImages);
+    };
+    fetchImages();
   }, []);
 
-  useEffect(() => {
-    toggleBodyOverflow(isPopupOpen);
-  }, [isPopupOpen]);
-
-  const filteredEventVisuals = eventVisuals.filter((event) =>
-    event.labels.includes("PROCEEDING")
-  );
-
-  const handleEventClick = (event) => {
-    setPopupContent(event);
+  const handleImageClick = (image) => {
+    setPopupContent(image);
     setIsPopupOpen(true);
+    toggleBodyOverflow(true);
   };
 
   const closePopup = () => {
     setIsPopupOpen(false);
     setPopupContent(null);
+    toggleBodyOverflow(false);
+  };
+
+  const handlePopupBackgroundClick = (e) => {
+    if (e.target === e.currentTarget) {
+      closePopup();
+    }
   };
 
   return (
     <section className={style.gallery}>
       <h2 hidden>PROCEEDING</h2>
-      {/* 이벤트 목록 */}
-      {filteredEventVisuals.map((event) => (
+      {images.map((image) => (
         <div
-          key={event.id}
+          key={image.name}
           className={style.eventVisual}
-          onClick={() => handleEventClick(event)}
+          onClick={() => handleImageClick(image)}
         >
-          <p>{event.visual}</p>
+          <img src={image.url} alt={image.name} />
         </div>
       ))}
-
       {isPopupOpen && (
-        <div className={style.popup}>
-          <div className={style.popupContent}>
+        <div className={style.popup} onClick={handlePopupBackgroundClick}>
+          <div
+            className={style.popupContent}
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className={style.eventVisual}>
-              <p>{popupContent.visual}</p>
+              <img src={popupContent.url} alt={popupContent.name} />
             </div>
             <span className={style.closeBtn} onClick={closePopup}>
               &times;
