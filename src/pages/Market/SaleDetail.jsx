@@ -46,7 +46,7 @@ const SaleDetail = () => {
 
   useEffect(() => {
     fetchSalePostDetail();
-  }, []);
+  }, [id]);
 
   const navigate = useNavigate();
   const deleteSalePost = async () => {

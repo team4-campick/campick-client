@@ -96,10 +96,13 @@ const SalePostWrite = () => {
     });
 
     try {
-      const response = await fetch("http://localhost:8000/api/sale-posts", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/sale-posts`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const res = await response.json();
       if (!res.result) {
@@ -107,7 +110,7 @@ const SalePostWrite = () => {
       }
 
       alert("게시물 생성에 성공했습니다.");
-      navigate("/market");
+      navigate(`/sale-post-detail/${res.salePost._id}`);
     } catch (error) {
       console.log(error);
     }
