@@ -89,7 +89,7 @@ const SalePostEdit = () => {
     setPrice(event.target.value);
   };
 
-  const [desc, setDesc] = useState("여기서부터 추가로 입력하세요");
+  const [desc, setDesc] = useState("");
   const handleDesc = (event) => {
     setDesc(event.target.value);
   };
