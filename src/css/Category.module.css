@@ -9,7 +9,7 @@
   margin: 60px auto;
 }
 
-.pageSubHeader a {
+.pageSubHeaderLink {
   margin: 0 20px;
   text-decoration: none;
   color: #888;
@@ -18,24 +18,26 @@
   position: relative;
 }
 
-.pageSubHeader a::before {
+.pageSubHeaderLink::before {
   content: "";
   position: absolute;
   width: 100%;
   height: 2px;
   bottom: -5px;
   left: 0;
-  background-color: #008080; /* 바 색상 조정 */
+  background-color: #008080;
   visibility: hidden;
   transform: scaleX(0);
   transition: all 0.3s ease-in-out;
 }
 
-.pageSubHeader a:hover::before,
-.pageSubHeader a.active::before {
+.pageSubHeaderLink:hover::before,
+.pageSubHeaderLink.active::before {
   visibility: visible;
   transform: scaleX(1);
 }
-.active {
+
+.pageSubHeaderLink:hover,
+.pageSubHeaderLink.active {
   color: #008080;
 }
