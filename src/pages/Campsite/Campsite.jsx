@@ -17,9 +17,38 @@ const Campsite = () => {
   const handleSearchChange = (e) => {
     setSearchKeyword(e.target.value);
   };
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
+    await searchList();
   };
+  const searchList = async () => {
+    try {
+      const searchUrl = new URL(
+        `${apiUrl}searchList?MobileOS=${apiOS}&MobileApp=${apiName}&numOfRows=12&serviceKey=${apiKey}&_type=${apiType}&keyword=${encodeURI(
+          searchKeyword
+        )}`
+      );
+      console.log("검색 기능", searchUrl);
+      const response = await fetch(searchUrl, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      console.log("response", response);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setSiteLists(data.response.body.items.item);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    console.log("Updated siteLists:", siteLists);
+  }, [siteLists]);
+
   useEffect(() => {
     const basedList = async () => {
       try {
@@ -49,7 +78,7 @@ const Campsite = () => {
   return (
     <section className={style.campsite}>
       <h2 hidden>Campsite</h2>
-      <form className={style.searchBar}>
+      <form className={style.searchBar} onSubmit={handleSearch}>
         <label className={style.inputArea}>
           <input
             type="text"
@@ -62,9 +91,13 @@ const Campsite = () => {
         </label>
       </form>
       <div className={style.siteAreas}>
-        {siteLists.map((site) => {
-          return <SiteCard key={site.contentId} site={site} />;
-        })}
+        {siteLists ? (
+          siteLists.map((site) => {
+            return <SiteCard key={site.contentId} site={site} />;
+          })
+        ) : (
+          <div>검색된 내용이 없습니다.</div>
+        )}
       </div>
     </section>
   );
