@@ -1,0 +1,11 @@
+.cardCon {
+  /* padding: 1rem 4rem; */
+  display: flex;
+  justify-content: center;
+}
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(4, 250px);
+  padding: 2rem;
+  gap: 1rem;
+}
