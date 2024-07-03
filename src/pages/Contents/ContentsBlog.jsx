@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import style from "../../css/Contents/contentsBlog.module.css";
+import BlogPostCard from "../../components/BlogPost/BlogPostCard";
 
 const ContentsBlog = () => {
   const navigate = useNavigate();
@@ -40,38 +41,9 @@ const ContentsBlog = () => {
       </div>
       <div className={style.blogPostList}>
         {!blogPosts.length && <p>게시물이 존재하지 않습니다.</p>}
-        {blogPosts.map((post) => {
-          const {
-            author,
-            campSiteName,
-            blogPostTitle,
-            region,
-            city,
-            blogPostDesc,
-          } = post;
-          return (
-            <div
-              className={style.blogPostCard}
-              onClick={() => {
-                navigate(`/blog-post-detail/${post._id}`);
-              }}
-            >
-              <div className={style.blogImg}>
-                <img src="" alt="이미지" />
-              </div>
-              <div>
-                <div className={style.campSiteInfo}>
-                  <span>{`${campSiteName}`} &middot; </span>
-                  <span>{`${region}`} </span>
-                  <span>{`${city}`}</span>
-                </div>
-                <h3 className={style.postTitle}>{`${blogPostTitle}`}</h3>
-                <div>{`${blogPostDesc}`}</div>
-                <div className={style.author}>by.{`${author}`}</div>
-              </div>
-            </div>
-          );
-        })}
+        {blogPosts.map((post) => (
+          <BlogPostCard key={post._id} post={post} />
+        ))}
       </div>
     </section>
   );
