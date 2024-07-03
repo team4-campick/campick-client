@@ -9,6 +9,7 @@ import { Autoplay, Pagination, Navigation, Controller } from "swiper/modules";
 import { allImages } from "../utils/imageData";
 import { filterImagesByDate, updateImageStatuses } from "../utils/EventUtils";
 import styles from "../css/mainpage.module.css";
+import ScrollTopBtn from "../components/ScrollTop/ScrollTopBtn";
 
 const Mainpage = () => {
   const mainSwiperRef = useRef(null);
@@ -179,6 +180,9 @@ const Mainpage = () => {
           </div>
         </div>
       </section>
+
+      {/* ScrollTopBtn 추가 */}
+      <ScrollTopBtn />
     </>
   );
 };
