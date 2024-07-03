@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -6,12 +6,25 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import YouTube from "react-youtube";
 import { Autoplay, Pagination, Navigation, Controller } from "swiper/modules";
-
+import { allImages } from "../utils/imageData";
+import { filterImagesByDate, updateImageStatuses } from "../utils/EventUtils";
 import styles from "../css/mainpage.module.css"; // CSS 모듈로 임포트
 
 const Mainpage = () => {
   const mainSwiperRef = useRef(null);
   const blogSwiperRef = useRef(null);
+
+  const [proceedingImages, setProceedingImages] = useState([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const updatedImages = updateImageStatuses(allImages);
+      const today = new Date();
+      const proceedingImages = filterImagesByDate(updatedImages, today, false);
+      setProceedingImages(proceedingImages);
+    };
+    fetchImages();
+  }, []);
 
   return (
     <>
@@ -129,15 +142,11 @@ const Mainpage = () => {
               modules={[Navigation, Pagination]}
               className={styles.mainEventsSwiper}
             >
-              <SwiperSlide>Slide 1</SwiperSlide>
-              <SwiperSlide>Slide 2</SwiperSlide>
-              <SwiperSlide>Slide 3</SwiperSlide>
-              <SwiperSlide>Slide 4</SwiperSlide>
-              <SwiperSlide>Slide 5</SwiperSlide>
-              <SwiperSlide>Slide 6</SwiperSlide>
-              <SwiperSlide>Slide 7</SwiperSlide>
-              <SwiperSlide>Slide 8</SwiperSlide>
-              <SwiperSlide>Slide 9</SwiperSlide>
+              {proceedingImages.map((image) => (
+                <SwiperSlide key={image.name}>
+                  <img src={image.url} alt={image.name} />
+                </SwiperSlide>
+              ))}
             </Swiper>
           </Link>
         </div>
