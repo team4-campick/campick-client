@@ -5,41 +5,17 @@ import {
   REGION,
   PRODUCT_CONDITION_OPTIONS,
 } from "../../constants/market";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 const SalePostEdit = () => {
   const { id } = useParams();
-  //   const [salePostEdit, setSalePostEdit] = useState({});
-  //   console.log(salePostEdit);
 
   const salePostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/sale-posts/${id}`;
 
   const navigate = useNavigate();
-  //   const [imagePreviews, setImagePreviews] = useState([]);
-  //   const MAX_IMAGES = 5;
+
   const [imageFiles, setImageFiles] = useState([]);
-  //   const handleFileChange = (event) => {
-  // const files = Array.from(event.target.files);
-  // const newFiles = files.slice(0, MAX_IMAGES - imagePreviews.length);
-
-  // setImageFiles((prev) => [...prev, ...newFiles]);
-
-  // const filePreviews = newFiles.map((file) => {
-  //   const reader = new FileReader();
-  //   return new Promise((resolve) => {
-  //     reader.onloadend = () => resolve(reader.result);
-  //     reader.readAsDataURL(file);
-  //   });
-  // });
-
-  //     Promise.all(filePreviews).then((previews) =>
-  //       setImagePreviews((prev) => [...prev, ...previews])
-  //     );
-  //   };
-  //   const handleImageDelete = (index) => {
-  //     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
-  //   };
 
   // useDropdown 훅을 통해 드롭다운 컴포넌트 및 선택값을 필요한 값(카테고리, 지역 등)에 따라 분리하여 관리
   const {
@@ -280,9 +256,13 @@ const SalePostEdit = () => {
           </li>
         </ul>
         <div className="submitButtonWrap">
-          <Link to="/market">
+          <div
+            onClick={() => {
+              navigate(`/sale-post-detail/${id}`);
+            }}
+          >
             <i className="fa-solid fa-chevron-left"></i>
-          </Link>
+          </div>
 
           <button className="submitButton" onClick={handleSubmitPost}>
             수정하기
