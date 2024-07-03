@@ -7,50 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 const url = process.env.REACT_APP_SERVER_URL;
 
 const Header = () => {
-  // 로그인 상태를 관리하는 변수
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
-  // 로그인 함수
-  const handleLogin = () => {
-    // setIsLoggedIn(true);
-  };
-
-  // 로그아웃 함수
-  // const handleLogout = async () => {
-  //   try {
-  //     const response = await fetch(`${url}/logout`, {
-  //       method: "POST",
-  //       credentials: "include",
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-  //     console.log(response);
-  //     // setIsLoggedIn(false);
-  //     <Navigate to="/" />;
-  //   } catch (error) {
-  //     console.error("Error logging out:", error);
-  //   }
-  // };
 
   const user = useSelector((state) => state.user.user);
   const isLoggedIn = useMemo(() => (user ? user.username : null), [user]);
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const response = await fetch(`${url}/profile`, {
-        credentials: "include",
-      });
-      if (response.ok) {
-        const userInfo = await response.json();
-        dispatch(setUserAllInfo(userInfo));
-      }
-    };
-    fetchProfile();
-  }, [dispatch, location.pathname]);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -110,9 +71,7 @@ const Header = () => {
           ) : (
             <>
               <li className={style.public}>
-                <Link to="/signin" onClick={handleLogin}>
-                  SIGN IN
-                </Link>
+                <Link to="/signin">SIGN IN</Link>
               </li>
               <li className={style.public}>
                 <Link to="/register">REGISTER</Link>
