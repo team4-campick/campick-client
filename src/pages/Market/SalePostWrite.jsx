@@ -101,6 +101,7 @@ const SalePostWrite = () => {
         {
           method: "POST",
           body: formData,
+          credentials: "include",
         }
       );
 
@@ -224,9 +225,13 @@ const SalePostWrite = () => {
         </ul>
 
         <div className="submitButtonWrap">
-          <Link to="/market">
+          <div
+            onClick={() => {
+              navigate(`/market`);
+            }}
+          >
             <i className="fa-solid fa-chevron-left"></i>
-          </Link>
+          </div>
 
           <button className="submitButton" onClick={handleSubmitPost}>
             등록하기
