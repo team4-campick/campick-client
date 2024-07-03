@@ -9,8 +9,6 @@ import { Autoplay, Pagination, Navigation, Controller } from "swiper/modules";
 import { allImages } from "../utils/imageData";
 import { filterImagesByDate, updateImageStatuses } from "../utils/EventUtils";
 import styles from "../css/mainpage.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 const Mainpage = () => {
   const mainSwiperRef = useRef(null);
@@ -155,7 +153,7 @@ const Mainpage = () => {
             className={styles.mainEventsSwiper}
             ref={eventSwiperRef}
           >
-            {proceedingImages.map((image) => (
+            {proceedingImages.slice(0, 10).map((image) => (
               <SwiperSlide key={image.name}>
                 <Link to="/event">
                   <img src={image.url} alt={image.name} />
@@ -169,7 +167,7 @@ const Mainpage = () => {
             }`}
             onClick={handlePrev}
           >
-            <FontAwesomeIcon icon={faAngleLeft} size="3x" />
+            <i className="fa-solid fa-angle-left fa-3x"></i>
           </div>
           <div
             className={`${styles.nextButton} ${
@@ -177,7 +175,7 @@ const Mainpage = () => {
             }`}
             onClick={handleNext}
           >
-            <FontAwesomeIcon icon={faAngleRight} size="3x" />
+            <i className="fa-solid fa-angle-right fa-3x"></i>
           </div>
         </div>
       </section>
