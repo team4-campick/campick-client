@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from "react";
 import PostCard from "../../components/MyPage/PostCard";
 import style from "../../css/MyPage/MyPost.module.css";
+import { useSelector } from "react-redux";
+
 const MyPost = () => {
   const url = process.env.REACT_APP_SERVER_URL;
+  const user = useSelector((state) => state.user.user);
+  const userName = user?.username;
   const [myPostList, setMyPostList] = useState([1, 2, 3, 4, 5, 6]);
-  const getMyPostList = async () => {
-    try {
-      const response = await fetch(`${url}/post/:id`);
-      const data = await response.json();
-      if (!data) {
-        alert("값이 없넹");
-      }
-      setMyPostList(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   useEffect(() => {
+    const getMyPostList = async () => {
+      try {
+        const response = await fetch(`${url}/post/${userName}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          // headers: {
+          //   // Authorization: localStorage.getItem("token"),
+          // },
+          credentials: "include",
+        });
+        const data = await response.json();
+        if (!data) {
+          alert("값이 없넹");
+        }
+        console.log("post get data", data);
+        setMyPostList(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     getMyPostList();
   }, []);
   console.log(myPostList);

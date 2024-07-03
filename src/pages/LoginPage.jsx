@@ -38,7 +38,6 @@ const LoginPage = () => {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
-
       if (!response.ok) {
         const errorData = await response.json();
         if (response.status === 404) {
@@ -50,10 +49,7 @@ const LoginPage = () => {
         }
         return;
       }
-
       const data = await response.json();
-      console.log(data);
-
       if (data.id) {
         setRedirect(true);
         setIsLoggedIn(true);
