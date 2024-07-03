@@ -14,9 +14,23 @@ const RegisterPage = () => {
 
   const register = async (e) => {
     e.preventDefault();
+    if (!/^[a-zA-Z][a-zA-Z0-9]{3,}$/.test(username)) {
+      setMessage("아이디는 4자 이상이어야 하며 영어로 시작해야 합니다.");
+      return;
+    } else {
+      setMessage("");
+    }
+    if (password.length < 8) {
+      setMessage("패스워드는 8자 이상이어야 합니다.");
+      return;
+    } else {
+      setMessage("");
+    }
     if (password !== password2) {
       setMessage("패스워드가 일치하지 않습니다.");
       return;
+    } else {
+      setMessage("");
     }
 
     //백엔드로 post 요청 및 응답
