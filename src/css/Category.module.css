@@ -18,26 +18,14 @@
   position: relative;
 }
 
-.pageSubHeaderLink::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -5px;
-  left: 0;
-  background-color: #008080;
-  visibility: hidden;
-  transform: scaleX(0);
-  transition: all 0.3s ease-in-out;
-}
-
-.pageSubHeaderLink:hover::before,
-.pageSubHeaderLink.active::before {
-  visibility: visible;
-  transform: scaleX(1);
-}
-
-.pageSubHeaderLink:hover,
 .pageSubHeaderLink.active {
   color: #008080;
+}
+
+.underline {
+  position: absolute;
+  bottom: -5px;
+  height: 2px;
+  background-color: #008080;
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
