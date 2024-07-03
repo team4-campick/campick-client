@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import QuillEditor from "../../components/BlogPost/QuillEditor";
 import style from "../../css/Contents/blogPostWrite.module.css";
 import useDropdown from "../../hooks/useDropdown";
@@ -34,12 +34,6 @@ const BlogPostEdit = () => {
 
   const handleCampSiteName = (event) => {
     setCampSiteName(event.target.value);
-  };
-
-  const [content, setContent] = useState("");
-
-  const handlecontent = (event) => {
-    setBlogPostDesc(event.target.value);
   };
 
   const [blogPostDesc, setBlogPostDesc] = useState("");
@@ -171,9 +165,13 @@ const BlogPostEdit = () => {
       />
 
       <div className="submitButtonWrap">
-        <Link to="/contents/contentsBlog">
+        <div
+          onClick={() => {
+            navigate(`/blog-post-detail/${id}`);
+          }}
+        >
           <i className="fa-solid fa-chevron-left"></i>
-        </Link>
+        </div>
 
         <button
           className="submitButton"

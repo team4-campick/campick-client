@@ -143,9 +143,9 @@ const BlogPostWrite = () => {
       <QuillEditor setValue={setQuillInputValue} value={quillInputValue} />
 
       <div className="submitButtonWrap">
-        <Link to="/contents/contentsBlog">
+        <div onClick={() => navigate(`/contents/contentsBlog`)}>
           <i className="fa-solid fa-chevron-left"></i>
-        </Link>
+        </div>
 
         <button
           className="submitButton"
