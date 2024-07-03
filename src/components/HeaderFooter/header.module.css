@@ -84,7 +84,9 @@
   align-items: center;
   gap: 5px;
 }
-
+.iconColor {
+  color: rgb(31, 59, 52);
+}
 .privacyWrap .privacy a,
 .privacyWrap .public a {
   color: rgb(31, 59, 52);
