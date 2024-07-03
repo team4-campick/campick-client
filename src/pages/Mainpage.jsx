@@ -8,13 +8,18 @@ import YouTube from "react-youtube";
 import { Autoplay, Pagination, Navigation, Controller } from "swiper/modules";
 import { allImages } from "../utils/imageData";
 import { filterImagesByDate, updateImageStatuses } from "../utils/EventUtils";
-import styles from "../css/mainpage.module.css"; // CSS 모듈로 임포트
+import styles from "../css/mainpage.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 const Mainpage = () => {
   const mainSwiperRef = useRef(null);
   const blogSwiperRef = useRef(null);
+  const eventSwiperRef = useRef(null);
 
   const [proceedingImages, setProceedingImages] = useState([]);
+  const [isPrevDisabled, setIsPrevDisabled] = useState(true);
+  const [isNextDisabled, setIsNextDisabled] = useState(false);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -26,15 +31,35 @@ const Mainpage = () => {
     fetchImages();
   }, []);
 
+  useEffect(() => {
+    if (eventSwiperRef.current) {
+      const swiper = eventSwiperRef.current.swiper;
+      swiper.on("slideChange", () => {
+        setIsPrevDisabled(swiper.isBeginning);
+        setIsNextDisabled(swiper.isEnd);
+      });
+    }
+  }, [eventSwiperRef]);
+
+  const handlePrev = () => {
+    if (eventSwiperRef.current && !isPrevDisabled) {
+      eventSwiperRef.current.swiper.slidePrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (eventSwiperRef.current && !isNextDisabled) {
+      eventSwiperRef.current.swiper.slideNext();
+    }
+  };
+
   return (
     <>
-      {/* 메인화면 비주얼 영역 */}
       <section className={styles.mainVisual}>
-        {/* 슬라이드 제어 불가 영역- 배경이미지 */}
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
-          allowTouchMove={false} // 마우스로 슬라이드 불가능
+          allowTouchMove={false}
           modules={[Controller]}
           className={styles.mainBackgroundSwiper}
           onSwiper={(swiper) => {
@@ -51,17 +76,10 @@ const Mainpage = () => {
         </Swiper>
 
         <div className={styles.blogTapWarp}>
-          {/* 슬라이드 제어 가능 영역- 설명페이지 */}
           <Swiper
             spaceBetween={4}
             centeredSlides={true}
-            // autoplay={{
-            //   delay: 5000,
-            //   disableOnInteraction: false,
-            // }}
-            pagination={{
-              clickable: true,
-            }}
+            pagination={{ clickable: true }}
             navigation={true}
             modules={[Autoplay, Pagination, Navigation, Controller]}
             className={styles.mainExplainSwiper}
@@ -102,8 +120,7 @@ const Mainpage = () => {
       </section>
 
       <section className={styles.mainVideoWarp}>
-        {/* 유튜브 영상 섹션 전체 처리완료 */}
-        <h2>Today's video</h2>
+        <h2>Today's Video</h2>
         <div className={styles.mainVideo}>
           <YouTube
             videoId="X5Y-zlsKL2M"
@@ -128,27 +145,40 @@ const Mainpage = () => {
       </section>
 
       <section className={styles.mainEventsWarp}>
-        {/* 이벤트 슬라이드 진행필요 */}
-        <h2>Today's event</h2>
+        <h2>Today's Event</h2>
         <div className={styles.mainEvents}>
-          <Link to="/event">
-            <Swiper
-              slidesPerView={4}
-              spaceBetween={15}
-              navigation={true}
-              pagination={{
-                clickable: true,
-              }}
-              modules={[Navigation, Pagination]}
-              className={styles.mainEventsSwiper}
-            >
-              {proceedingImages.map((image) => (
-                <SwiperSlide key={image.name}>
+          <Swiper
+            slidesPerView={4}
+            spaceBetween={15}
+            pagination={{ clickable: true }}
+            modules={[Navigation, Pagination]}
+            className={styles.mainEventsSwiper}
+            ref={eventSwiperRef}
+          >
+            {proceedingImages.map((image) => (
+              <SwiperSlide key={image.name}>
+                <Link to="/event">
                   <img src={image.url} alt={image.name} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Link>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div
+            className={`${styles.prevButton} ${
+              isPrevDisabled ? styles.buttonDisabled : ""
+            }`}
+            onClick={handlePrev}
+          >
+            <FontAwesomeIcon icon={faAngleLeft} size="3x" />
+          </div>
+          <div
+            className={`${styles.nextButton} ${
+              isNextDisabled ? styles.buttonDisabled : ""
+            }`}
+            onClick={handleNext}
+          >
+            <FontAwesomeIcon icon={faAngleRight} size="3x" />
+          </div>
         </div>
       </section>
     </>
