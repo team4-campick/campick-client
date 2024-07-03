@@ -38,7 +38,7 @@ const CustomerService = () => {
     } else {
       setContentErrMsg("");
     }
-    const response = await fetch(`${url}/inquiry/${userName}`, {
+    const response = await fetch(`${url}/inquiry`, {
       method: "POST",
       body: JSON.stringify({
         title,
