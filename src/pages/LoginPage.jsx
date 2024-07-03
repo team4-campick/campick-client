@@ -22,7 +22,7 @@ const LoginPage = () => {
       setMessage1("");
     }
     if (password.length < 8) {
-      setMessage2("8자 이상이어야 합니다.");
+      setMessage2("패스워드는 8자 이상이어야 합니다.");
       return;
     } else {
       setMessage2("");
@@ -38,14 +38,7 @@ const LoginPage = () => {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
       const data = await response.json();
-      console.log(data);
-
       if (data.id) {
         setRedirect(true);
         setIsLoggedIn(true);
