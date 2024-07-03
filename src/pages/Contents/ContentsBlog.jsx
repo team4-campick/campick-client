@@ -30,7 +30,7 @@ const ContentsBlog = () => {
   }, []);
 
   return (
-    <section class="mw">
+    <section className="mw">
       <h2 hidden>ContentsBlog</h2>
       <div className={style.writeBtnCon}>
         <Link to="/blog-post-write" className={style.writeBtn}>
