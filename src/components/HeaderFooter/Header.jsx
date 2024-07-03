@@ -3,8 +3,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUserAllInfo } from "../../store/userStore";
 
 import style from "./header.module.css";
-import logo from "./logo.svg";
 import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMessage } from "@fortawesome/free-solid-svg-icons";
 
 const url = process.env.REACT_APP_SERVER_URL;
 
@@ -37,8 +38,8 @@ const Header = () => {
   //     console.error("Error logging out:", error);
   //   }
   // };
+
   const user = useSelector((state) => state.user.user);
-  console.log("userInfo Get func =====", user);
   const isLoggedIn = useMemo(() => (user ? user.username : null), [user]);
 
   useEffect(() => {
@@ -54,7 +55,6 @@ const Header = () => {
     fetchProfile();
   }, [dispatch, location.pathname]);
 
-  console.log("isLoggedIn ", isLoggedIn);
   const handleLogout = (e) => {
     e.preventDefault();
     fetch(`${url}/logout`, {
@@ -64,11 +64,14 @@ const Header = () => {
     dispatch(setUserAllInfo(null));
     navigate("/");
   };
+
+  const logoUrl = process.env.PUBLIC_URL + "/images/logo.svg";
+
   return (
     <header className={style.headerWrap}>
       <h1>
         <Link to="/">
-          <img src={logo} alt="CAMPICK LOGO IMG" />
+          <img src={logoUrl} alt="CAMPICK LOGO IMG" />
         </Link>
       </h1>
 
@@ -91,9 +94,13 @@ const Header = () => {
 
       <nav className={style.privacyWrap}>
         <ul>
+          <li>
+            <Link to="/">
+              <FontAwesomeIcon icon={faMessage} />
+            </Link>
+          </li>
           {isLoggedIn ? (
             <>
-              {/* 로그인 후 */}
               <li className={style.privacy}>
                 <Link to="/my-page/bingo-coupon/bingo">MY PAGE</Link>
               </li>
@@ -105,7 +112,6 @@ const Header = () => {
             </>
           ) : (
             <>
-              {/* 로그인 전 */}
               <li className={style.public}>
                 <Link to="/signin" onClick={handleLogin}>
                   SIGN IN
