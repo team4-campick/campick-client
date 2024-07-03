@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PostCard from "../../components/MyPage/PostCard";
 import style from "../../css/MyPage/MyPost.module.css";
 import { useSelector } from "react-redux";
-
+import BlogPostCard from "../../components/BlogPost/BlogPostCard";
 const MyPost = () => {
   const url = process.env.REACT_APP_SERVER_URL;
   const user = useSelector((state) => state.user.user);
@@ -38,7 +38,7 @@ const MyPost = () => {
       <nav className="myPage_SubHeader">내가 쓴 게시글</nav>
       <div className={style.postCon}>
         {myPostList.map((post, i) => (
-          <PostCard key={i} post={post} />
+          <BlogPostCard key={i} post={post} />
         ))}
       </div>
     </section>
