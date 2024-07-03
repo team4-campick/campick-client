@@ -69,43 +69,43 @@ const RegisterPage = () => {
 
   return (
     <main className={`mw ${style.register}`}>
-      <h2 className={style["register-h2"]}>REGISTER</h2>
-      <form className={style["register-form"]} onSubmit={register}>
+      <h2 className={style.registerH2}>REGISTER</h2>
+      <form className={style.registerForm} onSubmit={register}>
         <input
           type="text"
-          className={style["register-input"]}
+          className={style.registerInput}
           placeholder="사용자ID"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="text"
-          className={style["register-input"]}
+          className={style.registerInput}
           placeholder="닉네임"
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
         />
         <input
           type="password"
-          className={style["register-input"]}
+          className={style.registerInput}
           placeholder="패스워드"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="password"
-          className={style["register-input"]}
+          className={style.registerInput}
           placeholder="패스워드 확인"
           value={password2}
           onChange={(e) => setPassword2(e.target.value)}
         />
-        <span className={style["register-span"]}>{message}</span>
-        <button type="submit" className={style["register-button"]}>
+        <span className={style.registerSpan}>{message}</span>
+        <button type="submit" className={style.registerButton}>
           REGISTER
         </button>
       </form>
-      <p className={style["register-link"]}>
-        계정이 있나요? <Link to="/login">SIGN IN</Link>
+      <p className={style.registerLink}>
+        계정이 있나요? <Link to="/signin">SIGN IN</Link>
       </p>
     </main>
   );

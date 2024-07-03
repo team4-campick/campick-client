@@ -22,7 +22,7 @@ const LoginPage = () => {
       setMessage1("");
     }
     if (password.length < 8) {
-      setMessage2("패스워드는 8자 이상이어야 합니다.");
+      setMessage2("비밀번호는 8자 이상이어야 합니다.");
       return;
     } else {
       setMessage2("");
@@ -38,17 +38,21 @@ const LoginPage = () => {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (response.status === 404) {
+          setMessage1("사용자가 없습니다.");
+        } else if (response.status === 401) {
+          setMessage2("비밀번호가 맞지 않습니다.");
+        } else {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return;
+      }
       const data = await response.json();
       if (data.id) {
         setRedirect(true);
         setIsLoggedIn(true);
-      } else {
-        if (data.message === "nouser") {
-          setMessage1("사용자가 없습니다.");
-        }
-        if (data.message === "failed") {
-          setMessage2("비밀번호가 맞지 않습니다.");
-        }
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -79,32 +83,32 @@ const LoginPage = () => {
   }
 
   return (
-    <main className={style.mw}>
+    <main className={style.signin}>
       <div className={style.header}>
-        <h2 className={style["header-h2"]}>SIGN IN</h2>
+        <h2>SIGN IN</h2>
       </div>
-      <form className={style["signin-form-container"]} onSubmit={login}>
+      <form className={style.signinFormContainer} onSubmit={login}>
         <input
           type="text"
-          className={style["signin-input"]}
+          className={style.signinInput}
           placeholder="사용자이름(ID)"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <span className={style["signin-message"]}>{message1}</span>
+        <span className={style.signinMessage}>{message1}</span>
         <input
           type="password"
-          className={style["signin-input"]}
+          className={style.signinInput}
           placeholder="패스워드"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <span className={style["signin-message"]}>{message2}</span>
-        <button className={style["signin-button"]} type="submit">
+        <span className={style.signinMessage}>{message2}</span>
+        <button className={style.signinButton} type="submit">
           SIGN IN
         </button>
       </form>
-      <p className={style["signin-link"]}>
+      <p className={style.signinLink}>
         계정이 없으신가요? <Link to="/register">REGISTER</Link>
       </p>
     </main>
