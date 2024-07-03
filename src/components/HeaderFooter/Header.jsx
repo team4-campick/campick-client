@@ -1,11 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUserAllInfo } from "../../store/userStore";
-
 import style from "./header.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMessage } from "@fortawesome/free-solid-svg-icons";
 
 const url = process.env.REACT_APP_SERVER_URL;
 
@@ -96,7 +93,7 @@ const Header = () => {
         <ul>
           <li>
             <Link to="/">
-              <FontAwesomeIcon icon={faMessage} />
+              <i className="fa-solid fa-message"></i>
             </Link>
           </li>
           {isLoggedIn ? (
