@@ -160,7 +160,7 @@ export const allImages = [
     date: new Date("2024-05-12"),
   },
   {
-    name: "image32",
+    name: "image33",
     url: "https://cdn.imweb.me/upload/S20200106a105fd03f4b57/19c9ce1d59519.jpg",
     date: new Date("2024-06-02"),
   },
