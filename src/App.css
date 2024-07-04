@@ -64,3 +64,8 @@ button {
   background-color: transparent;
   outline: none;
 }
+
+/* quill editor height */
+.quillTest .ql-container {
+  height: 500px;
+}
