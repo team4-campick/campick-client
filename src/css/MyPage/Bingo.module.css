@@ -1,6 +1,4 @@
 .bingo {
-  display: flex;
-  flex-wrap: wrap;
 }
 .countStatus {
   width: 100%;
@@ -9,14 +7,30 @@
   align-items: center;
   padding-left: 4rem;
 }
+.bingoGame {
+  display: flex;
+  padding: 0 2rem;
+}
 .bingoArea {
+  flex: 1;
   display: grid;
-  border: 1px solid red;
-  grid-template-columns: repeat(3, 300px);
-  padding: 2rem;
+  /* border: 1px solid red; */
+  grid-template-columns: repeat(3, 200px);
+  justify-content: center;
   gap: 1rem;
 }
-
 .missionList {
-  padding: 0 100px 0 1rem;
+  display: flex;
+  flex: 0.5;
+  padding-left: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid black;
+}
+.missionList > li {
+  padding-bottom: 2rem;
+  font-size: 1.5rem;
+  /* padding: 0 100px 0 1rem; */
+}
+.bingoPattern {
 }

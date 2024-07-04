@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import style from "../../css/Market/Market.module.css";
-import SalePostCard from "../../components/Market/SalePostCard";
+import style from "../../css/MyPage/Transaction.module.css";
+import SaleCard from "../../components/MyPage/SaleCard";
+
 const Sale = () => {
   const url = process.env.REACT_APP_SERVER_URL;
   const [salePosts, setSalePosts] = useState([]);
@@ -23,11 +24,11 @@ const Sale = () => {
     getSalePostList();
   }, []);
   return (
-    <section>
+    <section className={style.cardCon}>
       <h3 hidden>Sale</h3>
-      <div className={style.postCardList}>
+      <div className={style.cardList}>
         {salePosts.map((post) => (
-          <SalePostCard key={post._id} post={post} />
+          <SaleCard key={post._id} post={post} />
         ))}
       </div>
     </section>
