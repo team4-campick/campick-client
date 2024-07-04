@@ -15,8 +15,7 @@
   flex: 1;
   display: grid;
   border: 1px solid red;
-  grid-template-columns: repeat(3, 300px);
-  background-image: url("https://cdn.pixabay.com/photo/2021/05/05/11/43/modern-6230891_1280.png");
+  grid-template-columns: repeat(3, 200px);
   background-repeat: no-repeat;
   background-size: cover;
   padding: 2rem;
