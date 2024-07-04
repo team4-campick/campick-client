@@ -21,10 +21,11 @@
 }
 
 .registerInput {
-  width: 40%;
+  width: 35%;
   padding: 10px;
+  margin-top: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 12px;
   font-size: 16px;
   display: block;
 }
@@ -40,12 +41,12 @@
 }
 
 .registerButton {
-  width: 40%;
+  width: 20%;
   padding: 10px;
   margin-top: 20px;
   background-color: #055a5b;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   font-size: 16px;
   color: #fff;
   cursor: pointer;
@@ -58,7 +59,7 @@
 }
 
 .registerLink {
-  margin-top: 2rem;
+  margin-top: 3rem;
   margin-bottom: 8rem;
   font-size: 14px;
 }

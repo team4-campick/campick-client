@@ -69,12 +69,12 @@ const RegisterPage = () => {
 
   return (
     <main className={`mw ${style.register}`}>
-      <h2 className={style.registerH2}>REGISTER</h2>
+      <h2 className={style.registerH2}>회원가입</h2>
       <form className={style.registerForm} onSubmit={register}>
         <input
           type="text"
           className={style.registerInput}
-          placeholder="사용자ID"
+          placeholder="사용자 ID"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -101,11 +101,11 @@ const RegisterPage = () => {
         />
         <span className={style.registerSpan}>{message}</span>
         <button type="submit" className={style.registerButton}>
-          REGISTER
+          회원가입
         </button>
       </form>
       <p className={style.registerLink}>
-        계정이 있나요? <Link to="/signin">SIGN IN</Link>
+        계정이 있나요? <Link to="/signin">로그인</Link>
       </p>
     </main>
   );
