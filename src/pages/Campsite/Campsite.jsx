@@ -78,8 +78,8 @@ const Campsite = () => {
   return (
     <section className={style.campsite}>
       <h2 hidden>Campsite</h2>
-      <form className={style.searchBar} onSubmit={handleSearch}>
-        <label className={style.inputArea}>
+      <form className="searchBar" onSubmit={handleSearch}>
+        <label className="inputArea">
           <input
             type="text"
             placeholder="Search"

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SalePostCard from "../../components/Market/SalePostCard";
 import style from "../../css/Market/Market.module.css";
@@ -78,8 +78,20 @@ const Market = () => {
   return (
     <section className={`mw ${style.marketCon}`}>
       <h2 hidden>Market</h2>
-      <form className={style.searchBar}>
-        <input
+      <form className="searchBar">
+        <label className="inputArea">
+          <input
+            type="text"
+            value={searchKeyword}
+            placeholder="어떤 상품을 찾고있나요?"
+            onChange={handleSearchChange}
+          />
+          <button type="submit" onClick={handleSearch}>
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </label>
+
+        {/* <input
           type="text"
           placeholder="어떤 상품을 찾고있나요?"
           value={searchKeyword}
@@ -88,7 +100,7 @@ const Market = () => {
 
         <button type="submit" onClick={handleSearch}>
           <i className="fa-solid fa-magnifying-glass"></i>
-        </button>
+        </button> */}
       </form>
       <div className={style.cateGories}>
         <button onClick={() => handleCategoryClick("")}>전체보기</button>
