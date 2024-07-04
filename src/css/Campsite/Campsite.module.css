@@ -1,23 +1,7 @@
 .campsite {
   border: 1px solid red;
 }
-.searchBar {
-  border-bottom: 1px solid blue;
-}
-.inputArea {
-  border: 1px solid green;
-  background-color: rgba(31, 59, 52, 0.2);
-  border: none;
-  outline: none;
-}
-.searchBar input {
-  background-color: transparent;
-}
-.searchBar button {
-  background-color: transparent;
-  border: none;
-  outline: none;
-}
+
 .siteAreas {
   display: grid;
   grid-template-columns: repeat(3, 25%);
