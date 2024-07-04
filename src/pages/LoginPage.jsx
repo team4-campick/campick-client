@@ -1,15 +1,29 @@
 import style from "../css/LoginPage.module.css";
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserAllInfo } from "../store/userStore";
 const url = process.env.REACT_APP_SERVER_URL;
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message1, setMessage1] = useState("");
   const [message2, setMessage2] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const fetchProfile = async () => {
+    const response = await fetch(`${url}/profile`, {
+      credentials: "include",
+    });
+    if (response.ok) {
+      const userInfo = await response.json();
+      console.log("userInfo", userInfo);
+      dispatch(setUserAllInfo(userInfo));
+    }
+  };
 
   const login = async (e) => {
     e.preventDefault();
@@ -53,6 +67,7 @@ const LoginPage = () => {
       if (data.id) {
         setRedirect(true);
         setIsLoggedIn(true);
+        await fetchProfile();
       }
     } catch (error) {
       console.error("Error fetching data:", error);
