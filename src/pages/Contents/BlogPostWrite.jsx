@@ -91,7 +91,7 @@ const BlogPostWrite = () => {
   };
 
   return (
-    <section className={`mw ${style.postWriteCon}`}>
+    <section className={`mw quillTest ${style.postWriteCon}`}>
       <h2 hidden>BlogPostWrite</h2>
 
       <div className={style.bgImgWrap}>

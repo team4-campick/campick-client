@@ -6,33 +6,7 @@
 .marketCon > div {
   margin-bottom: 2rem;
 }
-.marketCon button {
-  outline: none;
-  border: none;
-  background-color: transparent;
-}
-.searchBar {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin: 2rem 200px;
-}
-.searchBar input {
-  width: 100%;
-  border-radius: 8px;
-  padding: 1rem 2rem;
-  background-color: rgba(31, 59, 52, 0.2);
-  outline: none;
-}
-.searchBar button {
-  position: absolute;
-  width: 50px;
-  height: 100%;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #1f3b34;
-}
+
 .cateGories {
   display: flex;
   justify-content: center;

@@ -5,6 +5,7 @@
   border-radius: 8px;
   display: flex;
   margin-bottom: 2rem;
+  overflow: hidden;
 }
 .salePostCard img {
   width: 170px;
