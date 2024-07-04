@@ -47,3 +47,15 @@
   font-size: 16px;
   color: #666;
 }
+
+.messageInput {
+  border: 1px solid black;
+}
+
+.receivedMessage {
+  text-align: left;
+}
+
+.sentMessage {
+  text-align: right;
+}

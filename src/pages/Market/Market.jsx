@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import SalePostCard from "../../components/Market/SalePostCard";
 import style from "../../css/Market/Market.module.css";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { PRODUCT_CATEGORY } from "../../constants/market";
 
 const Market = () => {
@@ -9,6 +10,8 @@ const Market = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [salePosts, setSalePosts] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const user = useSelector((state) => state.user.user);
+  const isLoggedIn = user?.username;
 
   const salePostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/sale-posts`;
 
@@ -63,6 +66,15 @@ const Market = () => {
     fetchSalePosts();
   }, [keyword, salePostsEndpoint, category]);
 
+  const handleClickSale = () => {
+    if (isLoggedIn) {
+      navigate("/sale-post-write");
+    } else {
+      alert("로그인이 필요합니다.");
+      navigate("/signin");
+    }
+  };
+
   return (
     <section className={`mw ${style.marketCon}`}>
       <h2 hidden>Market</h2>
@@ -91,10 +103,10 @@ const Market = () => {
       </div>
 
       <div className={style.writeBtnCon}>
-        <Link to="/sale-post-write" className={style.writeBtn}>
+        <button className={style.writeBtn} onClick={handleClickSale}>
           <span>판매하기</span>
           <i className="fa-regular fa-pen-to-square"></i>
-        </Link>
+        </button>
       </div>
 
       <div className={style.postCardList}>

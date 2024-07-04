@@ -1,19 +1,54 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setSelectedConversation,
+  setSelectedReceiverNickname,
+} from "../../store/chatStore";
+import useListenMessages from "../../hooks/useListenMessages";
+import useGetConversations from "../../hooks/useGetConversations";
+import useGetMessages from "../../hooks/useGetMessages";
+import useSendMessages from "../../hooks/useSendMessages";
 import style from "../../css/Market/Chat.module.css";
 
 const Chat = () => {
-  // 예시로 채팅 목록과 선택된 채팅을 관리할 상태
-  const [chatList, setChatList] = useState([
-    { id: 1, name: "User 1" },
-    { id: 2, name: "User 2" },
-    { id: 3, name: "User 3" },
-  ]);
-  const [selectedChat, setSelectedChat] = useState(null);
+  const dispatch = useDispatch();
 
-  // 채팅을 선택할 때 호출될 함수
-  const handleChatSelect = (chatId) => {
-    setSelectedChat(chatId);
-    // 선택된 채팅의 대화를 불러오는 로직을 추가할 수 있음
+  const [messageInput, setMessageInput] = useState("");
+  const handleMessageInput = (event) => {
+    setMessageInput(event.target.value);
+  };
+
+  // 소켓으로 새 메시지 감지
+  useListenMessages();
+
+  // 왼쪽 채팅창 목록 불러오기
+  const { conversations } = useGetConversations();
+
+  // 오른쪽 채팅 내역 가져오기
+  const { messages } = useGetMessages();
+
+  // 채팅 보내기
+  const { sendMessage } = useSendMessages(setMessageInput);
+
+  // 왼쪽에서 선택한 채팅창(채팅 상대방 id)
+  const selectedConversation = useSelector(
+    (state) => state.chat.selectedConversation
+  );
+
+  // 현재 채팅방의 상대 닉네임
+  const selectedReceiverNickname = useSelector(
+    (state) => state.chat.selectedReceiverNickname
+  );
+
+  // 메시지 관련 커스텀 훅에서 사용하기 위해서 redux로 관리
+  const handleChatSelect = (user) => {
+    dispatch(setSelectedConversation(user._id));
+    dispatch(setSelectedReceiverNickname(user.nickname));
+  };
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    await sendMessage(messageInput);
   };
 
   return (
@@ -22,9 +57,9 @@ const Chat = () => {
       <div className={style.chatList}>
         <h2>채팅 목록</h2>
         <ul>
-          {chatList.map((chat) => (
-            <li key={chat.id} onClick={() => handleChatSelect(chat.id)}>
-              {chat.name}
+          {conversations.map((user) => (
+            <li key={user._id} onClick={() => handleChatSelect(user)}>
+              {user.nickname}
             </li>
           ))}
         </ul>
@@ -32,16 +67,40 @@ const Chat = () => {
       {/* 오른쪽에 선택된 채팅의 대화 */}
       <div className={style.chatMessages}>
         <h2>채팅창</h2>
-        {selectedChat ? (
+        {selectedConversation ? (
           <div>
-            <p>선택된 ID: {selectedChat}</p>
+            <p>선택된 ID: {selectedConversation}</p>
             {/* 선택된 채팅의 대화 내용을 보여주는 컴포넌트를 추가 */}
           </div>
         ) : (
           <p>채팅을 선택하세요.</p>
         )}
+
+        {messages.map((message) => {
+          const isReceivedMessage = message.senderId === selectedConversation;
+          return (
+            <div
+              key={message._id}
+              className={
+                isReceivedMessage ? style.receivedMessage : style.sentMessage
+              }
+            >
+              <p>{isReceivedMessage ? selectedReceiverNickname : "나"}</p>
+              <p>{message.message}</p>
+            </div>
+          );
+        })}
+
+        <form onSubmit={handleSendMessage}>
+          <input
+            className={style.messageInput}
+            value={messageInput}
+            onChange={handleMessageInput}
+          />
+        </form>
       </div>
     </div>
   );
 };
+
 export default Chat;

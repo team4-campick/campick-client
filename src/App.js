@@ -69,7 +69,7 @@ function App() {
         <Route path="/sale-post-write" element={<SalePostWrite />} />
         <Route path="/sale-post-detail/:id" element={<SaleDetail />} />
         <Route path="/sale-post-edit/:id" element={<SalePostEdit />} />
-        <Route path="/sale-chat/:id" element={<Chat />} />
+        <Route path="/sale-chat" element={<Chat />} />
 
         {/* =================== contents page =================== */}
         <Route path="/contents" element={<Contents />}>

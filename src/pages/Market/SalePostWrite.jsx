@@ -13,10 +13,16 @@ const SalePostWrite = () => {
   const [imagePreviews, setImagePreviews] = useState([]);
   const MAX_IMAGES = 5;
   const [imageFiles, setImageFiles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
-    const newFiles = files.slice(0, MAX_IMAGES - imagePreviews.length);
+
+    if (files.length + imageFiles.length > MAX_IMAGES) {
+      return alert("사진은 5장까지만 첨부할 수 있습니다.");
+    }
+
+    const newFiles = [...imageFiles, ...files];
 
     setImageFiles(newFiles);
 
@@ -28,12 +34,12 @@ const SalePostWrite = () => {
       });
     });
 
-    Promise.all(filePreviews).then((previews) =>
-      setImagePreviews((prev) => [...prev, ...previews])
-    );
+    Promise.all(filePreviews).then((previews) => setImagePreviews(previews));
   };
+
   const handleImageDelete = (index) => {
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
+    setImageFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   // useDropdown 훅을 통해 드롭다운 컴포넌트 및 선택값을 필요한 값(카테고리, 지역 등)에 따라 분리하여 관리
@@ -78,6 +84,8 @@ const SalePostWrite = () => {
   };
 
   const handleSubmitPost = async () => {
+    setIsLoading(true);
+
     const newPost = {
       category,
       productName,
@@ -114,6 +122,8 @@ const SalePostWrite = () => {
       navigate(`/sale-post-detail/${res.salePost._id}`);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -131,7 +141,7 @@ const SalePostWrite = () => {
               multiple
               accept="image/*"
               onChange={handleFileChange}
-              disabled={imagePreviews.length >= MAX_IMAGES}
+              disabled={imageFiles.length >= MAX_IMAGES}
             />
             <label className={style.uploadBtn} htmlFor="file">
               <div>
@@ -233,8 +243,12 @@ const SalePostWrite = () => {
             <i className="fa-solid fa-chevron-left"></i>
           </div>
 
-          <button className="submitButton" onClick={handleSubmitPost}>
-            등록하기
+          <button
+            className="submitButton"
+            onClick={handleSubmitPost}
+            disabled={isLoading}
+          >
+            {isLoading ? "등록 중" : "등록하기"}
           </button>
         </div>
       </div>
