@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -24,7 +24,53 @@ const formats = [
 ];
 
 const QuillEditor = ({ value, setValue }) => {
-  // const [values, setValues] = useState();
+  const quillRef = useRef(null);
+
+  const handleUploadImage = async () => {
+    try {
+      // input 생성
+      const input = document.createElement("input");
+      input.setAttribute("type", "file");
+      input.setAttribute("accept", "image/*");
+      input.setAttribute("multiple", true);
+      input.click();
+
+      // input에 이미지 추가
+      input.onchange = async () => {
+        const formData = new FormData();
+        const { files } = input;
+
+        [...files].forEach((file) => {
+          formData.append("images", file);
+        });
+
+        // 이미지 업로드
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/api/blog-posts/upload-images`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        const res = await response.json();
+
+        if (!res.result) return alert(res.message);
+
+        // 반환된 이미지 url을 에디터에 추가
+        const imageUrls = res.imageUrls;
+
+        const quill = quillRef.current.getEditor();
+        const range = quill.getSelection();
+
+        for (const imageUrl of imageUrls) {
+          quill.insertEmbed(range.index, "image", imageUrl.url);
+        }
+      };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const modules = useMemo(() => {
     return {
@@ -43,6 +89,9 @@ const QuillEditor = ({ value, setValue }) => {
           ["link", "image", "video"], // insert link, image, video
           ["clean"], // remove formatting button
         ],
+        handlers: {
+          image: handleUploadImage,
+        },
       },
     };
   }, []);
@@ -50,6 +99,7 @@ const QuillEditor = ({ value, setValue }) => {
   return (
     <ReactQuill
       theme="snow"
+      ref={quillRef}
       modules={modules}
       formats={formats}
       value={value}
