@@ -52,13 +52,14 @@ const Header = () => {
 
       <nav className={style.privacyWrap}>
         <ul>
-          <li>
-            <Link to="/">
-              <i className="fa-solid fa-message"></i>
-            </Link>
-          </li>
           {isLoggedIn ? (
             <>
+              {" "}
+              <li>
+                <Link to="/sale-chat">
+                  <i className="fa-solid fa-message"></i>
+                </Link>
+              </li>
               <li className={style.privacy}>
                 <Link to="/my-page/bingo-coupon/bingo">MY PAGE</Link>
               </li>
