@@ -98,12 +98,8 @@ const SaleDetail = () => {
             className={style.detailSlide}
           >
             {imageUrls.map((image, index) => (
-              <SwiperSlide>
-                <img
-                  key={image._id}
-                  src={image.url}
-                  alt={`상품이미지 ${index + 1}`}
-                />
+              <SwiperSlide key={image._id}>
+                <img src={image.url} alt={`상품이미지 ${index + 1}`} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -129,7 +125,7 @@ const SaleDetail = () => {
         <Link to="/market">
           <i className="fa-solid fa-chevron-left"></i>
         </Link>
-        <Link to="/sale-chat/:id">
+        <Link to="/sale-chat">
           <button className="submitButton">문의하기</button>
         </Link>
       </div>
