@@ -8,11 +8,23 @@ const url = process.env.REACT_APP_SERVER_URL;
 
 const Header = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.user.user);
   const isLoggedIn = useMemo(() => (user ? user.username : null), [user]);
-
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const response = await fetch(`${url}/profile`, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const userInfo = await response.json();
+        dispatch(setUserAllInfo(userInfo));
+      }
+    };
+    fetchProfile();
+  }, [dispatch, location.pathname]);
   const handleLogout = (e) => {
     e.preventDefault();
     fetch(`${url}/logout`, {
