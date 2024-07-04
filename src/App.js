@@ -39,6 +39,8 @@ import RegisterPage from "./pages/RegisterPage";
 import Campsite from "./pages/Campsite/Campsite";
 import SiteDetail from "./pages/Campsite/SiteDetail";
 
+import ScrollTopBtn from "./components/ScrollTop/ScrollTopBtn";
+
 function App() {
   return (
     <div className="App">
@@ -93,6 +95,7 @@ function App() {
 
         <Route path="*" element={<>잘못된 경로입니다</>} />
       </Routes>
+      <ScrollTopBtn />
       <Footer />
     </div>
   );
