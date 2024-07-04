@@ -133,7 +133,7 @@ const SalePostEdit = () => {
       }
 
       alert("게시물 수정에 성공했습니다.");
-      navigate(`/sale-detail/${id}`);
+      navigate(`/sale-post-detail/${id}`);
     } catch (error) {
       console.log(error);
     }
