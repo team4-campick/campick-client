@@ -92,7 +92,7 @@ const BlogPostDetail = () => {
         </div>
       </div>
       <div
-        className={style.innerText}
+        className={`${style.innerText} ql-editor`}
         dangerouslySetInnerHTML={{ __html: content }}
       />
 
