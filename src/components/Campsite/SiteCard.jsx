@@ -4,21 +4,39 @@ import { useNavigate } from "react-router-dom";
 
 const SiteCard = ({ site }) => {
   const navigate = useNavigate();
-  console.log("site", site);
-  const { doNm, sigunguNm, firstImageUrl, facltNm, contentId } = site;
+  const { doNm, sigunguNm, firstImageUrl, facltNm, contentId, induty } = site;
+  const facltNmArr = facltNm.split(" ");
+  const filterdFacltNm = [];
+  facltNmArr.map((e) => {
+    if (facltNmArr.length === 1) {
+      return filterdFacltNm.push(e);
+    }
+    if (e.includes("(")) {
+      e.split();
+      const newE = e.slice(0, e.indexOf("("));
+      return filterdFacltNm.push(newE);
+    }
+    if (e !== "충주") {
+      return filterdFacltNm.push(e);
+    }
+  });
   return (
     <div
       className={style.siteCard}
+      key={contentId}
       onClick={() => {
         navigate(`/site-detail/${contentId}`, { state: site });
       }}
     >
       <figure>
         <figcaption>
-          {/* <p className={style.info}> */}
-          <span>{facltNm}</span>
-          <span>{`${doNm} ${sigunguNm}`}</span>
-          {/* </p> */}
+          <span className={style.facltNm}>{filterdFacltNm[0]}</span>
+
+          <p className={style.info}>
+            <span className={style.induty}>{induty}</span>
+            <span className={style.location}>{`${doNm} ${sigunguNm}`}</span>
+          </p>
+
           {/* <span className={style.score}>점수</span> */}
         </figcaption>
         <div className={style.imgCon}>

@@ -42,7 +42,7 @@ const ReviewCreateModal = ({ setModalOpen, id }) => {
         setReview("");
         setModalOpen(false);
         alert("리뷰가 성공적으로 작성되었습니다");
-        navigate(`/site-detail/${id}`);
+        window.location.reload();
       }
     } catch (error) {
       console.error(error);

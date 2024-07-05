@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -8,26 +8,32 @@ import "swiper/css/thumbs";
 
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import style from "../../css/Campsite/SiteDetail.module.css";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ReviewCard from "../../components/Campsite/ReviewCard";
 import ReviewCreateModal from "../../components/Campsite/ReviewCreateModal";
 import { useSelector } from "react-redux";
-
+import { GiElectric, GiTrail, GiWoodBeam } from "react-icons/gi";
+import { FaDumbbell, FaSwimmingPool, FaWifi } from "react-icons/fa";
+import { BsFillCupHotFill } from "react-icons/bs";
+import { RiStore3Fill } from "react-icons/ri";
+import { FaTrash } from "react-icons/fa6";
+import Loading from "../../components/Laoding/Loading";
+import StarRating from "../../components/Campsite/StarRating";
 const { kakao } = window;
 
 const SiteDetail = () => {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const userName = user?.username;
   const { id } = useParams();
   const { state } = useLocation();
-  const { mapX, mapY, facltNm, addr1, induty, resveUrl, sbrsCl } = state;
-
-  // const [modal, setModal] = useState(false);
+  const { mapX, mapY, facltNm, addr1, induty, homepage, sbrsCl } = state;
   const [siteImg, setSiteImg] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [scoreAvg, setScoreAvg] = useState(0);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const url = process.env.REACT_APP_SERVER_URL;
   const apiUrl = process.env.REACT_APP_SERVICE_URL;
@@ -35,23 +41,11 @@ const SiteDetail = () => {
   const apiOS = process.env.REACT_APP_SERVICE_OS;
   const apiType = process.env.REACT_APP_SERVICE_TYPE;
   const apiName = process.env.REACT_APP_SERVICE_NAME;
-
-  // try {
-  //   const response = await fetch(`${url}/review/${id}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     credentials: "include",
-  //   });
-  //   const data = await response.json();
-  //   console.log("review Detail Area test ", data);
-  // } catch (error) {
-  //   console.error(error);
-  // }
+  const newArr = sbrsCl.split(",");
+  const newImgArr = siteImg?.splice(1, 3);
 
   const calcAvg = async (data) => {
-    const avg = await Math.round(
+    const avg = Math.round(
       data?.reduce((acc, review) => acc + data.score, 0) / (data?.length || 1)
     );
     setScoreAvg(avg);
@@ -61,6 +55,7 @@ const SiteDetail = () => {
 
   useEffect(() => {
     const imageList = async () => {
+      setLoading(true);
       try {
         const baseUrl = new URL(
           `${apiUrl}imageList?MobileOS=${apiOS}&MobileApp=${apiName}&numOfRows=12&serviceKey=${apiKey}&_type=${apiType}&contentId=${id}`
@@ -75,6 +70,7 @@ const SiteDetail = () => {
         const data = await response.json();
         console.log(data);
         setSiteImg(data.response.body.items.item);
+        setLoading(false);
       } catch (e) {
         console.error(e);
       }
@@ -85,15 +81,15 @@ const SiteDetail = () => {
     const container = document.getElementById("map");
     const options = {
       center: new kakao.maps.LatLng(
-        Number(mapY).toFixed(6),
-        Number(mapX).toFixed(6)
+        Number(mapY ? mapY : 127.0277194).toFixed(6),
+        Number(mapX ? mapX : 37.63695556).toFixed(6)
       ),
       level: 3,
     };
     const map = new kakao.maps.Map(container, options);
     const markerPosition = new kakao.maps.LatLng(
-      Number(mapY).toFixed(6),
-      Number(mapX).toFixed(6)
+      Number(mapY ? mapY : 127.0277194).toFixed(6),
+      Number(mapX ? mapX : 37.63695556).toFixed(6)
     );
     const marker = new kakao.maps.Marker({
       position: markerPosition,
@@ -119,24 +115,24 @@ const SiteDetail = () => {
   }, []);
   return (
     <section className={style.siteDetail}>
-      <h2 hidden>SiteDetail</h2>
+      <h2 hidden>SiteDetail</h2> {loading ? <Loading /> : null}
       <div className={style.bannerCon}>
         <Swiper
           style={{
             "--swiper-navigation-color": "#fff",
             "--swiper-pagination-color": "#fff",
           }}
-          // loop={true}
+          loop={true}
           spaceBetween={10}
           navigation={true}
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Navigation, Thumbs]}
           className={style.siteDetailBanner}
         >
-          {siteImg ? (
-            siteImg.map((item) => (
+          {newImgArr ? (
+            newImgArr.map((item) => (
               <SwiperSlide key={item}>
-                <img src={item.imageUrl} />
+                <img src={item.imageUrl} onLoad={() => {}} />
               </SwiperSlide>
             ))
           ) : (
@@ -151,15 +147,15 @@ const SiteDetail = () => {
         </Swiper>
         <Swiper
           onSwiper={setThumbsSwiper}
-          // loop={true}
+          loop={true}
           slidesPerView={4}
           freeMode={true}
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
           className={style.siteDetailSubBanner}
         >
-          {siteImg ? (
-            siteImg.map((item) => (
+          {newImgArr ? (
+            newImgArr.map((item) => (
               <SwiperSlide key={item}>
                 <img src={item.imageUrl} />
               </SwiperSlide>
@@ -177,17 +173,33 @@ const SiteDetail = () => {
       </div>
       <p className={style.siteInfo}>
         <h3>
-          <a href={resveUrl} target="_blank">
+          <a href={homepage ? homepage : "*"} target="_blank">
             {facltNm} <i className="fa-solid fa-arrow-up-right-from-square"></i>
           </a>
         </h3>
+        <StarRating scoreAvg={scoreAvg} />
         <span>{induty}</span>
         <span>{addr1}</span>
-        {/* <StarRating scoreAvg={scoreAvg} /> */}
       </p>
       <div className={style.optionCon}>
         <h3>Option</h3>
-        {sbrsCl}
+        <div className={style.options}>
+          {newArr.map((e) => {
+            if (e === "전기") return <GiElectric />;
+            if (e === "무선인터넷") return <FaWifi />;
+            if (e === "장작판매") return <GiWoodBeam />;
+            if (e === "온수") return <BsFillCupHotFill />;
+            if (e === "트렘폴린") return;
+            if (e === "물놀이장") return <FaSwimmingPool />;
+            if (e === "놀이터") return;
+            if (e === "산책로") return <GiTrail />;
+            if (e === "운동장") return <FaDumbbell />;
+            if (e === "운동시설") return <FaDumbbell />;
+            if (e === "마트.편의점") return <RiStore3Fill />;
+            if (e === "덤프스테이션") return <FaTrash />;
+            else return <div>정보 없음</div>;
+          })}
+        </div>
       </div>
       <div id="map" className={style.siteMap}></div>
       <div className={style.reviewArea}>
@@ -196,7 +208,12 @@ const SiteDetail = () => {
           <button
             className={style.writeBtn}
             onClick={() => {
-              userName ? setModalOpen(true) : alert("로그인 후 이용해주세요.");
+              if (userName) {
+                setModalOpen(true);
+              } else {
+                alert("로그인 후 이용해주세요.");
+                navigate("/signin");
+              }
             }}
           >
             리뷰 쓰기
@@ -209,7 +226,7 @@ const SiteDetail = () => {
               <ReviewCard item={item} userName={userName} />
             ))
           ) : (
-            <li>리뷰가 없어요</li>
+            <li className={style.noReview}>리뷰가 없어요</li>
           )}
         </ul>
       </div>
