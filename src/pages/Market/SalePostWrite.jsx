@@ -5,7 +5,7 @@ import {
   REGION,
   PRODUCT_CONDITION_OPTIONS,
 } from "../../constants/market";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 const SalePostWrite = () => {

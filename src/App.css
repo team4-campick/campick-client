@@ -16,6 +16,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 12px;
+  margin: 2rem 0;
 }
 
 .submitButtonWrap i {

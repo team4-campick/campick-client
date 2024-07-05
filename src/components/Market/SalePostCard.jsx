@@ -1,9 +1,19 @@
 import style from "./SalePostCard.module.css";
 import { useNavigate } from "react-router-dom";
+import convertToKoreanDate from "../../utils/convertToKoreanDate";
 
 const SalePostCard = ({ post }) => {
   const navigate = useNavigate();
-  const { productName, region, city, price, imageUrls } = post;
+  const {
+    productName,
+    category,
+    region,
+    city,
+    price,
+    imageUrls,
+    isNegotiable,
+    createdAt,
+  } = post;
 
   const thumbnail =
     imageUrls?.[0]?.url ||
@@ -16,11 +26,24 @@ const SalePostCard = ({ post }) => {
         navigate(`/sale-post-detail/${post._id}`);
       }}
     >
-      <img src={thumbnail} alt="상품이미지" />
+      <div className={style.thumnailImg}>
+        <img src={thumbnail} alt="상품이미지" />
+      </div>
       <div className={style.productInfo}>
-        <span>{`${region} ${city} `}</span>
-        <p>{`${productName}`} 판매합니다.</p>
-        <span>{` ${price}`}원</span>
+        <div>{`${region} ${city} `}</div>
+        <div>
+          <span className={style.productCategory}>{category}</span>
+          <p>{`${productName}`} 판매합니다.</p>
+        </div>
+        <div className={style.pricWrap}>
+          <span>{price && `${price.toLocaleString("ko-KR")}원`}</span>
+          <div
+            className={isNegotiable ? style.negotiable : style.nonNegotiable}
+          >
+            {isNegotiable ? "협의가능" : "협의불가"}
+          </div>
+        </div>
+        <div className={style.writeDate}>{convertToKoreanDate(createdAt)}</div>
       </div>
     </div>
   );

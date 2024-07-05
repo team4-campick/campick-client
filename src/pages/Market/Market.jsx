@@ -10,6 +10,7 @@ const Market = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [salePosts, setSalePosts] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [isInputClicked, setIsInputClicked] = useState(false);
   const user = useSelector((state) => state.user.user);
   const isLoggedIn = user?.username;
 
@@ -20,6 +21,7 @@ const Market = () => {
 
   const handleCategoryClick = (category) => {
     searchParams.delete("keyword");
+    setSearchKeyword("");
 
     // 전체보기일 때
     if (!category) {
@@ -83,24 +85,21 @@ const Market = () => {
           <input
             type="text"
             value={searchKeyword}
-            placeholder="어떤 상품을 찾고있나요?"
             onChange={handleSearchChange}
+            onFocus={() => {
+              setIsInputClicked(true);
+            }}
+            onBlur={() => {
+              setIsInputClicked(false);
+            }}
+            placeholder={
+              isInputClicked === true ? "" : "어떤 상품을 찾으시나요?"
+            }
           />
           <button type="submit" onClick={handleSearch}>
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </label>
-
-        {/* <input
-          type="text"
-          placeholder="어떤 상품을 찾고있나요?"
-          value={searchKeyword}
-          onChange={handleSearchChange}
-        />
-
-        <button type="submit" onClick={handleSearch}>
-          <i className="fa-solid fa-magnifying-glass"></i>
-        </button> */}
       </form>
       <div className={style.cateGories}>
         <button onClick={() => handleCategoryClick("")}>전체보기</button>

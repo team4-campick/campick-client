@@ -112,12 +112,6 @@ const SalePostEdit = () => {
       isNegotiable,
     };
 
-    // const formData = new FormData();
-    // formData.append('newPost', JSON.stringify(newPost));
-    // imageFiles.forEach((file) => {
-    //   formData.append('images', file);
-    // });
-
     try {
       const response = await fetch(salePostsEndpoint, {
         method: "PUT",
@@ -146,30 +140,7 @@ const SalePostEdit = () => {
         <ul>
           <li>
             <span>상품이미지</span>
-            {/* <input
-              type="file"
-              id="file"
-              className={style.imgInput}
-              multiple
-              accept="image/*"
-              onChange={handleFileChange}
-              disabled={imagePreviews.length >= MAX_IMAGES}
-            /> */}
-            {/* <label className={style.uploadBtn} htmlFor="file">
-              <div>
-                <i className="fa-solid fa-camera"></i>
-              </div> */}
-            {/* </label> */}
             <div className={style.imgPreview}>
-              {/* {imagePreviews.map((preview, index) => (
-                <img
-                  key={index}
-                  src={preview}
-                  alt={`미리보기 ${index + 1}`}
-                  //   onClick={() => handleImageDelete(index)}
-                />
-              ))} */}
-
               {imageFiles.map((image, index) => {
                 return (
                   <img

@@ -1,16 +1,16 @@
 .postWriteCon {
-  border: 1px solid red;
+  margin-top: 2rem;
 }
 .bgImgWrap {
   position: relative;
-  margin: 2rem 0;
 }
-.bgImgWrap :nth-of-type(0) {
+.bgImgWrap div:nth-of-type(0) {
   padding: 1rem;
 }
 
 .imgInput {
   /* display: none; */
+  margin-bottom: 1rem;
 }
 .uploadBtn {
   border: 1px solid lightgrey;
@@ -32,28 +32,38 @@
 
 .imgPreview img {
   width: 100%;
-  height: 500px;
-  object-fit: fill;
+  height: 100%;
+  object-fit: cover;
 }
 .uploadBtn i {
   color: #d2d8d6;
 }
 .inputWrap {
-  padding: 1rem 0;
   position: absolute;
+  width: 400px;
+  padding: 1rem 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
 }
 .inputWrap input {
-  border-bottom: 1px solid gray;
-  width: 400px;
+  border: 1px solid lightgray;
+  width: 100%;
+  display: block;
   padding: 1rem;
   text-align: center;
+  outline: none;
+  margin-bottom: 0.5rem;
 }
 
 .selectedRegion {
   display: flex;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+}
+.inputWrap textarea {
+  width: 100%;
+  outline: none;
+  border: 1px solid lightgray;
 }
