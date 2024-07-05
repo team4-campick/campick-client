@@ -1,41 +1,56 @@
-import React, { useRef, useState, useEffect } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import React, { useRef, useState, useEffect, useCallback } from "react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import categoryStyle from "../../css/Category.module.css";
 
 const Contents = () => {
-  const [hoverUnderlineStyle, setHoverUnderlineStyle] = useState({});
-  const [activeUnderlineStyle, setActiveUnderlineStyle] = useState({});
+  const [underlineStyle, setUnderlineStyle] = useState({});
+  const [isHovered, setIsHovered] = useState(false);
   const navRef = useRef(null);
+  const location = useLocation();
 
-  const handleHover = (e) => {
-    const link = e.target;
-    const { offsetLeft, offsetWidth } = link;
-    setHoverUnderlineStyle({
-      left: offsetLeft,
-      width: offsetWidth,
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setHoverUnderlineStyle(activeUnderlineStyle);
-  };
-
-  useEffect(() => {
-    if (navRef.current) {
+  const updateUnderlineStyle = useCallback(() => {
+    if (navRef.current && !isHovered) {
       const activeLink = navRef.current.querySelector(
         `.${categoryStyle.active}`
       );
       if (activeLink) {
         const { offsetLeft, offsetWidth } = activeLink;
-        const style = {
+        setUnderlineStyle({
           left: offsetLeft,
           width: offsetWidth,
-        };
-        setHoverUnderlineStyle(style);
-        setActiveUnderlineStyle(style);
+        });
       }
     }
-  }, []);
+  }, [isHovered]);
+
+  const handleHover = (e) => {
+    setIsHovered(true);
+    const link = e.target;
+    const { offsetLeft, offsetWidth } = link;
+    setUnderlineStyle({
+      left: offsetLeft,
+      width: offsetWidth,
+    });
+  };
+
+  const handleHoverLeave = () => {
+    setIsHovered(false);
+    updateUnderlineStyle();
+  };
+
+  useEffect(() => {
+    updateUnderlineStyle();
+    window.addEventListener("resize", updateUnderlineStyle);
+    return () => {
+      window.removeEventListener("resize", updateUnderlineStyle);
+    };
+  }, [location, updateUnderlineStyle]);
+
+  const getClassName = (isActive) => {
+    return `${categoryStyle.pageSubHeaderLink} ${
+      isActive ? categoryStyle.active : ""
+    }`;
+  };
 
   return (
     <section className={categoryStyle.pageWarp}>
@@ -43,30 +58,21 @@ const Contents = () => {
       <nav className={categoryStyle.pageSubHeader} ref={navRef}>
         <NavLink
           to="contentsBlog"
-          className={({ isActive }) =>
-            isActive
-              ? `${categoryStyle.active} ${categoryStyle.pageSubHeaderLink}`
-              : categoryStyle.pageSubHeaderLink
-          }
+          className={({ isActive }) => getClassName(isActive)}
           onMouseEnter={handleHover}
-          onMouseLeave={handleMouseLeave}
+          onMouseLeave={handleHoverLeave}
         >
           BLOG
         </NavLink>
         <NavLink
           to="contentsVideo"
-          className={({ isActive }) =>
-            isActive
-              ? `${categoryStyle.active} ${categoryStyle.pageSubHeaderLink}`
-              : categoryStyle.pageSubHeaderLink
-          }
+          className={({ isActive }) => getClassName(isActive)}
           onMouseEnter={handleHover}
-          onMouseLeave={handleMouseLeave}
+          onMouseLeave={handleHoverLeave}
         >
           VIDEO
         </NavLink>
-
-        <div className={categoryStyle.underline} style={hoverUnderlineStyle} />
+        <div className={categoryStyle.underline} style={underlineStyle} />
       </nav>
       <Outlet />
     </section>
