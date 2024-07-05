@@ -13,6 +13,7 @@ const ReviewCard = ({ item, userName }) => {
       method: "DELETE",
       credentials: "include",
     });
+    window.location.reload();
   };
   return (
     <li className={style.reviewCard}>
@@ -32,16 +33,7 @@ const ReviewCard = ({ item, userName }) => {
           <button onClick={() => setModalOpen(true)}>수정</button>
           <button onClick={(e) => handleReviewDelete(e)}>삭제</button>
         </div>
-      ) : (
-        <div className={style.tools}>
-          <button onClick={(e) => handleReviewEdit(e)} disabled>
-            수정
-          </button>
-          <button onClick={(e) => handleReviewDelete(e)} disabled>
-            삭제
-          </button>
-        </div>
-      )}
+      ) : null}
 
       <div className={style.content}>
         <span className={style.date}>{convertToKoreanDate(createdAt)}</span>

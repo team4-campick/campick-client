@@ -43,7 +43,7 @@ const ReviewEditModal = ({ setModalOpen, item }) => {
         setEditReview("");
         setModalOpen(false);
         alert("리뷰가 성공적으로 수정되었습니다");
-        navigate(`/site-detail/${contentId}`);
+        window.location.reload();
       }
     } catch (error) {
       console.error(error);
