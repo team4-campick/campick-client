@@ -1,14 +1,15 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import categoryStyle from "../../css/Category.module.css";
 
 const Event = () => {
   const [underlineStyle, setUnderlineStyle] = useState({});
+  const [isHovered, setIsHovered] = useState(false);
   const navRef = useRef(null);
   const location = useLocation();
 
-  const updateUnderlineStyle = () => {
-    if (navRef.current) {
+  const updateUnderlineStyle = useCallback(() => {
+    if (navRef.current && !isHovered) {
       const activeLink = navRef.current.querySelector(
         `.${categoryStyle.active}`
       );
@@ -20,9 +21,10 @@ const Event = () => {
         });
       }
     }
-  };
+  }, [isHovered]);
 
   const handleHover = (e) => {
+    setIsHovered(true);
     const link = e.target;
     const { offsetLeft, offsetWidth } = link;
     setUnderlineStyle({
@@ -31,9 +33,24 @@ const Event = () => {
     });
   };
 
+  const handleHoverLeave = () => {
+    setIsHovered(false);
+    updateUnderlineStyle();
+  };
+
   useEffect(() => {
     updateUnderlineStyle();
-  }, [location]);
+    window.addEventListener("resize", updateUnderlineStyle);
+    return () => {
+      window.removeEventListener("resize", updateUnderlineStyle);
+    };
+  }, [location, updateUnderlineStyle]);
+
+  const getClassName = (isActive) => {
+    return `${categoryStyle.pageSubHeaderLink} ${
+      isActive ? categoryStyle.active : ""
+    }`;
+  };
 
   return (
     <section className={categoryStyle.pageWarp}>
@@ -41,23 +58,17 @@ const Event = () => {
       <nav className={categoryStyle.pageSubHeader} ref={navRef}>
         <NavLink
           to="eventProceeding"
-          className={({ isActive }) =>
-            isActive
-              ? `${categoryStyle.active} ${categoryStyle.pageSubHeaderLink}`
-              : categoryStyle.pageSubHeaderLink
-          }
+          className={({ isActive }) => getClassName(isActive)}
           onMouseEnter={handleHover}
+          onMouseLeave={handleHoverLeave}
         >
           PROCEEDING
         </NavLink>
         <NavLink
           to="eventFinished"
-          className={({ isActive }) =>
-            isActive
-              ? `${categoryStyle.active} ${categoryStyle.pageSubHeaderLink}`
-              : categoryStyle.pageSubHeaderLink
-          }
+          className={({ isActive }) => getClassName(isActive)}
           onMouseEnter={handleHover}
+          onMouseLeave={handleHoverLeave}
         >
           FINISHED
         </NavLink>
