@@ -127,62 +127,93 @@ const Bingo = () => {
     <section className={style.bingo}>
       <h3 hidden>Bingo</h3>
       <p className={style.countStatus}>
-        지금까지 채운 빙고의 갯수는 <span>{bingoCount}</span>개 입니다
-        <button onClick={updateStatus}>refresh</button>
+        지금까지 채운 빙고의 갯수는 <span>&nbsp;{bingoCount}</span>개 입니다
+        <button onClick={updateStatus} className={style.updateBtn}>
+          <i className="fa-solid fa-rotate-right"></i>
+        </button>
       </p>
 
       <div className={style.bingoGame}>
-        <div className={style.bingoArea}>
-          {bingoCount === 8 ? (
-            <button onClick={resetBingo}>reset</button>
-          ) : null}
-          {bingoArea.map((e, i) => (
-            <BingoCard key={i + 1} e={e} />
-          ))}
-          {bingoPattern.map((e, i) => {
-            if (e === 1) {
-              return (
-                <div className={style.bingoPattern} key={i + 1}>
-                  {i + 1}번째 패턴
-                </div>
-              );
-            }
-          })}
+        <div className={style.bingoCon}>
+          <div className={style.bingoArea}>
+            {bingoCount === 8 ? (
+              <button onClick={resetBingo}>reset</button>
+            ) : null}
+            {bingoArea.map((e, i) => (
+              <BingoCard key={i + 1} e={e} />
+            ))}
+            <div className={style.patternArea}>
+              {bingoPattern.map((e, i) => {
+                if (e === 1) {
+                  return (
+                    <div
+                      className={`${style.bingoPattern} ${
+                        i + 1 === 1
+                          ? style.bingoPattern1
+                          : i + 1 === 2
+                          ? style.bingoPattern2
+                          : i + 1 === 3
+                          ? style.bingoPattern3
+                          : i + 1 === 4
+                          ? style.bingoPattern4
+                          : i + 1 === 5
+                          ? style.bingoPattern5
+                          : i + 1 === 6
+                          ? style.bingoPattern6
+                          : i + 1 === 7
+                          ? style.bingoPattern7
+                          : style.bingoPattern8
+                      }`}
+                      key={i + 1}
+                    ></div>
+                  );
+                }
+              })}
+            </div>
+          </div>
         </div>
-        <ul className={style.missionList}>
-          <li>
-            1. 리뷰 3회 : {reviewCount >= 3 ? "clear" : `${reviewCount} 회`}
-          </li>
-          <li>
-            2. 게시글 2회 작성 : {postCount >= 2 ? "clear" : `${postCount} 회`}
-          </li>
-          <li>
-            3. 미션 3개 완성 :{" "}
-            {missionClear >= 3 ? "clear" : `${missionClear} 개`}
-          </li>
-          <li>
-            4. 빙고 2개 달성 :{" "}
-            {bingoCount >= 2 ? "clear" : `${bingoCount} 빙고`}
-          </li>
-          <li>
-            5. 리뷰 5회 : {reviewCount >= 5 ? "clear" : `${reviewCount} 회`}
-          </li>
-          <li>
-            6. 게시글 4회 작성 : {postCount >= 4 ? "clear" : `${postCount} 회`}
-          </li>
-          <li>
-            7. 연속 접속일 3일 :{" "}
-            {continuousConnection >= 3 ? "clear" : `${continuousConnection}일`}
-          </li>
-          <li>
-            8. 미션 6개 완성 :{" "}
-            {missionClear >= 6 ? "clear" : `${missionClear} 개`}{" "}
-          </li>
-          <li>
-            9. 연속 접속일 7일 :{" "}
-            {continuousConnection >= 7 ? "clear" : `${continuousConnection}일`}
-          </li>
-        </ul>
+        <div className={style.missionCon}>
+          <ul className={style.missionList}>
+            <li>
+              1. 리뷰 3회 : {reviewCount >= 3 ? "clear" : `${reviewCount} 회`}
+            </li>
+            <li>
+              2. 게시글 2회 작성 :{" "}
+              {postCount >= 2 ? "clear" : `${postCount} 회`}
+            </li>
+            <li>
+              3. 미션 3개 완성 :{" "}
+              {missionClear >= 3 ? "clear" : `${missionClear} 개`}
+            </li>
+            <li>
+              4. 빙고 2개 달성 :{" "}
+              {bingoCount >= 2 ? "clear" : `${bingoCount} 빙고`}
+            </li>
+            <li>
+              5. 리뷰 5회 : {reviewCount >= 5 ? "clear" : `${reviewCount} 회`}
+            </li>
+            <li>
+              6. 게시글 4회 작성 :{" "}
+              {postCount >= 4 ? "clear" : `${postCount} 회`}
+            </li>
+            <li>
+              7. 연속 접속일 3일 :{" "}
+              {continuousConnection >= 3
+                ? "clear"
+                : `${continuousConnection}일`}
+            </li>
+            <li>
+              8. 미션 6개 완성 :{" "}
+              {missionClear >= 6 ? "clear" : `${missionClear} 개`}{" "}
+            </li>
+            <li>
+              9. 연속 접속일 7일 :{" "}
+              {continuousConnection >= 7
+                ? "clear"
+                : `${continuousConnection}일`}
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );
