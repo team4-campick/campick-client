@@ -25,42 +25,43 @@
   position: absolute;
   bottom: 0;
   width: 310px;
-  height: 130px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  height: 120px;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
   color: white;
   padding: 10px;
   box-sizing: border-box;
-  border: 1px solid green;
+  text-align: left;
 }
 
 .videoTitle {
   font-size: 18px;
   font-weight: bold;
-  border: 1px solid green;
+  text-align: left;
 }
 
 .videoDescription {
   font-size: 14px;
   margin: 5px 0;
-  border: 1px solid tan;
+  text-align: left;
 }
 
 .userBox {
+  margin-top: 10px;
   display: flex;
   align-items: center;
-  border: 1px solid tan;
+  text-align: left;
 }
 
 .userImage {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  margin-right: 5px;
-  border: 1px solid tan;
+  margin-right: 10px;
+  border: 1px solid red;
 }
 
 .videoUser {
   font-size: 14px;
-  border: 1px solid tan;
+  text-align: left;
 }
