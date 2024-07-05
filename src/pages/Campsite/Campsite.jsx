@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "../../css/Campsite/Campsite.module.css";
 import SiteCard from "../../components/Campsite/SiteCard";
+import Loading from "../../components/Laoding/Loading";
 
 const Campsite = () => {
   const url = process.env.REACT_APP_SERVER_URL;
@@ -12,50 +13,88 @@ const Campsite = () => {
   const apiName = process.env.REACT_APP_SERVICE_NAME;
 
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
   const [siteLists, setSiteLists] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+
+  const handleObserver = (entries) => {
+    const target = entries[0];
+    if (target.isIntersecting && !loading && !isSearching) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleObserver, {
+      threshold: 0,
+    });
+    const observerTarget = document.getElementById("observer");
+    if (observerTarget) {
+      observer.observe(observerTarget);
+    }
+    return () => {
+      if (observerTarget) {
+        observer.unobserve(observerTarget);
+      }
+    };
+  }, [loading, isSearching]);
 
   const handleSearchChange = (e) => {
     setSearchKeyword(e.target.value);
   };
+
   const handleSearch = async (e) => {
     e.preventDefault();
-    await searchList();
+    if (!searchKeyword) {
+      return alert("검색어를 입력해주세요.");
+    }
+    setIsSearching(true);
+    setPage(1);
+    setSiteLists([]);
+    await searchList(1);
   };
-  const searchList = async () => {
+
+  const searchList = async (pageNumber) => {
+    setLoading(true);
     try {
       const searchUrl = new URL(
-        `${apiUrl}searchList?MobileOS=${apiOS}&MobileApp=${apiName}&numOfRows=12&serviceKey=${apiKey}&_type=${apiType}&keyword=${encodeURI(
+        `${apiUrl}searchList?MobileOS=${apiOS}&MobileApp=${apiName}&numOfRows=12&serviceKey=${apiKey}&_type=${apiType}&pageNo=${pageNumber}&keyword=${encodeURI(
           searchKeyword
         )}`
       );
-      console.log("검색 기능", searchUrl);
       const response = await fetch(searchUrl, {
         method: "GET",
         headers: {
           Accept: "application/json",
         },
       });
-      console.log("response", response);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      setSiteLists(data.response.body.items.item);
+      setSiteLists((prevData) =>
+        pageNumber === 1
+          ? data.response.body.items.item
+          : [...prevData, ...data.response.body.items.item]
+      );
     } catch (err) {
       console.error(err);
     }
+    setLoading(false);
   };
+
   useEffect(() => {
     console.log("Updated siteLists:", siteLists);
   }, [siteLists]);
 
   useEffect(() => {
     const basedList = async () => {
+      setLoading(true);
       try {
         const baseUrl = new URL(
-          `${apiUrl}basedList?MobileOS=${apiOS}&MobileApp=${apiName}&numOfRows=12&serviceKey=${apiKey}&_type=${apiType}`
+          `${apiUrl}basedList?MobileOS=${apiOS}&MobileApp=${apiName}&numOfRows=12&serviceKey=${apiKey}&pageNo=${page}&_type=${apiType}`
         );
-        console.log("baseUrl : ", baseUrl);
         const response = await fetch(baseUrl, {
           method: "GET",
           headers: {
@@ -67,16 +106,21 @@ const Campsite = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log(data);
-        setSiteLists(data.response.body.items.item);
+        setLoading(false);
+        setSiteLists((prevData) =>
+          prevData ? [...prevData, ...data.response.body.items.item] : null
+        );
       } catch (error) {
         console.error(error);
       }
     };
-    basedList();
-  }, []);
+    if (!isSearching) {
+      basedList();
+    }
+  }, [page, isSearching]);
+
   return (
-    <section className={style.campsite}>
+    <section className={`mw ${style.campsite}`}>
       <h2 hidden>Campsite</h2>
       <form className="searchBar" onSubmit={handleSearch}>
         <label className="inputArea">
@@ -96,9 +140,11 @@ const Campsite = () => {
             return <SiteCard key={site.contentId} site={site} />;
           })
         ) : (
-          <div>검색된 내용이 없습니다.</div>
+          <div>검색 결과 없음</div>
         )}
       </div>
+      {loading ? <Loading /> : null}
+      <div id="observer" style={{ height: "20px" }}></div>
     </section>
   );
 };
