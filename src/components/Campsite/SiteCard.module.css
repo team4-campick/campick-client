@@ -1,27 +1,36 @@
 .siteCard {
-  /* display: flex; */
   overflow: hidden;
   cursor: pointer;
-  /* width: 100%; */
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.7);
+  transition: 0.3s;
 }
 .siteCard figure {
   display: flex;
   flex-direction: column-reverse;
+
+  overflow: hidden;
 }
 .siteCard figcaption {
-  padding-top: 0.5rem;
+  padding: 1rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  gap: 1rem;
+}
+.facltNm {
+  font-size: 1.5rem;
 }
 .imgCon {
   overflow: hidden;
-  padding-top: 70%;
+  padding-top: 120%;
   position: relative;
-  border-radius: 0.5rem;
 }
-.imgCon:hover img {
-  transform: scale(1.1);
+.siteCard:hover img {
+  transform: scale(1.05);
+}
+.siteCard:hover {
+  box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.7);
 }
 .imgCon img {
   object-fit: cover;
@@ -33,5 +42,15 @@
 }
 .siteCard .info {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  justify-content: space-between;
+}
+.induty {
+  font-size: 1rem;
+}
+.location {
+  font-size: 1rem;
+  color: gray;
+  text-align: right;
+  padding-right: 1rem;
 }
