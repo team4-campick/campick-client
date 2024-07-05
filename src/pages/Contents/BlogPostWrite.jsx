@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import QuillEditor from "../../components/BlogPost/QuillEditor";
 import style from "../../css/Contents/blogPostWrite.module.css";
 import useDropdown from "../../hooks/useDropdown";
 import { REGION } from "../../constants/market";
+import extractImageUrls from "../../utils/extractImageUrls";
 
 const BlogPostWrite = () => {
   // 이미지 미리보기 URL을 저장할 상태와 파일을 저장할 상태 선언
   const navigate = useNavigate();
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [quillImages, setQuillImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // 파일이 변경될 때 호출되는 핸들러
   const handleFileChange = (event) => {
@@ -53,9 +56,13 @@ const BlogPostWrite = () => {
     setBlogPostDesc(event.target.value);
   };
   const [quillInputValue, setQuillInputValue] = useState("");
-  console.log(quillInputValue);
 
   const handleSubmitPost = async () => {
+    // Quill 에디터 내에서 존재하는 이미지 URL만 추출
+    const imageUrlsInContent = extractImageUrls(quillInputValue);
+    const vaildImageUrls = quillImages.filter((image) =>
+      imageUrlsInContent.includes(image.url)
+    );
     const newPost = {
       content: quillInputValue,
       region,
@@ -63,17 +70,19 @@ const BlogPostWrite = () => {
       blogPostTitle,
       campSiteName,
       blogPostDesc,
+      imageUrls: vaildImageUrls,
     };
+
+    const formData = new FormData();
+    formData.append("newPost", JSON.stringify(newPost));
+    formData.append("images", imageFile);
 
     try {
       const response = await fetch(
         `${process.env.REACT_APP_SERVER_URL}/api/blog-posts`,
         {
           method: "POST",
-          body: JSON.stringify(newPost),
-          headers: {
-            "Content-type": "application/json",
-          },
+          body: formData,
           credentials: "include",
         }
       );
@@ -87,13 +96,14 @@ const BlogPostWrite = () => {
       navigate(`/blog-post-detail/${res.blogPost._id}`);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <section className={`mw quillTest ${style.postWriteCon}`}>
       <h2 hidden>BlogPostWrite</h2>
-
       <div className={style.bgImgWrap}>
         <div>
           <input
@@ -131,16 +141,20 @@ const BlogPostWrite = () => {
             <RegionDropdown />
             <CityDropdown />
           </div>
-          <input
-            type="text"
+          <textarea
             placeholder="소개글을 작성해주세요."
             value={blogPostDesc}
             onChange={handleblogPostDesc}
+            rows="5"
           />
         </div>
       </div>
 
-      <QuillEditor setValue={setQuillInputValue} value={quillInputValue} />
+      <QuillEditor
+        setValue={setQuillInputValue}
+        value={quillInputValue}
+        setQuillImages={setQuillImages}
+      />
 
       <div className="submitButtonWrap">
         <div onClick={() => navigate(`/contents/contentsBlog`)}>
@@ -149,10 +163,10 @@ const BlogPostWrite = () => {
 
         <button
           className="submitButton"
-          type="button"
           onClick={handleSubmitPost}
+          disabled={isLoading}
         >
-          작성완료
+          {isLoading ? "등록 중" : "등록하기"}
         </button>
       </div>
     </section>

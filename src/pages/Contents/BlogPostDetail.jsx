@@ -6,19 +6,19 @@ import { useSelector } from "react-redux";
 
 const BlogPostDetail = () => {
   const { id } = useParams();
-  const [blogPostDetail, setBlogPostDetail] = useState({});
+  const [blogPostDetail, setBlogPostDetail] = useState(null);
   const navigate = useNavigate();
 
-  const {
-    author,
-    authorId,
-    blogPostTitle,
-    campSiteName,
-    region,
-    city,
-    content,
-    createdAt,
-  } = blogPostDetail;
+  // const {
+  //   author,
+  //   authorId,
+  //   blogPostTitle,
+  //   campSiteName,
+  //   region,
+  //   city,
+  //   content,
+  //   createdAt,
+  // } = blogPostDetail;
 
   const blogPostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/blog-posts/${id}`;
 
@@ -65,6 +65,21 @@ const BlogPostDetail = () => {
   const editPost = () => {
     navigate(`/blog-post-edit/${id}`);
   };
+  // 데이터 로딩 전에는 로딩 중임을 표시
+  if (blogPostDetail === null) return <p>loading...</p>;
+
+  // blogPostDetail 데이터를 불러온 이후에 destructuring 및 렌더링
+  const {
+    author,
+    authorId,
+    blogPostTitle,
+    campSiteName,
+    region,
+    city,
+    content,
+    createdAt,
+    backgroundImgUrls,
+  } = blogPostDetail;
 
   return (
     <section>
@@ -77,17 +92,17 @@ const BlogPostDetail = () => {
       )}
 
       <div className={style.topBackgroundImg}>
-        <img src="" alt="배경이미지" />
+        <img src={backgroundImgUrls[0].url} alt="배경이미지" />
         <div className={style.blogPostInfo}>
           <h3>{blogPostTitle}</h3>
           <div>
-            <span>{campSiteName} </span>
+            <span>{campSiteName} / </span>
             <span>{region} </span>
             <span>{city}</span>
           </div>
           <div>
             <span>{convertToKoreanDate(createdAt)}</span>
-            <span> by. {author}</span>
+            <div className={style.postAutor}> by. {author}</div>
           </div>
         </div>
       </div>

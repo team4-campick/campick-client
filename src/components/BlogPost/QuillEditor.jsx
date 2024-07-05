@@ -23,7 +23,7 @@ const formats = [
   "code-block",
 ];
 
-const QuillEditor = ({ value, setValue }) => {
+const QuillEditor = ({ value, setValue, setQuillImages }) => {
   const quillRef = useRef(null);
 
   const handleUploadImage = async () => {
@@ -58,12 +58,14 @@ const QuillEditor = ({ value, setValue }) => {
         if (!res.result) return alert(res.message);
 
         // 반환된 이미지 url을 에디터에 추가
-        const imageUrls = res.imageUrls;
+        const imageData = res.imageUrls;
+        console.log(imageData);
+        setQuillImages((prev) => [...prev, ...imageData]);
 
         const quill = quillRef.current.getEditor();
         const range = quill.getSelection();
 
-        for (const imageUrl of imageUrls) {
+        for (const imageUrl of imageData) {
           quill.insertEmbed(range.index, "image", imageUrl.url);
         }
       };

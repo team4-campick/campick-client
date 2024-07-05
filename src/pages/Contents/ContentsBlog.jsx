@@ -7,6 +7,7 @@ import BlogPostCard from "../../components/BlogPost/BlogPostCard";
 const ContentsBlog = () => {
   const navigate = useNavigate();
   const [blogPosts, setBlogPosts] = useState([]);
+
   const user = useSelector((state) => state.user.user);
   const isLoggedIn = user?.username;
   useEffect(() => {

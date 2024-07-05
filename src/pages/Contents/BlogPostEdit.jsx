@@ -4,10 +4,20 @@ import QuillEditor from "../../components/BlogPost/QuillEditor";
 import style from "../../css/Contents/blogPostWrite.module.css";
 import useDropdown from "../../hooks/useDropdown";
 import { REGION } from "../../constants/market";
+import extractImageUrls from "../../utils/extractImageUrls";
 
 const BlogPostEdit = () => {
+  const [quillImages, setQuillImages] = useState([]);
+
   const { id } = useParams();
   const navigate = useNavigate();
+  const [imageFiles, setImageFiles] = useState([
+    {
+      _id: "",
+      url: "",
+      publicId: "",
+    },
+  ]);
 
   const {
     selectedLabel: region,
@@ -43,7 +53,6 @@ const BlogPostEdit = () => {
   };
 
   const [quillInputValue, setQuillInputValue] = useState("");
-  console.log(quillInputValue);
 
   const fetchBlogPostEdit = async () => {
     try {
@@ -66,16 +75,21 @@ const BlogPostEdit = () => {
       setCity(data.blogPost.city);
       setCampSiteName(data.blogPost.campSiteName);
       setBlogPostDesc(data.blogPost.blogPostDesc);
+      setImageFiles(data.blogPost.backgroundImgUrls);
     } catch (error) {
       console.log(error);
     }
   };
-
+  console.log(imageFiles);
   useEffect(() => {
     fetchBlogPostEdit();
   }, []);
 
   const handleSubmitPost = async () => {
+    const imageUrlsInContent = extractImageUrls(quillInputValue);
+    const vaildImageUrls = quillImages.filter((image) =>
+      imageUrlsInContent.includes(image.url)
+    );
     const editedPost = {
       content: quillInputValue,
       region,
@@ -83,6 +97,7 @@ const BlogPostEdit = () => {
       blogPostTitle,
       campSiteName,
       blogPostDesc,
+      imageUrls: vaildImageUrls,
     };
 
     try {
@@ -109,26 +124,12 @@ const BlogPostEdit = () => {
     }
   };
   return (
-    <section className={`mw ${style.postWriteCon}`}>
+    <section className={`mw quillTest ${style.postWriteCon}`}>
       <h2 hidden>BlogPostEdit</h2>
 
       <div className={style.bgImgWrap}>
-        {/* <div>
-          <input
-            type="file"
-            id="file"
-            className={style.imgInput}
-            accept="image/*"
-            onChange={handleFileChange}
-          />
-        </div> */}
-
         <div className={style.imgPreview}>
-          {/* <img
-            src={imagePreview}
-            alt="배경이미지"
-            onClick={handleImageDelete}
-          /> */}
+          <img key={imageFiles._id} src={imageFiles[0].url} alt="배경이미지" />
         </div>
 
         <div className={style.inputWrap}>
@@ -161,7 +162,7 @@ const BlogPostEdit = () => {
       <QuillEditor
         value={quillInputValue}
         setValue={setQuillInputValue}
-        // onChange={handlecontent}
+        setQuillImages={setQuillImages}
       />
 
       <div className="submitButtonWrap">
