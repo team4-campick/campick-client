@@ -1,6 +1,5 @@
 .bingoCard {
-  border: 1px solid transparent;
-  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,6 +8,7 @@
   overflow: hidden;
   position: relative;
   perspective: 800px;
+  z-index: 2;
 }
 .front,
 .back {
@@ -19,7 +19,6 @@
   transition: 1s;
   backface-visibility: hidden;
   background-color: white;
-  /* border: 3px solid black; */
   border-radius: 50%;
 }
 .front {
@@ -38,6 +37,9 @@
   justify-content: center;
   align-items: center;
   transform: rotateY(180deg);
+}
+.back img {
+  width: 60%;
 }
 .bingoCard.on .front {
   transform: rotateY(180deg);

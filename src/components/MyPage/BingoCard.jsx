@@ -2,7 +2,6 @@ import React from "react";
 import style from "./BingoCard.module.css";
 
 const BingoCard = ({ e }) => {
-  console.log("e가 무엇을 담고 있는가?", e);
   const backImgList = [
     "https://img.icons8.com/ios-filled/100/055a5b/camping-tent.png",
     "https://img.icons8.com/pastel-glyph/64/055a5b/camping-gas-burner.png",
