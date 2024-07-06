@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const StarRating = (scoreAvg) => {
+const StarRating = ({ scoreAvg }) => {
+  console.log("scoreAvg", scoreAvg);
   return (
     <div>
       {[...Array(scoreAvg)].map((_, i) => (

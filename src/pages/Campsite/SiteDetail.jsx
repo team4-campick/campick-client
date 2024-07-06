@@ -45,12 +45,16 @@ const SiteDetail = () => {
   const newImgArr = siteImg?.splice(1, 3);
 
   const calcAvg = async (data) => {
-    const avg = Math.round(
-      data?.reduce((acc, review) => acc + data.score, 0) / (data?.length || 1)
-    );
+    console.log("data", data);
+    if (data.length === 0) {
+      setScoreAvg(0);
+      return;
+    }
+    let total = 0;
+    data?.forEach((e) => (total += e.score));
+
+    const avg = Math.round(total / data?.length);
     setScoreAvg(avg);
-    console.log("avg", avg);
-    console.log("scoreAvg", scoreAvg);
   };
 
   useEffect(() => {
@@ -106,7 +110,7 @@ const SiteDetail = () => {
         const data = await response.json();
         console.log("사이트 디테일 페이지 데이터 체크 : ", data.reviews);
         setReviews(data.reviews);
-        await calcAvg(reviews);
+        await calcAvg(data.reviews);
       } catch (error) {
         console.error(error);
       }
@@ -177,8 +181,8 @@ const SiteDetail = () => {
             {facltNm} <i className="fa-solid fa-arrow-up-right-from-square"></i>
           </a>
         </h3>
-        <StarRating scoreAvg={scoreAvg} />
         <span>{induty}</span>
+        <StarRating scoreAvg={scoreAvg} />
         <span>{addr1}</span>
       </p>
       <div className={style.optionCon}>
