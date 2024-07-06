@@ -56,12 +56,13 @@ const BlogPostWrite = () => {
     setBlogPostDesc(event.target.value);
   };
   const [quillInputValue, setQuillInputValue] = useState("");
+  console.log(quillInputValue);
 
   const handleSubmitPost = async () => {
     // Quill 에디터 내에서 존재하는 이미지 URL만 추출
     const imageUrlsInContent = extractImageUrls(quillInputValue);
     const vaildImageUrls = quillImages.filter((image) =>
-      imageUrlsInContent.includes(image.url)
+      imageUrlsInContent.includes(image?.url)
     );
     const newPost = {
       content: quillInputValue,

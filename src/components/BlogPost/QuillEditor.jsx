@@ -59,13 +59,16 @@ const QuillEditor = ({ value, setValue, setQuillImages }) => {
 
         // 반환된 이미지 url을 에디터에 추가
         const imageData = res.imageUrls;
-        console.log(imageData);
-        setQuillImages((prev) => [...prev, ...imageData]);
+        const validImageData = [...imageData].filter((image) => image);
+        if (validImageData.length === 0)
+          return alert("이미지 첨부에 실패했습니다. 용량을 확인해주세요.");
+
+        setQuillImages((prev) => [...prev, ...validImageData]);
 
         const quill = quillRef.current.getEditor();
         const range = quill.getSelection();
 
-        for (const imageUrl of imageData) {
+        for (const imageUrl of validImageData) {
           quill.insertEmbed(range.index, "image", imageUrl.url);
         }
       };
