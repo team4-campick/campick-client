@@ -17,6 +17,8 @@ const EditInfo = () => {
   const [errorMsg2, setErrorMsg2] = useState("");
   const [errorMsg3, setErrorMsg3] = useState("");
   const [errorMsg4, setErrorMsg4] = useState("");
+  const [nicknameDuplicateCheck, setNicknameDuplicateCheck] = useState(false);
+  const [curPwCheck, setCurPwCheck] = useState(false);
 
   const user = useSelector((state) => state.user.user);
   const userName = user?.username;
@@ -38,9 +40,11 @@ const EditInfo = () => {
     if (response.status === 200) {
       // 여기서 중복확인 되면 통과한것 관련 효과 추가하자.
       console.log("중복확인 성공");
+      setNicknameDuplicateCheck(true);
       setErrorMsg1("");
     } else if (response.status === 409) {
       setErrorMsg1(AUTH_ERROR.DUPLICATE);
+      setNicknameDuplicateCheck(false);
     }
   };
   const passwordCheck = async (password) => {
@@ -54,17 +58,24 @@ const EditInfo = () => {
     if (response.status === 200) {
       console.log("passwordCheck 성공");
       setErrorMsg2("passwordCheck 성공");
+      setCurPwCheck(true);
     } else if (response.status === 409) {
-      setErrorMsg2(AUTH_ERROR.PASSWORD_CHECK);
-      return;
+      setCurPwCheck(false);
     }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    passwordCheck(currentPW);
-    // 이부분에서
-    // const pwOK = bcrypt.compareSync(password, userDoc.password); 이 요청 보내면 될듯.
-    // response null 이면 setErrorMsg2('현재 비밀번호와 일치하지 않습니다.');
+    console.log("currentPW", currentPW);
+    await passwordCheck(currentPW);
+
+    if (nicknameDuplicateCheck === false) {
+      setErrorMsg1(AUTH_ERROR.DUPLICATE);
+      return;
+    }
+    if (curPwCheck === false) {
+      setErrorMsg2(AUTH_ERROR.NOT_MATCHING.CURRENT_PW);
+      return;
+    }
     if (!nickname) {
       setErrorMsg1(AUTH_ERROR.BLANK.NICKNAME);
       return;
