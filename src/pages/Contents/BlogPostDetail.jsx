@@ -92,7 +92,9 @@ const BlogPostDetail = () => {
       )}
 
       <div className={style.topBackgroundImg}>
-        <img src={backgroundImgUrls[0].url} alt="배경이미지" />
+        {!!backgroundImgUrls.length && (
+          <img src={backgroundImgUrls[0].url} alt="배경이미지" />
+        )}
         <div className={style.blogPostInfo}>
           <h3>{blogPostTitle}</h3>
           <div>
