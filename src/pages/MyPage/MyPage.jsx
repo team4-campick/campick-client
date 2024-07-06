@@ -6,6 +6,7 @@ import "../../css/MyPage/MyPageCommon.css";
 const MyPage = () => {
   const user = useSelector((state) => state.user.user);
   const nickname = user?.nickname;
+  console.log("nickname test", nickname);
   return (
     <section className={style.myPage}>
       <h2 hidden>MyPage</h2>
