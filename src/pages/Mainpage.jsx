@@ -46,7 +46,7 @@ const MainPage = () => {
         const data = await response.json();
 
         const latestPosts = data.blogPosts
-          .sort((a, b) => new Date(b.date) - new Date(a.date)) // 날짜 순으로 정렬
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
           .slice(0, 3);
 
         setBlogPosts(latestPosts);
@@ -116,6 +116,10 @@ const MainPage = () => {
             centeredSlides={true}
             pagination={{ clickable: true }}
             navigation={true}
+            autoplay={{
+              delay: 4500,
+              disableOnInteraction: false,
+            }}
             modules={[Autoplay, Pagination, Navigation, Controller]}
             className={styles.mainExplainSwiper}
             onSwiper={(swiper) => {
