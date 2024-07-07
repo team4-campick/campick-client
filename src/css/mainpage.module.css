@@ -2,7 +2,6 @@
 .mainVisual {
   width: 100%;
   height: 900px;
-  border: 1px solid red;
   display: block;
   background-color: rgb(13, 74, 82);
   position: relative;
@@ -81,7 +80,7 @@
   border-radius: 0 0 5px 5px;
   text-align: center;
   margin: 0 auto;
-  padding: 28px;
+  padding: 34px 28px 28px 28px;
 }
 
 .blog strong,
@@ -91,8 +90,6 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  border: 1px solid red;
-  margin-bottom: 16px;
 }
 
 .blog strong {
@@ -108,6 +105,7 @@
   font-weight: bold;
   color: rgba(0, 0, 0, 1);
   -webkit-line-clamp: 2;
+  margin-bottom: 16px;
 }
 
 .blog p {
