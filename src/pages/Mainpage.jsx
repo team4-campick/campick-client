@@ -11,12 +11,13 @@ import { filterImagesByDate, updateImageStatuses } from "../utils/EventUtils";
 import styles from "../css/mainpage.module.css";
 import ScrollTopBtn from "../components/ScrollTop/ScrollTopBtn";
 
-const Mainpage = () => {
+const MainPage = () => {
   const mainSwiperRef = useRef(null);
   const blogSwiperRef = useRef(null);
   const eventSwiperRef = useRef(null);
 
   const [proceedingImages, setProceedingImages] = useState([]);
+  const [blogPosts, setBlogPosts] = useState([]);
   const [isPrevDisabled, setIsPrevDisabled] = useState(true);
   const [isNextDisabled, setIsNextDisabled] = useState(false);
 
@@ -28,6 +29,33 @@ const Mainpage = () => {
       setProceedingImages(proceedingImages);
     };
     fetchImages();
+  }, []);
+
+  useEffect(() => {
+    const fetchBlogPosts = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER_URL}/api/blog-posts`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        const latestPosts = data.blogPosts
+          .sort((a, b) => new Date(b.date) - new Date(a.date)) // 날짜 순으로 정렬
+          .slice(0, 3);
+
+        setBlogPosts(latestPosts);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchBlogPosts();
   }, []);
 
   useEffect(() => {
@@ -69,14 +97,22 @@ const Mainpage = () => {
             }
           }}
         >
-          <SwiperSlide>Slide 1</SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
+          {blogPosts.map((post, index) => (
+            <SwiperSlide key={post._id}>
+              <img
+                src={
+                  post.backgroundImgUrls?.[0]?.url ||
+                  "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"
+                }
+                alt={`Slide ${index + 1}`}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
 
         <div className={styles.blogTapWarp}>
           <Swiper
-            spaceBetween={4}
+            spaceBetween={0}
             centeredSlides={true}
             pagination={{ clickable: true }}
             navigation={true}
@@ -90,30 +126,16 @@ const Mainpage = () => {
               }
             }}
           >
-            <SwiperSlide>
-              <div className={styles.firstBlog}>
-                <strong>위치정보1</strong>
-                <h3>정보1</h3>
-                <p>내용1</p>
-                <Link to="/blog/1">Read More1</Link>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className={styles.secondBlog}>
-                <strong>위치정보2</strong>
-                <h3>정보2</h3>
-                <p>내용2</p>
-                <Link to="/blog/2">Read More2</Link>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className={styles.thirdBlog}>
-                <strong>위치정보3</strong>
-                <h3>정보3</h3>
-                <p>내용3</p>
-                <Link to="/blog/3">Read More3</Link>
-              </div>
-            </SwiperSlide>
+            {blogPosts.map((post) => (
+              <SwiperSlide key={post._id}>
+                <div className={styles.blog}>
+                  <strong>{`${post.region}, ${post.city}`}</strong>
+                  <h3>{post.blogPostTitle}</h3>
+                  <p>{post.blogPostDesc}</p>
+                  <Link to={`/blog-post-detail/${post._id}`}>Read More</Link>
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </section>
@@ -181,10 +203,9 @@ const Mainpage = () => {
         </div>
       </section>
 
-      {/* ScrollTopBtn 추가 */}
       <ScrollTopBtn />
     </>
   );
 };
 
-export default Mainpage;
+export default MainPage;
