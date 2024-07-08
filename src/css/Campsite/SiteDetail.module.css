@@ -53,7 +53,6 @@
   height: 100%;
   width: 100%;
 }
-
 .siteInfo {
   display: flex;
   flex-direction: column;
@@ -70,28 +69,36 @@
   font-weight: bold;
   gap: 0.5rem;
   padding-bottom: 1rem;
+  width: fit-content;
 }
 .siteInfo h3 i {
   font-size: 1rem;
   color: black;
 }
 .optionCon {
-  /* border: 1px solid red; */
+  border-top: 1px solid lightgray;
+  padding-top: 3rem;
 }
 .optionCon h3 {
   font-size: 2rem;
   font-weight: bold;
   color: #055a5b;
-  padding: 3rem 0 1rem 0;
+  padding-bottom: 1rem;
 }
 .options {
   display: flex;
-  gap: 1.5rem;
+  gap: 3rem;
 }
-.options > svg {
+.options svg {
   width: 3rem;
   height: 3rem;
   color: gray;
+}
+.options .option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 .siteMap {
   width: 100%;

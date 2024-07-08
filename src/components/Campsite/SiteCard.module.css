@@ -1,8 +1,9 @@
 .siteCard {
   overflow: hidden;
   cursor: pointer;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.7);
+  /* border-radius: 0.5rem; */
+  /* box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.7); */
+  border: 1px solid lightgray;
   transition: 0.3s;
 }
 .siteCard figure {
@@ -30,7 +31,7 @@
   transform: scale(1.05);
 }
 .siteCard:hover {
-  box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.7);
+  /* box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.7); */
 }
 .imgCon img {
   object-fit: cover;
@@ -52,5 +53,4 @@
   font-size: 1rem;
   color: gray;
   text-align: right;
-  padding-right: 1rem;
 }
