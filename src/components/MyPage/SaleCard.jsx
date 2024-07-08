@@ -4,7 +4,15 @@ import convertToKoreanDate from "../../utils/convertToKoreanDate";
 const SaleCard = ({ post }) => {
   const navigate = useNavigate();
   console.log("post data check", post);
-  const { productName, region, city, price, imageUrls, createdAt } = post;
+  const {
+    productName,
+    region,
+    city,
+    price,
+    imageUrls,
+    createdAt,
+    isNegotiable,
+  } = post;
   const wonPrice = price?.toLocaleString("ko-KR");
   const thumbnail =
     imageUrls?.[0]?.url ||
@@ -17,12 +25,18 @@ const SaleCard = ({ post }) => {
         navigate(`/sale-post-detail/${post._id}`);
       }}
     >
-      <img src={thumbnail} alt="상품이미지" />
+      <div className={style.imgCon}>
+        <img src={thumbnail} alt="상품이미지" />
+      </div>
       <div className={style.productInfo}>
         <p className={style.product}>{`${productName}`} 판매합니다.</p>
         <div className={style.priceInfo}>
           <span className={style.price}>{`${wonPrice}`}원</span>
-          <span>협의 가능?</span>
+          <span
+            className={isNegotiable ? style.negotiable : style.nonNegotiable}
+          >
+            {isNegotiable ? "협의가능" : "협의불가"}
+          </span>
         </div>
         <p className={style.registerInfo}>
           <span className={style.location}>{`${region} ${city} `}</span>

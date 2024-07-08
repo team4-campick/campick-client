@@ -7,24 +7,22 @@ const MyPost = () => {
   const url = process.env.REACT_APP_SERVER_URL;
   const user = useSelector((state) => state.user.user);
   const userName = user?.username;
-  const [myPostList, setMyPostList] = useState([1, 2, 3, 4, 5, 6]);
+  const [myPostList, setMyPostList] = useState([]);
   useEffect(() => {
     const getMyPostList = async () => {
       try {
         const response = await fetch(`${url}/post/${userName}`, {
           method: "GET",
-          headers: { "Content-Type": "application/json" },
-          // headers: {
-          //   // Authorization: localStorage.getItem("token"),
-          // },
+          headers: { Accept: "application/json" },
           credentials: "include",
         });
         const data = await response.json();
+        console.log("data", data.post);
         if (!data) {
           alert("값이 없넹");
         }
         console.log("post get data", data);
-        setMyPostList(data);
+        setMyPostList(data.post);
       } catch (error) {
         console.error(error);
       }
@@ -37,9 +35,11 @@ const MyPost = () => {
       <h3 hidden>MyPost</h3>
       <nav className="myPage_SubHeader">내가 쓴 게시글</nav>
       <div className={style.postCon}>
-        {myPostList.map((post, i) => (
-          <BlogPostCard key={i} post={post} />
-        ))}
+        {myPostList.length !== 0 ? (
+          myPostList.map((post, i) => <BlogPostCard key={i} post={post} />)
+        ) : (
+          <div className={style.noPost}>내가 쓴 게시글이 없습니다.</div>
+        )}
       </div>
     </section>
   );

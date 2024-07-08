@@ -27,9 +27,11 @@ const Purchase = () => {
     <section className={style.cardCon}>
       <h3 hidden>Purchase</h3>
       <div className={style.cardList}>
-        {salePosts.map((post) => (
-          <SaleCard key={post._id} post={post} />
-        ))}
+        {salePosts.length !== 0 ? (
+          salePosts.map((post) => <SaleCard key={post._id} post={post} />)
+        ) : (
+          <div className={style.noPost}>거래 정보가 없습니다.</div>
+        )}
       </div>
     </section>
   );
