@@ -1,7 +1,7 @@
 .editInfo > form {
   display: flex;
   flex-direction: column;
-  padding: 6rem 12rem;
+  padding: 6rem 15%;
 }
 .editInfo .inputArea {
   border-bottom: 1px;

@@ -3,10 +3,12 @@ import style from "../../css/MyPage/Bingo.module.css";
 import BingoCard from "../../components/MyPage/BingoCard";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { COUPON } from "../../constants/coupon";
 
 const Bingo = () => {
   const url = process.env.REACT_APP_SERVER_URL;
   const user = useSelector((state) => state.user.user);
+  const userObjId = user?.id;
   const userName = user?.username;
 
   const [bingoArea, setBingoArea] = useState([]);
@@ -18,10 +20,10 @@ const Bingo = () => {
   const [bingoCount, setBingoCount] = useState(0);
   const [continuousConnection, setContinuousConnection] = useState(0);
   const [bingoPattern, setBingoPattern] = useState([]);
-
+  console.log("objId", userObjId);
   const updateMission = async () => {
     try {
-      const response = await fetch(`${url}/update-mission/${userName}`, {
+      const response = await fetch(`${url}/update-mission/${userObjId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -42,18 +44,16 @@ const Bingo = () => {
       setContinuousConnection(mission.continuousConnection);
       setMissionClear(mission.missionClear);
       setBingoCount(mission.bingoCount);
-      console.log("포카", postCount);
       if (JSON.stringify(bingoArea) !== JSON.stringify(bingo)) {
         getBingoArea();
       }
-      console.log("빙고영역", bingoArea);
     } catch (error) {
       console.error(error);
     }
   };
   const getBingoPattern = async () => {
     try {
-      const response = await fetch(`${url}/bingo-pattern/${userName}`, {
+      const response = await fetch(`${url}/bingo-pattern/${userObjId}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -69,7 +69,7 @@ const Bingo = () => {
   };
   const getBingoArea = async () => {
     try {
-      const response = await fetch(`${url}/bingo-area/${userName}`, {
+      const response = await fetch(`${url}/bingo-area/${userObjId}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -84,7 +84,7 @@ const Bingo = () => {
   };
   const getBingoCount = async () => {
     try {
-      const response = await fetch(`${url}/bingo-count/${userName}`, {
+      const response = await fetch(`${url}/bingo-count/${userObjId}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -104,23 +104,85 @@ const Bingo = () => {
   };
   const resetBingo = async () => {
     try {
-      const response = await fetch(`${url}/reset-bingo/${userName}`, {
+      console.log("reset clicked");
+      const response = await fetch(`${url}/reset-bingo/${userObjId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
       });
-      console.log(response);
+      console.log("reset???", response);
       await getBingoArea();
     } catch (error) {
       console.log(error);
+    }
+  };
+  const couponDuplicateCheck = async (coupon) => {
+    try {
+      console.log("쿠폰 테스트", coupon);
+      const newCoupon = coupon;
+      const response = await fetch(`${url}/check-duplicate/${userObjId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          coupon: newCoupon,
+        }),
+        credentials: "include",
+      });
+      if (response.status === 401) {
+        return false;
+      }
+      if (response.status === 200) {
+        const data = await response.json();
+        return data;
+      }
+    } catch (error) {
+      console.error("중복체크 에러", error);
+    }
+  };
+  const couponIssuance = async (coupon) => {
+    try {
+      console.log("쿠폰 테스트2", coupon);
+      const newCoupon = coupon;
+      const response = await fetch(`${url}/issue-coupon/${userObjId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ coupon: newCoupon }),
+        credentials: "include",
+      });
+      const data = await response.json();
+      console.log("data", data);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleCoupon = async (coupon) => {
+    console.log("handleCoupon", coupon);
+    const couponCheck = await couponDuplicateCheck(coupon);
+    console.log("couponCheck", couponCheck);
+    if (couponCheck === false) {
+      return alert("이미 발급된 쿠폰입니다.");
+    } else {
+      const couponIssue = await couponIssuance(coupon);
+      console.log("couponIssue", couponIssue);
+      if (couponIssue) {
+        alert("쿠폰이 발급되었습니다.");
+      } else {
+        alert("오류 발생");
+      }
     }
   };
 
   useEffect(() => {
     getBingoArea();
     updateMission();
+    getBingoPattern();
   }, []);
 
   return (
@@ -137,7 +199,9 @@ const Bingo = () => {
         <div className={style.bingoCon}>
           <div className={style.bingoArea}>
             {bingoCount === 8 ? (
-              <button onClick={resetBingo}>reset</button>
+              <button className={style.resetBingoBtn} onClick={resetBingo}>
+                reset
+              </button>
             ) : null}
             {bingoArea.map((e, i) => (
               <BingoCard key={i + 1} e={e} />
@@ -172,47 +236,117 @@ const Bingo = () => {
             </div>
           </div>
         </div>
-        <div className={style.missionCon}>
-          <ul className={style.missionList}>
-            <li>
-              1. 리뷰 3회 : {reviewCount >= 3 ? "clear" : `${reviewCount} 회`}
-            </li>
-            <li>
-              2. 게시글 2회 작성 :{" "}
-              {postCount >= 2 ? "clear" : `${postCount} 회`}
-            </li>
-            <li>
-              3. 미션 3개 완성 :{" "}
-              {missionClear >= 3 ? "clear" : `${missionClear} 개`}
-            </li>
-            <li>
-              4. 빙고 2개 달성 :{" "}
-              {bingoCount >= 2 ? "clear" : `${bingoCount} 빙고`}
-            </li>
-            <li>
-              5. 리뷰 5회 : {reviewCount >= 5 ? "clear" : `${reviewCount} 회`}
-            </li>
-            <li>
-              6. 게시글 4회 작성 :{" "}
-              {postCount >= 4 ? "clear" : `${postCount} 회`}
-            </li>
-            <li>
-              7. 연속 접속일 3일 :{" "}
-              {continuousConnection >= 3
-                ? "clear"
-                : `${continuousConnection}일`}
-            </li>
-            <li>
-              8. 미션 6개 완성 :{" "}
-              {missionClear >= 6 ? "clear" : `${missionClear} 개`}{" "}
-            </li>
-            <li>
-              9. 연속 접속일 7일 :{" "}
-              {continuousConnection >= 7
-                ? "clear"
-                : `${continuousConnection}일`}
-            </li>
-          </ul>
+        <div className={style.bingoResultCon}>
+          <div className={style.missionCon}>
+            <ul className={style.missionList}>
+              <li>
+                <span>1. 리뷰 3회 </span>
+                <span className={style.result}>
+                  {reviewCount >= 3 ? (
+                    <span className={style.clear}>clear</span>
+                  ) : (
+                    `${reviewCount} 회`
+                  )}
+                </span>
+              </li>
+              <li>
+                <span>2. 게시글 2회 작성</span>
+                <span className={style.result}>
+                  {postCount >= 2 ? (
+                    <span className={style.clear}>clear</span>
+                  ) : (
+                    `${postCount} 회`
+                  )}
+                </span>
+              </li>
+              <li>
+                <span>3. 미션 3개 완성</span>
+                <span className={style.result}>
+                  {missionClear >= 3 ? (
+                    <span className={style.clear}>clear</span>
+                  ) : (
+                    `${missionClear} 개`
+                  )}
+                </span>
+              </li>
+              <li>
+                <span>4. 빙고 2개 달성</span>
+                <span className={style.result}>
+                  {bingoCount >= 2 ? (
+                    <span className={style.clear}>clear</span>
+                  ) : (
+                    `${bingoCount} 빙고`
+                  )}
+                </span>
+              </li>
+              <li>
+                <span>5. 리뷰 5회</span>
+                <span className={style.result}>
+                  {reviewCount >= 5 ? (
+                    <span className={style.clear}>clear</span>
+                  ) : (
+                    `${reviewCount} 회`
+                  )}
+                </span>
+              </li>
+              <li>
+                <span>6. 게시글 4회 작성</span>
+                <span className={style.result}>
+                  {postCount >= 4 ? (
+                    <span className={style.clear}>clear</span>
+                  ) : (
+                    `${postCount} 회`
+                  )}
+                </span>
+              </li>
+              <li>
+                <span>7. 연속 접속일 3일</span>
+                <span className={style.result}>
+                  {continuousConnection >= 3 ? (
+                    <span className={style.clear}>clear</span>
+                  ) : (
+                    `${continuousConnection}일`
+                  )}
+                </span>
+              </li>
+              <li>
+                <span>8. 미션 6개 완성</span>
+                <span className={style.result}>
+                  {missionClear >= 6 ? (
+                    <span className={style.clear}>clear</span>
+                  ) : (
+                    `${missionClear} 개`
+                  )}
+                </span>
+              </li>
+              <li>
+                <span>9. 연속 접속일 7일</span>
+                <span className={style.result}>
+                  {continuousConnection >= 7 ? (
+                    <span className={style.clear}>clear</span>
+                  ) : (
+                    `${continuousConnection}일`
+                  )}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div className={style.couponCon}>
+            <ul className={style.couponList}>
+              {COUPON.map((item, i) => {
+                return (
+                  <li key={item} className={style[item]}>
+                    <span className={style.coupon}>{item.TYPE}</span>
+                    {bingoCount >= i + 1 ? (
+                      <button onClick={() => handleCoupon(item)}>발급</button>
+                    ) : (
+                      <button disabled>발급</button>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

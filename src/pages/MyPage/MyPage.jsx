@@ -11,7 +11,7 @@ const MyPage = () => {
     <section className={style.myPage}>
       <h2 hidden>MyPage</h2>
       <div className={style.banner}>
-        <p className={style.myPageIntro}>{`안녕하세요, ${nickname} 님!`}</p>
+        <p className={style.myPageIntro}>{`${nickname}님 반가워요 !`}</p>
       </div>
       <div className={style.contentCon}>
         <aside className={style.sideBar}>

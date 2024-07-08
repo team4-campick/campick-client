@@ -1,11 +1,12 @@
 .bingo {
+  padding: 2rem;
 }
 .countStatus {
   width: 100%;
   height: 6rem;
   display: flex;
   align-items: center;
-  padding-left: 8rem;
+  justify-content: center;
   font-size: 1.5rem;
 }
 .updateBtn {
@@ -13,14 +14,15 @@
 }
 .bingoCon {
   width: 40%;
-  padding-top: 40%;
+  padding-top: 50%;
   position: relative;
+  flex: 1;
 }
 .bingoGame {
   display: flex;
+  justify-content: space-around;
   align-items: center;
   gap: 2rem;
-  padding: 0 0 4rem 4rem;
 }
 .bingoArea {
   width: 100%;
@@ -32,16 +34,38 @@
   position: absolute;
   top: 0;
 }
-.missionCon {
-  /* flex: 1; */
+.bingoResultCon {
+  flex: 1;
   display: flex;
+  gap: 4rem;
+  justify-content: center;
+}
+.missionCon {
+  display: flex;
+  justify-content: center;
 }
 .missionList {
   /* border: 1px solid black; */
+  border-left: 1px solid lightgray;
+  padding-left: 2rem;
 }
-.missionList > li {
-  padding-bottom: 1.25rem;
+.missionList > li,
+.couponList > li {
+  padding: 1.25rem 0 0.5rem;
+  margin-bottom: 0.75rem;
   font-size: 1rem;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.missionList .result {
+  padding-left: 2rem;
+}
+.missionList .clear {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #055a5b;
 }
 .patternArea {
   position: absolute;
@@ -58,6 +82,13 @@
   opacity: 0.15;
   height: 85%;
   border-radius: 2rem;
+  z-index: -1;
+}
+.resetBingoBtn {
+  position: absolute;
+  background-color: #055a5b;
+  z-index: 1000;
+  cursor: pointer;
 }
 
 .bingoPattern1 {
@@ -86,4 +117,21 @@
 }
 .bingoPattern8 {
   transform: rotate(45deg);
+}
+@media (max-width: 1460px) {
+  .bingoGame {
+    flex-direction: column;
+    align-items: center;
+  }
+  .missionList {
+    border: none;
+    padding: 0;
+  }
+  .bingoCon {
+    width: 65%;
+    padding-top: 65%;
+  }
+  .bingoResultCon {
+    width: 100%;
+  }
 }
