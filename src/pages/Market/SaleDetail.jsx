@@ -81,19 +81,22 @@ const SaleDetail = () => {
     <section className={`mw ${style.detailCon}`}>
       <h2 hidden>SaleDetail</h2>
       {userId === authorId && (
-        <div>
+        <div className={style.editDeletes}>
           <button onClick={editPost}>수정</button>
           <button onClick={deleteSalePost}>삭제</button>
         </div>
       )}
       <div className={style.detailWrap}>
-        <div className={style.productImg}>
+        <div className={style.productImgSlideWrap}>
           <div className={style.productImgSlide}>
             <Swiper
               pagination={{
                 type: "fraction",
               }}
-              navigation={true}
+              navigation={{
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              }}
               loop={true}
               modules={[Pagination, Navigation]}
               className={style.detailSlide}
@@ -103,20 +106,24 @@ const SaleDetail = () => {
                   <img src={image.url} alt={`상품이미지 ${index + 1}`} />
                 </SwiperSlide>
               ))}
+              <div
+                className={`swiper-button-next ${style.customNavigation}`}
+              ></div>
+              <div
+                className={`swiper-button-prev ${style.customNavigation}`}
+              ></div>
             </Swiper>
-          </div>
-          <span className={style.writer}>{author}</span>
-          <div className={style.region}>
-            {region} {city}
           </div>
         </div>
         <div className={style.productInfo}>
-          <div className={style.productInfoTop}>
+          <div>
             <div>
+              <span className={style.writer}>{author} </span>
               <div className={style.productCategory}>{category}</div>
-              <p className={style.productName}>{productName}판매합니다.</p>
+              <p className={style.productName}>{productName} 판매합니다.</p>
             </div>
-            <div className={style.productPrice}>
+            <div className={style.productPriceWrap}>
+              <span>{price && `${price.toLocaleString("ko-KR")}원`}</span>
               <div
                 className={
                   isNegotiable ? style.negotiable : style.nonNegotiable
@@ -124,11 +131,15 @@ const SaleDetail = () => {
               >
                 {isNegotiable ? "협의가능" : "협의불가"}
               </div>
-              <span>{price && `${price.toLocaleString("ko-KR")}원`}</span>
             </div>
+            <ul className={style.productInfoList}>
+              <li className={style.region}>
+                거래 지역 : {region} {city}
+              </li>
+              <li>상품 상태 : {condition}</li>
+              <li>상품 설명 : {desc}</li>
+            </ul>
           </div>
-          <div>상품 상태 : {condition}</div>
-          <div>상품 설명 : {desc}</div>
           <div className="submitButtonWrap">
             <Link to="/market">
               <i className="fa-solid fa-chevron-left"></i>
@@ -136,7 +147,7 @@ const SaleDetail = () => {
             <Link to="/sale-chat">
               <button className="submitButton">문의하기</button>
             </Link>
-          </div>{" "}
+          </div>
         </div>
       </div>
     </section>

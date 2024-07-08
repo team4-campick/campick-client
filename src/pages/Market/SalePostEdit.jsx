@@ -7,6 +7,7 @@ import {
 } from "../../constants/market";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { checkMarketPostData } from "../../utils/validation";
 
 const SalePostEdit = () => {
   const { id } = useParams();
@@ -16,6 +17,10 @@ const SalePostEdit = () => {
   const navigate = useNavigate();
 
   const [imageFiles, setImageFiles] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [isFetched, setIsFetched] = useState(false);
 
   // useDropdown 훅을 통해 드롭다운 컴포넌트 및 선택값을 필요한 값(카테고리, 지역 등)에 따라 분리하여 관리
   const {
@@ -91,6 +96,7 @@ const SalePostEdit = () => {
       setRegion(data.salePost.region);
       setCity(data.salePost.city);
       setImageFiles(data.salePost.imageUrls);
+      setIsFetched(true);
     } catch (error) {
       console.log(error);
     }
@@ -112,6 +118,11 @@ const SalePostEdit = () => {
       isNegotiable,
     };
 
+    const isCompleted = checkMarketPostData(editedPost);
+    if (!isCompleted) return alert("필수 입력 항목을 확인해주세요.");
+
+    setIsLoading(true);
+
     try {
       const response = await fetch(salePostsEndpoint, {
         method: "PUT",
@@ -130,8 +141,13 @@ const SalePostEdit = () => {
       navigate(`/sale-post-detail/${id}`);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // 데이터가 불러와지기 전에는 Loading 표시
+  if (!isFetched) return <p>Loading...</p>;
 
   return (
     <section className={`mw ${style.writeCon}`}>
@@ -235,8 +251,13 @@ const SalePostEdit = () => {
             <i className="fa-solid fa-chevron-left"></i>
           </div>
 
-          <button className="submitButton" onClick={handleSubmitPost}>
-            수정하기
+          <button
+            className="submitButton"
+            type="button"
+            onClick={handleSubmitPost}
+            disabled={isLoading}
+          >
+            {isLoading ? "수정 중" : "등록하기"}
           </button>
         </div>
       </div>

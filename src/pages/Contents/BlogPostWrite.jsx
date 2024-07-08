@@ -5,6 +5,7 @@ import style from "../../css/Contents/blogPostWrite.module.css";
 import useDropdown from "../../hooks/useDropdown";
 import { REGION } from "../../constants/market";
 import extractImageUrls from "../../utils/extractImageUrls";
+import { checkBlogPostData } from "../../utils/validation";
 
 const BlogPostWrite = () => {
   // 이미지 미리보기 URL을 저장할 상태와 파일을 저장할 상태 선언
@@ -73,6 +74,12 @@ const BlogPostWrite = () => {
       blogPostDesc,
       imageUrls: vaildImageUrls,
     };
+
+    // 필수값 빠진 항목 없는지 검사
+    const isCompleted = checkBlogPostData(newPost);
+    if (!isCompleted) return alert("필수 입력 항목을 확인해주세요.");
+
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("newPost", JSON.stringify(newPost));

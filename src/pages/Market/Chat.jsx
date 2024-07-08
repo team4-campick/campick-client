@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSelectedConversation,
@@ -12,6 +12,7 @@ import style from "../../css/Market/Chat.module.css";
 
 const Chat = () => {
   const dispatch = useDispatch();
+  const inputRef = useRef(null);
 
   const [messageInput, setMessageInput] = useState("");
   const handleMessageInput = (event) => {
@@ -50,6 +51,14 @@ const Chat = () => {
     e.preventDefault();
     await sendMessage(messageInput);
   };
+
+  useEffect(() => {
+    // 다른 채팅방 입장시 자동으로 메시지 입력창에 포커스
+    inputRef.current?.focus();
+
+    // 다른 채팅방 입장시 입력된 메시지 초기화
+    setMessageInput("");
+  }, [selectedConversation]);
 
   return (
     <div className={`mw ${style.chatContainer}`}>
@@ -96,6 +105,7 @@ const Chat = () => {
             className={style.messageInput}
             value={messageInput}
             onChange={handleMessageInput}
+            ref={inputRef}
           />
         </form>
       </div>
