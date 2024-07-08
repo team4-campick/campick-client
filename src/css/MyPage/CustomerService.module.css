@@ -1,0 +1,84 @@
+.customerService .inputArea {
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 8rem);
+  min-width: 300px;
+  margin: auto;
+  /* padding: 4rem 12rem; */
+}
+
+.customerService .inputArea input,
+.customerService .inputArea textarea {
+  border: 1px solid rgba(217, 217, 217, 0.5);
+  border-radius: 0.2rem;
+  padding: 1rem 0.5rem;
+  outline: none;
+  font-size: 12px;
+}
+.customerService textarea {
+  height: 20vh;
+  resize: none;
+}
+.policy {
+  border: 2px solid black;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  opacity: 50%;
+}
+.policyAllowArea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.policyAllow {
+  font-size: 12px;
+}
+.policyAllowArea .policyCheck {
+  display: inline-block;
+  margin-bottom: 0 !important;
+}
+.customerService button {
+  width: 30%;
+  position: relative;
+  left: 100%;
+  transform: translateX(-100%);
+  outline: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+.customerService button::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 3px;
+  background-color: #55a18e;
+  position: absolute;
+  top: calc(100% + 1rem);
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.inquiryBtn {
+  color: #55a18e;
+}
+.deleteBtn:disabled {
+  color: gray;
+}
+.deleteBtn {
+  color: red;
+}
+.customerService .deleteBtn:disabled:after {
+  background-color: gray;
+}
+.customerService .deleteBtn:after {
+  background-color: red;
+}
+.errMsg {
+  color: red;
+  margin: 0.5rem 0;
+  font-size: 12px;
+}

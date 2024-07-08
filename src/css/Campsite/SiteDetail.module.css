@@ -1,0 +1,139 @@
+.siteDetail {
+  width: calc(100% - 600px);
+  margin: auto;
+  padding-top: 4rem;
+  /* border: 1px solid black; */
+}
+.siteDetailBanner {
+  padding-top: 40%;
+  position: relative;
+  /* border: 4px solid yellowgreen; */
+}
+.siteDetailBanner > div {
+  position: absolute;
+  object-fit: cover;
+  height: 100%;
+  top: 0;
+}
+
+.siteDetailBanner > div > div > img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.siteDetailSubBanner {
+  height: 100px;
+  width: 100%;
+  margin: 1rem 0;
+  /* border: 1px solid green; */
+}
+.siteDetailSubBanner > div {
+  display: flex;
+  width: 100%;
+
+  gap: 0.5rem;
+  justify-content: end;
+}
+.siteDetailSubBanner > div > div {
+  padding-top: 5%;
+  width: 120px !important;
+  overflow: hidden;
+  position: relative;
+  border: 4px solid transparent;
+  transition: 0.5s;
+}
+.siteDetailSubBanner > div > div:hover {
+  border: 4px solid #333;
+}
+.siteDetailSubBanner > div > div > img {
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+.siteInfo {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+}
+.siteInfo span {
+  padding: 0.5rem 0;
+}
+.siteInfo h3 a {
+  color: #055a5b;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  width: fit-content;
+}
+.siteInfo h3 i {
+  font-size: 1rem;
+  color: black;
+}
+.optionCon {
+  border-top: 1px solid lightgray;
+  padding-top: 3rem;
+}
+.optionCon h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #055a5b;
+  padding-bottom: 1rem;
+}
+.options {
+  display: flex;
+  gap: 3rem;
+}
+.options svg {
+  width: 3rem;
+  height: 3rem;
+  color: gray;
+}
+.options .option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.siteMap {
+  width: 100%;
+  height: 400px;
+  margin: 4rem 0;
+}
+.reviewArea {
+  position: relative;
+  padding-bottom: 4rem;
+}
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+}
+.reviewHeader h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #055a5b;
+  padding-bottom: 0.5rem;
+}
+.writeBtn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.writeBtn i {
+  padding-left: 0.5rem;
+}
+.reviewCon {
+  width: 100%;
+}
+.reviewCon li:first-of-type {
+  border-top: 1px solid black;
+}
+.noReview {
+  padding-top: 2rem;
+}

@@ -1,0 +1,114 @@
+.myPage {
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  margin: 0 auto;
+  max-width: calc(100% - 8rem);
+  min-width: 370px;
+  height: 100%;
+  /* padding-bottom: 1rem; */
+  /* border: 2px solid black; */
+  border-bottom: 2px solid lightgray;
+  margin-bottom: 4rem;
+}
+.myPage .banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+  padding-top: 30%;
+  position: relative;
+  /* background-image: url("../../../public/images/MyPage/MyPageBanner.svg"); */
+  background-image: url("https://cdn.pixabay.com/photo/2014/04/02/16/14/camping-306676_640.png");
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: right;
+  border-bottom: 2px solid lightgray;
+}
+.myPageIntro {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+}
+.contentCon {
+  display: flex;
+}
+.detailHeader {
+  width: 100%;
+  text-align: center;
+}
+.sideBar {
+  display: flex;
+  width: 400px;
+  flex-direction: column;
+  /* align-items: center; */
+  /* color: rgba(0, 0, 0, 0.4); */
+  border-right: 2px solid lightgray;
+  /* background-color: rgba(217, 217, 217, 0.2); */
+  padding: 6rem 0 6rem 4rem;
+}
+.sideBar > a {
+  /* padding: 1rem 6rem; */
+  /* width: 100%; */
+  padding: 1rem 0;
+  /* text-align: center; */
+  position: relative;
+  transition: 0.3s;
+  line-height: 1;
+  color: black;
+  opacity: 0.7;
+}
+.sideBar > a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  transform: translateY(-60%);
+  /* transform-origin: center; */
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: black;
+  transition: 0.3s;
+  opacity: 0;
+}
+.myPage .sideBar > a:hover,
+.myPage .sideBar > a:focus {
+  opacity: 1;
+  font-weight: bold;
+}
+.sideBar > a:hover::after {
+  opacity: 1;
+}
+.myPage .outletArea {
+  flex: 1;
+  height: 55rem;
+  /* width: 100%; */
+  /* border: 2px solid blue; */
+  overflow-y: scroll;
+}
+.myPage .outletArea section {
+  position: relative;
+}
+.myPage .outletArea section > nav {
+  position: sticky;
+  background-color: white;
+  top: 0;
+  z-index: 1;
+}
+
+@media (max-width: 890px) {
+  .contentCon {
+    flex-direction: column;
+  }
+  .sideBar {
+    width: 100%;
+    padding: 0;
+    border: none;
+  }
+  .myPage .outletArea {
+    padding-bottom: 1rem;
+  }
+}

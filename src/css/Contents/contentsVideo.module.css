@@ -1,0 +1,67 @@
+.ContentsVideo {
+  display: grid;
+  grid-template-columns: repeat(3, 310px);
+  gap: 10px;
+  justify-content: center;
+}
+
+.videoBox {
+  width: 310px;
+  height: 540px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.infoBox {
+  position: absolute;
+  bottom: 0;
+  width: 310px;
+  height: 120px;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: left;
+}
+.videoTitle {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.videoDescription {
+  font-size: 14px;
+  margin: 5px 0;
+  text-align: left;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.userBox {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.userImage {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.videoUser {
+  font-size: 14px;
+  text-align: left;
+}

@@ -1,0 +1,17 @@
+.couponCon,
+.notAvailableCouponCon {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  /* grid-template-columns: 1fr;
+  grid-template-rows: auto; */
+  padding: 2rem;
+  gap: 2rem;
+}
+.notAvailableCouponCon > div {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+}
+.notAvailableCouponCon > div > p {
+  color: gray;
+  text-decoration: line-through;
+}

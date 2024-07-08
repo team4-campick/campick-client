@@ -1,0 +1,92 @@
+.register {
+  text-align: center;
+  margin: auto;
+}
+
+.register h2 {
+  margin-top: 10%;
+  margin-bottom: 40px;
+  font-size: 22px;
+  color: #7a8a87;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.registerInput {
+  width: 35%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
+  display: block;
+}
+
+.registerInput::placeholder {
+  color: #999;
+}
+
+.registerSpan {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.registerButton {
+  width: 20%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #055a5b;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+}
+
+.registerButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.registerLink {
+  margin-top: 3rem;
+  margin-bottom: 8rem;
+  font-size: 14px;
+}
+
+.registerLink a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.registerLink a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .mw {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .registerInput,
+  .register-button {
+    width: 100%;
+  }
+
+  .registerForm {
+    width: 100%;
+    padding: 10px;
+    gap: 12px;
+  }
+}

@@ -1,0 +1,30 @@
+.campsite {
+  padding-bottom: 6rem;
+}
+
+.siteAreas {
+  display: grid;
+  padding-top: 54px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  justify-content: center;
+}
+
+.cateGories {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.cateGories button {
+  font-size: 1rem;
+  color: #9c9c9c;
+  position: relative;
+  line-height: 1;
+}
+.cateGories button:hover,
+.cateGories button:focus {
+  color: #1f3b34;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}

@@ -1,0 +1,56 @@
+.siteCard {
+  overflow: hidden;
+  cursor: pointer;
+  /* border-radius: 0.5rem; */
+  /* box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.7); */
+  border: 1px solid lightgray;
+  transition: 0.3s;
+}
+.siteCard figure {
+  display: flex;
+  flex-direction: column-reverse;
+
+  overflow: hidden;
+}
+.siteCard figcaption {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.facltNm {
+  font-size: 1.5rem;
+}
+.imgCon {
+  overflow: hidden;
+  padding-top: 120%;
+  position: relative;
+}
+.siteCard:hover img {
+  transform: scale(1.05);
+}
+.siteCard:hover {
+  /* box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.7); */
+}
+.imgCon img {
+  object-fit: cover;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  transition: 0.3s;
+}
+.siteCard .info {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+}
+.induty {
+  font-size: 1rem;
+}
+.location {
+  font-size: 1rem;
+  color: gray;
+  text-align: right;
+}

@@ -1,0 +1,48 @@
+.saleCard {
+  border: 1px solid gray;
+  overflow: hidden;
+}
+.imgCon {
+  padding-top: 80%;
+  position: relative;
+}
+.saleCard img {
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.productInfo {
+  padding: 1rem;
+}
+.saleCard .product {
+  padding-bottom: 1rem;
+}
+.priceInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.negotiable {
+  color: #42ade2;
+}
+.nonNegotiable {
+  color: red;
+}
+.registerInfo {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+}
+.location,
+.date {
+  font-size: 0.7rem;
+}
+.date {
+  color: gray;
+}

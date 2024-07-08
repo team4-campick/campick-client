@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+.reviewCard,
+.reviewCard .writerInfo,
+.reviewCard .tools {
+  display: flex;
+}
+.reviewCard {
+  width: 100%;
+  border-bottom: 1px solid black;
+  gap: 4rem;
+  padding: 2rem 1rem;
+  position: relative;
+}
+.reviewCard .writerInfo {
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.reviewCard .content {
+  flex: 1;
+  position: relative;
+}
+.reviewCard .tools {
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+}
+.reviewCard .tools button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: gray;
+}
+.score > i {
+  color: #055a5b;
+}
+.date {
+  font-size: 0.8rem;
+  color: gray;
+}

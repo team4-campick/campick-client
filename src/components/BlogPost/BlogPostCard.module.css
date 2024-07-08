@@ -1,0 +1,41 @@
+.blogPostCard {
+  border: 1px solid lightgray;
+  width: calc((100% - 4rem) / 3);
+  text-align: left;
+}
+.postCardImg {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+.postCardImg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.postCardInfoCon {
+  padding: 0.5rem;
+}
+.campSiteInfo {
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+.postTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+.postDesc {
+  margin: 1rem 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.author {
+  color: #888;
+}
