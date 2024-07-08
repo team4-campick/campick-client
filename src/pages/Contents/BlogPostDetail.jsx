@@ -83,28 +83,29 @@ const BlogPostDetail = () => {
 
   return (
     <section>
-      <h2 hidden>BlogPostDetail</h2>
-      {userId === authorId && (
-        <div>
-          <button onClick={editPost}>수정</button>
-          <button onClick={deleteBlogPost}>삭제</button>
-        </div>
-      )}
+      <h2 hidden>BlogPostDetail</h2>{" "}
+      <div className={style.topBanner}>
+        {userId === authorId && (
+          <div className={style.editDeletes}>
+            <button onClick={editPost}>수정</button>
+            <button onClick={deleteBlogPost}>삭제</button>
+          </div>
+        )}
 
-      <div className={style.topBackgroundImg}>
         {!!backgroundImgUrls.length && (
           <img src={backgroundImgUrls[0].url} alt="배경이미지" />
         )}
+        <div className={style.bgOverlay}></div>
         <div className={style.blogPostInfo}>
           <h3>{blogPostTitle}</h3>
           <div>
-            <span>{campSiteName} / </span>
+            <span>{campSiteName} ・ </span>
             <span>{region} </span>
             <span>{city}</span>
           </div>
-          <div>
+          <div className={style.dateAutor}>
             <span>{convertToKoreanDate(createdAt)}</span>
-            <div className={style.postAutor}> by. {author}</div>
+            <span className={style.postAutor}> by. {author}</span>
           </div>
         </div>
       </div>
@@ -112,7 +113,6 @@ const BlogPostDetail = () => {
         className={`${style.innerText} ql-editor`}
         dangerouslySetInnerHTML={{ __html: content }}
       />
-
       <div className="submitButtonWrap">
         <button
           className="submitButton"
