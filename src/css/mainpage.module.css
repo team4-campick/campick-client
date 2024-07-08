@@ -1,11 +1,17 @@
+/* 기본 스타일 */
 .mainVisual {
   width: 100%;
   height: 900px;
-  border: 1px solid red;
   display: block;
   background-color: rgb(13, 74, 82);
-  top: 0;
   position: relative;
+  top: 0;
+}
+
+.mainVisual img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
 
 .mainVisual > div:nth-child(1) > div {
@@ -26,88 +32,125 @@
 }
 
 .mainVisual > div:nth-child(2) > div > div:nth-child(4) {
-  top: 0px;
+  bottom: 110%;
+  height: 1rem;
   z-index: 1;
   display: flex;
-  flex-wrap: nowrap;
   justify-content: space-between;
+  position: relative;
 }
 
 .mainVisual > div:nth-child(2) > div > div:nth-child(4) > span {
   width: 90px;
-  height: 20px;
+  height: 25px;
   border-radius: 3px 3px 0 0;
-  margin: 0;
   background-color: white;
+  margin: 0;
 }
 
-.blogTapWarp {
-  width: 300px;
-  height: 300px;
-  border: 1px solid rgb(224, 0, 168);
-  position: absolute;
-  right: 5%;
-  bottom: 30%;
-}
-
+.blogTapWarp,
 .mainExplainSwiper {
   width: 300px;
   height: 300px;
-  border: 1px solid orange;
-  display: block;
   position: absolute;
+}
+
+.blogTapWarp {
+  right: 5%;
+  bottom: 25%;
+}
+
+.blogTapWarp > div > div {
+  height: calc(100% + 30px);
+}
+
+.mainExplainSwiper {
   right: 0;
-  bottom: 0;
-}
-
-.firstBlog,
-.secondBlog,
-.thirdBlog {
-  width: 300px;
-  height: 300px;
-  background-color: white;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  margin: 20px auto;
-  border: 1px solid red;
-}
-
-.firstBlog strong,
-.secondBlog strong,
-.thirdBlog strong {
-  color: #555;
-  margin-top: 80px;
-  border: 1px solid rgb(55, 151, 63);
-}
-
-.firstBlog h3,
-.secondBlog h3,
-.thirdBlog h3 {
+  bottom: -120px;
   display: block;
-  margin-bottom: 10px;
-  font-size: 24px;
-  color: #333;
-  border: 1px solid rgb(188, 57, 206);
 }
 
-.firstBlog p,
-.secondBlog p,
-.thirdBlog p {
-  color: #555;
-  border: 1px solid rgb(184, 104, 104);
+.blog {
+  position: relative;
+  z-index: 12;
+  top: 1.5rem;
+  width: 300px;
+  height: 270px;
+  background-color: white;
+  border-radius: 0 0 5px 5px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 34px 28px 28px 28px;
 }
 
-.firstBlog :link,
-.secondBlog :link,
-.thirdBlog :link {
-  display: inline-block;
-  margin-top: 50px;
-  padding: 8px 16px;
-  color: #007bff;
+.blog strong,
+.blog h3,
+.blog p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.blog strong {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+  margin-bottom: 6px;
+  -webkit-line-clamp: 1;
+}
+
+.blog h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 1);
+  -webkit-line-clamp: 2;
+  margin-bottom: 16px;
+}
+
+.blog p {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 18px;
+  -webkit-line-clamp: 6;
+  font-weight: 300;
+}
+
+.blog a {
+  position: absolute;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
   text-decoration: none;
-  border: 1px solid #007bff;
-  border-radius: 4px;
+  margin-top: 13px;
+  display: inline-block;
+  font-weight: 300;
+  right: 28px;
+  bottom: 28px;
+}
+
+.blog a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  background-color: currentColor;
+  width: 100%;
+}
+
+.mainVideoWarp,
+.mainEventsWarp {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainVideoWarp {
+  background-color: #1f3b3418;
+  height: 770px;
 }
 
 .mainVideoWarp h2,
@@ -118,17 +161,6 @@
   margin-bottom: 20px;
 }
 
-.mainVideoWarp {
-  background-color: #1f3b3418;
-  width: 100%;
-  height: 770px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .mainVideo {
   width: 980px;
   height: 540px;
@@ -136,14 +168,14 @@
 }
 
 .mainEventsWarp {
-  width: 100%;
   height: 600px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 60px;
+}
+
+.mainEvents {
+  width: 980px;
+  height: 360px;
+  position: relative;
 }
 
 .mainEvents img {
@@ -152,12 +184,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.mainEvents {
-  width: 980px;
-  height: 360px;
-  position: relative;
 }
 
 .mainEventsSwiper {
