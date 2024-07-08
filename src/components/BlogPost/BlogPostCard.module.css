@@ -1,5 +1,5 @@
 .blogPostCard {
-  border: 1px solid #888;
+  border: 1px solid lightgray;
   width: calc((100% - 4rem) / 3);
   text-align: left;
 }
