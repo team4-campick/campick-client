@@ -189,18 +189,77 @@ const SiteDetail = () => {
         <h3>Option</h3>
         <div className={style.options}>
           {newArr.map((e) => {
-            if (e === "전기") return <GiElectric />;
-            if (e === "무선인터넷") return <FaWifi />;
-            if (e === "장작판매") return <GiWoodBeam />;
-            if (e === "온수") return <BsFillCupHotFill />;
+            if (e === "전기")
+              return (
+                <div className={style.option}>
+                  <GiElectric />
+                  <span>{e}</span>
+                </div>
+              );
+            if (e === "무선인터넷")
+              return (
+                <div className={style.option}>
+                  <FaWifi />
+                  <span>{e}</span>
+                </div>
+              );
+            if (e === "장작판매")
+              return (
+                <div className={style.option}>
+                  <GiWoodBeam />
+                  <span>{e}</span>
+                </div>
+              );
+            if (e === "온수")
+              return (
+                <div className={style.option}>
+                  <BsFillCupHotFill />
+                  <span>{e}</span>
+                </div>
+              );
             if (e === "트렘폴린") return;
-            if (e === "물놀이장") return <FaSwimmingPool />;
+            if (e === "물놀이장")
+              return (
+                <div className={style.option}>
+                  <FaSwimmingPool />
+                  <span>{e}</span>
+                </div>
+              );
             if (e === "놀이터") return;
-            if (e === "산책로") return <GiTrail />;
-            if (e === "운동장") return <FaDumbbell />;
-            if (e === "운동시설") return <FaDumbbell />;
-            if (e === "마트.편의점") return <RiStore3Fill />;
-            if (e === "덤프스테이션") return <FaTrash />;
+            if (e === "산책로")
+              return (
+                <div className={style.option}>
+                  <GiTrail />
+                  <span>{e}</span>
+                </div>
+              );
+            if (e === "운동장")
+              return (
+                <div className={style.option}>
+                  <FaDumbbell />
+                  <span>{e}</span>
+                </div>
+              );
+            if (e === "운동시설")
+              return (
+                <div className={style.option}>
+                  <FaDumbbell />
+                  <span>{e}</span>
+                </div>
+              );
+            if (e === "마트.편의점")
+              return (
+                <div className={style.option}>
+                  <RiStore3Fill />
+                  <span>{e}</span>
+                </div>
+              );
+            if (e === "덤프스테이션")
+              return (
+                <div className={style.option}>
+                  <FaTrash /> <span>{e}</span>
+                </div>
+              );
             else return <div>정보 없음</div>;
           })}
         </div>

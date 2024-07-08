@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import style from "../../css/Campsite/Campsite.module.css";
 import SiteCard from "../../components/Campsite/SiteCard";
 import Loading from "../../components/Laoding/Loading";
+import REGION_CATEGORY from "../../constants/campsite";
 
 const Campsite = () => {
+  const navigate = useNavigate();
   const url = process.env.REACT_APP_SERVER_URL;
   const apiUrl = "https://apis.data.go.kr/B551011/GoCamping/";
   const apiKey = process.env.REACT_APP_SERVICE_KEY;
@@ -17,12 +19,24 @@ const Campsite = () => {
   const [page, setPage] = useState(1);
   const [siteLists, setSiteLists] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleObserver = (entries) => {
     const target = entries[0];
     if (target.isIntersecting && !loading && !isSearching) {
       setPage((prevPage) => prevPage + 1);
     }
+  };
+  const handleCategoryClick = (category) => {
+    searchParams.delete("keyword");
+    setSearchKeyword("");
+
+    // 전체보기일 때
+    if (!category) {
+      return navigate("/campsite");
+    }
+
+    setSearchParams({ category });
   };
 
   useEffect(() => {
@@ -134,6 +148,17 @@ const Campsite = () => {
           </button>
         </label>
       </form>
+      <div className={style.cateGories}>
+        <button onClick={() => handleCategoryClick("")}>전체보기</button>
+        {REGION_CATEGORY.map((cate) => (
+          <button
+            key={cate.value}
+            onClick={() => handleCategoryClick(cate.label)}
+          >
+            {cate.label}
+          </button>
+        ))}
+      </div>
       <div className={style.siteAreas}>
         {siteLists ? (
           siteLists.map((site) => {
