@@ -8,7 +8,8 @@
   overflow: hidden;
   position: relative;
   perspective: 800px;
-  z-index: 2;
+  /* z-index 설정으로 위 헤더보다 높게 올라가는 증상이 있어 일단 주석처리 */
+  /* z-index: 1; */
 }
 .front,
 .back {
