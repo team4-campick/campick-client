@@ -7,6 +7,7 @@ import {
 } from "../../constants/market";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import { checkMarketPostData } from "../../utils/validation";
 
 const SalePostWrite = () => {
   const navigate = useNavigate();
@@ -84,8 +85,6 @@ const SalePostWrite = () => {
   };
 
   const handleSubmitPost = async () => {
-    setIsLoading(true);
-
     const newPost = {
       category,
       productName,
@@ -96,6 +95,11 @@ const SalePostWrite = () => {
       condition,
       isNegotiable,
     };
+
+    const isCompleted = checkMarketPostData(newPost);
+    if (!isCompleted) return alert("필수 입력 항목을 확인해주세요.");
+
+    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("newPost", JSON.stringify(newPost));

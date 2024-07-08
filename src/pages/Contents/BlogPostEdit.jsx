@@ -5,19 +5,23 @@ import style from "../../css/Contents/blogPostWrite.module.css";
 import useDropdown from "../../hooks/useDropdown";
 import { REGION } from "../../constants/market";
 import extractImageUrls from "../../utils/extractImageUrls";
+import { checkBlogPostData } from "../../utils/validation";
 
 const BlogPostEdit = () => {
   const [quillImages, setQuillImages] = useState([]);
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const [imageFiles, setImageFiles] = useState([
+  const [backgroundImage, setBackgroundImage] = useState([
     {
       _id: "",
       url: "",
       publicId: "",
     },
   ]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [isFetched, setIsFetched] = useState(false);
 
   const {
     selectedLabel: region,
@@ -64,7 +68,9 @@ const BlogPostEdit = () => {
           },
         }
       );
+
       const data = await response.json();
+
       if (!data.result) {
         return alert(data.message);
       }
@@ -75,12 +81,13 @@ const BlogPostEdit = () => {
       setCity(data.blogPost.city);
       setCampSiteName(data.blogPost.campSiteName);
       setBlogPostDesc(data.blogPost.blogPostDesc);
-      setImageFiles(data.blogPost.backgroundImgUrls);
+      setBackgroundImage(data.blogPost.backgroundImgUrls);
+      setIsFetched(true);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(imageFiles);
+
   useEffect(() => {
     fetchBlogPostEdit();
   }, []);
@@ -99,6 +106,12 @@ const BlogPostEdit = () => {
       blogPostDesc,
       imageUrls: vaildImageUrls,
     };
+
+    // 필수값 빠진 항목 없는지 검사
+    const isCompleted = checkBlogPostData(editedPost);
+    if (!isCompleted) return alert("필수 입력 항목을 확인해주세요.");
+
+    setIsLoading(true);
 
     try {
       const response = await fetch(
@@ -121,15 +134,28 @@ const BlogPostEdit = () => {
       navigate(`/blog-post-detail/${id}`);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // 데이터가 불러와지기 전에는 Loading 표시
+  if (!isFetched) return <p>Loading...</p>;
+
   return (
     <section className={`mw quillTest ${style.postWriteCon}`}>
       <h2 hidden>BlogPostEdit</h2>
 
       <div className={style.bgImgWrap}>
         <div className={style.imgPreview}>
-          <img key={imageFiles._id} src={imageFiles[0].url} alt="배경이미지" />
+          {/* 배경이미지가 있을 경우에만 노출 */}
+          {!!backgroundImage.length && (
+            <img
+              key={backgroundImage[0]._id}
+              src={backgroundImage[0].url}
+              alt="배경이미지"
+            />
+          )}
         </div>
 
         <div className={style.inputWrap}>
@@ -178,8 +204,9 @@ const BlogPostEdit = () => {
           className="submitButton"
           type="button"
           onClick={handleSubmitPost}
+          disabled={isLoading}
         >
-          수정하기
+          {isLoading ? "수정 중" : "등록하기"}
         </button>
       </div>
     </section>
