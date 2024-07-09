@@ -15,7 +15,7 @@ const SalePostWrite = () => {
   const MAX_IMAGES = 5;
   const [imageFiles, setImageFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  console.log("=====", imageFiles);
+
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
 
@@ -138,7 +138,7 @@ const SalePostWrite = () => {
       <div>
         <ul>
           <li>
-            <span>상품이미지</span>
+            <span>상품 사진</span>
             <input
               type="file"
               id="file"
