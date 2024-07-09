@@ -89,7 +89,7 @@ const CustomerService = () => {
           <span className={style.errMsg}>&nbsp;{titleErrMsg}</span>
           <input
             type="text"
-            // pattern=".+@example\.com"git
+            pattern=".+@example\.com"
             placeholder="답변 받으실 이메일"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -118,13 +118,10 @@ const CustomerService = () => {
         <label className={style.inputArea}>
           <p className={style.policy}>
             회원 탈퇴일로부터 계정과 닉네임을 포함한 계정 정보는
-            <br />
             <u>개인정보처리방침</u>에 따라 60일간 보관&#40;잠김&#41;되며, 60일
             경과된 후에는 모든 개인 정보는 완전히 삭제되며 더 이상 복구할 수
-            없게 됩니다.
-            <br />
-            작성된 게시물은 삭제되지 않으며, 익명처리 후 Campick으로 소유권이
-            귀속됩니다.
+            없게 됩니다. 작성된 게시물은 삭제되지 않으며, 익명처리 후
+            Campick으로 소유권이 귀속됩니다.
           </p>
           <p className={style.policyAllowArea}>
             <input
