@@ -46,7 +46,8 @@ const BlogPostWrite = () => {
 
   const [blogPostTitle, setBlogPostTitle] = useState("");
   const handleblogPostTitle = (event) => {
-    setBlogPostTitle(event.target.value);
+    const inputText = event.target.value.slice(0, 20);
+    setBlogPostTitle(inputText);
   };
   const [campSiteName, setCampSiteName] = useState("");
   const handlecampSiteName = (event) => {
@@ -54,10 +55,11 @@ const BlogPostWrite = () => {
   };
   const [blogPostDesc, setBlogPostDesc] = useState("");
   const handleblogPostDesc = (event) => {
-    setBlogPostDesc(event.target.value);
+    // 글자수 제한 40자
+    const inputText = event.target.value.slice(0, 50);
+    setBlogPostDesc(inputText);
   };
   const [quillInputValue, setQuillInputValue] = useState("");
-  console.log(quillInputValue);
 
   const handleSubmitPost = async () => {
     // Quill 에디터 내에서 존재하는 이미지 URL만 추출
@@ -114,6 +116,9 @@ const BlogPostWrite = () => {
       <h2 hidden>BlogPostWrite</h2>
       <div className={style.bgImgWrap}>
         <div>
+          <label htmlFor="file" className={style.imgUploadBtn}>
+            배경이미지선택
+          </label>
           <input
             type="file"
             id="file"
@@ -124,11 +129,7 @@ const BlogPostWrite = () => {
         </div>
 
         <div className={style.imgPreview}>
-          <img
-            src={imagePreview}
-            alt="배경이미지"
-            onClick={handleImageDelete}
-          />
+          <img src={imagePreview} alt="" onClick={handleImageDelete} />
         </div>
 
         <div className={style.inputWrap}>
@@ -150,10 +151,10 @@ const BlogPostWrite = () => {
             <CityDropdown />
           </div>
           <textarea
-            placeholder="소개글을 작성해주세요."
+            placeholder="간단한 소개글을 작성해주세요."
             value={blogPostDesc}
             onChange={handleblogPostDesc}
-            rows="5"
+            rows="3"
           />
         </div>
       </div>
@@ -170,7 +171,7 @@ const BlogPostWrite = () => {
         </div>
 
         <button
-          className="submitButton"
+          className={`submitButton ${style.blogPostSubmitBtn}`}
           onClick={handleSubmitPost}
           disabled={isLoading}
         >
