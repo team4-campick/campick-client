@@ -1,8 +1,20 @@
 .blogPostList {
-  display: flex;
+  display: grid;
   gap: 2rem;
-  flex-wrap: wrap;
   margin-bottom: 2rem;
+  grid-template-columns: repeat(3, calc((100% - 4rem) / 3));
+}
+
+@media (max-width: 1200px) {
+  .blogPostList {
+    grid-template-columns: repeat(2, calc((100% - 2rem) / 2));
+  }
+}
+
+@media (max-width: 768px) {
+  .blogPostList {
+    grid-template-columns: 1fr;
+  }
 }
 .writeBtnCon {
   display: block;
