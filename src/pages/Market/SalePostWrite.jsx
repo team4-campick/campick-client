@@ -15,7 +15,7 @@ const SalePostWrite = () => {
   const MAX_IMAGES = 5;
   const [imageFiles, setImageFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  console.log("=====", imageFiles);
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
 
@@ -79,7 +79,7 @@ const SalePostWrite = () => {
     setPrice(event.target.value);
   };
 
-  const [desc, setDesc] = useState("여기서부터 추가로 입력하세요");
+  const [desc, setDesc] = useState("");
   const handleDesc = (event) => {
     setDesc(event.target.value);
   };
@@ -97,7 +97,8 @@ const SalePostWrite = () => {
     };
 
     const isCompleted = checkMarketPostData(newPost);
-    if (!isCompleted) return alert("필수 입력 항목을 확인해주세요.");
+    if (!isCompleted || !imageFiles)
+      return alert("필수 입력 항목을 확인해주세요.");
 
     setIsLoading(true);
 
@@ -190,7 +191,7 @@ const SalePostWrite = () => {
               const { value, label } = option;
               return (
                 <React.Fragment key={value}>
-                  <label>
+                  <label className={style.productCondition}>
                     <input
                       type="radio"
                       id={label}
@@ -209,12 +210,12 @@ const SalePostWrite = () => {
             <span>판매 가격</span>
             <input
               type="text"
-              placeholder="가격을 입력해 주세요."
+              placeholder="가격을 입력해주세요."
               value={price}
               onChange={handlePrice}
             />
             원
-            <div>
+            <div className={style.priceNegotiable}>
               <label>
                 <input
                   type="checkbox"
@@ -228,12 +229,15 @@ const SalePostWrite = () => {
             </div>
           </li>
           <li>
-            <span>상품설명</span>
+            <span>상품 설명</span>
             <textarea
               name=""
               id=""
               value={desc}
               onChange={handleDesc}
+              className={style.productDesc}
+              rows="15"
+              placeholder="사용 기간 및 제조사/브랜드 이름과 함께 상품에 대한 자세한 설명을 작성해주세요. "
             ></textarea>
           </li>
         </ul>
@@ -248,7 +252,8 @@ const SalePostWrite = () => {
           </div>
 
           <button
-            className="submitButton"
+            className={`submitButton ${style.salePostSubmitBtn}`}
+            type="button"
             onClick={handleSubmitPost}
             disabled={isLoading}
           >

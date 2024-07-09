@@ -155,7 +155,7 @@ const SalePostEdit = () => {
       <div>
         <ul>
           <li>
-            <span>상품이미지</span>
+            <span>상품 사진</span>
             <div className={style.imgPreview}>
               {imageFiles.map((image, index) => {
                 return (
@@ -169,11 +169,11 @@ const SalePostEdit = () => {
             </div>
           </li>
           <li>
-            <span>상품종류</span>
+            <span>상품 종류</span>
             <CategoryDropdown />
           </li>
           <li>
-            <span>상품이름</span>
+            <span>상품 이름</span>
             <input
               type="text"
               placeholder="상품명을 입력해주세요."
@@ -182,20 +182,20 @@ const SalePostEdit = () => {
             />
           </li>
           <li>
-            <span>지역</span>
+            <span>거래 지역</span>
             <div className={style.selectRegion}>
               <RegionDropdown />
               <CityDropdown />
             </div>
           </li>
           <li>
-            <span>상품상태</span>
+            <span>상품 상태</span>
 
             {PRODUCT_CONDITION_OPTIONS.map((option, idx) => {
               const { value, label } = option;
               return (
                 <React.Fragment key={value}>
-                  <label>
+                  <label className={style.productCondition}>
                     <input
                       type="radio"
                       id={label}
@@ -211,7 +211,7 @@ const SalePostEdit = () => {
             })}
           </li>
           <li>
-            <span>가격</span>
+            <span>판매 가격</span>
             <input
               type="text"
               placeholder="가격을 입력해 주세요."
@@ -219,7 +219,7 @@ const SalePostEdit = () => {
               onChange={handlePrice}
             />
             원
-            <div>
+            <div className={style.priceNegotiable}>
               <label>
                 <input
                   type="checkbox"
@@ -233,12 +233,14 @@ const SalePostEdit = () => {
             </div>
           </li>
           <li>
-            상품설명
+            <span>상품 설명</span>
             <textarea
               name=""
               id=""
               value={desc}
               onChange={handleDesc}
+              className={style.productDesc}
+              rows="15"
             ></textarea>
           </li>
         </ul>
@@ -252,7 +254,7 @@ const SalePostEdit = () => {
           </div>
 
           <button
-            className="submitButton"
+            className={`submitButton ${style.salePostEditBtn}`}
             type="button"
             onClick={handleSubmitPost}
             disabled={isLoading}
