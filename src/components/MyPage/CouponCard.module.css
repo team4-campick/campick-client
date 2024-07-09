@@ -9,19 +9,28 @@
   position: relative;
   box-shadow: 0 1px 4px 2px rgba(31, 59, 52, 0.2);
 }
-
-.statusCircle {
+.statusCircle,
+.statusExpiredCircle {
   position: absolute;
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
-  background-color: #055a5b;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   top: 1rem;
   right: 1rem;
+}
+.statusCircle {
+  background-color: #055a5b;
+}
+.statusExpiredCircle {
+  background-color: red;
+}
+.statusExpiredCircle > svg {
+  width: 2rem;
+  height: 2rem;
 }
 .couponType {
   font-weight: bold;
@@ -39,5 +48,13 @@
 
 .couponNum {
   font-size: 0.75rem;
+  cursor: pointer;
+}
+.cardBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardBottom .used {
   cursor: pointer;
 }

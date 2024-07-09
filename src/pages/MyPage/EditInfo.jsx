@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import style from "../../css/MyPage/EditInfo.module.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AUTH_ERROR } from "../../constants/errMsg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserAllInfo } from "../../store/userStore";
 
 // fetch 경로에서 원래는 ${username} 을 써야하는데 현재 로그인 기능 미완으로 하드코딩 하였음.
 
@@ -20,6 +21,8 @@ const EditInfo = () => {
   const [nicknameDuplicateCheck, setNicknameDuplicateCheck] = useState(false);
   const [curPwCheck, setCurPwCheck] = useState(false);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const userName = user?.username;
 
@@ -38,10 +41,8 @@ const EditInfo = () => {
       credentials: "include",
     });
     if (response.status === 200) {
-      // 여기서 중복확인 되면 통과한것 관련 효과 추가하자.
-      console.log("중복확인 성공");
       setNicknameDuplicateCheck(true);
-      setErrorMsg1("");
+      setErrorMsg1("사용 가능");
     } else if (response.status === 409) {
       setErrorMsg1(AUTH_ERROR.DUPLICATE);
       setNicknameDuplicateCheck(false);
@@ -56,7 +57,6 @@ const EditInfo = () => {
       },
     });
     if (response.status === 200) {
-      console.log("passwordCheck 성공");
       setErrorMsg2("passwordCheck 성공");
       setCurPwCheck(true);
     } else if (response.status === 409) {
@@ -94,7 +94,14 @@ const EditInfo = () => {
       setErrorMsg3("");
       setErrorMsg4("");
     }
-
+    const handleLogout = () => {
+      fetch(`${url}/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+      dispatch(setUserAllInfo(null));
+      navigate("/");
+    };
     const response = await fetch(`${url}/editInfo/${userName}`, {
       method: "POST",
       body: JSON.stringify({ username: userName, nickname, password: newPW }),
@@ -102,9 +109,11 @@ const EditInfo = () => {
       credentials: "include",
     });
     if (response) {
-      console.log("변경완료");
+      alert("회원정보 수정이 완료되었습니다. 다시 로그인 해주세요.");
+      handleLogout();
+      navigate("/");
     } else {
-      console.log("변경실패");
+      alert("회원정보 수정 실패");
     }
   };
 
@@ -122,7 +131,12 @@ const EditInfo = () => {
             onChange={(e) => setNickname(e.target.value)}
             required
           />
-          <span className={style.errMsg}>{errorMsg1}</span>
+          {errorMsg1 !== "사용 가능" ? (
+            <span className={style.errMsg}>{errorMsg1}</span>
+          ) : (
+            <span className={style.passed}>{errorMsg1}</span>
+          )}
+
           <button
             onClick={(e) => {
               duplicateCheck(e);

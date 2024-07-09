@@ -183,7 +183,7 @@ const Bingo = () => {
     getBingoArea();
     updateMission();
     getBingoPattern();
-  }, []);
+  }, [userObjId, url]);
 
   return (
     <section className={style.bingo}>
