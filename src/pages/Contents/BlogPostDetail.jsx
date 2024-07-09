@@ -83,7 +83,7 @@ const BlogPostDetail = () => {
 
   return (
     <section>
-      <h2 hidden>BlogPostDetail</h2>{" "}
+      <h2 hidden>BlogPostDetail</h2>
       <div className={style.topBanner}>
         {userId === authorId && (
           <div className={style.editDeletes}>
@@ -115,7 +115,7 @@ const BlogPostDetail = () => {
       />
       <div className="submitButtonWrap">
         <button
-          className="submitButton"
+          className={`submitButton ${style.postDetailBtn}`}
           type="button"
           onClick={() => {
             navigate(`/contents/contentsBlog`);

@@ -41,9 +41,26 @@
   margin: 1rem 0 2rem 0;
 }
 
-.postCardList {
+/* .postCardList {
   display: flex;
   margin: 0 8rem;
   flex-wrap: wrap;
   justify-content: space-between;
+} */
+.postCardList {
+  display: grid;
+  gap: 2rem;
+  margin: 0 8rem;
+}
+
+@media (min-width: 900px) {
+  .postCardList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 899px) {
+  .postCardList {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

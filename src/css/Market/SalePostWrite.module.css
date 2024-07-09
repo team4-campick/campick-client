@@ -5,7 +5,7 @@
 .writeCon > div > ul > li {
   display: flex;
   padding: 1rem;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px dotted gray;
   padding: 2rem 0;
 }
 .writeCon li > span {
@@ -42,4 +42,18 @@
 }
 .selectRegion {
   display: flex;
+}
+.productCondition input,
+.priceNegotiable input {
+  margin: 0 0.3rem;
+}
+.productDesc {
+  width: 500px;
+  resize: none;
+}
+
+.salePostSubmitBtn,
+.salePostEditBtn {
+  width: 600px;
+  flex-grow: 0;
 }

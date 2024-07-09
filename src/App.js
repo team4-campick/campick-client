@@ -20,6 +20,7 @@ import Market from "./pages/Market/Market";
 import SalePostWrite from "./pages/Market/SalePostWrite";
 import SaleDetail from "./pages/Market/SaleDetail";
 import SalePostEdit from "./pages/Market/SalePostEdit";
+import ChatList from "./pages/Market/ChatList";
 import Chat from "./pages/Market/Chat";
 
 import Contents from "./pages/Contents/Contents";
@@ -71,7 +72,8 @@ function App() {
         <Route path="/sale-post-write" element={<SalePostWrite />} />
         <Route path="/sale-post-detail/:id" element={<SaleDetail />} />
         <Route path="/sale-post-edit/:id" element={<SalePostEdit />} />
-        <Route path="/sale-chat" element={<Chat />} />
+        <Route path="/sale-chat" element={<ChatList />} />
+        <Route path="/sale-chat/:id" element={<Chat />} />
 
         {/* =================== contents page =================== */}
         <Route path="/contents" element={<Contents />}>

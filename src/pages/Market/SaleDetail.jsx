@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import style from "../../css/Market/SaleDetail.module.css";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import convertToKoreanDate from "../../utils/convertToKoreanDate";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -26,6 +27,7 @@ const SaleDetail = () => {
     desc,
     isNegotiable,
     imageUrls = [],
+    createdAt,
   } = salePostDetail;
 
   const salePostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/sale-posts/${id}`;
@@ -117,21 +119,27 @@ const SaleDetail = () => {
         </div>
         <div className={style.productInfo}>
           <div>
-            <div>
-              <span className={style.writer}>{author} </span>
-              <div className={style.productCategory}>{category}</div>
-              <p className={style.productName}>{productName} 판매합니다.</p>
-            </div>
-            <div className={style.productPriceWrap}>
-              <span>{price && `${price.toLocaleString("ko-KR")}원`}</span>
-              <div
-                className={
-                  isNegotiable ? style.negotiable : style.nonNegotiable
-                }
-              >
-                {isNegotiable ? "협의가능" : "협의불가"}
+            <div className={style.infoTop}>
+              <div>
+                <div className={style.productCategory}>{category}</div>{" "}
+                <p className={style.productName}>{productName} 판매합니다.</p>
+                <div className={style.writerDate}>
+                  <span>{author} </span>
+                  <span> {convertToKoreanDate(createdAt)}</span>
+                </div>
+              </div>
+              <div className={style.productPriceWrap}>
+                <div
+                  className={
+                    isNegotiable ? style.negotiable : style.nonNegotiable
+                  }
+                >
+                  {isNegotiable ? "협의가능" : "협의불가"}
+                </div>
+                <span>{price && `${price.toLocaleString("ko-KR")}원`}</span>
               </div>
             </div>
+
             <ul className={style.productInfoList}>
               <li className={style.region}>
                 거래 지역 : {region} {city}
@@ -144,9 +152,13 @@ const SaleDetail = () => {
             <Link to="/market">
               <i className="fa-solid fa-chevron-left"></i>
             </Link>
-            <Link to="/sale-chat">
-              <button className="submitButton">문의하기</button>
-            </Link>
+
+            <button
+              className={`submitButton ${style.inquiryBtn}`}
+              onClick={() => navigate(`/sale-chat/${authorId}`)}
+            >
+              문의하기
+            </button>
           </div>
         </div>
       </div>

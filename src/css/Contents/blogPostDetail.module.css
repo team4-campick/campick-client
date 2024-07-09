@@ -51,6 +51,7 @@
 .blogPostInfo h3 {
   font-size: 40px;
   font-weight: bold;
+  text-wrap: nowrap;
 }
 .dateAutor {
   font-size: 14px;
@@ -66,4 +67,7 @@
   margin: 0 auto;
   padding: 48px 20px 40px 0;
   border-bottom: 1px solid lightgrey;
+}
+.postDetailBtn {
+  width: 600px;
 }

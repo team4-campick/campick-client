@@ -42,7 +42,8 @@ const BlogPostEdit = () => {
 
   const [blogPostTitle, setBlogPostTitle] = useState("");
   const handleblogPostTitle = (event) => {
-    setBlogPostTitle(event.target.value);
+    const inputText = event.target.value.slice(0, 20);
+    setBlogPostTitle(inputText);
   };
   const [campSiteName, setCampSiteName] = useState("");
 
@@ -53,7 +54,8 @@ const BlogPostEdit = () => {
   const [blogPostDesc, setBlogPostDesc] = useState("");
 
   const handleblogPostDesc = (event) => {
-    setBlogPostDesc(event.target.value);
+    const inputText = event.target.value.slice(0, 50);
+    setBlogPostDesc(inputText);
   };
 
   const [quillInputValue, setQuillInputValue] = useState("");
@@ -95,7 +97,7 @@ const BlogPostEdit = () => {
   const handleSubmitPost = async () => {
     const imageUrlsInContent = extractImageUrls(quillInputValue);
     const vaildImageUrls = quillImages.filter((image) =>
-      imageUrlsInContent.includes(image.url)
+      imageUrlsInContent.includes(image?.url)
     );
     const editedPost = {
       content: quillInputValue,
@@ -176,11 +178,12 @@ const BlogPostEdit = () => {
             <RegionDropdown />
             <CityDropdown />
           </div>
-          <input
+          <textarea
             type="text"
-            placeholder="소개글을 작성해주세요."
+            placeholder="간단한 소개글을 작성해주세요."
             value={blogPostDesc}
             onChange={handleblogPostDesc}
+            rows="3"
           />
         </div>
       </div>
@@ -201,7 +204,7 @@ const BlogPostEdit = () => {
         </div>
 
         <button
-          className="submitButton"
+          className={`submitButton ${style.blogPostEditBtn}`}
           type="button"
           onClick={handleSubmitPost}
           disabled={isLoading}

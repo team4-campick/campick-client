@@ -29,6 +29,10 @@
   padding: 10px 0;
 }
 
+.currentChat {
+  background-color: red;
+}
+
 .chatList li:hover {
   background-color: #f0f0f0;
 }

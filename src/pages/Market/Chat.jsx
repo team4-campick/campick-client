@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSelectedConversation,
@@ -11,8 +12,10 @@ import useSendMessages from "../../hooks/useSendMessages";
 import style from "../../css/Market/Chat.module.css";
 
 const Chat = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   const [messageInput, setMessageInput] = useState("");
   const handleMessageInput = (event) => {
@@ -45,6 +48,7 @@ const Chat = () => {
   const handleChatSelect = (user) => {
     dispatch(setSelectedConversation(user._id));
     dispatch(setSelectedReceiverNickname(user.nickname));
+    navigate(`/sale-chat/${user._id}`);
   };
 
   const handleSendMessage = async (e) => {
@@ -53,40 +57,55 @@ const Chat = () => {
   };
 
   useEffect(() => {
+    dispatch(setSelectedConversation(id));
+    if (conversations.length) {
+      const selectedNickname = conversations.find(
+        (conversation) => conversation.participants[0]._id === id
+      ).participants[0].nickname;
+      dispatch(setSelectedReceiverNickname(selectedNickname));
+    }
+
     // 다른 채팅방 입장시 자동으로 메시지 입력창에 포커스
     inputRef.current?.focus();
 
     // 다른 채팅방 입장시 입력된 메시지 초기화
     setMessageInput("");
-  }, [selectedConversation]);
+  }, [id, conversations]);
 
   return (
-    <div className={`mw ${style.chatContainer}`}>
+    <section className={`mw ${style.chatContainer}`}>
       {/* 왼쪽에 채팅 목록 */}
       <div className={style.chatList}>
         <h2>채팅 목록</h2>
         <ul>
-          {conversations.map((user) => (
-            <li key={user._id} onClick={() => handleChatSelect(user)}>
-              {user.nickname}
-            </li>
-          ))}
+          {conversations.map((chat) => {
+            return (
+              <li
+                key={chat.participants[0]._id}
+                onClick={() => handleChatSelect(chat.participants[0])}
+                className={`${
+                  chat.participants[0]._id === id ? style.currentChat : ""
+                }`}
+              >
+                {chat.participants[0].nickname}
+              </li>
+            );
+          })}
         </ul>
       </div>
       {/* 오른쪽에 선택된 채팅의 대화 */}
       <div className={style.chatMessages}>
-        <h2>채팅창</h2>
         {selectedConversation ? (
           <div>
-            <p>선택된 ID: {selectedConversation}</p>
-            {/* 선택된 채팅의 대화 내용을 보여주는 컴포넌트를 추가 */}
+            <h2> {selectedReceiverNickname}님과 채팅중입니다.</h2>
           </div>
         ) : (
-          <p>채팅을 선택하세요.</p>
+          <h2>채팅을 선택하세요.</h2>
         )}
 
         {messages.map((message) => {
           const isReceivedMessage = message.senderId === selectedConversation;
+
           return (
             <div
               key={message._id}
@@ -109,7 +128,7 @@ const Chat = () => {
           />
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 
