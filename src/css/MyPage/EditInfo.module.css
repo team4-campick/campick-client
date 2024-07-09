@@ -53,7 +53,13 @@
   font-size: 18px;
   cursor: pointer;
 }
-.errMsg {
+.errMsg,
+.passed {
   font-size: 12px;
+}
+.errMsg {
   color: #ff3a3a;
+}
+.passed {
+  color: green;
 }

@@ -1,7 +1,7 @@
 .customerService .inputArea {
   display: flex;
   flex-direction: column;
-  max-width: calc(100% - 8rem);
+  max-width: calc(100% - 16rem);
   min-width: 300px;
   margin: auto;
   /* padding: 4rem 12rem; */
@@ -81,4 +81,16 @@
   color: red;
   margin: 0.5rem 0;
   font-size: 12px;
+}
+
+@media (max-width: 1400px) {
+  .customerService {
+    margin-bottom: 1rem;
+  }
+  .customerService button {
+    margin: 0.5rem 0;
+  }
+  .customerService button::after {
+    top: calc(100% + 0.5rem);
+  }
 }
