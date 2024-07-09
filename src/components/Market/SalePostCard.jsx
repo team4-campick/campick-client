@@ -30,7 +30,6 @@ const SalePostCard = ({ post }) => {
         <img src={thumbnail} alt="상품이미지" />
       </div>
       <div className={style.productInfo}>
-        <div>{`${region} ${city} `}</div>
         <div>
           <span className={style.productCategory}>{category}</span>
           <p>{`${productName}`} 판매합니다.</p>
@@ -43,6 +42,7 @@ const SalePostCard = ({ post }) => {
             {isNegotiable ? "협의가능" : "협의불가"}
           </div>
         </div>
+        <div>{`${region} ${city} `}</div>
         <div className={style.writeDate}>{convertToKoreanDate(createdAt)}</div>
       </div>
     </div>

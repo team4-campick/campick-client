@@ -103,10 +103,14 @@
   .contentCon {
     flex-direction: column;
   }
+  .myPageIntro {
+    font-size: 1.5rem;
+  }
   .sideBar {
     width: 100%;
     padding: 0;
     border: none;
+    border-bottom: 2px solid lightgray;
   }
   .myPage .outletArea {
     padding-bottom: 1rem;

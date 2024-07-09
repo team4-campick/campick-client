@@ -2,7 +2,6 @@ export const checkBlogPostData = (post) => {
   if (
     !post.blogPostTitle ||
     !post.region ||
-    !post.city ||
     !post.content ||
     !post.campSiteName ||
     !post.blogPostDesc
@@ -18,11 +17,9 @@ export const checkMarketPostData = (post) => {
     !post.category ||
     !post.productName ||
     !post.region ||
-    !post.city ||
     !post.price ||
     !post.desc ||
-    !post.condition ||
-    !post.isNegotiable
+    !post.condition
   ) {
     return false;
   }

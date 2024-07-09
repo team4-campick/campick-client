@@ -7,27 +7,29 @@
 .bgImgWrap div:nth-of-type(0) {
   padding: 1rem;
 }
-
-.imgInput {
-  /* display: none; */
-  margin-bottom: 1rem;
-}
-.uploadBtn {
-  border: 1px solid lightgrey;
+.imgUploadBtn {
   width: 150px;
-  height: 150px;
-}
-.uploadBtn {
+  height: 30px;
+  border: 1px solid lightgray;
+  background: rgb(77, 77, 77);
+  color: #fff;
+  margin-bottom: 1rem;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-right: 10px;
+  justify-content: center;
+  &:hover {
+    background: #fff;
+    color: rgb(77, 77, 77);
+  }
+}
+.imgInput {
+  display: none;
 }
 
 .imgPreview {
-  border: 1px solid gray;
   width: 100%;
   height: 440px;
+  margin-bottom: 1rem;
 }
 
 .imgPreview img {
@@ -35,9 +37,7 @@
   height: 100%;
   object-fit: cover;
 }
-.uploadBtn i {
-  color: #d2d8d6;
-}
+
 .inputWrap {
   position: absolute;
   width: 400px;
@@ -59,11 +59,19 @@
 
 .selectedRegion {
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   justify-content: space-between;
 }
 .inputWrap textarea {
   width: 100%;
   outline: none;
   border: 1px solid lightgray;
+  resize: unset;
+  padding: 0;
+  font-size: 1rem;
+}
+.blogPostSubmitBtn,
+.blogPostEditBtn {
+  width: 600px;
+  flex-grow: 0;
 }

@@ -13,6 +13,7 @@ body {
 
 /* 포스트 작성 완료 버튼 */
 .submitButtonWrap {
+  width: 100%;
   display: flex;
   justify-content: center;
   gap: 12px;
@@ -31,7 +32,7 @@ body {
   align-items: center;
 }
 .submitButton {
-  width: 600px;
+  /* flex-grow: 1; */
   height: 50px;
   border: none;
   border-radius: 3px;
