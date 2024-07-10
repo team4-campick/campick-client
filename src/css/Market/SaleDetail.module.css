@@ -4,39 +4,43 @@
 }
 .detailWrap {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 150px;
 }
 .editDeletes {
   text-align: end;
 }
 .editDeletes button {
-  cursor: pointer;
   color: rgba(0, 0, 0, 0.5);
   font-size: 14px;
 }
 .productImgSlideWrap {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  border: 1px solid lightgray;
 }
 .detailSlide {
   width: 100%;
-  height: 500px;
-  margin-bottom: 1rem;
+  overflow: hidden;
 }
-.detailSlide img {
+.detailSlide > div:first-child > div {
+  position: relative;
+  padding-top: 100%;
+}
+.detailSlide > div:first-child > div > img {
+  position: absolute;
+  top: 0;
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: cover;
 }
 .productInfo {
-  flex-grow: 1;
-  border-left: 1px solid lightgrey;
-  margin-left: 50px;
-  padding-left: 50px;
-  height: 500px;
+  width: 100%;
+  height: 400px;
+  margin: 2rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: hidden;
 }
 .infoTop {
   display: flex;
@@ -58,11 +62,9 @@
 }
 .productPriceWrap {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 5px;
   font-size: 1.2rem;
-  padding: 10px 0;
-
-  /* margin-right: 7rem; */
 }
 .productPriceWrap .negotiable {
   color: #42ade2;
@@ -88,6 +90,12 @@
   color: gray;
 }
 
-.inquiryBtn {
-  flex-grow: 1;
+.soldOutBtn {
+  background-color: gray;
+}
+
+@media (max-width: 850px) {
+  .detailWrap {
+    padding: 0;
+  }
 }
