@@ -1,6 +1,9 @@
 import React, { useMemo, useRef } from "react";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import style from "./QuillEditor.module.css";
+import ImageResize from "quill-image-resize";
+Quill.register("modules/ImageResize", ImageResize);
 
 const formats = [
   "header",
@@ -11,7 +14,6 @@ const formats = [
   "underline",
   "align",
   "strike",
-  "script",
   "blockquote",
   "background",
   "list",
@@ -86,7 +88,6 @@ const QuillEditor = ({ value, setValue, setQuillImages }) => {
           [{ font: [] }], // font family
           [{ align: [] }], // text align
           ["bold", "italic", "underline", "strike"], // formatting buttons
-          [{ script: "sub" }, { script: "super" }], // superscript/subscript
           [{ list: "ordered" }, { list: "bullet" }], // lists
           [{ indent: "-1" }, { indent: "+1" }], // indent/outdent
           [{ direction: "rtl" }], // text direction
@@ -98,19 +99,26 @@ const QuillEditor = ({ value, setValue, setQuillImages }) => {
           image: handleUploadImage,
         },
       },
+      ImageResize: {
+        parchment: Quill.import("parchment"),
+        modules: ["Resize", "DisplaySize"],
+      },
     };
   }, []);
 
   return (
-    <ReactQuill
-      theme="snow"
-      ref={quillRef}
-      modules={modules}
-      formats={formats}
-      value={value}
-      onChange={setValue}
-      placeholder="내용을 입력해주세요."
-    />
+    <div className={style.editorWrap}>
+      <ReactQuill
+        theme="snow"
+        ref={quillRef}
+        modules={modules}
+        formats={formats}
+        value={value}
+        onChange={setValue}
+        placeholder="내용을 입력해주세요."
+        style={{ all: "revert" }}
+      />
+    </div>
   );
 };
 
