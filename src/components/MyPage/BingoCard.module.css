@@ -1,5 +1,5 @@
 .bingoCard {
-  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 1);
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,8 +8,6 @@
   overflow: hidden;
   position: relative;
   perspective: 800px;
-  /* z-index 설정으로 위 헤더보다 높게 올라가는 증상이 있어 일단 주석처리 */
-  /* z-index: 1; */
 }
 .front,
 .back {
@@ -40,7 +38,7 @@
   transform: rotateY(180deg);
 }
 .back img {
-  width: 60%;
+  width: 40%;
 }
 .bingoCard.on .front {
   transform: rotateY(180deg);

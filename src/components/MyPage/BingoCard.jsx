@@ -7,7 +7,7 @@ const BingoCard = ({ e }) => {
     "https://img.icons8.com/pastel-glyph/64/055a5b/camping-gas-burner.png",
     "https://img.icons8.com/ios-filled/100/055a5b/compass-west.png",
     "https://img.icons8.com/glyph-neue/64/055a5b/trailer.png",
-    "https://img.icons8.com/ios-glyphs/30/055a5b/bonfire.png",
+    "https://img.icons8.com/external-vitaliy-gorbachev-fill-vitaly-gorbachev/60/055a5b/external-bonfire-winter-vitaliy-gorbachev-fill-vitaly-gorbachev.png",
     "https://img.icons8.com/ios-filled/100/055a5b/campsite.png",
     "https://img.icons8.com/ios-filled/100/055a5b/weber.png",
     "https://img.icons8.com/ios-filled/100/055a5b/fishing-pole.png",

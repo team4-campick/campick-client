@@ -65,3 +65,13 @@
   font-size: 14px;
   text-align: left;
 }
+@media (max-width: 1000px) {
+  .ContentsVideo {
+    grid-template-columns: repeat(2, 310px);
+  }
+}
+@media (max-width: 650px) {
+  .ContentsVideo {
+    grid-template-columns: 310px;
+  }
+}
