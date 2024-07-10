@@ -73,3 +73,14 @@
   background-color: white;
   color: #055a5b;
 }
+@media (max-width: 800px) {
+  .modalCon {
+    width: calc(100% - 1rem);
+  }
+  .reviewForm {
+    width: calc(100% - 1rem);
+  }
+  .tools > button {
+    padding: 1rem 2rem;
+  }
+}

@@ -2,12 +2,15 @@ body {
   -ms-overflow-style: none;
 }
 
+.wrap {
+  overflow-x: clip;
+}
 ::-webkit-scrollbar {
   display: none;
 }
 .mw {
   max-width: 1440px;
-  width: calc(100% - 200px);
+  width: calc(100% - 8rem);
   margin: auto;
 }
 
@@ -58,7 +61,8 @@ button {
   width: 100%;
   border-radius: 8px;
   padding: 1rem 2rem;
-  background-color: rgba(31, 59, 52, 0.2);
+  background-color: white;
+  border: 1px solid lightgray;
   outline: none;
 }
 .searchBar input {
@@ -70,4 +74,17 @@ button {
 /* quill editor height */
 .quillTest .ql-container {
   height: 500px;
+}
+@media (max-width: 1440px) {
+  .searchBar {
+    margin: 4rem 200px 1rem;
+  }
+}
+@media (max-width: 800px) {
+  .searchBar {
+    margin: 2rem 0;
+  }
+  .mw {
+    width: calc(100% - 2rem);
+  }
 }
