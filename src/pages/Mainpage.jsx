@@ -106,6 +106,11 @@ const MainPage = () => {
                 }
                 alt={`Slide ${index + 1}`}
               />
+              <div className={styles.mainBannerBlog}>
+                <strong>{`${post.region}, ${post.city}`}</strong>
+                <h3>{post.blogPostTitle}</h3>
+                <Link to={`/blog-post-detail/${post._id}`}>Read More</Link>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -122,6 +127,7 @@ const MainPage = () => {
             }}
             modules={[Autoplay, Pagination, Navigation, Controller]}
             className={styles.mainExplainSwiper}
+            id={styles.testId}
             onSwiper={(swiper) => {
               blogSwiperRef.current = swiper;
               if (mainSwiperRef.current) {
@@ -173,12 +179,28 @@ const MainPage = () => {
         <h2>Today's Event</h2>
         <div className={styles.mainEvents}>
           <Swiper
-            slidesPerView={4}
-            spaceBetween={15}
             pagination={{ clickable: true }}
             modules={[Navigation, Pagination]}
             className={styles.mainEventsSwiper}
             ref={eventSwiperRef}
+            breakpoints={{
+              100: {
+                slidesPerView: 1,
+                spaceBetween: 15,
+              },
+              500: {
+                slidesPerView: 2,
+                spaceBetween: 15,
+              },
+              800: {
+                slidesPerView: 3,
+                spaceBetween: 15,
+              },
+              1440: {
+                slidesPerView: 4,
+                spaceBetween: 15,
+              },
+            }}
           >
             {proceedingImages.slice(0, 10).map((image) => (
               <SwiperSlide key={image.name}>
