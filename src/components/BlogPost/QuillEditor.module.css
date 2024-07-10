@@ -1,0 +1,6 @@
+.editorWrap {
+  strong,
+  em {
+    all: revert;
+  }
+}

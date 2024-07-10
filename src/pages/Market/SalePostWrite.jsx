@@ -4,6 +4,7 @@ import {
   PRODUCT_CATEGORY,
   REGION,
   PRODUCT_CONDITION_OPTIONS,
+  SALE_STATUS,
 } from "../../constants/market";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
@@ -44,6 +45,10 @@ const SalePostWrite = () => {
   };
 
   // useDropdown 훅을 통해 드롭다운 컴포넌트 및 선택값을 필요한 값(카테고리, 지역 등)에 따라 분리하여 관리
+  const { selectLabel: saleStatus, Dropdown: StatusDropdown } = useDropdown({
+    options: SALE_STATUS,
+    type: "판매중",
+  });
   const { selectedLabel: category, Dropdown: CategoryDropdown } = useDropdown({
     options: PRODUCT_CATEGORY,
     type: "종류",
@@ -94,6 +99,7 @@ const SalePostWrite = () => {
       desc,
       condition,
       isNegotiable,
+      saleStatus,
     };
 
     const isCompleted = checkMarketPostData(newPost);
@@ -208,13 +214,15 @@ const SalePostWrite = () => {
           </li>
           <li>
             <span>판매 가격</span>
-            <input
-              type="text"
-              placeholder="가격을 입력해주세요."
-              value={price}
-              onChange={handlePrice}
-            />
-            원
+            <div>
+              <input
+                type="text"
+                placeholder="가격을 입력해주세요."
+                value={price}
+                onChange={handlePrice}
+              />
+              원
+            </div>
             <div className={style.priceNegotiable}>
               <label>
                 <input
@@ -252,7 +260,7 @@ const SalePostWrite = () => {
           </div>
 
           <button
-            className={`submitButton ${style.salePostSubmitBtn}`}
+            className="submitButton"
             type="button"
             onClick={handleSubmitPost}
             disabled={isLoading}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedConversation } from "../../store/chatStore";
 import style from "../../css/Market/SaleDetail.module.css";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import convertToKoreanDate from "../../utils/convertToKoreanDate";
@@ -13,29 +14,15 @@ import { Pagination, Navigation } from "swiper/modules";
 
 const SaleDetail = () => {
   const { id } = useParams();
-  const [salePostDetail, setSalePostDetail] = useState({});
-
-  const {
-    author,
-    authorId,
-    category,
-    productName,
-    region,
-    city,
-    condition,
-    price,
-    desc,
-    isNegotiable,
-    imageUrls = [],
-    createdAt,
-  } = salePostDetail;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [salePostDetail, setSalePostDetail] = useState(null);
 
   const salePostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/sale-posts/${id}`;
+  const messageEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/messages/create`;
 
   const user = useSelector((state) => state.user.user);
   const userId = user?.id;
-
-  console.log("author===", authorId);
 
   const fetchSalePostDetail = async () => {
     try {
@@ -58,7 +45,24 @@ const SaleDetail = () => {
     fetchSalePostDetail();
   }, [id]);
 
-  const navigate = useNavigate();
+  if (salePostDetail === null) return <p>loading...</p>;
+
+  const {
+    author,
+    authorId,
+    category,
+    productName,
+    region,
+    city,
+    condition,
+    price,
+    desc,
+    isNegotiable,
+    imageUrls = [],
+    createdAt,
+    salesStatus,
+  } = salePostDetail;
+
   const deleteSalePost = async () => {
     try {
       const response = await fetch(salePostsEndpoint, {
@@ -75,8 +79,37 @@ const SaleDetail = () => {
       alert("삭제 중 오류가 발생했습니다.");
     }
   };
+
   const editPost = () => {
     navigate(`/sale-post-edit/${id}`);
+  };
+
+  const handleNavigateChat = async () => {
+    try {
+      const response = await fetch(messageEndpoint, {
+        method: "POST",
+        body: JSON.stringify({
+          receiverId: authorId,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      const res = await response.json();
+
+      if (!res.result) {
+        alert("로그인이 필요합니다.");
+        return navigate("/signin");
+      }
+
+      dispatch(setSelectedConversation(authorId));
+      navigate(`/sale-chat/${authorId}`);
+    } catch (error) {
+      console.log(error);
+      alert("채팅을 불러오는데 실패했습니다. 잠시 후 다시 시도해주세요.");
+    }
   };
 
   return (
@@ -90,32 +123,30 @@ const SaleDetail = () => {
       )}
       <div className={style.detailWrap}>
         <div className={style.productImgSlideWrap}>
-          <div className={style.productImgSlide}>
-            <Swiper
-              pagination={{
-                type: "fraction",
-              }}
-              navigation={{
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-              }}
-              loop={true}
-              modules={[Pagination, Navigation]}
-              className={style.detailSlide}
-            >
-              {imageUrls.map((image, index) => (
-                <SwiperSlide key={image._id}>
-                  <img src={image.url} alt={`상품이미지 ${index + 1}`} />
-                </SwiperSlide>
-              ))}
-              <div
-                className={`swiper-button-next ${style.customNavigation}`}
-              ></div>
-              <div
-                className={`swiper-button-prev ${style.customNavigation}`}
-              ></div>
-            </Swiper>
-          </div>
+          <Swiper
+            pagination={{
+              type: "fraction",
+            }}
+            navigation={{
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            }}
+            loop={true}
+            modules={[Pagination, Navigation]}
+            className={style.detailSlide}
+          >
+            {imageUrls.map((image, index) => (
+              <SwiperSlide key={image._id}>
+                <img src={image.url} alt={`상품이미지 ${index + 1}`} />
+              </SwiperSlide>
+            ))}
+            <div
+              className={`swiper-button-next ${style.customNavigation}`}
+            ></div>
+            <div
+              className={`swiper-button-prev ${style.customNavigation}`}
+            ></div>
+          </Swiper>
         </div>
         <div className={style.productInfo}>
           <div>
@@ -154,10 +185,20 @@ const SaleDetail = () => {
             </Link>
 
             <button
-              className={`submitButton ${style.inquiryBtn}`}
-              onClick={() => navigate(`/sale-chat/${authorId}`)}
+              className={`submitButton ${
+                salesStatus === "거래완료" ? style.soldOutBtn : " "
+              }`}
+              onClick={() => {
+                if (userId !== authorId) {
+                  handleNavigateChat();
+                }
+              }}
             >
-              문의하기
+              {userId === authorId
+                ? salesStatus
+                : salesStatus === "거래완료"
+                ? "거래완료"
+                : "문의하기"}
             </button>
           </div>
         </div>

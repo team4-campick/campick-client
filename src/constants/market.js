@@ -256,4 +256,10 @@ const PRODUCT_CONDITION_OPTIONS = [
   { value: "muchUse", label: "사용감 많음" },
 ];
 
-export { PRODUCT_CATEGORY, REGION, PRODUCT_CONDITION_OPTIONS };
+const SALE_STATUS = [
+  { label: "판매중", value: "판매중" },
+  { label: "예약중", value: "예약중" },
+  { label: "거래완료", value: "거래완료" },
+];
+
+export { PRODUCT_CATEGORY, REGION, PRODUCT_CONDITION_OPTIONS, SALE_STATUS };
