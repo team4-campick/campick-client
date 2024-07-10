@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUserAllInfo } from "../../store/userStore";
 import style from "./header.module.css";
@@ -13,6 +13,7 @@ const Header = () => {
 
   const user = useSelector((state) => state.user.user);
   const isLoggedIn = useMemo(() => (user ? user.username : null), [user]);
+  const [gnbOn, setGnbOn] = useState(false);
   useEffect(() => {
     const fetchProfile = async () => {
       const response = await fetch(`${url}/profile`, {
@@ -44,55 +45,127 @@ const Header = () => {
           <img src={logoUrl} alt="CAMPICK LOGO IMG" />
         </Link>
       </h1>
+      <div className={!gnbOn ? style.gnb : `${style.gnb} ${style.on}`}>
+        {gnbOn ? (
+          <button className={style.closeHam} onClick={(e) => setGnbOn(false)}>
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+        ) : null}
+        <nav className={style.menuWrap}>
+          <ul>
+            <li>
+              <Link
+                to="/campsite"
+                onClick={() => {
+                  setGnbOn(false);
+                }}
+              >
+                CAMP SITE
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/market"
+                onClick={() => {
+                  setGnbOn(false);
+                }}
+              >
+                MARKET
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contents"
+                onClick={() => {
+                  setGnbOn(false);
+                }}
+              >
+                CONTENTS
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/event"
+                onClick={() => {
+                  setGnbOn(false);
+                }}
+              >
+                EVENT
+              </Link>
+            </li>
+          </ul>
+        </nav>
 
-      <nav className={style.menuWrap}>
-        <ul>
-          <li>
-            <Link to="/campsite">CAMP SITE</Link>
-          </li>
-          <li>
-            <Link to="/market">MARKET</Link>
-          </li>
-          <li>
-            <Link to="/contents">CONTENTS</Link>
-          </li>
-          <li>
-            <Link to="/event">EVENT</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <nav className={style.privacyWrap}>
-        <ul>
-          {isLoggedIn ? (
-            <>
-              {" "}
-              <li>
-                <Link to="/sale-chat">
-                  <i className="fa-solid fa-message"></i>
-                </Link>
-              </li>
-              <li className={style.privacy}>
-                <Link to="/my-page/bingo-coupon/bingo">MY PAGE</Link>
-              </li>
-              <li className={style.privacy}>
-                <Link to="/" onClick={handleLogout}>
-                  SIGN OUT
-                </Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className={style.public}>
-                <Link to="/signin">SIGN IN</Link>
-              </li>
-              <li className={style.public}>
-                <Link to="/register">REGISTER</Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </nav>
+        <nav className={style.privacyWrap}>
+          <ul>
+            {isLoggedIn ? (
+              <>
+                {" "}
+                <li>
+                  <Link
+                    to="/sale-chat"
+                    onClick={() => {
+                      setGnbOn(false);
+                    }}
+                  >
+                    <i className="fa-solid fa-message"></i>
+                  </Link>
+                </li>
+                <li
+                  className={style.privacy}
+                  onClick={() => {
+                    setGnbOn(false);
+                  }}
+                >
+                  <Link to="/my-page/bingo-coupon/bingo">MY PAGE</Link>
+                </li>
+                <li className={style.privacy}>
+                  <Link
+                    to="/"
+                    onClick={(e) => {
+                      handleLogout();
+                      setGnbOn(false);
+                    }}
+                  >
+                    SIGN OUT
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className={style.public}>
+                  <Link
+                    to="/signin"
+                    onClick={() => {
+                      setGnbOn(false);
+                    }}
+                  >
+                    SIGN IN
+                  </Link>
+                </li>
+                <li className={style.public}>
+                  <Link
+                    to="/register"
+                    onClick={() => {
+                      setGnbOn(false);
+                    }}
+                  >
+                    REGISTER
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
+      </div>
+      <button
+        className={style.ham}
+        onClick={() => {
+          setGnbOn(true);
+        }}
+      >
+        <i className="fa-solid fa-bars"></i>
+      </button>
     </header>
   );
 };

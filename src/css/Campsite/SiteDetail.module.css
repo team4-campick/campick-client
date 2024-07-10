@@ -87,6 +87,7 @@
 }
 .options {
   display: flex;
+  flex-wrap: wrap;
   gap: 3rem;
 }
 .options svg {
@@ -136,4 +137,38 @@
 }
 .noReview {
   padding-top: 2rem;
+}
+
+@media (max-width: 1440px) {
+  .siteDetail {
+    width: calc(100% - 300px);
+  }
+}
+@media (max-width: 800px) {
+  .siteDetail {
+    width: 100%;
+    padding: 1rem;
+  }
+  .siteDetailBanner {
+    padding-top: 60%;
+    margin-bottom: 1rem;
+  }
+
+  .siteDetailSubBanner {
+    display: none;
+  }
+  .options {
+    gap: 1rem;
+  }
+  .options svg {
+    width: 2rem;
+    height: 2rem;
+  }
+  .siteDetail h3,
+  .siteDetail h3 a {
+    font-size: 1rem;
+  }
+  .siteMap {
+    height: 300px;
+  }
 }

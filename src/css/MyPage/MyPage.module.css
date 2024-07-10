@@ -15,14 +15,9 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 1rem;
-  padding-top: 30%;
+
+  padding-top: 20%;
   position: relative;
-  /* background-image: url("../../../public/images/MyPage/MyPageBanner.svg"); */
-  background-image: url("https://cdn.pixabay.com/photo/2014/04/02/16/14/camping-306676_640.png");
-  background-repeat: no-repeat;
-  background-size: 20%;
-  background-position: right;
   border-bottom: 2px solid lightgray;
 }
 .myPageIntro {
@@ -103,10 +98,14 @@
   .contentCon {
     flex-direction: column;
   }
+  .myPageIntro {
+    font-size: 1.5rem;
+  }
   .sideBar {
     width: 100%;
     padding: 0;
     border: none;
+    border-bottom: 2px solid lightgray;
   }
   .myPage .outletArea {
     padding-bottom: 1rem;
