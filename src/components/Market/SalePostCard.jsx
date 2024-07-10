@@ -32,7 +32,7 @@ const SalePostCard = ({ post }) => {
       <div className={style.productInfo}>
         <div>
           <span className={style.productCategory}>{category}</span>
-          <p>{`${productName}`} 판매합니다.</p>
+          <p>{productName} 판매합니다.</p>
         </div>
         <div className={style.pricWrap}>
           <span>{price && `${price.toLocaleString("ko-KR")}원`}</span>
@@ -42,7 +42,9 @@ const SalePostCard = ({ post }) => {
             {isNegotiable ? "협의가능" : "협의불가"}
           </div>
         </div>
-        <div>{`${region} ${city} `}</div>
+        <div className={style.regionCity}>
+          {region} {city}
+        </div>
         <div className={style.writeDate}>{convertToKoreanDate(createdAt)}</div>
       </div>
     </div>
