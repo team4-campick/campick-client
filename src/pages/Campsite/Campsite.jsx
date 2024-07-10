@@ -140,7 +140,7 @@ const Campsite = () => {
         <label className="inputArea">
           <input
             type="text"
-            placeholder="Search"
+            placeholder="어디로 갈까요?"
             onChange={handleSearchChange}
           />
           <button type="submit">

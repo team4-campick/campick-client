@@ -1,13 +1,22 @@
 .chatContainer {
-  display: flex;
-  justify-content: space-between;
+  height: 800px;
   margin-top: 20px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
-  padding: 20px;
 }
 
-.chatList {
+.messageBox {
+  margin-top: 1rem;
+}
+.noticeMessage {
+  padding-left: 12px;
+}
+
+@media (max-width: 800px) {
+  .chatContainer {
+    width: 100%;
+  }
+}
+/* .chatList {
   flex: 1;
   border-right: 1px solid #ccc;
   padding-right: 20px;
@@ -54,12 +63,31 @@
 
 .messageInput {
   border: 1px solid black;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .receivedMessage {
   text-align: left;
+  padding-right: 40%;
+  border: 1px solid red;
 }
 
-.sentMessage {
+/* .sentMessage {
   text-align: right;
+  padding-left: 40%;
+  border: 1px solid green;
+} */
+/* .chatUserName {
+  color: gray;
+} */
+/* .receivedMessage .messages {
+  background-color: aliceblue;
 }
+.sentMessage .messages {
+  background-color: antiquewhite;
+} */
+/* .messages {
+  border-radius: 3px;
+  font-size: 1.1rem;
+} */

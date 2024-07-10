@@ -44,15 +44,17 @@ const EventFinished = () => {
   return (
     <section className={style.gallery}>
       <h2 hidden>FINISHED</h2>
-      {images.map((image) => (
-        <div
-          key={image.name}
-          className={style.eventVisual}
-          onClick={() => handleImageClick(image)}
-        >
-          <img src={image.url} alt={image.name} />
-        </div>
-      ))}
+      <div className={style.galleryCon}>
+        {images.map((image) => (
+          <div
+            key={image.name}
+            className={style.eventVisual}
+            onClick={() => handleImageClick(image)}
+          >
+            <img src={image.url} alt={image.name} />
+          </div>
+        ))}
+      </div>
       {isPopupOpen && (
         <div className={style.popup} onClick={handlePopupBackgroundClick}>
           <div
@@ -61,10 +63,10 @@ const EventFinished = () => {
           >
             <div className={style.eventVisual}>
               <img src={popupContent.url} alt={popupContent.name} />
+              <span className={style.closeBtn} onClick={closePopup}>
+                &times;
+              </span>
             </div>
-            <span className={style.closeBtn} onClick={closePopup}>
-              &times;
-            </span>
           </div>
         </div>
       )}

@@ -43,7 +43,7 @@ const ContentsBlog = () => {
   };
 
   return (
-    <section className="mw">
+    <section className={`mw ${style.blogListWrap}`}>
       <h2 hidden>ContentsBlog</h2>
       <div className={style.writeBtnCon}>
         <button

@@ -1,13 +1,19 @@
+@import url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css");
+
 body {
   -ms-overflow-style: none;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
 }
 
+.wrap {
+  overflow-x: clip;
+}
 ::-webkit-scrollbar {
   display: none;
 }
 .mw {
   max-width: 1440px;
-  width: calc(100% - 200px);
+  width: calc(100% - 8rem);
   margin: auto;
 }
 
@@ -30,17 +36,32 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .submitButton {
-  /* flex-grow: 1; */
+  width: 600px;
   height: 50px;
   border: none;
   border-radius: 3px;
   background-color: #055a5b;
   color: white;
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
+@media (max-width: 800px) {
+  .submitButton {
+    width: 400px;
+  }
+  .submitButtonWrap i {
+    width: 50px;
+  }
+}
+@media (max-width: 500px) {
+  .submitButton {
+    width: 200px;
+  }
+}
 /* button reset */
 button {
   outline: none;
@@ -58,7 +79,8 @@ button {
   width: 100%;
   border-radius: 8px;
   padding: 1rem 2rem;
-  background-color: rgba(31, 59, 52, 0.2);
+  background-color: white;
+  border: 1px solid lightgray;
   outline: none;
 }
 .searchBar input {
@@ -70,4 +92,21 @@ button {
 /* quill editor height */
 .quillTest .ql-container {
   height: 500px;
+}
+input:focus::placeholder,
+textarea:focus::placeholder {
+  opacity: 0;
+}
+@media (max-width: 1440px) {
+  .searchBar {
+    margin: 4rem 200px 1rem;
+  }
+}
+@media (max-width: 800px) {
+  .searchBar {
+    margin: 2rem 0;
+  }
+  .mw {
+    width: calc(100% - 2rem);
+  }
 }

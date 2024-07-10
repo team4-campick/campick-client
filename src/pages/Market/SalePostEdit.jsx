@@ -4,6 +4,7 @@ import {
   PRODUCT_CATEGORY,
   REGION,
   PRODUCT_CONDITION_OPTIONS,
+  SALE_STATUS,
 } from "../../constants/market";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -48,6 +49,14 @@ const SalePostEdit = () => {
     type: "시",
   });
 
+  const {
+    selectedLabel: salesStatus,
+    setSelectedLabel: setSalesStatus,
+    Dropdown: StatusDropdown,
+  } = useDropdown({
+    options: SALE_STATUS,
+    type: "판매중",
+  });
   const [productName, setProductName] = useState("");
   const handleProductName = (event) => {
     setProductName(event.target.value);
@@ -96,6 +105,7 @@ const SalePostEdit = () => {
       setRegion(data.salePost.region);
       setCity(data.salePost.city);
       setImageFiles(data.salePost.imageUrls);
+      setSalesStatus(data.salePost.salesStatus);
       setIsFetched(true);
     } catch (error) {
       console.log(error);
@@ -116,6 +126,7 @@ const SalePostEdit = () => {
       desc,
       condition,
       isNegotiable,
+      salesStatus,
     };
 
     const isCompleted = checkMarketPostData(editedPost);
@@ -242,6 +253,10 @@ const SalePostEdit = () => {
               className={style.productDesc}
               rows="15"
             ></textarea>
+          </li>
+          <li>
+            <span>판매 상태</span>
+            <StatusDropdown />
           </li>
         </ul>
         <div className="submitButtonWrap">

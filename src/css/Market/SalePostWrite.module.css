@@ -1,19 +1,26 @@
 .writeCon {
-  padding: 0 200px;
+  padding: 0 100px;
+}
+@media (max-width: 980px) {
+  .writeCon {
+    width: 90%;
+    padding: 0;
+  }
 }
 
 .writeCon > div > ul > li {
   display: flex;
-  padding: 1rem;
-  border-bottom: 1px dotted gray;
+  border-bottom: 1px solid gray;
   padding: 2rem 0;
 }
+
 .writeCon li > span {
   display: block;
   width: 150px;
   min-width: 150px;
   padding-right: 3rem;
 }
+
 .imgInput {
   display: none;
 }
@@ -28,8 +35,10 @@
   justify-content: center;
   align-items: center;
   margin-right: 10px;
+  flex-shrink: 0;
 }
-.imgPreview {
+
+.uploadBtn .imgPreview {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -47,13 +56,32 @@
 .priceNegotiable input {
   margin: 0 0.3rem;
 }
+
 .productDesc {
   width: 500px;
   resize: none;
 }
+@media (max-width: 850px) {
+  .writeCon > div > ul > li {
+    flex-direction: column;
+    align-items: start;
+  }
+  .writeCon li > span {
+    margin-bottom: 1rem;
+    padding-right: 0;
+    text-align: start;
+  }
 
-.salePostSubmitBtn,
-.salePostEditBtn {
-  width: 600px;
-  flex-grow: 0;
+  .writeCon li > textarea {
+    width: 350px;
+  }
+  .priceNegotiable {
+    margin-top: 1rem;
+  }
+  .selectRegion {
+    flex-direction: column;
+  }
+  .uploadBtn {
+    margin-bottom: 10px;
+  }
 }

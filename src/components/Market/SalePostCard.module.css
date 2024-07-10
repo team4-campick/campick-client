@@ -1,43 +1,48 @@
 .salePostCard {
-  height: auto;
+  height: 100%;
   border: 1px solid lightgray;
   border-radius: 8px;
   display: flex;
   margin-bottom: 2rem;
   overflow: hidden;
+  cursor: pointer;
 }
 .thumnailImg {
-  flex: 4;
-  margin-right: 2rem;
+  position: relative;
+  padding-top: 30%;
+  flex: 1;
+  height: 100%;
 }
 .thumnailImg img {
+  position: absolute;
+  top: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .productInfo {
-  flex: 6;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.5rem 0;
+  padding: 10px 1rem;
 }
 .productCategory {
   font-size: 0.85rem;
-  bottom: 0.5rem;
   color: gray;
 }
 .productInfo p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  margin-top: 0.5rem;
+  margin-top: 5px;
 }
 .pricWrap {
   display: flex;
   gap: 1rem;
 }
 .pricWrap > span {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .pricWrap .negotiable {
   color: #42ade2;
@@ -45,6 +50,9 @@
 
 .pricWrap .nonNegotiable {
   color: red;
+}
+.regionCity {
+  font-size: 0.9rem;
 }
 .writeDate {
   font-size: 0.8rem;

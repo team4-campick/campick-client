@@ -6,3 +6,8 @@
   border: 1px solid lightgray;
   color: gray;
 }
+@media (max-width: 800px) {
+  .container button {
+    margin-bottom: 0.5rem;
+  }
+}

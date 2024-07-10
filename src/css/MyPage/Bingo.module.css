@@ -3,26 +3,56 @@
 }
 .countStatus {
   width: 100%;
-  height: 6rem;
+  /* height: 6rem; */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  /* padding: 1rem 0 1rem 4rem; */
 }
 .updateBtn {
   cursor: pointer;
 }
 .bingoCon {
-  width: 40%;
-  padding-top: 50%;
+  /* width: 100%; */
+  padding-top: 100%;
   position: relative;
   flex: 1;
 }
 .bingoGame {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 4rem;
+}
+.bingoBoard {
+  /* flex: 1; */
+  width: 40%;
+  padding: 2rem;
+  border: 1px solid black;
+  box-shadow: 0 4px 6px 1px rgba(1, 1, 1, 0.5);
+  border-radius: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+.bingoBanner {
+  padding-top: 35%;
+  /* width: 100%; */
+  background-image: url("../../../public/images/MyPage/bingoBanner.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.bannerText {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(-15deg);
+  font-size: 4rem;
+  font-weight: bold;
 }
 .bingoArea {
   width: 100%;
@@ -34,10 +64,17 @@
   top: 0;
 }
 .bingoResultCon {
-  flex: 1;
+  /* flex: 1; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-left: 1px solid lightgray;
+  padding-left: 4rem;
+  gap: 4rem;
+}
+.resultCon {
   display: flex;
   gap: 4rem;
-  justify-content: center;
 }
 .missionCon {
   display: flex;
@@ -45,8 +82,8 @@
 }
 .missionList {
   /* border: 1px solid black; */
-  border-left: 1px solid lightgray;
-  padding-left: 2rem;
+  /* border-left: 1px solid lightgray; */
+  /* padding-left: 4rem; */
 }
 .missionList > li,
 .couponList > li {
@@ -57,6 +94,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.couponList button {
+  padding-left: 1rem;
 }
 .missionList .result {
   padding-left: 2rem;
@@ -117,21 +157,40 @@
 .bingoPattern8 {
   transform: rotate(45deg);
 }
-@media (max-width: 1460px) {
+@media (max-width: 1440px) {
   .bingoGame {
     flex-direction: column;
     align-items: center;
+  }
+  .bingoBoard {
+    width: 60%;
+    min-width: 350px;
   }
   .missionList {
     border: none;
     padding: 0;
   }
   .bingoCon {
-    width: 65%;
-    padding-top: 65%;
+    /* width: 65%;
+    padding-top: 65%; */
+  }
+  .bannerText {
+    font-size: 3rem;
+  }
+  .countStatus {
+    padding: 1rem 0;
+    font-size: 1rem;
   }
   .bingoResultCon {
     width: 100%;
+    border-top: 1px solid lightgray;
+    border-left: none;
+    padding-top: 1rem;
+    padding-left: 0;
+    gap: 2rem;
+  }
+  .resultCon {
+    justify-content: center;
   }
 }
 @media (max-width: 800px) {
@@ -140,6 +199,9 @@
     height: 3rem;
   }
   .bingoResultCon {
+    gap: 2rem;
+  }
+  .resultCon {
     gap: 2rem;
   }
   .couponList li,
@@ -152,5 +214,8 @@
   .couponList li button,
   .missionList .clear {
     font-size: 0.75rem;
+  }
+  .bingoBoard {
+    width: 100%;
   }
 }

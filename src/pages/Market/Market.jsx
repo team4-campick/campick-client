@@ -120,11 +120,13 @@ const Market = () => {
         </button>
       </div>
 
-      <div className={style.postCardList}>
-        {!salePosts.length && <p>게시물이 존재하지 않습니다.</p>}
-        {salePosts.map((post) => (
-          <SalePostCard key={post._id} post={post} />
-        ))}
+      <div className={style.postListWrap}>
+        <div className={style.postCardList}>
+          {!salePosts.length && <p>게시물이 존재하지 않습니다.</p>}
+          {salePosts.map((post) => (
+            <SalePostCard key={post._id} post={post} />
+          ))}
+        </div>
       </div>
     </section>
   );
