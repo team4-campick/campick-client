@@ -96,6 +96,7 @@ button {
 input:focus::placeholder,
 textarea:focus::placeholder {
   opacity: 0;
+}
 @media (max-width: 1440px) {
   .searchBar {
     margin: 4rem 200px 1rem;
