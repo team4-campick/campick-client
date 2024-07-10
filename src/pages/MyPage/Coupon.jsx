@@ -2,47 +2,12 @@ import React, { useEffect, useState } from "react";
 import style from "../../css/MyPage/Coupon.module.css";
 import CouponCard from "../../components/MyPage/CouponCard";
 import { useSelector } from "react-redux";
-import { COUPON } from "../../constants/coupon";
 
 const Coupon = () => {
   const url = process.env.REACT_APP_SERVER_URL;
   const user = useSelector((state) => state.user.user);
   const [coupons, setCoupons] = useState([]);
-  // console.log("COUPON", COUPON);
-  // const [bingoPattern, setBingoPattern] = useState([]);
   const userObjId = user?.id;
-  // const getBingoPattern = async () => {
-  //   try {
-  //     const response = await fetch(`${url}/bingo-pattern/${userObjId}`, {
-  //       method: "GET",
-  //       headers: { Accept: "application/json" },
-  //       credentials: "include",
-  //     });
-  //     const data = await response.json();
-  //     setBingoPattern(data.bingoPattern);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-  // const issuanceCoupon = async () => {
-  //   try {
-  //     await getBingoPattern();
-  //     const response = await fetch(`${url}/coupon-issuance`, {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         userObjId,
-  //       }),
-  //       headers: { Accept: "application/json" },
-  //       credentials: "include",
-  //     });
-  //     const data = await response.json();
-  //     console.log(data);
-
-  //     window.location.reload();
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
   useEffect(() => {
     const getCoupon = async () => {
       try {

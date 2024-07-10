@@ -102,6 +102,7 @@ textarea:focus::placeholder {
     margin: 4rem 200px 1rem;
   }
 }
+
 @media (max-width: 800px) {
   .searchBar {
     margin: 2rem 0;

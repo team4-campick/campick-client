@@ -341,7 +341,7 @@ const Bingo = () => {
                 {COUPON.map((item, i) => {
                   return (
                     <li key={item} className={style[item]}>
-                      <span className={style.coupon}>{item.TYPE}</span>
+                      <span className={style.coupon}>{item.CONDITION}</span>
                       {bingoCount >= i + 1 ? (
                         <button onClick={() => handleCoupon(item)}>발급</button>
                       ) : (

@@ -9,7 +9,7 @@
   background-color: white;
   padding: 10px 4rem;
   border-bottom: rgb(31, 59, 52, 0.2) solid 1px;
-  gap: 4rem;
+  gap: 1rem;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -17,8 +17,11 @@
 }
 .gnb {
   display: flex;
+  flex: 1;
   justify-content: space-between;
-  gap: 8rem;
+}
+.gnb a {
+  white-space: nowrap;
 }
 .ham {
   display: none;
@@ -46,8 +49,14 @@
   height: 30px; /* SVG 이미지 높이 조정 */
   width: auto; /* 자동 너비 유지 */
 }
-
-.menuWrap ul,
+.menuWrap {
+  flex: 1;
+}
+.menuWrap ul {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}
 .privacyWrap ul {
   list-style: none;
   display: flex;
@@ -113,72 +122,13 @@
   text-decoration: none;
   font-size: 16px;
 }
-.utilHeader {
-  color: var(--white);
-  font-size: 0.875em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-transform: none;
-  font-weight: lighter;
-  height: 43px;
-  background-color: var(--rope);
-  transition: 0.3s;
-}
-.utilHeader.scrolled {
-  height: 0;
-}
-.utilHeader p {
-  display: inline-block;
-  white-space: nowrap;
-  line-height: 1;
-  padding: 0.75em 0;
-}
-.utilHeader .person {
-  display: flex;
-  justify-content: end;
-}
-.utilHeader .person a {
-  position: relative;
-  padding-left: 1rem;
-  white-space: wrap;
-  opacity: 1;
-  transition: 0.3s;
-}
-.utilHeader .person a:hover {
-  color: rgba(252, 212, 175, 0.9);
-}
-.utilHeader .person a:nth-of-type(2)::before,
-.utilHeader .person a:nth-of-type(3)::before {
-  content: "";
-  position: absolute;
-  width: 1px;
-  height: 0.875em;
-  top: 40%;
-  left: 0.5rem;
-  transform: translateY(-50%);
-  background-color: var(--white);
-}
-@media (max-width: 990px) {
-  .utilHeader .person {
-    display: none;
-  }
-  .utilHeader {
-    justify-content: center;
-  }
-}
-@media (max-width: 540px) {
-  .utilHeader p {
-    font-size: 0.7rem;
-  }
-}
 @media (max-width: 1440px) {
   .gnb {
     gap: 6rem;
   }
 }
 /* 반응형 디자인 */
-@media (max-width: 800px) {
+@media (max-width: 1100px) {
   .headerWrap {
     /* flex-direction: column; */
     /* align-items: flex-start; */
@@ -234,7 +184,6 @@
   }
   .gnb .privacyWrap ul li:first-child {
     order: 3;
-    flex: 1;
   }
   .gnb .privacyWrap ul li:nth-of-type(2) {
     order: 1;
@@ -242,7 +191,7 @@
   .gnb .privacyWrap ul li:nth-of-type(3) {
     order: 2;
   }
-  .closeHam {
+  .gnb .privacyWrap ul li .closeHam {
     display: inline;
     cursor: pointer;
     position: absolute;

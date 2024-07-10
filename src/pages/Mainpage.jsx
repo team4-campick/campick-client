@@ -228,8 +228,6 @@ const MainPage = () => {
           </div>
         </div>
       </section>
-
-      <ScrollTopBtn />
     </>
   );
 };
