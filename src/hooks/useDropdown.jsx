@@ -24,9 +24,9 @@ const useDropdown = ({ options, type }) => {
   // 드롭다운 컴포넌트
   const Dropdown = () => {
     return (
-      <div className='container' tabIndex={0}>
+      <div className="container" tabIndex={0}>
         <label onClick={handleClickContainer}>
-          <button type='button'>
+          <button type="button">
             {selectedLabel || type} {isDropdownOpen ? "⌃" : "⌄"}
           </button>
         </label>
