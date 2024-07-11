@@ -9,7 +9,7 @@
   font-size: 0.8rem;
   color: gray;
 }
-.messageBox {
+.noticeMessageBox {
   margin-bottom: 2px;
   width: 100%;
   display: flex;
