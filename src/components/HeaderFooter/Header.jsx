@@ -123,7 +123,7 @@ const Header = () => {
                   <Link
                     to="/"
                     onClick={(e) => {
-                      handleLogout();
+                      handleLogout(e);
                       setGnbOn(false);
                     }}
                   >

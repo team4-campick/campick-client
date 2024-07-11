@@ -201,6 +201,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 4rem;
 }
 
 .mainVideoWarp {
@@ -219,12 +220,13 @@
 .mainVideo {
   width: 980px;
   height: 540px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .mainEventsWarp {
+  padding: 4rem 0;
   /* height: 600px; */
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
 }
 
 .mainEvents {

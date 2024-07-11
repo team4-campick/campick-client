@@ -1,0 +1,24 @@
+.my-chat-container .cs-message--incoming .cs-message__content {
+  background-color: #e6e6e6;
+}
+
+.my-chat-container .cs-message--outgoing .cs-message__content,
+.cs-message-input__content-editor-wrapper,
+.cs-message-input__content-editor,
+.ps__thumb-y {
+  background-color: #cce8e2;
+}
+.cs-button--send,
+.cs-conversation.cs-conversation--active .cs-conversation__name {
+  color: #055a5b;
+}
+.cs-conversation.cs-conversation--active,
+.cs-conversation.cs-conversation:hover {
+  color: #16a085;
+  background-color: #cce8e2;
+}
+
+.cs-main-container > .cs-sidebar.cs-sidebar--left,
+.cs-main-container {
+  border-color: #e6e6e6;
+}
