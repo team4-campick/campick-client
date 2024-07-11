@@ -74,7 +74,7 @@
   width: 50%;
 }
 .mainVisual > div:nth-child(2) > div > div:nth-child(4) > span {
-  width: 90px;
+  width: 98px;
   height: 25px;
   border-radius: 3px 3px 0 0;
   background-color: white;
@@ -145,6 +145,7 @@
   font-size: 15px;
   color: rgba(0, 0, 0, 0.8);
   line-height: 18px;
+  padding-top: 2rem;
   -webkit-line-clamp: 6;
   font-weight: 300;
 }
