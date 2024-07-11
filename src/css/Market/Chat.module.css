@@ -1,93 +1,19 @@
 .chatContainer {
-  height: 800px;
+  height: 500px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
+.chatSendTime {
+  padding-top: 4px;
+  font-size: 0.8rem;
+  color: gray;
+}
 .messageBox {
-  margin-top: 1rem;
+  margin-bottom: 2px;
 }
-.noticeMessage {
-  padding-left: 12px;
-}
-
 @media (max-width: 800px) {
   .chatContainer {
-    width: 100%;
+    width: 90%;
   }
 }
-/* .chatList {
-  flex: 1;
-  border-right: 1px solid #ccc;
-  padding-right: 20px;
-}
-
-.chatList h2,
-.chatMessages h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.chatList ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.chatList li {
-  cursor: pointer;
-  padding: 10px 0;
-}
-
-.currentChat {
-  background-color: red;
-}
-
-.chatList li:hover {
-  background-color: #f0f0f0;
-}
-
-.chatMessages {
-  flex: 2;
-  padding-left: 20px;
-}
-
-.chatMessagesh2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.chatMessagesp {
-  font-size: 16px;
-  color: #666;
-}
-
-.messageInput {
-  border: 1px solid black;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.receivedMessage {
-  text-align: left;
-  padding-right: 40%;
-  border: 1px solid red;
-}
-
-/* .sentMessage {
-  text-align: right;
-  padding-left: 40%;
-  border: 1px solid green;
-} */
-/* .chatUserName {
-  color: gray;
-} */
-/* .receivedMessage .messages {
-  background-color: aliceblue;
-}
-.sentMessage .messages {
-  background-color: antiquewhite;
-} */
-/* .messages {
-  border-radius: 3px;
-  font-size: 1.1rem;
-} */

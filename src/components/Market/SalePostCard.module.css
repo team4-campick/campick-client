@@ -25,10 +25,12 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 10px 1rem;
+  justify-content: center;
+  gap: 1rem;
+  margin: 10px;
 }
-.productCategory {
+.productCategory,
+.regionCity {
   font-size: 0.85rem;
   color: gray;
 }
@@ -37,24 +39,22 @@
   font-weight: bold;
   margin-top: 5px;
 }
-.pricWrap {
+.priceWrap {
   display: flex;
   gap: 1rem;
 }
-.pricWrap > span {
+.priceWrap > span {
   font-size: 1rem;
 }
-.pricWrap .negotiable {
+.priceWrap .negotiable {
   color: #42ade2;
 }
 
-.pricWrap .nonNegotiable {
+.priceWrap .nonNegotiable {
   color: red;
 }
-.regionCity {
-  font-size: 0.9rem;
-}
+
 .writeDate {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: gray;
 }
