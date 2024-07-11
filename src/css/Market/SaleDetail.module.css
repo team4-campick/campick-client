@@ -1,12 +1,13 @@
 .detailCon {
   margin-top: 2rem;
   margin-bottom: 2rem;
+  max-width: 1000px;
 }
 .detailWrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 150px;
+  padding: 0 180px;
 }
 .editDeletes {
   text-align: end;

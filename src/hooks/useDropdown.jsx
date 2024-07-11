@@ -27,11 +27,12 @@ const useDropdown = ({ options, type }) => {
       <div className="container" tabIndex={0}>
         <label onClick={handleClickContainer}>
           <button type="button">
-            {selectedLabel || type} {isDropdownOpen ? "⌃" : "⌄"}
+            <div>{selectedLabel || type} </div>
+            <div>{isDropdownOpen ? "\u23f6" : "\u23f7"}</div>
           </button>
         </label>
         {isDropdownOpen && (
-          <ul style={{ maxHeight: "100px", overflowY: "scroll" }}>
+          <ul style={{ maxHeight: "100px", overflowY: "auto" }}>
             {options.map((option) => {
               const { label, value } = option;
               return (
