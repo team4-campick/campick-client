@@ -1,7 +1,7 @@
 .chatContainer {
   height: 500px;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 330px;
 }
 
 .chatSendTime {
@@ -11,6 +11,15 @@
 }
 .messageBox {
   margin-bottom: 2px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noticeMessage {
+  font-weight: bold;
+  color: #055a5b;
 }
 @media (max-width: 800px) {
   .chatContainer {
