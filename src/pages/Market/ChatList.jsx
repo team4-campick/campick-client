@@ -102,7 +102,7 @@ const ChatList = () => {
             ))}
           </ConversationList>
         </Sidebar>
-        <div className={style.messageBox}>
+        <div className={style.noticeMessageBox}>
           <p className={style.noticeMessage}>채팅을 선택하세요.</p>
         </div>
       </MainContainer>
