@@ -58,7 +58,7 @@ const CustomerService = () => {
     console.log("deleteBtn clicked");
     console.log(userName);
     console.log(url);
-    const response = await fetch(`${url}/delete-user/${userName}`, {
+    const response = await fetch(`${url}/user/${userName}`, {
       method: "DELETE",
       headers: { "Content-type": "application/json" },
       credentials: "include",

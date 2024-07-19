@@ -147,7 +147,7 @@ const Bingo = () => {
     try {
       console.log("쿠폰 테스트2", coupon);
       const newCoupon = coupon;
-      const response = await fetch(`${url}/issue-coupon/${userObjId}`, {
+      const response = await fetch(`${url}/coupon/${userObjId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -9,7 +9,6 @@ const LoginPage = () => {
   const [message1, setMessage1] = useState("");
   const [message2, setMessage2] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
@@ -52,7 +51,6 @@ const LoginPage = () => {
       const data = await response.json();
       if (data.id) {
         setRedirect(true);
-        setIsLoggedIn(true);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -66,12 +64,9 @@ const LoginPage = () => {
         method: "POST",
         credentials: "include",
       });
-
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      setIsLoggedIn(false);
       setRedirect(false);
     } catch (error) {
       console.error("Error logging out:", error);
