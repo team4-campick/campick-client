@@ -11,7 +11,7 @@ const Coupon = () => {
   useEffect(() => {
     const getCoupon = async () => {
       try {
-        const response = await fetch(`${url}/get-coupon/${userObjId}`, {
+        const response = await fetch(`${url}/coupon/${userObjId}`, {
           method: "GET",
           headers: { Accept: "application/json" },
           credentials: "include",

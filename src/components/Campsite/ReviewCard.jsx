@@ -7,7 +7,7 @@ const ReviewCard = ({ item, userName }) => {
   const { _id, author, review, createdAt, score, contentId } = item;
   const [modalOpen, setModalOpen] = useState(false);
   const handleReviewDelete = async () => {
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/delete/${_id}`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/review/${_id}`, {
       method: "DELETE",
       credentials: "include",
     });

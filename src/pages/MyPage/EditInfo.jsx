@@ -56,23 +56,19 @@ const EditInfo = () => {
         "Content-Type": "application/json",
       },
     });
-    if (response.status === 200) {
-      setErrorMsg2("passwordCheck 성공");
-      setCurPwCheck(true);
-    } else if (response.status === 409) {
-      setCurPwCheck(false);
-    }
+    const data = await response.json();
+    return data.result;
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("currentPW", currentPW);
-    await passwordCheck(currentPW);
+    const pwCheckResult = await passwordCheck(currentPW);
 
     if (nicknameDuplicateCheck === false) {
       setErrorMsg1(AUTH_ERROR.DUPLICATE);
       return;
     }
-    if (curPwCheck === false) {
+    if (pwCheckResult === false) {
       setErrorMsg2(AUTH_ERROR.NOT_MATCHING.CURRENT_PW);
       return;
     }
@@ -102,8 +98,8 @@ const EditInfo = () => {
       dispatch(setUserAllInfo(null));
       navigate("/");
     };
-    const response = await fetch(`${url}/editInfo/${userName}`, {
-      method: "POST",
+    const response = await fetch(`${url}/user/${userName}`, {
+      method: "PUT",
       body: JSON.stringify({ username: userName, nickname, password: newPW }),
       headers: { "Content-Type": "application/json" },
       credentials: "include",
