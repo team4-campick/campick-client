@@ -26,7 +26,7 @@ const ReviewEditModal = ({ setModalOpen, item }) => {
     }
     try {
       const response = await fetch(`${url}/review/${_id}`, {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify({
           score: editScore,
           review: editReview,
