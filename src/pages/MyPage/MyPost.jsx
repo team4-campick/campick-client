@@ -6,12 +6,13 @@ import BlogPostCard from "../../components/BlogPost/BlogPostCard";
 const MyPost = () => {
   const url = process.env.REACT_APP_SERVER_URL;
   const user = useSelector((state) => state.user.user);
-  const userName = user?.username;
+  // const userName = user?.username;
+  const userObjId = user?.id;
   const [myPostList, setMyPostList] = useState([]);
   useEffect(() => {
     const getMyPostList = async () => {
       try {
-        const response = await fetch(`${url}/post/${userName}`, {
+        const response = await fetch(`${url}/post/${userObjId}`, {
           method: "GET",
           headers: { Accept: "application/json" },
           credentials: "include",
