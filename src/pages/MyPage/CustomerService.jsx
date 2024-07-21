@@ -14,6 +14,7 @@ const CustomerService = () => {
   const [contentErrMsg, setContentErrMsg] = useState("");
 
   const user = useSelector((state) => state.user.user);
+  const userObjId = user?.id;
   const userName = user?.username;
 
   const checkBoxStatus = () => setPolicyCheckStatus(!policyCheckStatus);
@@ -56,9 +57,9 @@ const CustomerService = () => {
   const deleteUser = async (e) => {
     e.preventDefault();
     console.log("deleteBtn clicked");
-    console.log(userName);
+    console.log(userObjId);
     console.log(url);
-    const response = await fetch(`${url}/user/${userName}`, {
+    const response = await fetch(`${url}/user/${userObjId}`, {
       method: "DELETE",
       headers: { "Content-type": "application/json" },
       credentials: "include",
@@ -89,7 +90,7 @@ const CustomerService = () => {
           <span className={style.errMsg}>&nbsp;{titleErrMsg}</span>
           <input
             type="text"
-            pattern=".+@example\.com"
+            // pattern=".+@example\.com"
             placeholder="답변 받으실 이메일"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
