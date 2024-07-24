@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import style from "../../css/MyPage/Bingo.module.css";
 import BingoCard from "../../components/MyPage/BingoCard";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { COUPON } from "../../constants/coupon";
 
 const Bingo = () => {
   const url = process.env.REACT_APP_SERVER_URL;
   const user = useSelector((state) => state.user.user);
   const userObjId = user?.id;
-  const userName = user?.username;
+  // const userName = user?.username;
 
   const [bingoArea, setBingoArea] = useState([]);
   // const [bingoStatus, setBingoStatus] = useState('');
@@ -24,14 +24,9 @@ const Bingo = () => {
   const updateMission = async () => {
     try {
       const response = await fetch(`${url}/update-mission/${userObjId}`, {
-        method: "POST",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          reviewCount,
-          postCount,
-          missionClear,
-          bingoCount,
-        }),
+        // 현재 보이는거로는 body 를 서버단에서 안 쓰고 있음.
         credentials: "include",
       });
       const data = await response.json();
@@ -59,10 +54,7 @@ const Bingo = () => {
         credentials: "include",
       });
       const data = await response.json();
-      console.log("빙고 패턴 체크 부분", data);
-      console.log(data.bingoPattern);
       setBingoPattern(data.bingoPattern);
-      // }
     } catch (error) {
       console.error(error);
     }
@@ -75,9 +67,7 @@ const Bingo = () => {
         credentials: "include",
       });
       const data = await response.json();
-      console.log("빙고 영역 체크 부분", data.bingo.bingo);
       setBingoArea(data.bingo.bingo);
-      console.log("빙고카운트 확인하는 곳", bingoCount);
     } catch (error) {
       console.error(error);
     }
@@ -90,37 +80,27 @@ const Bingo = () => {
         credentials: "include",
       });
       const data = await response.json();
-      console.log(data);
       setBingoCount(data.bingoCount);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  };
-  const updateStatus = async () => {
-    await updateMission();
-    await getBingoCount();
-    await getBingoPattern();
-    console.log("빙고패턴을 확인하려고 합니다", bingoPattern);
   };
   const resetBingo = async () => {
     try {
-      console.log("reset clicked");
       const response = await fetch(`${url}/reset-bingo/${userObjId}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
       });
-      console.log("reset???", response);
-      await getBingoArea();
+      if (response.result) await getBingoArea();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   const couponDuplicateCheck = async (coupon) => {
     try {
-      console.log("쿠폰 테스트", coupon);
       const newCoupon = coupon;
       const response = await fetch(`${url}/check-duplicate/${userObjId}`, {
         method: "POST",
@@ -145,7 +125,6 @@ const Bingo = () => {
   };
   const couponIssuance = async (coupon) => {
     try {
-      console.log("쿠폰 테스트2", coupon);
       const newCoupon = coupon;
       const response = await fetch(`${url}/coupon/${userObjId}`, {
         method: "POST",
@@ -156,21 +135,22 @@ const Bingo = () => {
         credentials: "include",
       });
       const data = await response.json();
-      console.log("data", data);
       return data;
     } catch (error) {
       console.error(error);
     }
   };
+  const updateStatus = async () => {
+    await updateMission();
+    await getBingoCount();
+    await getBingoPattern();
+  };
   const handleCoupon = async (coupon) => {
-    console.log("handleCoupon", coupon);
     const couponCheck = await couponDuplicateCheck(coupon);
-    console.log("couponCheck", couponCheck);
     if (couponCheck === false) {
       return alert("이미 발급된 쿠폰입니다.");
     } else {
       const couponIssue = await couponIssuance(coupon);
-      console.log("couponIssue", couponIssue);
       if (couponIssue) {
         alert("쿠폰이 발급되었습니다.");
       } else {
@@ -178,7 +158,6 @@ const Bingo = () => {
       }
     }
   };
-
   useEffect(() => {
     getBingoArea();
     updateMission();

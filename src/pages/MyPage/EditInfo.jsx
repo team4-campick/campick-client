@@ -24,6 +24,7 @@ const EditInfo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
+  const userObjId = user?.id;
   const userName = user?.username;
 
   const duplicateCheck = async (e) => {
@@ -49,7 +50,7 @@ const EditInfo = () => {
     }
   };
   const passwordCheck = async (password) => {
-    const response = await fetch(`${url}/passwordCheck/${userName}`, {
+    const response = await fetch(`${url}/passwordCheck/${userObjId}`, {
       method: "POST",
       body: JSON.stringify({ password }),
       headers: {
@@ -98,9 +99,9 @@ const EditInfo = () => {
       dispatch(setUserAllInfo(null));
       navigate("/");
     };
-    const response = await fetch(`${url}/user/${userName}`, {
+    const response = await fetch(`${url}/user/${userObjId}`, {
       method: "PUT",
-      body: JSON.stringify({ username: userName, nickname, password: newPW }),
+      body: JSON.stringify({ nickname, password: newPW }),
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
