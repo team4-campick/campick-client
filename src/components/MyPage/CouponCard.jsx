@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./CouponCard.module.css";
+import { COUPON_MSG } from "../../constants/couponMsg";
 import { RxCross2 } from "react-icons/rx";
 
-const CouponCard = ({ coupon }) => {
+const CouponCard = ({ coupon, updateCoupons }) => {
   const url = process.env.REACT_APP_SERVER_URL;
   const [serialOn, setSerialOn] = useState(false);
   const couponNumber = coupon.serialNum ? coupon.serialNum : "123456789012";
@@ -11,6 +12,7 @@ const CouponCard = ({ coupon }) => {
     setSerialOn(true);
     revealCouponNumber(couponNumber);
   };
+
   const getRandomDigits = (length) => {
     let result = "";
     for (let i = 0; i < length; i++) {
@@ -18,9 +20,11 @@ const CouponCard = ({ coupon }) => {
     }
     return result;
   };
+
   const [displayText, setDisplayText] = useState(
     getRandomDigits(couponNumber.length)
   );
+
   const revealCouponNumber = (number) => {
     const duration = 100;
     let revealedText = "";
@@ -34,21 +38,22 @@ const CouponCard = ({ coupon }) => {
       }, i * duration);
     }
   };
+
   const handleCouponDel = async () => {
     try {
       const response = await fetch(`${url}/coupon/${coupon._id}`, {
         method: "DELETE",
         credentials: "include",
       });
-      console.log("response status", response.status);
       if (response.status === 204) {
-        alert("삭제완료");
-        window.location.reload();
+        alert(COUPON_MSG.DELETE);
+        updateCoupons({ ...coupon, status: "deleted" }); // 상태 업데이트
       }
     } catch (error) {
       console.error(error);
     }
   };
+
   const handleCouponUsed = async () => {
     try {
       const response = await fetch(`${url}/coupon/${coupon._id}`, {
@@ -59,15 +64,17 @@ const CouponCard = ({ coupon }) => {
         credentials: "include",
       });
       if (response.status === 204) {
-        alert("사용완료");
-        window.location.reload();
+        alert(COUPON_MSG.USED);
+        updateCoupons({ ...coupon, status: "expired" }); // 상태 업데이트
       }
     } catch (error) {
       console.error(error);
     }
   };
+
   const timeGap = new Date(coupon.expireDate).getTime() - new Date().getTime();
   const dDay = Math.floor(timeGap / (1000 * 60 * 60 * 24));
+
   return (
     <div className={style.couponCard}>
       {dDay > 0 ? (
@@ -116,4 +123,5 @@ const CouponCard = ({ coupon }) => {
     </div>
   );
 };
+
 export default CouponCard;
