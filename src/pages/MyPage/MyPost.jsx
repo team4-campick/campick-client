@@ -16,9 +16,6 @@ const MyPost = () => {
           credentials: "include",
         });
         const data = await response.json();
-        if (!data) {
-          alert("값이 없넹");
-        }
         setMyPostList(data.blogPost);
       } catch (error) {
         console.error(error);
