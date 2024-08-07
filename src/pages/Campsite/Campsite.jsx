@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import style from "../../css/Campsite/Campsite.module.css";
 import SiteCard from "../../components/Campsite/SiteCard";
-import Loading from "../../components/Laoding/Loading";
+import Loading from "../../components/Loading/Loading";
 import REGION_CATEGORY from "../../constants/campsite";
 
 const Campsite = () => {
@@ -31,7 +31,6 @@ const Campsite = () => {
     searchParams.delete("keyword");
     setSearchKeyword("");
 
-    // 전체보기일 때
     if (!category) {
       return navigate("/campsite");
     }
