@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setSelectedConversation } from "../../store/chatStore";
-import style from "../../css/Market/SaleDetail.module.css";
+import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import useGetSalePostDetail from "../../hooks/useGetSalePostDetail";
+import { setSelectedConversation } from "../../store/chatStore";
 import convertToKoreanDate from "../../utils/convertToKoreanDate";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import style from "../../css/Market/SaleDetail.module.css";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -16,7 +18,9 @@ const SaleDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [salePostDetail, setSalePostDetail] = useState(null);
+
+  const { salePostDetail, isLoading, error, ErrorComponent } =
+    useGetSalePostDetail();
 
   const salePostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/sale-posts/${id}`;
   const messageEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/messages/create`;
@@ -24,28 +28,11 @@ const SaleDetail = () => {
   const user = useSelector((state) => state.user.user);
   const userId = user?.id;
 
-  const fetchSalePostDetail = async () => {
-    try {
-      const response = await fetch(salePostsEndpoint, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      if (!data.result) {
-        return alert(data.message);
-      }
-      setSalePostDetail(data.salePost);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // 데이터 로딩 전에는 로딩 중임을 표시
+  if (isLoading || !salePostDetail) return <LoadingSpinner />;
 
-  useEffect(() => {
-    fetchSalePostDetail();
-  }, [id]);
-
-  if (salePostDetail === null) return <p>loading...</p>;
+  // TODO: 에러 케이스 처리
+  if (error) return <ErrorComponent />;
 
   const {
     author,

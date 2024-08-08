@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useGetSalePosts from "../../hooks/useGetSalePosts";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import SalePostCard from "../../components/Market/SalePostCard";
 import style from "../../css/Market/Market.module.css";
 import { PRODUCT_CATEGORY } from "../../constants/market";
@@ -8,16 +10,11 @@ import { PRODUCT_CATEGORY } from "../../constants/market";
 const Market = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [salePosts, setSalePosts] = useState([]);
+  const { salePosts, isLoading, error, ErrorComponent } = useGetSalePosts();
   const [searchKeyword, setSearchKeyword] = useState("");
   const [isInputClicked, setIsInputClicked] = useState(false);
   const user = useSelector((state) => state.user.user);
   const isLoggedIn = user?.username;
-
-  const salePostsEndpoint = `${process.env.REACT_APP_SERVER_URL}/api/sale-posts`;
-
-  const keyword = searchParams.get("keyword");
-  const category = searchParams.get("category");
 
   const handleCategoryClick = (category) => {
     searchParams.delete("keyword");
@@ -41,33 +38,6 @@ const Market = () => {
     searchParams.delete("category");
   };
 
-  useEffect(() => {
-    const fetchSalePosts = async () => {
-      try {
-        const url = category
-          ? `${salePostsEndpoint}?category=${category}`
-          : keyword
-          ? `${salePostsEndpoint}?keyword=${keyword}`
-          : salePostsEndpoint;
-        const response = await fetch(url, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        const data = await response.json();
-        if (!data.result) {
-          return alert(data.message);
-        }
-        setSalePosts(data.salePosts);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchSalePosts();
-  }, [keyword, salePostsEndpoint, category]);
-
   const handleClickSale = () => {
     if (isLoggedIn) {
       navigate("/sale-post-write");
@@ -76,6 +46,11 @@ const Market = () => {
       navigate("/signin");
     }
   };
+
+  if (isLoading) return <LoadingSpinner />;
+
+  // TODO: 에러 케이스 처리
+  if (error) return <ErrorComponent />;
 
   return (
     <section className={`mw ${style.marketCon}`}>
@@ -101,12 +76,24 @@ const Market = () => {
           </button>
         </label>
       </form>
-      <div className={style.cateGories}>
-        <button onClick={() => handleCategoryClick("")}>전체보기</button>
+      <div className={style.categories}>
+        <button
+          onClick={() => handleCategoryClick("")}
+          className={
+            searchParams.get("category") || searchParams.get("keyword")
+              ? ""
+              : style.active
+          }
+        >
+          전체보기
+        </button>
         {PRODUCT_CATEGORY.map((cate) => (
           <button
             key={cate.value}
             onClick={() => handleCategoryClick(cate.label)}
+            className={
+              searchParams.get("category") === cate.label ? style.active : ""
+            }
           >
             {cate.label}
           </button>
