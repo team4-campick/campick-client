@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import style from "../../css/MyPage/Bingo.module.css";
 import BingoCard from "../../components/MyPage/BingoCard";
 import { useSelector } from "react-redux";
-// import { useParams } from "react-router-dom";
 import { COUPON } from "../../constants/coupon";
+import { COUPON_ERROR } from "../../constants/errMsg";
+import { COUPON_MSG } from "../../constants/couponMsg";
+import patternChecker from "../../utils/patternChecker";
 
 const Bingo = () => {
   const url = process.env.REACT_APP_SERVER_URL;
   const user = useSelector((state) => state.user.user);
   const userObjId = user?.id;
-  // const userName = user?.username;
 
   const [bingoArea, setBingoArea] = useState([]);
-  // const [bingoStatus, setBingoStatus] = useState('');
-
   const [reviewCount, setReviewCount] = useState(0);
   const [postCount, setPostCount] = useState(0);
   const [missionClear, setMissionClear] = useState(0);
@@ -26,7 +25,6 @@ const Bingo = () => {
       const response = await fetch(`${url}/update-mission/${userObjId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        // 현재 보이는거로는 body 를 서버단에서 안 쓰고 있음.
         credentials: "include",
       });
       const data = await response.json();
@@ -120,7 +118,7 @@ const Bingo = () => {
         return data;
       }
     } catch (error) {
-      console.error("중복체크 에러", error);
+      console.error(COUPON_ERROR.DUPLICATE, error);
     }
   };
   const couponIssuance = async (coupon) => {
@@ -147,14 +145,12 @@ const Bingo = () => {
   };
   const handleCoupon = async (coupon) => {
     const couponCheck = await couponDuplicateCheck(coupon);
-    if (couponCheck === false) {
-      return alert("이미 발급된 쿠폰입니다.");
+    if (couponCheck) {
+      alert(COUPON_ERROR.EXIST);
     } else {
       const couponIssue = await couponIssuance(coupon);
       if (couponIssue) {
-        alert("쿠폰이 발급되었습니다.");
-      } else {
-        alert("오류 발생");
+        alert(COUPON_MSG.SUCCESS);
       }
     }
   };
@@ -183,32 +179,7 @@ const Bingo = () => {
                 <BingoCard key={i + 1} e={e} />
               ))}
               <div className={style.patternArea}>
-                {bingoPattern.map((e, i) => {
-                  if (e === 1) {
-                    return (
-                      <div
-                        className={`${style.bingoPattern} ${
-                          i + 1 === 1
-                            ? style.bingoPattern1
-                            : i + 1 === 2
-                            ? style.bingoPattern2
-                            : i + 1 === 3
-                            ? style.bingoPattern3
-                            : i + 1 === 4
-                            ? style.bingoPattern4
-                            : i + 1 === 5
-                            ? style.bingoPattern5
-                            : i + 1 === 6
-                            ? style.bingoPattern6
-                            : i + 1 === 7
-                            ? style.bingoPattern7
-                            : style.bingoPattern8
-                        }`}
-                        key={i + 1}
-                      ></div>
-                    );
-                  }
-                })}
+                {patternChecker(style, bingoPattern)}
               </div>
             </div>
           </div>

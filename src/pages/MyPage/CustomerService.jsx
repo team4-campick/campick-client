@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import style from "../../css/MyPage/CustomerService.module.css";
-import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import { url } from '../../store/ref';
+import { CUSTOMER_SERVICE_ERROR } from "../../constants/errMsg";
+
 const url = process.env.REACT_APP_SERVER_URL;
 const CustomerService = () => {
   const [policyCheckStatus, setPolicyCheckStatus] = useState(false);
@@ -15,26 +15,25 @@ const CustomerService = () => {
 
   const user = useSelector((state) => state.user.user);
   const userObjId = user?.id;
-  const userName = user?.username;
 
   const checkBoxStatus = () => setPolicyCheckStatus(!policyCheckStatus);
   const inquiry = async (e) => {
     e.preventDefault();
     if (title === "") {
-      setTitleErrMsg("제목을 입력해주세요");
+      setTitleErrMsg(CUSTOMER_SERVICE_ERROR.TITLE);
       return;
     } else {
       setTitleErrMsg("");
     }
     if (email === "") {
-      setEmailErrMsg("이메일을 입력해주세요");
+      setEmailErrMsg(CUSTOMER_SERVICE_ERROR.EMAIL);
       return;
     } else {
       setEmailErrMsg("");
     }
 
     if (content === "") {
-      setContentErrMsg("내용을 입력해주세요");
+      setContentErrMsg(CUSTOMER_SERVICE_ERROR.CONTENT);
       return;
     } else {
       setContentErrMsg("");
@@ -56,19 +55,17 @@ const CustomerService = () => {
   };
   const deleteUser = async (e) => {
     e.preventDefault();
-    console.log("deleteBtn clicked");
-    console.log(userObjId);
-    console.log(url);
-    const response = await fetch(`${url}/user/${userObjId}`, {
-      method: "DELETE",
-      headers: { "Content-type": "application/json" },
-      credentials: "include",
-    });
-    if (response.status === 200) {
-      console.log("deleted");
-      window.location = "/";
-    } else {
-      console.log("오류가 있다.", response.status);
+    try {
+      const response = await fetch(`${url}/user/${userObjId}`, {
+        method: "DELETE",
+        headers: { "Content-type": "application/json" },
+        credentials: "include",
+      });
+      if (response.status === 200) {
+        window.location = "/";
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
   return (

@@ -17,8 +17,8 @@ const Sale = () => {
         credentials: "include",
       });
       const data = await response.json();
-      if (!data) {
-        return alert(data.message);
+      if (!data.salePost === null) {
+        return setSalePosts([]);
       }
       setSalePosts(data.salePost);
     } catch (error) {
@@ -33,8 +33,8 @@ const Sale = () => {
     <section className={style.cardCon}>
       <h3 hidden>Sale</h3>
       <div className={style.cardList}>
-        {salePosts.length !== 0 ? (
-          salePosts.map((post) => <SaleCard key={post._id} post={post} />)
+        {salePosts?.length !== 0 ? (
+          salePosts?.map((post) => <SaleCard key={post._id} post={post} />)
         ) : (
           <div className={style.noPost}>내가 쓴 게시글이 없습니다.</div>
         )}

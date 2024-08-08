@@ -8,6 +8,7 @@ const Coupon = () => {
   const user = useSelector((state) => state.user.user);
   const [coupons, setCoupons] = useState([]);
   const userObjId = user?.id;
+
   useEffect(() => {
     const getCoupon = async () => {
       try {
@@ -17,21 +18,31 @@ const Coupon = () => {
           credentials: "include",
         });
         const data = await response.json();
-        console.log("data coupon list", data.couponList);
         setCoupons(data.couponList);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
-    getCoupon();
-  }, [userObjId]);
+    if (userObjId) {
+      getCoupon();
+    }
+  }, [userObjId, setCoupons]); // 상태가 변경되면 useEffect 재실행
+
+  const updateCoupons = (updatedCoupon) => {
+    setCoupons((prevCoupons) =>
+      prevCoupons.map((coupon) =>
+        coupon._id === updatedCoupon._id ? updatedCoupon : coupon
+      )
+    );
+  };
+
   return (
     <section className={style.coupon}>
       <h3 hidden>Coupon</h3>
       <div className={style.couponCon}>
         {coupons.map((coupon, i) =>
           coupon.status === "active" ? (
-            <CouponCard key={i} coupon={coupon} />
+            <CouponCard key={i} coupon={coupon} updateCoupons={updateCoupons} />
           ) : null
         )}
       </div>
@@ -42,7 +53,7 @@ const Coupon = () => {
       <div className={style.notAvailableCouponCon}>
         {coupons.map((coupon, i) =>
           coupon.status === "expired" ? (
-            <CouponCard key={i} coupon={coupon} />
+            <CouponCard key={i} coupon={coupon} updateCoupons={updateCoupons} />
           ) : null
         )}
       </div>

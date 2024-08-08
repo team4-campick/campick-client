@@ -14,4 +14,14 @@ const AUTH_ERROR = Object.freeze({
   },
   DUPLICATE: "이미 존재하는 닉네임입니다.",
 });
-export { AUTH_ERROR };
+const COUPON_ERROR = Object.freeze({
+  DUPLICATE: "중복체크 에러",
+  EXIST: "이미 발급된 쿠폰입니다.",
+});
+const CUSTOMER_SERVICE_ERROR = Object.freeze({
+  TITLE: "제목을 입력해주세요",
+  EMAIL: "이메일을 입력해주세요",
+  CONTENT: "내용을 입력해주세요",
+});
+
+export { AUTH_ERROR, COUPON_ERROR, CUSTOMER_SERVICE_ERROR };
