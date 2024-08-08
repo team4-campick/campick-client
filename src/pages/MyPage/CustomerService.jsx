@@ -23,8 +23,8 @@ const CustomerService = () => {
 
   const checkBoxStatus = () => setPolicyCheckStatus(!policyCheckStatus);
 
-  const handleLogout = () => {
-    fetch(`${url}/logout`, {
+  const handleLogout = async () => {
+    await fetch(`${url}/logout`, {
       method: "POST",
       credentials: "include",
     });
@@ -78,7 +78,7 @@ const CustomerService = () => {
       console.log("test response delete", response);
       if (response.status === 200) {
         alert("탈퇴되었습니다.");
-        handleLogout();
+        await handleLogout();
         navigate("/");
       }
     } catch (error) {
