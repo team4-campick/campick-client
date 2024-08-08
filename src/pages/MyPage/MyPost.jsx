@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from "react";
-import PostCard from "../../components/MyPage/PostCard";
 import style from "../../css/MyPage/MyPost.module.css";
 import { useSelector } from "react-redux";
 import BlogPostCard from "../../components/BlogPost/BlogPostCard";
 const MyPost = () => {
   const url = process.env.REACT_APP_SERVER_URL;
   const user = useSelector((state) => state.user.user);
-  const userName = user?.username;
+  const userObjId = user?.id;
   const [myPostList, setMyPostList] = useState([]);
   useEffect(() => {
     const getMyPostList = async () => {
       try {
-        const response = await fetch(`${url}/post/${userName}`, {
+        const response = await fetch(`${url}/post/${userObjId}`, {
           method: "GET",
           headers: { Accept: "application/json" },
           credentials: "include",
         });
         const data = await response.json();
-        console.log("data", data.post);
-        if (!data) {
-          alert("값이 없넹");
-        }
-        console.log("post get data", data);
-        setMyPostList(data.post);
+        setMyPostList(data.blogPost);
       } catch (error) {
         console.error(error);
       }

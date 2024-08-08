@@ -1,37 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import useGetBlogPosts from "../../hooks/useGetBlogPosts";
 import style from "../../css/Contents/contentsBlog.module.css";
 import BlogPostCard from "../../components/BlogPost/BlogPostCard";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const ContentsBlog = () => {
   const navigate = useNavigate();
-  const [blogPosts, setBlogPosts] = useState([]);
+  const { blogPosts, isLoading, error, ErrorComponent } = useGetBlogPosts();
 
   const user = useSelector((state) => state.user.user);
   const isLoggedIn = user?.username;
-  useEffect(() => {
-    const fetchBlogPosts = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_SERVER_URL}/api/blog-posts`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        const data = await response.json();
-
-        setBlogPosts(data.blogPosts);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchBlogPosts();
-  }, []);
 
   const handleClickSale = () => {
     if (isLoggedIn) {
@@ -41,6 +20,11 @@ const ContentsBlog = () => {
       navigate("/signin");
     }
   };
+
+  if (isLoading) return <LoadingSpinner />;
+
+  // TODO: 에러 케이스 처리
+  if (error) return <ErrorComponent />;
 
   return (
     <section className={`mw ${style.blogListWrap}`}>

@@ -25,7 +25,7 @@ const ReviewEditModal = ({ setModalOpen, item }) => {
       return;
     }
     try {
-      const response = await fetch(`${url}/edit-review/${_id}`, {
+      const response = await fetch(`${url}/review/${_id}`, {
         method: "POST",
         body: JSON.stringify({
           score: editScore,

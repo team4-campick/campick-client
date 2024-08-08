@@ -17,7 +17,7 @@ import { FaDumbbell, FaSwimmingPool, FaWifi } from "react-icons/fa";
 import { BsFillCupHotFill } from "react-icons/bs";
 import { RiStore3Fill } from "react-icons/ri";
 import { FaTrash } from "react-icons/fa6";
-import Loading from "../../components/Laoding/Loading";
+import Loading from "../../components/Loading/Loading";
 import StarRating from "../../components/Campsite/StarRating";
 const { kakao } = window;
 
@@ -92,8 +92,8 @@ const SiteDetail = () => {
     };
     const map = new kakao.maps.Map(container, options);
     const markerPosition = new kakao.maps.LatLng(
-      Number(mapY ? mapY : 127.0277194).toFixed(6),
-      Number(mapX ? mapX : 37.63695556).toFixed(6)
+      Number(mapY ?? 127.0277194).toFixed(6),
+      Number(mapX ?? 37.63695556).toFixed(6)
     );
     const marker = new kakao.maps.Marker({
       position: markerPosition,
@@ -104,7 +104,7 @@ const SiteDetail = () => {
     const getReviewLst = async () => {
       try {
         console.log("리뷰 가져오기 실행");
-        const response = await fetch(`${url}/get-reviews/${id}`, {
+        const response = await fetch(`${url}/review/${id}`, {
           method: "GET",
         });
         const data = await response.json();

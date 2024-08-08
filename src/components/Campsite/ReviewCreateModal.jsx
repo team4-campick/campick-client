@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const ReviewCreateModal = ({ setModalOpen, id }) => {
   const url = process.env.REACT_APP_SERVER_URL;
   const user = useSelector((state) => state.user.user);
+  const userObjId = user?.id;
   const userName = user?.username;
 
   const navigate = useNavigate();
@@ -24,8 +25,8 @@ const ReviewCreateModal = ({ setModalOpen, id }) => {
       return;
     }
     try {
-      const response = await fetch(`${url}/create-review/${userName}`, {
-        method: "POST",
+      const response = await fetch(`${url}/review/${userObjId}`, {
+        method: "PUT",
         body: JSON.stringify({
           score,
           review,
