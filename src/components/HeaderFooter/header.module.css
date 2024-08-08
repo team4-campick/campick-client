@@ -19,6 +19,7 @@
   display: flex;
   flex: 1;
   justify-content: space-between;
+  position: relative;
 }
 .gnb a {
   white-space: nowrap;
@@ -28,8 +29,13 @@
   cursor: pointer;
 }
 .closeHam {
-  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   cursor: pointer;
+  font-size: 48px;
+  color: gray;
 }
 .headerWrap h1 {
   display: flex;
