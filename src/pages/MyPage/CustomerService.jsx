@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import style from "../../css/MyPage/CustomerService.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CUSTOMER_SERVICE_ERROR } from "../../constants/errMsg";
+import { useNavigate } from "react-router-dom";
+import { setUserAllInfo } from "../../store/userStore";
 
 const url = process.env.REACT_APP_SERVER_URL;
 const CustomerService = () => {
@@ -16,7 +18,20 @@ const CustomerService = () => {
   const user = useSelector((state) => state.user.user);
   const userObjId = user?.id;
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const checkBoxStatus = () => setPolicyCheckStatus(!policyCheckStatus);
+
+  const handleLogout = () => {
+    fetch(`${url}/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+    dispatch(setUserAllInfo(null));
+    navigate("/");
+  };
+
   const inquiry = async (e) => {
     e.preventDefault();
     if (title === "") {
@@ -53,16 +68,18 @@ const CustomerService = () => {
     setEmail("");
     setContent("");
   };
-  const deleteUser = async (e) => {
-    e.preventDefault();
+  const deleteUser = async () => {
     try {
       const response = await fetch(`${url}/user/${userObjId}`, {
         method: "DELETE",
         headers: { "Content-type": "application/json" },
         credentials: "include",
       });
+      console.log("test response delete", response);
       if (response.status === 200) {
-        window.location = "/";
+        alert("탈퇴되었습니다.");
+        handleLogout();
+        navigate("/");
       }
     } catch (error) {
       console.error(error);
@@ -135,7 +152,8 @@ const CustomerService = () => {
           <button
             className={style.deleteBtn}
             disabled={!policyCheckStatus}
-            onClick={(e) => deleteUser(e)}
+            onClick={deleteUser}
+            type="button"
           >
             탈퇴하기
           </button>
