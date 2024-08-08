@@ -2,22 +2,26 @@
   margin-bottom: 2rem;
 }
 
-.cateGories {
+.categories {
   display: flex;
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
 }
-.cateGories button {
+.categories button {
   font-size: 1rem;
   color: #9c9c9c;
 }
-.cateGories button:hover,
-.cateGories button:focus {
+.categories button:hover,
+.categories button:focus {
   color: #1f3b34;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
+}
+.categories button.active {
+  color: #1f3b34;
+  font-weight: bold;
 }
 .writeBtnCon {
   display: block;
