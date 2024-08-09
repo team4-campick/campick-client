@@ -77,7 +77,7 @@
 ┣ 📂models
 ┣ 📂routes
 ┣ 📂services
-┗ 📂utils
+┣ 📂utils
 ┣ 📜server.js
 ┗ 📜package.json
 ```
