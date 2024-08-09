@@ -2,7 +2,7 @@
 > "캠핑(camping)" + "선택하다(pick)" = "캠픽(campick)", 사용자들이 자신이 선택한 캠핑장과 물품 정보를 나누며 즐길 수 있는 캠핑 커뮤니티 웹사이트
 ### 💡 campcik 소개
  현대 사회에서 캠핑은 자연을 즐기고 스트레스를 해소하는 활동으로 인기를 끌고 있습니다. <br> 그러나 캠핑 관련 정보를 공유하고 소통할 수 있는 커뮤니티가 부족하여, 캠핑 애호가들 간의 정보 교류와 문화 확산이 제한적입니다. <br>
- 이러한 문제점을 해결하기 위해 좀 더 편리하게  ***캠핑장 검색, 캠핑 물품 중고거래, 캠핑에 관한 정보 공유***를 할 수 있는 캠핑 애호가들은 위한 웹사이트 "캠픽(Campick)"을 제작하게 되었습니다.
+ 이러한 문제점을 해결하기 위해 좀 더 편리하게  ***캠핑장 검색, 캠핑 물품 중고거래, 캠핑에 관한 정보 공유***를 할 수 있는 캠핑 애호가들을 위한 웹사이트 "캠픽(Campick)"을 제작하게 되었습니다.
 
 <img src="./mainImg.png" width="100%">
 
@@ -23,9 +23,13 @@
  ![CSS3 badge](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) 
  ![JavaScript badge](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black)
  ![React badge](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+ ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+
 
 - Back-end <br>
-![Node.js badge](https://img.shields.io/badge/nodejs-339933?style=for-the-badge&logo=Node.js&logoColor=white) ![Express badge](https://img.shields.io/badge/express-000000?style=for-the-badge&logo=Express&logoColor=white)
+![Node.js badge](https://img.shields.io/badge/nodejs-339933?style=for-the-badge&logo=Node.js&logoColor=white)
+![Express badge](https://img.shields.io/badge/express-000000?style=for-the-badge&logo=Express&logoColor=white)
+![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
 
 - Database <br>
  ![MongoDB badge](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white)
@@ -102,7 +106,7 @@
 ```
 
 ### 💣 이슈 및 해결
-**1. db 에서 findOneAndUpdate 로 Data 업데이트 하는데 갱신버튼 한번 눌렀는데 적용안 되고 한번 더 눌러야 적용되는 오류**  
+**1. db 에서 findOneAndUpdate 로 Data 업데이트 하는데 갱신버튼 한번 눌렀는데 적용 안 되고 한번 더 눌러야 적용되는 오류**  
 
 
 > 👉🏻 findOneAndUpdate 내부에 `{ new: true }` 를 추가하여 해결
@@ -111,19 +115,19 @@
 
 
 > 👉🏻 초기 스키마 userId, nickname, pw 등이 `required : true` 옵션을
-갖고 있어 필수 값 설정이 셋팅되어 있는데 스키마가 변경되며 새로운 값과 초기 값의 차이가 존재했고 mogoDB에 indexes 설정된 값이 지켜지지 않아 발생한 문제.
+갖고 있어 필수 값 설정이 셋팅되어 있는데 스키마가 변경되며 새로운 값과 초기 값의 차이가 존재했고 mongoDB에 indexes 설정된 값이 지켜지지 않아 발생한 문제.
 `mongodb -> campick -> browse collections -> 문제의 collection (ex posts, camps etc) 클릭 -> Indexes`
 의 경로로 들어가 옛날 키 이름을 삭제하여 해결
 
 **3. react 환경변수 설정 문제 - 민감 정보를 환경변수로 처리하기 위해 .env 폴더로 관리하던 중 환경변수에 문제가 발생.**  
 
 
-> 👉🏻 react는 환경변수를 설정할 때 `REACT_APP_'환경변수'`  의 형태로 작성해야함. react 에 맞는 환경변수 폼 설정으로 문제 해결
+> 👉🏻 react는 환경변수를 설정할 때 `REACT_APP_'환경변수'`  의 형태로 작성해야 함. react 에 맞는 환경변수 폼 설정으로 문제 해결
 
 **4.  env 설정이 반영 안 되는 문제**  
 
 
-> 👉🏻 서버, client 를 저장해서 다시 새로고침 하는것과는 다르게 `.env` 폴더 내부 변경점이 생겼을 경우 아예 켜둔 서버 및 클라이언트를 종료 후 재 실행해야 .env가 반영됨
+> 👉🏻 서버, client를 저장해서 다시 새로고침 하는 것과는 다르게 `.env` 폴더 내부 변경점이 생겼을 경우 아예 켜둔 서버 및 client를 종료 후 재 실행해야 .env가 반영됨
 
 **5. mobile 환경에서 의도하지 않은 x축 스크롤 문제**  
 
