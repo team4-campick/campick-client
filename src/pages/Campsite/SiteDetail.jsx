@@ -70,9 +70,7 @@ const SiteDetail = () => {
             Accept: "application/json",
           },
         });
-        console.log("response", response);
         const data = await response.json();
-        console.log(data);
         setSiteImg(data.response.body.items.item);
         setLoading(false);
       } catch (e) {
